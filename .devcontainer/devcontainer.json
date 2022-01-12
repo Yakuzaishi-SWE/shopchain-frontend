@@ -1,0 +1,31 @@
+{
+	"name": "ShopChain Frontend",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"VARIANT": "16"
+		}
+	},
+	"settings": {},
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"sibiraj-s.vscode-scss-formatter",
+		"jock.svg",
+		"eg2.vscode-npm-script",
+		"pranaygp.vscode-css-peek"
+	],
+	"forwardPorts": [
+		8080
+	],
+	"portsAttributes": {
+		"8080": {
+			"label": "Web",
+			"onAutoForward": "notify",
+			"protocol": "http",
+		}
+	},
+	"remoteUser": "node",
+	"features": {
+		"git": "os-provided"
+	}
+}
