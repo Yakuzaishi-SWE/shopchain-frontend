@@ -1,7 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 module.exports = {
 	target: 'web',
@@ -14,19 +12,19 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js'],
 		fallback: {
-			
+			"os": require.resolve("os-browserify/browser"),
+			"https": require.resolve("https-browserify"),
+			"url": false,
+			"http": require.resolve("stream-http"),
+			"crypto": require.resolve("crypto-browserify"),
+			"assert": false,
+			"stream": require.resolve("stream-browserify")
 		},
 		alias: {
-			pages: path.resolve(__dirname, 'src/pages'),
 			views: path.resolve(__dirname, 'src/views'),
-			store: path.resolve(__dirname, 'src/store'),
 			resources: path.resolve(__dirname, 'src/resources'),
 			controllers: path.resolve(__dirname, 'src/controllers'),
 			types: path.resolve(__dirname, 'src/types'),
-			components: path.resolve(__dirname, 'src/components'),
-			hooks: path.resolve(__dirname, 'src/hooks'),
-			providers: path.resolve(__dirname, 'src/providers'),
-			contexts: path.resolve(__dirname, 'src/contexts')
 		},
 	},
 	module: {
@@ -53,8 +51,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: './src/index.html',
-			favicon: './src/favicon.ico'
+			template: './src/index.html'
 		}),
 	],
 };

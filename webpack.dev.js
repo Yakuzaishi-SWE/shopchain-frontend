@@ -18,13 +18,13 @@ module.exports = merge(common, {
 			index: '/index.html',
 		},
 		host: 'localhost',
-		port: 8082,
+		port: 8085,
 		hot: true,
 		client: {
 			overlay: false,
 		},
 		open:{
-			target: ['http://localhost/'],
+			target: ['http://localhost:8085/'],
 		},
 	},
 	plugins: [

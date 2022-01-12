@@ -1,0 +1,31 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body > header {
+    display: flex;
+    width: 100%;
+    background-color: #ccf;
+    padding: 8px;
+    box-sizing: border-box;
+
+    & > a {
+        flex-grow: 1;
+        color: black;
+        text-decoration: none;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    & > span {
+        display: flex;
+        align-items: center;
+        font-family: monospace;
+        border-radius: 6px;
+        background-color: #666;
+        color: white;
+        padding: 4px 8px; 
+    }
+}
