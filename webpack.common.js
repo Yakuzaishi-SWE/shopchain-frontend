@@ -13,14 +13,15 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js'],
 		fallback: {
+			"buffer": require.resolve("buffer"),
 			"os": require.resolve("os-browserify/browser"),
 			"https": require.resolve("https-browserify"),
-			url: false,
-			process: require.resolve('process/browser'),
+			"url": false,
+			"process": require.resolve('process/browser'),
 			"http": require.resolve("stream-http"),
 			"crypto": require.resolve("crypto-browserify"),
 			"assert": false,
-			"stream": require.resolve("stream-browserify")
+			"stream": require.resolve("stream-browserify"),
 		},
 		alias: {
 			pages: path.resolve(__dirname, "src/pages"),
@@ -55,6 +56,12 @@ module.exports = {
 		],
 	},
 	plugins: [
+		new webpack.ProvidePlugin({
+            Buffer: ['buffer', 'Buffer'],
+        }),
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+        }),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('development'),
 			'process.env.NODE_DEBUG': JSON.stringify('development')

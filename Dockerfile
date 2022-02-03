@@ -2,7 +2,6 @@ FROM node:16.10-alpine AS build
 
 WORKDIR /app/
 
-COPY .npmrc /app/
 COPY .babelrc /app/
 COPY tsconfig.json /app/
 COPY package.json /app/
