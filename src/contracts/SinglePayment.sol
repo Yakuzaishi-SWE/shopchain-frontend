@@ -4,15 +4,23 @@
 pragma solidity >=0.7.0 <0.9.0;
  
 contract SinglePayment {
-    
-    address payable private sellerAddress;
-    address payable private contractOwnerAddress;
-    uint private amount;
-    uint private unlockCode;
 
-    enum ContractState {Created, Filled, Closed, Canceled}
+    enum OrderState {Created, Filled, Closed, Canceled}
 
-    ContractState private state;
+    struct Order {
+        address payable sellerAddress;
+        address payable ownerAddress;
+        uint amount;
+        uint unlockCode;
+        OrderState state;
+    }
+
+    // mapping for searching optimization
+    mapping (address => uint[]) private buyerOrders;
+    mapping (address => uint[]) private sellerOrders;
+    // mapping for orders
+    uint private orderCount = 0;
+    mapping (uint => Order) private orders;
 
     /// only the owner of the contract can call this function
     error OnlyOwner();
@@ -21,26 +29,52 @@ contract SinglePayment {
     /// The function cannot be called at the current state.
     error InvalidState();
 
-    modifier onlyOwner() {
-        if (msg.sender != contractOwnerAddress)
-            revert OnlyOwner();
+    /**************************************
+     *             MODIFIER
+     *************************************/
+
+    modifier onlyOwner(uint id) {
+        require(
+            msg.sender == orders[id].ownerAddress, 
+            "only the owner can call this function"
+        );
         _;
     }
 
-    modifier onlySeller() {
-        if (msg.sender != sellerAddress)
-            revert OnlySeller();
+    modifier onlySeller(uint id) {
+        require(
+            msg.sender == orders[id].sellerAddress, 
+            "only the seller can call this function"
+        );
         _;
     }
 
-    modifier inState(ContractState state_) {
-        if (state != state_)
-            revert InvalidState();
+    modifier inState(uint id, OrderState state_) {
+        require(
+            orders[id].state == state_, 
+            "the order hasn't the valid state"
+        );
         _;
     }
 
     modifier condition(bool condition_) {
-        require(condition_);
+        require(condition_, "insufficient funds");
+        _;
+    }
+
+    modifier enoughFunds(address wallet, uint amountToPay) {
+        require(
+            wallet.balance >= amountToPay,
+            "insufficient funds"
+        );
+        _;
+    }
+
+    modifier notItself(address addr1, address addr2) {
+        require(
+            addr1 != addr2,
+            "the seller and buyer can't be equal"
+        );
         _;
     }
 
@@ -48,159 +82,150 @@ contract SinglePayment {
      *              EVENTS
      *************************************/
     event Aborted();
-    event PurchaseConfirmed();
-    event ItemReceived();
-    event OwnerRefunded();
+
+    event OrderCreated (
+        uint id
+    );
+
+    event OrderConfirmed(
+        uint id,
+        address payable sellerAddress,
+        address payable ownerAddress,
+        uint amount,
+        uint unlockCode,
+        OrderState state
+    );
+
+    event ItemReceived(
+        uint id
+    );
+
+    event OwnerRefunded(
+        uint id
+    );
 
     /**************************************
      *             FUNCTIONS
      *************************************/
 
-    constructor(address payable _sellerAddress, uint _amount) payable {
-        contractOwnerAddress = payable(msg.sender);
-        sellerAddress = _sellerAddress;
-        amount = _amount;
-        state = ContractState.Created;
-    }
-
-    /// Abort the purchase and reclaim the ether (timer/dashboard)
-    /// Can only be called by the smart contract owner before
-    /// the contract is filled.
-    function abort()
+    /// Create new order with data
+    // This will set the order as created and ready to receive coins
+    /*
+    function createNewOrder(address payable _seller, address payable _buyer, uint _amount)
         external
-        onlyOwner
-        inState(ContractState.Created)
     {
-        emit Aborted();
-        state = ContractState.Canceled;
-        // We use transfer here directly. It is
-        // reentrancy-safe, because it is the
-        // last call in this function and we
-        // already changed the state.
-        contractOwnerAddress.transfer(address(this).balance);
+        orderCount++;
+        orders[orderCount] = Order(_seller, _buyer, _amount, 0, OrderState.Created);
+
+        // link the order
+        buyerOrders[_buyer].push(orderCount);
+        sellerOrders[_seller].push(orderCount);
+
+        emit OrderCreated(orderCount);
     }
+    */
 
     /// Confirm the purchase as buyer.
-    /// Transaction has to include `2 * value` ether.
     /// The ether will be locked until confirmReceived
     /// is called.
-    function confirmPurchase()
+    function newOrder(address payable _seller, uint _amount)
         external
-        inState(ContractState.Created)
-        condition(msg.value >= amount)
         payable
+        notItself(_seller, msg.sender)
+        enoughFunds(msg.sender, _amount)
     {
-        //address(this).transfer(msg.value);        // this transfer is implicit
-        emit PurchaseConfirmed();
-        unlockCode = block.number;
-        state = ContractState.Filled;
+        require(
+            msg.value >= _amount,
+            "Insufficient coin value"
+        );
+        require(
+            _amount > 0,
+            "order amount is invalid"
+        );
+        orderCount++;
+        orders[orderCount] = Order(_seller, payable(msg.sender), _amount, block.number, OrderState.Filled);
+        // overwrite it
+        emit OrderConfirmed(orderCount, _seller, payable(msg.sender), _amount, block.number, OrderState.Filled);
     }
 
     /// Confirm that the smart contract's owner received the item.
     /// This will release the locked ether.
-    function confirmReceived(uint _unlockCode)
+    function confirmReceived(uint id, uint _unlockCode)
         external
-        onlyOwner
-        inState(ContractState.Filled)
-        condition(_unlockCode == unlockCode)
+        onlyOwner(id)
+        inState(id, OrderState.Filled)
     {
-        sellerAddress.transfer(amount);
-        emit ItemReceived();
+        Order memory currentOrder = orders[id];
+        require(
+            _unlockCode == currentOrder.unlockCode,
+            "Invalid unlock code"
+        );
+
+        currentOrder.sellerAddress.transfer(currentOrder.amount);
+        currentOrder.state = OrderState.Closed;
+
+        // overwrite it
+        orders[id] = currentOrder;
+        emit ItemReceived(id);
+    }
+
+    /// Refound owner if he decided to cancel the order before
+    /// the Closed state (before unlock)
+    function refundOwner(uint id)
+        external
+        onlyOwner(id)
+        inState(id, OrderState.Filled)
+    {
+        Order memory currentOrder = orders[id];
+        currentOrder.ownerAddress.transfer(currentOrder.amount);
         // It is important to change the state first because
         // otherwise, the contracts called using `send` below
         // can call in again here.
-        state = ContractState.Closed;
+        currentOrder.state = OrderState.Canceled;
+        
+        // overwrite
+        orders[id] = currentOrder;
+        emit OwnerRefunded(id);
     }
-
-    /// This function refunds the seller, i.e.
-    /// pays back the locked funds of the seller.
-    function refundOwner()
-        external
-        onlyOwner
-        inState(ContractState.Filled)
-    {
-        contractOwnerAddress.transfer(amount);
-        emit OwnerRefunded();
-        // It is important to change the state first because
-        // otherwise, the contracts called using `send` below
-        // can call in again here.
-        state = ContractState.Canceled;
-    }
-
-    /**************************************
-     *             UTILITY
-     *************************************/
-    /*
-    function stringCompare (string memory str1, string memory str2) internal pure returns(bool) {
-        return keccak256(abi.encodePacked(str1)) == keccak256(abi.encodePacked(str2));
-    }
-    */
-
 
     /**************************************
      *             GETTER
      *************************************/
 
-    function balanceOf() external view returns(uint) {
+    function getOrderCount() external view returns(uint) {
+        return orderCount;
+    }
+
+    function contractBalance() external view returns(uint) {
         return address(this).balance;
     }
 
-    function getOwnerAddress() external view returns(address) {
-        return contractOwnerAddress;
+    function getOwnerAddress(uint id) external view returns(address) {
+        return orders[id].ownerAddress;
     }
 
-    function getSellerAddress() external view returns(address) {
-        return sellerAddress;
+    function getSellerAddress(uint id) external view returns(address) {
+        return orders[id].sellerAddress;
     }
 
-    function getAmountToPay() external view returns(uint) {
-        return amount;
+    function getAmountToPay(uint id) external view returns(uint) {
+        return orders[id].amount;
     }
 
-    function getContractState() external view returns(ContractState) {
-        return state;
+    function getOrderState(uint id) external view returns(OrderState) {
+        return orders[id].state;
     }
 
-    function getUnlockCode() external view returns(uint) {
-        return unlockCode;
+    function getUnlockCode(uint id) external view returns(uint) {
+        return orders[id].unlockCode;
     }
 
-    /*
-    event UnlockContract (
-        uint date,
-        address to,
-        uint amount
-    );
-
-    function setParameters(address payable _sellerAddress, uint _amount) public {
-        sellerAddress = _sellerAddress;
-        amount = _amount;
+    function getOrderById(uint id) external view returns(Order memory) {
+        return orders[id];
     }
 
-    function getSellerAddress() public view returns (address) {
-        return sellerAddress;
-    }
 
-    function getAmount() public view returns (uint) {
-        return amount;
-    }
-
-    function sendToContract() public payable {
-        //address(this).transfer(msg.value);  // msg.sender is implicity
-    }
-
-    function unlockToSeller(string memory unlockCode) external {
-        require(
-            keccak256(abi.encodePacked(unlockCode)) == keccak256(abi.encodePacked("12345")),
-            "Wrong unlock code"
-        );
-
-        sellerAddress.transfer(amount);
-        emit UnlockContract(block.timestamp, sellerAddress, amount);
-    }
-
-    */
-
+    // we have to write a refund from seller too????
 }
 
 // Helper functions are defined outside of a contract
