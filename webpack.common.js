@@ -36,6 +36,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.json$/,
+				exclude: /node_modules/,
+				loader: 'json'
+			},
+			{
 				test: /\.(ts|tsx)$/,
 				exclude: /node_modules/,
 				use: ["ts-loader"],
@@ -47,21 +52,23 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
+				exclude: /node_modules/,
 				use: ['style-loader', 'css-loader', 'sass-loader'],
 			},
 			{
 				test: /\.css$/,
+				exclude: /node_modules/,
 				use: ['style-loader', 'css-loader'],
 			},
 		],
 	},
 	plugins: [
 		new webpack.ProvidePlugin({
-            Buffer: ['buffer', 'Buffer'],
-        }),
-        new webpack.ProvidePlugin({
-            process: 'process/browser',
-        }),
+			Buffer: ['buffer', 'Buffer'],
+		}),
+		new webpack.ProvidePlugin({
+			process: 'process/browser',
+		}),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('development'),
 			'process.env.NODE_DEBUG': JSON.stringify('development')

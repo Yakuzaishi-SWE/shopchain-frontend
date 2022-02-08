@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const MockTransact = () => {
+const ECommercePage = () => {
     const [amount, setAmount] = useState<number>(0);
     const [destination, setDesination] = useState<string>("");
 
@@ -20,4 +20,4 @@ const MockTransact = () => {
     </form>;
 }
 
-export default MockTransact;
+export default ECommercePage;

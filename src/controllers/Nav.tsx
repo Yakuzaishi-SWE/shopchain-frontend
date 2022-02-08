@@ -5,9 +5,9 @@ import { NavView } from "views"
 
 
 const NavController =  () => {
-    const [address] = useAddress();
+    const address = useAddress();
 
-    return <NavView address={address}/>
+    return <NavView address={address || undefined}/>
 }
 
 export default NavController;
