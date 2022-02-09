@@ -5,13 +5,11 @@ import Emojis from '../emojis.json';
 const EmojiAddress = (address: string) => {
     if (typeof address !== "string") return address;
     let s = address.substring(2).split('');
-    let out = "";
+    const positions: number[] = [];
     for (let i = 0; i + 1 < s.length; i += 2) {
-        let hex = `${s[i]}${s[i + 1]}`
-        let pos = parseInt(hex, 16);
-        out += String.fromCodePoint(["0x"+Emojis[pos]] as unknown as number);
+        positions.push(Emojis[parseInt(`${s[i]}${s[i + 1]}`, 16)] as unknown as number);
     }
-    return out;
+    return String.fromCodePoint(...positions);
 }
 
 
@@ -23,7 +21,10 @@ const Nav = ({ address }: { address?: string }) => {
                 ?
                 <ConnectMetamaskController />
                 :
-                <span>{EmojiAddress(address) || ""}</span>
+                <span className="addr">
+                    <span className="addr-overlay">{EmojiAddress(address)}</span>
+                    <span className="addr-hex">{address}</span>
+                </span>
 
         }
     </header>

@@ -36,9 +36,9 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.json$/,
+				test: /^emojis.json$/,
 				exclude: /node_modules/,
-				loader: 'json'
+				use: ['json-loader']
 			},
 			{
 				test: /\.(ts|tsx)$/,

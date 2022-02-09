@@ -22,13 +22,12 @@ const AppProvider = ({ children }: { children: React.ReactChild }) => {
         window.location.reload();
     }
 
-
     useEffect(() => {
         detectEthereumProvider()
             .then((p) => {
                 if (!p) console.error("Install Metamask");
-                if (p !== window.ethereum) console.error("Conflicting Multiple Wallet installed");
-                setProvider(p as MetaMaskInpageProvider | null);
+                else if (p !== window.ethereum) console.error("Conflicting Multiple Wallet installed");
+                else setProvider(p as MetaMaskInpageProvider | null);
             })
             .catch(err => console.error(err));
     }, []);
