@@ -1,21 +1,24 @@
 import React, { useState } from "react";
+import { InputView } from "views";
 
 const ECommercePage = () => {
     const [amount, setAmount] = useState<number>(0);
-    const [destination, setDesination] = useState<string>("");
+    const [id, setId] = useState<string>("");
 
     const handleSubmit = (e: React.MouseEvent) => {
         e.preventDefault();
 
-        window.location.pathname = `/transaction/${destination}/${amount}`;
+        window.location.pathname = `/transaction/${id}/`;
 
         return false;
     }
 
     return <form>
-        <input type="number" value={amount} onChange={(e) => setAmount(e.target.valueAsNumber)}></input>
-        <input type="text" value={destination} onChange={(e) => setDesination(e.target.value)}></input>
-
+        <label>
+            Id:
+            <InputView value={id} setValue={setId} />
+        </label>
+        
         <input type="submit" onClick={handleSubmit}></input>
     </form>;
 }

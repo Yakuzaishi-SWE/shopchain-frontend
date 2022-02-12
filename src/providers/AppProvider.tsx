@@ -2,6 +2,8 @@ import { AppContext, IAppContext } from "./AppContext"
 import React, { useEffect, useMemo, useState } from "react"
 import { MetaMaskInpageProvider } from "@metamask/providers";
 import detectEthereumProvider from "@metamask/detect-provider";
+import Web3 from "web3";
+import SP from './SP.json';
 
 const AppProvider = ({ children }: { children: React.ReactChild }) => {
     const [currentAccount, setAccount] = useState<string | null>(null);
@@ -9,6 +11,15 @@ const AppProvider = ({ children }: { children: React.ReactChild }) => {
     const [connected, setConnected] = useState<boolean>(false);
     const [ethereum, setProvider] = useState<MetaMaskInpageProvider | null>(null);
 
+    const w3 = useMemo(() => {
+        if (ethereum) return new Web3(ethereum as any);
+        return null;
+    }, [ethereum]);
+
+    const contract = useMemo(() => {
+        if (w3) return new w3.eth.Contract(SP as any, "0x21461fFe79adb0606456c6214B5569Ba0f40f4B3");
+        else return null;
+    }, [w3]);
 
     function handleAccountsChanged(...accounts: unknown[]) {
         if (accounts.length === 0) {
@@ -71,7 +82,7 @@ const AppProvider = ({ children }: { children: React.ReactChild }) => {
 
     const info = useMemo<IAppContext["info"]>(() => ({ connected, address: currentAccount, chain: currentChain }), [connected, currentAccount, currentChain]);
 
-    const ctx = useMemo<IAppContext>(() => ({ info, provider: ethereum, connect }), [info, ethereum, connect]);
+    const ctx = useMemo<IAppContext>(() => ({ info, contract, provider: ethereum, connect }), [info, ethereum, connect]);
 
     return <AppContext.Provider value={ctx}>{children}</AppContext.Provider>
 }

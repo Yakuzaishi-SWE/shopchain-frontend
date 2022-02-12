@@ -1,33 +1,12 @@
 [
     {
-        "inputs": [],
-        "name": "InvalidState",
-        "type": "error"
-    },
-    {
-        "inputs": [],
-        "name": "OnlyOwner",
-        "type": "error"
-    },
-    {
-        "inputs": [],
-        "name": "OnlySeller",
-        "type": "error"
-    },
-    {
-        "anonymous": false,
-        "inputs": [],
-        "name": "Aborted",
-        "type": "event"
-    },
-    {
         "anonymous": false,
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "ItemReceived",
@@ -38,9 +17,9 @@
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             },
             {
                 "indexed": false,
@@ -81,9 +60,9 @@
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "OrderCreated",
@@ -94,9 +73,9 @@
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "OwnerRefunded",
@@ -105,9 +84,9 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             },
             {
                 "internalType": "uint256",
@@ -136,9 +115,9 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "getAmountToPay",
@@ -155,9 +134,9 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "getOrderById",
@@ -188,11 +167,6 @@
                         "internalType": "enum SinglePayment.OrderState",
                         "name": "state",
                         "type": "uint8"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "orderGUID",
-                        "type": "string"
                     }
                 ],
                 "internalType": "struct SinglePayment.Order",
@@ -219,9 +193,9 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "getOrderState",
@@ -248,37 +222,44 @@
             {
                 "components": [
                     {
-                        "internalType": "address payable",
-                        "name": "sellerAddress",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "address payable",
-                        "name": "ownerAddress",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "amount",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "unlockCode",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "enum SinglePayment.OrderState",
-                        "name": "state",
-                        "type": "uint8"
-                    },
-                    {
                         "internalType": "string",
-                        "name": "orderGUID",
+                        "name": "id",
                         "type": "string"
+                    },
+                    {
+                        "components": [
+                            {
+                                "internalType": "address payable",
+                                "name": "sellerAddress",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "address payable",
+                                "name": "ownerAddress",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "amount",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "unlockCode",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "enum SinglePayment.OrderState",
+                                "name": "state",
+                                "type": "uint8"
+                            }
+                        ],
+                        "internalType": "struct SinglePayment.Order",
+                        "name": "order",
+                        "type": "tuple"
                     }
                 ],
-                "internalType": "struct SinglePayment.Order[]",
+                "internalType": "struct SinglePayment.OrderTuple[]",
                 "name": "",
                 "type": "tuple[]"
             }
@@ -299,37 +280,44 @@
             {
                 "components": [
                     {
-                        "internalType": "address payable",
-                        "name": "sellerAddress",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "address payable",
-                        "name": "ownerAddress",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "amount",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "unlockCode",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "enum SinglePayment.OrderState",
-                        "name": "state",
-                        "type": "uint8"
-                    },
-                    {
                         "internalType": "string",
-                        "name": "orderGUID",
+                        "name": "id",
                         "type": "string"
+                    },
+                    {
+                        "components": [
+                            {
+                                "internalType": "address payable",
+                                "name": "sellerAddress",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "address payable",
+                                "name": "ownerAddress",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "amount",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "unlockCode",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "enum SinglePayment.OrderState",
+                                "name": "state",
+                                "type": "uint8"
+                            }
+                        ],
+                        "internalType": "struct SinglePayment.Order",
+                        "name": "order",
+                        "type": "tuple"
                     }
                 ],
-                "internalType": "struct SinglePayment.Order[]",
+                "internalType": "struct SinglePayment.OrderTuple[]",
                 "name": "",
                 "type": "tuple[]"
             }
@@ -340,9 +328,9 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "getOwnerAddress",
@@ -359,9 +347,9 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "getSellerAddress",
@@ -378,9 +366,9 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "getUnlockCode",
@@ -408,7 +396,7 @@
             },
             {
                 "internalType": "string",
-                "name": "_orderGUID",
+                "name": "_orderId",
                 "type": "string"
             }
         ],
@@ -420,9 +408,9 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "refundFromOwner",
@@ -433,9 +421,9 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "id",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "refundFromSeller",

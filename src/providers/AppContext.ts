@@ -1,4 +1,5 @@
-import {createContext} from "react";
+import { createContext } from "react";
+import { Contract } from "web3-eth-contract";
 
 export interface IAppContext {
     info: {
@@ -7,6 +8,7 @@ export interface IAppContext {
         chain: string | null,
     },
     provider: MetaMaskInpageProvider | null,
+    contract: Contract | null,
     connect: () => void,
 }
 
@@ -17,7 +19,8 @@ const initContext: IAppContext = {
         chain: null,
     },
     provider: null,
-    connect: () => {}
+    contract: null,
+    connect: () => { }
 }
 
 export const AppContext = createContext<IAppContext>(initContext);
