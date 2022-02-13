@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
     return <>
-        <Link to="/e-commerce/">Simula Pagamento</Link>
-        <Link to="/transaction/">Elenco Transazioni</Link>
+        <div className = "center">
+            <Link to="/e-commerce/">Simula Pagamento</Link>
+            <Link to="/transaction/">Elenco Transazioni</Link>
+        </div>
     </>
 }
 
