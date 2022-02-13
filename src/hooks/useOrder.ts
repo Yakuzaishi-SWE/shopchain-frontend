@@ -27,9 +27,22 @@ const useOrder = (id: string): { order: IOrder | null, unlock: (code: number) =>
     }, [contract]);
 
     const unlock = async (code: number) => {
-        if (contract && address) await contract.methods
-            .confirmReceived(id, code)
-            .send({ from: address, type: "0x1" });
+        if (contract && address) {
+            try {
+                await contract.methods
+                    .confirmReceived(id, code)
+                    .send({ from: address });
+            } catch (err) {
+                if ((err as any).code && (err as any).code === -32602) {
+                    await contract.methods
+                        .confirmReceived(id, code)
+                        .send({ from: address, type: "0x1" });
+                }
+                else {
+                    throw err;
+                }
+            }
+        }
         else throw new Error("Contract not loaded");
     }
 

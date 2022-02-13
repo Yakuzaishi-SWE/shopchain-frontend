@@ -73,6 +73,6 @@
         "react-router-dom": "^5.2.0",
         "react-transition-group": "^4.4.2",
         "use-debounce": "^7.0.0",
-        "web3": "^1.6.1"
+        "web3": "^1.7.0"
     }
 }

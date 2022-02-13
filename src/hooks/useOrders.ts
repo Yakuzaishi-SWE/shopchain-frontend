@@ -28,9 +28,22 @@ const useOrders = (filter?: { seller?: string, buyer?: string }): {
     }, [contract, filter?.seller, filter?.buyer]);
 
     const create = async (from: string, { seller, amount, id }: { seller: string, amount: string, id: string }) => {
-        if (contract) await contract.methods
-            .newOrder(seller, amount, id)
-            .send({ from, value: amount, type: '0x1' });
+        if (contract) {
+            try {
+                await contract.methods
+                    .newOrder(seller, amount, id)
+                    .send({ from, value: amount });
+            } catch (err) {
+                if ((err as any).code && (err as any).code === -32602) {
+                    await contract.methods
+                        .newOrder(seller, amount, id)
+                        .send({ from, value: amount, type: "0x1" });
+                }
+                else {
+                    throw err;
+                }
+            }
+        }
         else throw new Error("Contract not loaded");
     }
 
