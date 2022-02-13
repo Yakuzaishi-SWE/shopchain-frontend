@@ -13,17 +13,15 @@ const ECommercePage = () => {
         return false;
     }
 
-    return <form>
-        <div className="form-wrapper">
-            <label>
-                Id:
-            </label>
-            <InputView value={id} setValue={setId} />
-        </div>
-        <div className="form-wrapper">
-            <input type="submit" onClick={handleSubmit}></input>    
-        </div>
-    </form>;
+    return <div className="form-wrapper">
+            <form>
+                <label>Id:</label>
+                <InputView value={id} setValue={setId} />
+                <div className="center">
+                    <input type="submit" onClick={handleSubmit}></input>    
+                </div>
+            </form>
+        </div>;
 }
 
 export default ECommercePage;
