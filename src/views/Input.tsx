@@ -42,7 +42,7 @@ const InputView = ({
         placeholder={placeholder}
         disabled={disabled}
         onFocus={selectOnFocus?(el) => el.target.select():undefined}
-    ></input>
+    ></input>;
 };
 
 

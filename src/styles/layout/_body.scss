@@ -21,4 +21,43 @@ div#root{
             margin-top: 12.5%;
         }
     }
+
+    & > form {
+        padding: 2em;
+        background-color: #3c3a5b;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-top: 3em;
+        width: 20%;
+        color: white;
+        border-radius: 32px;
+
+        & > div.form-wrapper {
+            display: flex;
+            flex-direction: column;
+    
+            & > label {
+                display: inline-block;
+            }
+
+            & > input {
+                width: 100%;
+                padding: 0.8em;
+                border: none;
+                border-radius: 30px;
+                font-size: 1em;
+            }
+
+            & > input[type=submit] {
+                width: 100%;
+                padding: 1em;
+                border-radius: 30px;
+                background-color: red;
+            }
+        }
+        
+
+    }
 }

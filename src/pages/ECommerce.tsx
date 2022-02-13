@@ -14,12 +14,15 @@ const ECommercePage = () => {
     }
 
     return <form>
-        <label>
-            Id:
+        <div className="form-wrapper">
+            <label>
+                Id:
+            </label>
             <InputView value={id} setValue={setId} />
-        </label>
-        
-        <input type="submit" onClick={handleSubmit}></input>
+        </div>
+        <div className="form-wrapper">
+            <input type="submit" onClick={handleSubmit}></input>    
+        </div>
     </form>;
 }
 
