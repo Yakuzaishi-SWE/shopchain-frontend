@@ -5,7 +5,7 @@ import { TransactionListView } from "views";
 
 const TransactionListController = () => {
     const address = useAddress();
-    const { orders } = useOrders({ seller: address || undefined });
+    const { orders } = useOrders({ buyer: address || undefined });
 
     return <TransactionListView transactions={orders} />
 }
