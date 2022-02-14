@@ -166,9 +166,13 @@ div#root{
         &.payAlone {
             background-color: $primaryLight;
         }
-
+        
         &.moneyBox {
             background-color: #be24e5;
+        }
+
+        &:active{
+            box-shadow: 0px 0px;
         }
     }
 }
@@ -182,5 +186,6 @@ button {
 }
 
 button:active {
-    transform: translateY(4px);
+    transform: translateY(3px);
+    box-shadow: 0px 0px;
   }
