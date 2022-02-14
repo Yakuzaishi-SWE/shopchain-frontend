@@ -43,11 +43,9 @@ div#root{
                 padding: 1em 1em;
                 margin: 1em  0 1.5em 0;
                 display: inline-block;
-                border: 1px solid #ccc;
                 border-radius: 32px;
                 box-sizing: border-box;
                 font-size: 1em;
-                border: none;
                 color: white;
                 background-color: $background60;
 
@@ -105,7 +103,6 @@ div#root{
                 border: none;
                 margin: none;
                 padding: 16px;
-                color: black;
                 font-weight: bold;
                 border-radius: 16px;
                 cursor: pointer;
