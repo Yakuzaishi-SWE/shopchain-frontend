@@ -5,7 +5,7 @@ import React from "react"
 const TransactionListPage = () => {
 
     return <>
-        <h2>Transaction List</h2>
+        <h1>Transaction List</h1>
         <TransactionListController/>
     </>
 }

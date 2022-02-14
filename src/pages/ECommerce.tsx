@@ -13,15 +13,25 @@ const ECommercePage = () => {
         return false;
     }
 
-    return <div className="form-wrapper">
-            <form>
-                <label>Id:</label>
-                <InputView value={id} setValue={setId} />
+    return <form>
+                <div className="form-wrapper">
+                    <label>Id</label>
+                    <InputView value={id} setValue={setId} placeholder="0000-000000-000000000000000" />
+                </div>
+                <div className="form-wrapper">
+                    <label>Amount</label>
+                    <div className="ftm-input">
+                        <input type="number" className="clickable-input" placeholder="0.00"/> 
+                        <span className="ftm-icon">
+                            <img src="../images/icons/FTM.png"/>
+                            FTM
+                        </span>
+                    </div>
+                </div>
                 <div className="center">
                     <input type="submit" onClick={handleSubmit}></input>    
                 </div>
-            </form>
-        </div>;
+        </form>;
 }
 
 export default ECommercePage;

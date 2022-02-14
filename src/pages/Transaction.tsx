@@ -10,7 +10,11 @@ const TransactionPage = () => {
     const usp = useMemo(() => new URLSearchParams(location.search), [location.search]);
 
     return <>
-        <h2>Transactions</h2>
+        <h1>Transactions</h1>
+        <p>Please choose the payment type that you prefer.<br/>
+        If you select “Pay Alone” you will redirect to checkout page and you will pay the entire order amount.<br/>
+        If you select Money Box you are going to create an order that you can share with your friends, to confirm 
+        the payment you have to fill the entire amount that is request.</p>
         <TransactionInitController id={id} />
         <TransactionDetailsController id={id} />
     </>
