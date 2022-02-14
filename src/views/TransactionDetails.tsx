@@ -6,8 +6,8 @@ const TransactionDetailsView = ({ order, id, onUnlock }: { order: IOrder, id: st
             <li><div className="section-head">Transaction ID:</div>{id}</li>
         <li><div className="section-head">Order Owner:</div>{order.ownerAddress}</li>
         <li><div className="section-head">Payed To:</div>{order.sellerAddress}</li>
-        <li><div className="section-head">Amount:{Math.floor(order.amount*100/1e18)/100 }</div></li>
-            <li><div className="section-head">State:{order.state}</div></li>
+        <li><div className="section-head">Amount:</div>{Math.floor(order.amount*100/1e18)/100 }</li>
+            <li><div className="section-head">State:</div>{order.state}</li>
         </ul>
     </section>
     <div className="box-button center">
