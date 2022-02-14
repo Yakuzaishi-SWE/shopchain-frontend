@@ -25,7 +25,7 @@ div#root{
     & > form{
         margin: 10em 25%;
         border-radius: 30px;
-        background-color: $background60;
+        background-color: $background80;
         padding: 2em;
 
         & > div.form-wrapper{
@@ -48,7 +48,8 @@ div#root{
                 box-sizing: border-box;
                 font-size: 1em;
                 border: none;
-                color: black;
+                color: white;
+                background-color: $background60;
 
                 &:focus {
                     outline: none;
@@ -56,7 +57,7 @@ div#root{
             }
 
             & ::placeholder {
-                color: rgb(83, 83, 83);
+                color: white;
             }
 
             & div.ftm-input {
@@ -65,7 +66,7 @@ div#root{
                 align-items: center;
                 -webkit-box-pack: justify;
                 justify-content: space-between;
-                background-color: white;
+                background-color: $background60;
                 padding: 0.3em 0.5em;
                 margin: 1em 0;
                 border-radius: 32px;
@@ -100,8 +101,13 @@ div#root{
             & > input[type=submit] {
                 background-color: $buttonGreen;
                 color: black;
-                padding: 1.5em 4em;
-                border-radius: 32px;
+                height: 50px;
+                border: none;
+                margin: none;
+                padding: 16px;
+                color: black;
+                font-weight: bold;
+                border-radius: 16px;
                 cursor: pointer;
             }
         }
@@ -183,7 +189,7 @@ div#root{
         margin: auto;
 
         & > li {
-            background-image: linear-gradient(to bottom right, $primary, #a8a9e3);
+            background-image: linear-gradient(to bottom right, $primary, $primaryLight);
             padding: 1em 1.5em;
             margin-bottom: 1.5em;
             border-radius: 32px;
