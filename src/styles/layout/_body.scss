@@ -250,4 +250,15 @@ button#unlock{
 button:active {
     transform: translateY(3px);
     box-shadow: 0px 0px;
-  }
+}
+
+div.page-loader {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15%;
+    align-items: center;
+
+    & > h1 {
+        color: white;
+    }
+}

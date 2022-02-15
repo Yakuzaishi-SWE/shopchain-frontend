@@ -3,10 +3,12 @@ import useSinglePayment from "./useSinglePayment";
 
 const useOrders = (filter?: { seller?: string, buyer?: string }): {
     orders: IOrderTuple[],
+    loading: boolean,
     create: (from: string, data: { seller: string, amount: string, id: string }) => Promise<void>,
     getBalance: () => Promise<number>
 } => {
     const [orders, setOrders] = useState<IOrderTuple[]>([]);
+    let [loading, setLoading] = useState(true);
     const contract = useSinglePayment();
 
     useEffect(() => {
@@ -21,7 +23,10 @@ const useOrders = (filter?: { seller?: string, buyer?: string }): {
                 contract.methods
                     .getOrdersByBuyer(filter.buyer)
                     .call()
-                    .then((data: IOrderTuple[]) => setOrders(data))
+                    .then(
+                        (data: IOrderTuple[]) => setOrders(data),
+                        setLoading(false)
+                    )
                     .catch(err => console.error(err));
             }
         }
@@ -54,7 +59,7 @@ const useOrders = (filter?: { seller?: string, buyer?: string }): {
         else throw new Error("Contract not loaded");
     }
 
-    return { orders, create, getBalance };
+    return { orders, create, getBalance, loading };
 }
 
 export default useOrders;

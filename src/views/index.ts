@@ -6,3 +6,4 @@ export { default as TransactionDetailsView } from './TransactionDetails';
 export { default as AddressView } from './Address';
 export { default as TransactionListView } from './TransactionList';
 export { default as TransactionListElView } from './TransactionListEl';
+export { default as PageLoaderView } from './PageLoader';
