@@ -18,7 +18,7 @@ const ECommercePage = () => {
         return false;
     };
 
-    return <form>
+    return <form className="payment-form">
         {redirectLink ? <Redirect to={redirectLink} /> : <></>}
         <div className="form-wrapper">
             <label>Id</label>

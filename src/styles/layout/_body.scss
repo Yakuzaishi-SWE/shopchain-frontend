@@ -21,95 +21,6 @@ div#root{
             margin-top: 12.5%;
         }
     }
-
-    & > form{
-        margin: 10em 25%;
-        border-radius: 30px;
-        background-color: $background80;
-        padding: 2em;
-
-        & > div.form-wrapper{
-            
-            &  label {
-                color: white;
-                font-size: 1.2em;
-                font-weight: 200;
-                display: block;
-                text-transform: uppercase;
-            }
-            
-            & input[type=text], input[type=number] {
-                width: 100%;
-                padding: 1em 1em;
-                margin: 1em  0 1.5em 0;
-                display: inline-block;
-                border-radius: 32px;
-                box-sizing: border-box;
-                font-size: 1em;
-                color: white;
-                background-color: $background60;
-
-                &:focus {
-                    outline: none;
-                }
-            }
-
-            & ::placeholder {
-                color: white;
-            }
-
-            & div.ftm-input {
-                display: flex;
-                -webkit-box-align: center;
-                align-items: center;
-                -webkit-box-pack: justify;
-                justify-content: space-between;
-                background-color: $background60;
-                padding: 0.3em 0.5em;
-                margin: 1em 0;
-                border-radius: 32px;
-
-                & > input {
-                    width: 75%;
-                    margin: 0;
-                    padding: 0 0.8em;
-                }
-                
-                & span.ftm-icon {
-                    display: flex;
-                    -webkit-box-align: center;
-                    align-items: center;
-                    -webkit-box-pack: justify;
-                    padding: 0.5em 0.6em;
-                    background-color: $background;
-                    border-radius: 60px;
-                    color: white;
-    
-                    & > img {
-                        width: 24px;
-                        height: 24px;
-                        margin-right: 5px;
-                    }
-                }
-            }
-        }
-
-        & >div.center {
-            text-align: center;
-            & > input[type=submit] {
-                background-color: $buttonGreen;
-                color: black;
-                height: 50px;
-                border: none;
-                margin: none;
-                padding: 16px;
-                font-weight: bold;
-                border-radius: 16px;
-                cursor: pointer;
-            }
-        }
-        
-    }
     
     & > h1 {
         text-align: center;
@@ -122,41 +33,6 @@ div#root{
         font-size: 1em;
         text-align: center;
         width: 50%;
-    }
-
-    & > section {
-
-        padding: 2em;
-        background-color: #49456e;
-        margin: 5em auto;
-        border-radius: 32px;
-        color: white;
-        width: 50%;
-
-        header {
-            color: white;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 0.2em;
-        }
-
-        ul {
-            margin: 2em 0;
-            list-style: none;
-            padding-left: 0;
-        }
-
-        ul > li {
-            margin: 1em 0;
-            clear: both;
-        }
-
-        ul > li > div.section-head {
-            font-size: 1em;
-            font-weight: bold;
-            width: 25%;
-            float: left;
-        }
     }
 
     div.box-button > button {
@@ -255,6 +131,6 @@ button:active {
 div.sweet-loading {
     display: flex;
     flex-direction: column;
-    //margin-top: 15%;
+    margin-top: 15%;
     align-items: center;
 }
