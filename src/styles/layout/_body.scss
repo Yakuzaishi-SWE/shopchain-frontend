@@ -252,13 +252,9 @@ button:active {
     box-shadow: 0px 0px;
 }
 
-div.page-loader {
+div.sweet-loading {
     display: flex;
     flex-direction: column;
-    margin-top: 15%;
+    //margin-top: 15%;
     align-items: center;
-
-    & > h1 {
-        color: white;
-    }
 }

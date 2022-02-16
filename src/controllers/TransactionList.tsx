@@ -9,8 +9,8 @@ const TransactionListController = () => {
     const { orders, loading } = useOrders({ buyer: address || undefined });
 
     return <>
-        <TransactionListView transactions={orders} />
         <PageLoaderController loading={loading}/>
+        <TransactionListView transactions={orders} />
     </>
 }
 
