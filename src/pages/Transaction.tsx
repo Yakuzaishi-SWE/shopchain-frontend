@@ -7,6 +7,8 @@ import { Loading } from "resources/svg";
 
 const TransactionPage = () => {
     const { id } = useParams<{ id: string }>();
+    if (!id) return <p>id is missing</p>;
+
     const { order, loaded, error } = useOrder(id);
 
     return <>

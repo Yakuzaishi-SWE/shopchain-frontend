@@ -41,7 +41,7 @@ const AppProvider = ({ children }: { children: React.ReactChild }) => {
     }, [w3]);
 
     useEffect(() => {
-        if (!currentAccount && provider_error.name !== MetamaskErrorName.OK) setProviderError(NotConnected);
+        if (!currentAccount && provider_error.name === MetamaskErrorName.OK) setProviderError(NotConnected);
         if (currentAccount && provider_error.name === MetamaskErrorName.NOT_CONNECTED) setProviderError(Nominal);
     }, [currentAccount, provider_error]);
 

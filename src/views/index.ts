@@ -7,3 +7,5 @@ export { default as AddressView } from "./Address";
 export { default as TransactionListView } from "./TransactionList";
 export { default as TransactionListElView } from "./TransactionListEl";
 export { default as PageLoaderView } from "./PageLoader";
+export { default as MetamaskErrorView } from "./MetamaskErrorView";
+export { default as TransDirectionSelectorView } from "./TransDirectionSelector";
