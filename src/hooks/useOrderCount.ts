@@ -3,22 +3,22 @@ import useLoadingWrap from "./useLoadingWrap";
 import useSinglePayment from "./useSinglePayment";
 
 
-const useContractBalance = () => {
+const useOrderCount = () => {
     const contract = useSinglePayment();
-    const { error, loaded, result, startLoading, setResult, setError } = useLoadingWrap<number>();
+    const { error, loaded, result, startLoading, setResult, setError } = useLoadingWrap<number>({onResult: (d) => {console.log(d);}, onError: (err )=> console.error(err)});
 
     useEffect(() => {
         if (contract) {
             startLoading();
             contract.methods
-                .contractBalance()
+                .getOrderCount()
                 .call()
                 .then(data => setResult(data))
                 .catch(err => setError(err));
         }
     }, [contract]);
 
-    return { error, loaded, balance: result };
+    return { error, loaded, count: result };
 };
 
-export default useContractBalance;
+export default useOrderCount;

@@ -3,8 +3,8 @@ import useAddress from "./useAddress";
 import useLoadingWrap from "./useLoadingWrap";
 import useSinglePayment from "./useSinglePayment";
 
-const useUnlock = () => {
-    const { startLoading, loaded, error, setResult, setError } = useLoadingWrap<void>();
+const useUnlock = ({ onSuccess }: { onSuccess?: () => void } = {}) => {
+    const { startLoading, loaded, error, setResult, setError } = useLoadingWrap<void>({onResult: onSuccess});
     const contract = useSinglePayment();
     const address = useAddress();
 

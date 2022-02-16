@@ -18,6 +18,9 @@ $success: #34C780;
 $warning: #CFB944;
 $error: rgb(236, 59, 59);
 
+body {
+    color: white;
+}
 
 @import './layout/';
 

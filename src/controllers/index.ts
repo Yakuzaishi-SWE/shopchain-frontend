@@ -1,9 +1,11 @@
 export { default as AddressController } from "./Address";
+export { default as BalanceController } from "./Balance";
 export { default as ConnectMetamaskController } from "./ConnectMetamask";
 export { default as EmojiAddressController } from "./EmojiAddress";
 export { default as NavController } from "./Nav";
+export { default as OrderCountController } from "./OrderCount";
+export { default as PageLoaderController } from "./PageLoader";
 export { default as TransactionDetailsController } from "./TransactionDetails";
 export { default as TransactionInitController } from "./TransactionInit";
 export { default as TransactionListController } from "./TransactionList";
 export { default as TransactionListElController } from "./TransactionListEl";
-export { default as PageLoaderController } from "./PageLoader";

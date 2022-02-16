@@ -10,7 +10,7 @@ const TransactionInitController = ({ id }: { id: string }) => {
     const amount = useMemo(() => new URLSearchParams(search).get("amount"), [search]) || "0";
 
     const t: ITransaction = { amount, seller: "0x91350E18AE7133052E06436433040E80f2E6988E" };
-    const { create, loaded, error} = useCreate({onSuccess: () => window.location.reload()});
+    const { create, loaded, error} = useCreate({onSuccess: () => setTimeout(() => window.location.reload(), 1000)});
 
     const handleCreate = () => create({ amount: t.amount, seller: t.seller, id });
 

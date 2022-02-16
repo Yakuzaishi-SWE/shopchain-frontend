@@ -2,13 +2,13 @@ import React from "react";
 import { Lock, MoneyOff, MoneyOn, Unlock } from "resources/svg";
 import { OrderState } from "types/enums";
 
-const TransactionListElView = ({ transaction, id }: { transaction: IOrder, id: string }) => {
+const TransactionListElView = ({ transaction, id, onUnlock }: { transaction: IOrder, id: string, onUnlock: () => void }) => {
     return <li>
         <div>
             <span className="transaction-id">{id}</span>
             <div>
                 <button className="btn-paid">{transaction.state > 1 ? <MoneyOn /> : <MoneyOff />}</button>
-                <button className="btn-unlock">{transaction.state === OrderState.FILLED ? <Lock /> : <Unlock />}</button>
+                <button className="btn-unlock" onClick={onUnlock}>{transaction.state === OrderState.FILLED ? <Lock /> : <Unlock />}</button>
             </div>
         </div>
         <div>
