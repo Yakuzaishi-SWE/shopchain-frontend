@@ -8,10 +8,10 @@ const override = css`
   margin: 0 auto;
 `;
 
-const PageLoaderView = ({ loading }: { loading: boolean }) => {
+const PageLoaderView = () => {
     return <div className="sweet-loading">
-        <HashLoader css={override} size={100} color={"#fff"} loading={loading} speedMultiplier={1.5} />
-      </div>
-}
+        <HashLoader css={override} size={100} color={"#fff"} loading={true} speedMultiplier={1.5} />
+    </div>;
+};
 
 export default PageLoaderView;

@@ -7,7 +7,7 @@ const Home = () => {
             <Link to="/e-commerce/">Simula Pagamento</Link>
             <Link to="/transaction/">Elenco Transazioni</Link>
         </div>
-    </>
-}
+    </>;
+};
 
 export default Home;

@@ -3,7 +3,7 @@ import React from "react";
 const ConnectMetamask = ({onClick}:{onClick: () => void}) => {
     return <button className="btn-connect" onClick={onClick}>
         Connect Metamask
-    </button>
-}
+    </button>;
+};
 
 export default ConnectMetamask;

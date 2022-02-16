@@ -1,11 +1,6 @@
 import { AppContext } from "providers";
 import { useContext } from "react";
 
-
-const useSinglePayment = () => {
-    const {contract} = useContext(AppContext);
-
-    return contract;
-}
+const useSinglePayment = () => useContext(AppContext).contract;
 
 export default useSinglePayment;

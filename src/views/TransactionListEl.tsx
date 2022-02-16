@@ -1,13 +1,6 @@
 import React from "react";
 import { Lock, MoneyOff, MoneyOn, Unlock } from "resources/svg";
-
-enum OrderState {
-    NOT_CREATED = "0",
-    CREATED = "1",
-    FILLED = "2",
-    CLOSED = "3",
-    CANCELLED = "4",
-}
+import { OrderState } from "types/enums";
 
 const TransactionListElView = ({ transaction, id }: { transaction: IOrder, id: string }) => {
     return <li>
@@ -29,7 +22,7 @@ const TransactionListElView = ({ transaction, id }: { transaction: IOrder, id: s
             </div>
         </div>
 
-    </li>
-}
+    </li>;
+};
 
 export default TransactionListElView;

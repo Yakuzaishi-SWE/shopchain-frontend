@@ -1,17 +1,31 @@
 import { useAddress } from "hooks";
 import { useOrders } from "hooks/";
-import React from "react";
+import React, { useState } from "react";
 import { TransactionListView } from "views";
-import PageLoaderController from "controllers/PageLoader";
+import { Loading } from "resources/svg";
+import TransDirectionSelectorController from "./TransDirectionSelector";
 
 const TransactionListController = () => {
-    const address = useAddress();
-    const { orders, loading } = useOrders({ buyer: address || undefined });
+    const address = useAddress() || undefined;
+    const [isSeller, setIsSeller] = useState<boolean>(true);
+    const { orders, error, loaded } = useOrders({ seller: isSeller ? address : undefined, buyer: !isSeller ? address : undefined });
 
     return <>
-        <PageLoaderController loading={loading}/>
-        <TransactionListView transactions={orders} />
-    </>
-}
+        <TransDirectionSelectorController isSeller={isSeller} setIsSeller={setIsSeller}/>
+        {
+            (loaded) ?
+                (
+                    error ? <p>{error.toString()}</p>
+                        :
+                        (
+                            orders ? <TransactionListView transactions={orders} />
+                                :
+                                <Loading />
+                        )
+                ) :
+                <Loading />
+        }
+    </>;
+};
 
 export default TransactionListController;

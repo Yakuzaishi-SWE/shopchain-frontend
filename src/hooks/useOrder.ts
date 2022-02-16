@@ -1,52 +1,26 @@
-import { useEffect, useState } from "react";
-import useAddress from "./useAddress";
+import { useEffect } from "react";
+import { OrderState } from "types/enums";
+import useLoadingWrap from "./useLoadingWrap";
 import useSinglePayment from "./useSinglePayment";
 
-enum OrderState {
-    NOT_CREATED = "0",
-    CREATED = "1",
-    FILLED = "2",
-    CLOSED = "3",
-    CANCELLED = "4",
-}
 
-const useOrder = (id: string): { order: IOrder | null, unlock: (code: number) => Promise<void> } => {
-    const [order, setOrder] = useState<IOrder | null>(null);
+
+const useOrder = (id: string) => {
+    const { loaded, error, result, setError, setResult, startLoading } = useLoadingWrap<IOrder | null>();
     const contract = useSinglePayment();
-    const address = useAddress();
 
     useEffect(() => {
-        if (contract && id !== undefined)
+        if (contract && id !== undefined) {
+            startLoading();
             contract.methods
                 .getOrderById(id)
                 .call()
-                .then((data: IOrder) => {
-                    setOrder((data.state !== OrderState.NOT_CREATED) ? data : null)
-                })
-                .catch(err => console.error(err));
+                .then((data: IOrder) => setResult((data.state !== OrderState.NOT_CREATED) ? data : null))
+                .catch(err => setError(err));
+        }
     }, [contract]);
 
-    const unlock = async (code: number) => {
-        if (contract && address) {
-            try {
-                await contract.methods
-                    .confirmReceived(id, code)
-                    .send({ from: address });
-            } catch (err) {
-                if ((err as any).code && (err as any).code === -32602) {
-                    await contract.methods
-                        .confirmReceived(id, code)
-                        .send({ from: address, type: "0x1" });
-                }
-                else {
-                    throw err;
-                }
-            }
-        }
-        else throw new Error("Contract not loaded");
-    }
-
-    return { order, unlock };
-}
+    return { order: result, loaded, error };
+};
 
 export default useOrder;

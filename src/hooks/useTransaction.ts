@@ -9,6 +9,6 @@ const useTransaction = (id: string): ITransaction|undefined => {
     }, []);
 
     return transaction;
-}
+};
 
 export default useTransaction;
