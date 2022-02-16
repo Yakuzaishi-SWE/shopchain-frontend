@@ -1,11 +1,11 @@
-import { ConnectMetamaskView } from "views"
+import { ConnectMetamaskView } from "views";
 import React from "react";
-import useMetamask from "hooks/useMetamask";
+import {useConnect} from "hooks";
 
 const ConnectMetamaskController = () => {
-    const [, connect] = useMetamask();
+    const connect = useConnect();
 
-    return <ConnectMetamaskView onClick={connect} />
-}
+    return <ConnectMetamaskView onClick={connect} />;
+};
 
 export default ConnectMetamaskController;

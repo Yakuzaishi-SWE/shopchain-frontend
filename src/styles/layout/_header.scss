@@ -1,51 +1,52 @@
 body > div#root > header {
     display: flex;
     width: 100%;
-    background-color: #ccf;
+    background-color: $primaryLight;
     padding: 8px;
     box-sizing: border-box;
 
     & > a {
         flex-grow: 1;
-        color: black;
+        color: white;
         text-decoration: none;
         font-size: 1.5em;
         font-weight: bold;
+        margin-top: 0.3em;
+    }
+}
+
+span.addr {
+    display: flex;
+    align-items: center;
+    font-family: monospace;
+    border-radius: 16px;
+    background-color: $background;
+    color: white;
+    padding: 4px 8px;
+    position: relative;
+    z-index: 0;
+
+    & > span.addr-overlay {
+        visibility: visible;
+        position: absolute;
+        left: 50%;
+        white-space: nowrap;
+        /*font-size: 1.2em;   A VOLTE ESCE DALLA PAGINA CON QUESTO FONT-SIZE*/
+        transform: translateX(-50%);
+        z-index: 2;
     }
 
-    & > span.addr {
-        display: flex;
-        align-items: center;
-        font-family: monospace;
-        border-radius: 6px;
-        background-color: #666;
-        color: white;
-        padding: 4px 8px;
-        position: relative;
-        z-index: 0;
+    & > span.addr-hex {
+        visibility: hidden;
+        z-index: 1;
+    }
 
+    &:hover {
         & > span.addr-overlay {
-            visibility: visible;
-            position: absolute;
-            left: 50%;
-            white-space: nowrap;
-            font-size: 1.2em;
-            transform: translateX(-50%);
-            z-index: 2;
-        }
-
-        & > span.addr-hex {
             visibility: hidden;
-            z-index: 1;
         }
-
-        &:hover {
-            & > span.addr-overlay {
-                visibility: hidden;
-            }
-            & > span.addr-hex {
-                visibility: visible;
-            }
+        & > span.addr-hex {
+            visibility: visible;
         }
     }
 }

@@ -1,3 +1,5 @@
+type MetamaskErrorSeverity = import("./enums").MetamaskErrorSeverity;
+type MetamaskErrorName = import("./enums").MetamaskErrorName;
 type MetaMaskInpageProvider = import("@metamask/providers").MetaMaskInpageProvider;
 
 declare global {
@@ -22,4 +24,10 @@ declare interface IOrderTuple {
 declare interface ITransaction {
     seller: string,
     amount: string,
+}
+
+declare interface MetamaskError {
+    severity: MetamaskErrorSeverity,
+    name: MetamaskErrorName,
+    description: string,
 }

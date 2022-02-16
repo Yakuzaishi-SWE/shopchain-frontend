@@ -25,7 +25,7 @@ const InputView = ({
     useEffect(() => setInternal(value), [value]);
 
     useEffect(() => {
-        let e = ((permissive !== undefined && !permissive.test(internal)) || false);
+        const e = ((permissive !== undefined && !permissive.test(internal)) || false);
         if (!e) {
             setValue(internal);
         }
@@ -36,13 +36,13 @@ const InputView = ({
         style={style}
         type="text"
         id={id}
-        className={"clickable-input" + ((isError) ? " error" : '')}
+        className={"clickable-input" + ((isError) ? " error" : "")}
         value={internal}
         onChange={(el) => setInternal(el.target.value)}
         placeholder={placeholder}
         disabled={disabled}
         onFocus={selectOnFocus?(el) => el.target.select():undefined}
-    ></input>
+    ></input>;
 };
 
 

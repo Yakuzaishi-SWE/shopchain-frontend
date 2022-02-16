@@ -1,19 +1,28 @@
 import { TransactionDetailsController, TransactionInitController } from "controllers";
-import { useOrders, useSinglePayment } from "hooks";
-import React, { useEffect, useMemo } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useOrder } from "hooks";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { Loading } from "resources/svg";
 
 
 const TransactionPage = () => {
-    const location = useLocation();
     const { id } = useParams<{ id: string }>();
-    const usp = useMemo(() => new URLSearchParams(location.search), [location.search]);
+    const { order, loaded, error } = useOrder(id);
 
     return <>
-        <h2>Transactions</h2>
-        <TransactionInitController id={id} />
-        <TransactionDetailsController id={id} />
-    </>
-}
+        {
+            loaded ?
+                (
+                    !order ?
+                        <TransactionInitController id={id} />
+                        :
+                        <TransactionDetailsController id={id} order={order} />
+                )
+                :
+                <Loading />
+        }
+    </>;
+
+};
 
 export default TransactionPage;

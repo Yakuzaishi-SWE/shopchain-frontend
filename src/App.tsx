@@ -14,5 +14,5 @@ export default () => {
             <Route path="/transaction/:id/" ><TransactionPage /></Route>
             <Route path="/transaction/"><TransactionListPage /></Route>
         </Switch>
-    </BrowserRouter>
-}
+    </BrowserRouter>;
+};

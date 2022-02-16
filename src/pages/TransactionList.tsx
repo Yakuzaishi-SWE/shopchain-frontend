@@ -1,14 +1,14 @@
 import TransactionListController from "controllers/TransactionList";
-import React from "react"
+import React from "react";
 
 
 const TransactionListPage = () => {
 
     return <>
-        <h2>Transaction List</h2>
+        <h1>Transaction List</h1>
         <TransactionListController/>
-    </>
-}
+    </>;
+};
 
 
 export default TransactionListPage;
