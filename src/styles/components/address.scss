@@ -1,0 +1,35 @@
+span.addr {
+    display: flex;
+    align-items: center;
+    font-family: monospace;
+    border-radius: 16px;
+    background-color: $background;
+    color: white;
+    padding: 4px 8px;
+    position: relative;
+    z-index: 0;
+
+    & > span.addr-overlay {
+        visibility: visible;
+        position: absolute;
+        left: 50%;
+        white-space: nowrap;
+        /*font-size: 1.2em;   A VOLTE ESCE DALLA PAGINA CON QUESTO FONT-SIZE*/
+        transform: translateX(-50%);
+        z-index: 2;
+    }
+
+    & > span.addr-hex {
+        visibility: hidden;
+        z-index: 1;
+    }
+
+    &:hover {
+        & > span.addr-overlay {
+            visibility: hidden;
+        }
+        & > span.addr-hex {
+            visibility: visible;
+        }
+    }
+}
