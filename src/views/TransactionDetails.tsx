@@ -1,7 +1,7 @@
 import React from "react";
 
 const TransactionDetailsView = ({ order, id, onUnlock }: { order: IOrder, id: string, onUnlock: () => void }) => {
-    return <><section>
+    return <><section className="transaction-details">
         <ul>
             <li><div className="section-head">Transaction ID:</div>{id}</li>
             <li><div className="section-head">Order Owner:</div>{order.ownerAddress}</li>

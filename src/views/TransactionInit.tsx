@@ -2,7 +2,7 @@ import React from "react";
 
 const TransactionInitView = ({ transaction, id, onCreate }: { transaction: ITransaction, id: string, onCreate: () => void }) => {
     return <>
-        <section>
+        <section className="transaction-details">
             <header>Transaction Details</header>
             <p>Please choose the payment type that you prefer.<br />
             If you select “Pay Alone” you will redirect to checkout page and you will pay the entire order amount.<br />

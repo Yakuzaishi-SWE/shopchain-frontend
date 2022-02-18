@@ -1,16 +1,13 @@
 import React from "react";
 
 const TransDirectionSelectorView = ({ isSeller, setIsSeller }: { isSeller: boolean, setIsSeller: (b: boolean) => void }) => {
-    return <form>
+    return <form className="toggle-form">
         <fieldset>
             <legend>Direction</legend>
             <label>
                 Outgoing
-                <input type="radio" name="direction" value="outbound" checked={!isSeller} onChange={() => setIsSeller(false)} />
-            </label>
-            <label>
+                <input type="checkbox" name="direction" value="outbound" checked={isSeller} onChange={(el) => setIsSeller(el.target.checked)} />
                 Ingoing
-                <input type="radio" name="direction" value="inbound" checked={isSeller} onChange={() => setIsSeller(true)} />
             </label>
         </fieldset>
     </form>;
