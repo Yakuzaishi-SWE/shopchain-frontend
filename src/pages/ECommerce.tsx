@@ -34,7 +34,7 @@ const ECommercePage = () => {
                 </span>
             </div>
         </div>
-        <div className="center">
+        <div className="btn-block">
             <input type="submit" onClick={handleSubmit}></input>
         </div>
     </form>;

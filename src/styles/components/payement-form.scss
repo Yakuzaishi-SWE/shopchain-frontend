@@ -28,6 +28,7 @@
                 font-size: 1em;
                 color: white;
                 background-color: $background60;
+                border: none;
 
                 &:focus {
                     outline: none;
@@ -40,9 +41,7 @@
 
             & div.ftm-input {
                 display: flex;
-                -webkit-box-align: center;
                 align-items: center;
-                -webkit-box-pack: justify;
                 justify-content: space-between;
                 background-color: $background60;
                 padding: 0.3em 0.5em;
@@ -57,24 +56,20 @@
                 
                 & span.ftm-icon {
                     display: flex;
-                    -webkit-box-align: center;
                     align-items: center;
-                    -webkit-box-pack: justify;
                     padding: 0.5em 0.6em;
                     background-color: $background;
                     border-radius: 60px;
                     color: white;
     
-                    & > img {
-                        width: 24px;
-                        height: 24px;
+                    & > svg {
                         margin-right: 5px;
                     }
                 }
             }
         }
 
-        & >div.center {
+        & >div.btn-block {
             text-align: center;
             & > input[type=submit] {
                 background-color: $buttonGreen;
