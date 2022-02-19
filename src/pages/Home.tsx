@@ -13,9 +13,8 @@ const Home = () => {
             <div className="button-box">
 
                 <Link to="/e-commerce/" className = "home-button">Checkout Page</Link>
-            
                 <Link to="/transaction?from=buyer" className = "home-button">Your Orders</Link>
-                <Link to="/transaction?from=seller" className = "home-button">Ingoing Transactions</Link>
+                <Link to="/transaction?from=seller" className = "home-button">Inbound Transactions</Link>
             </div>
         </div>
     </>;

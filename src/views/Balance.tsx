@@ -3,13 +3,16 @@ import { BalanceIcon } from "resources/svg";
 
 const BalanceView = ({ balance }: { balance: number }) => {
     return <div className="widget">
-        <div className="widget-big">
-            <BalanceIcon />
-            <span> {Math.floor(balance*10000/1e18)/10000} FTM</span>
+        <div className="float-left widget-text">
+            <h3>
+                <span className="count"> {Math.floor(balance*10000/1e18)/10000}</span> 
+                <span className="currency">FTM</span>
+            </h3>
+            <p>Contract Balance</p> 
         </div> 
-        <span className="widget-text">
-        Contract Balance
-        </span> 
+        <div className="float-right widget-big">
+            <BalanceIcon />
+        </div>
     </div>;
 };
 

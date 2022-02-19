@@ -4,28 +4,26 @@
     align-items: center;
     justify-content: center;
     margin: 12.5% auto;
-    //background-color: $background80;
     width: 50%;
 
     & > .widget-box {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         padding: 5%;
         width: 90%;
-
+        
         & > .widget {
-            width: 40%;
+            display: inline-block;
+            margin: 10px 2%;
+            padding: 2%;
+            width: 50%;
             background-color: $background80;
-            padding: 10px;
             border-radius: 8px;
 
-            & > .widget-big {
-                display: flex;
-                flex-direction: row;
-                margin: 0.8em 0.3em;
-                justify-content: center;
-                align-items: center;
+            & > .widget-big{
+                margin: 0.8em 15% 0.8em 0;
+                
 
                 & > span {
                     font-size: 2em;
@@ -48,4 +46,21 @@
             }
         }
     }
+}
+
+.float-left{
+    float: left;
+}
+
+.float-right{
+    float: right;
+}
+
+.currency, .count{
+    font-size: 30px;
+    font-weight: 500;
+}
+
+div > .widget-text{
+    margin-left: 10%;
 }
