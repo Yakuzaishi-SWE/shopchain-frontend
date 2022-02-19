@@ -1,25 +1,35 @@
 import { useAddress } from "hooks";
 import { useOrders } from "hooks/";
-import React, { useState } from "react";
+import React, { Children, useMemo } from "react";
 import { TransactionListView } from "views";
 import { Loading } from "resources/svg";
-import TransDirectionSelectorController from "./TransDirectionSelector";
+import { OrderState } from "types/enums";
 
-const TransactionListController = ({from}: {from: string|null}) => {
+const LoadingWrapper = ({ children }: { children: React.ReactChild, loaded: boolean| undefined, error: string | undefined }) => {
+    return <>
+        {children}
+    </>;
+};
+
+const TransactionListController = ({ from, state }: { from: "seller" | "buyer", state?: OrderState }) => {
     const address = useAddress() || undefined;
-    //const [isSeller, setIsSeller] = useState<boolean>(true);
-    
-    
-    const { orders, error, loaded } = useOrders({ seller: from=="seller" ? address : undefined, buyer: from=="buyer" ? address : undefined });
+
+    const { orders, error, loaded } = useOrders({ seller: from == "seller" ? address : undefined, buyer: from == "buyer" ? address : undefined });
+
+    const filteredorders = useMemo(() => orders?.filter(el => (state !== undefined) ? el.order.state === state : true), [orders, state]);
 
     return <>
+        <LoadingWrapper >
+            
+        </LoadingWrapper>
         {
+
             (loaded) ?
                 (
                     error ? <p>{error.toString()}</p>
                         :
                         (
-                            orders ? <TransactionListView transactions={orders} />
+                            filteredorders ? <TransactionListView transactions={filteredorders} />
                                 :
                                 <Loading />
                         )
