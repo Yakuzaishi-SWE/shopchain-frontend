@@ -6,12 +6,16 @@
     align-items: center;
     justify-content: center;
     transition: .15s ease-in-out;
+
     &:hover {
         cursor: pointer;
+        &:disabled {
+            cursor: default;
+        }
     }
     &.success {
         background-color: $success;
-        &:hover {
+        &:hover, &:disabled {
             background-color: $successDark;
         }
     }
@@ -19,13 +23,13 @@
         background-color: $error;
         color: white;
         fill: white;
-        &:hover {
+        &:hover, &:disabled {
             background-color: $errorDark;
         }
     }
     &.warning { 
         background-color: $warning;
-        &:hover {
+        &:hover, &:disabled {
             background-color: $warningDark;
         }
     }

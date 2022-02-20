@@ -7,6 +7,9 @@ const TransactionListElView = ({ transaction, id, onUnlock, from }: { from: "sel
     const paid = useMemo(() => transaction.state === OrderState.FILLED || transaction.state === OrderState.CLOSED, [transaction, id]);
     const unlocked = useMemo(() => transaction.state === OrderState.CLOSED, [transaction, id]);
     const refunded = useMemo(() => transaction.state === OrderState.CANCELLED, [transaction, id]);
+    const canPay = useMemo(() => from !== "seller" && transaction.state === OrderState.CREATED, [transaction, id]);
+    const canUnlock = useMemo(() => from !== "seller" && transaction.state === OrderState.FILLED, [transaction, id]);
+    const canRefund = useMemo(() => from !== "seller" && transaction.state === OrderState.FILLED, [transaction, id]);
 
     return <li>
         <article className="transaction">
@@ -15,8 +18,8 @@ const TransactionListElView = ({ transaction, id, onUnlock, from }: { from: "sel
                     <Link to={`/transaction/out/${id}/`} className="btn-linkto">{id}<Launch /></Link>
                 </span>
                 <div className="transaction-controls">
-                    <button className={"icon-btn btn-paid" + (paid ? " success" : (refunded ? " error" : " warning"))} disabled={paid}>{paid ? <MoneyOn /> : <MoneyOff />}</button>
-                    <button className={"icon-btn btn-unlock" + (unlocked ? " success" : " warning")} disabled={unlocked} onClick={onUnlock}>{unlocked ? <Unlock /> : <Lock />}</button>
+                    <button className={"icon-btn btn-paid" + (paid ? " success" : (refunded ? " error" : " warning"))} disabled={!canPay}>{paid ? <MoneyOn /> : <MoneyOff />}</button>
+                    <button className={"icon-btn btn-unlock" + (unlocked ? " success" : " warning")} disabled={!canRefund} onClick={onUnlock}>{unlocked ? <Unlock /> : <Lock />}</button>
                 </div>
             </header>
             <div className="content">
