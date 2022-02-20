@@ -28,10 +28,14 @@ const TransactionListController = ({ from, state }: { from: "seller" | "buyer", 
                         (
                             filteredorders ? <TransactionListView transactions={filteredorders} />
                                 :
-                                <Loading />
+                                <div className="sweet-loading">
+                                    <Loading />
+                                </div>
                         )
                 ) :
-                <Loading />
+                <div className="sweet-loading">
+                    <Loading />
+                </div>
         }
     </>;
 };

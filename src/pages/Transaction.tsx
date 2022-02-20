@@ -21,7 +21,9 @@ const TransactionPage = () => {
                         <TransactionDetailsController id={id} order={order} />
                 )
                 :
-                <Loading />
+                <div className="sweet-loading">
+                    <Loading />
+                </div>
         }
     </>;
 
