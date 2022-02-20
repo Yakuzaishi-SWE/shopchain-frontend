@@ -23,13 +23,16 @@ div.box-button > button {
     box-shadow: 0.3em 0.3em rgb(29, 29, 29);
     margin: 1em;
     width: 20%;
+    cursor: pointer;
 
-    &.payAlone {
+    &.btn-payalone {
         background-color: $primaryLight;
     }
     
-    &.moneyBox {
+    &.btn-moneybox {
         background-color: #be24e5;
+        color: #bcbcbc;
+        cursor: not-allowed;
     }
 
     &:active{

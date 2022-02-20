@@ -18,25 +18,45 @@
             justify-content: space-between;
             width: 100%;
 
+            & a.btn-linkto {
+                background-color: #d27373;
+                padding: 0.8em;
+                border-radius: 32px;
+                padding: 0.8;
+                padding-top: 1.2em;
+
+                &:hover {
+                    background-color: #a85353;
+                }
+            }
+
             & > div > button {
                 margin: 0.1em;
+                cursor: pointer;
 
                 &.btn-paid {
-                    background-color: $buttonGreen;
-                    cursor: pointer;
-                }
+                    
+                    &.success {
+                        background-color: $buttonGreen;
+                    }
 
-                &.btn-paid:hover{
-                    background-color: #81e7b6
+                    &:hover.success{
+                        background-color: $successHover;
+                    }
                 }
 
                 &.btn-unlock {
-                    background-color: orange;
-                    cursor: pointer;
-                }
+                    &.error {
+                        background-color: $warning;
 
-                &.btn-unlock:hover {
-                    background-color: rgb(245, 190, 89);
+                        &:hover {
+                            background-color: #b48837;
+                        }
+                    }
+
+                    &.success {
+                        background-color: $success;
+                    }
                 }
             }
 

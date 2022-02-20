@@ -10,10 +10,10 @@ const TransactionListElView = ({ transaction, id, onUnlock }: { transaction: IOr
     return <li>
         <div>
             <span className="transaction-id">{id}</span>
-            <Link to={`/transaction/t/${id}/`}><Launch /></Link>
             <div>
+                <Link to={`/transaction/t/${id}/`} className="btn-linkto"><Launch /></Link>
                 <button className={"btn-paid" + (paid ? " success" : " error")}>{paid ? <MoneyOn /> : <MoneyOff />}</button>
-                <button className={"btn-unlock" + (paid ? " success" : " error")} onClick={onUnlock}>{unlocked ? <Unlock /> : <Lock />}</button>
+                <button className={"btn-unlock" + (unlocked ? " success" : " error")} onClick={onUnlock}>{unlocked ? <Unlock /> : <Lock />}</button>
             </div>
         </div>
         <div>

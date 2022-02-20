@@ -24,8 +24,8 @@ const TransactionInitView = ({ transaction, id, onCreate }: { transaction: ITran
             </ul>
         </section>
         <div className="box-button center">
-            <button onClick={onCreate} className="payAlone">Pay Alone</button>
-            <button className="moneyBox" disabled>Create Money Box</button>
+            <button onClick={onCreate} className="btn-payalone">Pay Alone</button>
+            <button className="btn-moneybox" disabled>Create Money Box</button>
         </div>
     </>;
 };

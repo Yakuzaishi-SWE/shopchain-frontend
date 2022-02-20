@@ -13,7 +13,7 @@ const ECommercePage = () => {
         e.preventDefault();
 
         const usp = new URLSearchParams();
-        usp.set("amount", String(amount));
+        usp.set("amount", String(amount * 10e17));
         setRedirectLink(`/transaction/t/${id}/?${usp}`);
 
         return false;
@@ -28,7 +28,7 @@ const ECommercePage = () => {
         <div className="form-wrapper">
             <label>Amount</label>
             <div className="ftm-input">
-                <input type="number" className="clickable-input" value={amount || 0} onChange={el => setAmount(el.target.valueAsNumber)} placeholder="0.00" />
+                <input type="number" className="clickable-input" value={amount || undefined} onChange={el => setAmount(el.target.valueAsNumber)} placeholder="0.00" />
                 <span className="ftm-icon">
                     <FTMIcon />
                     FTM
