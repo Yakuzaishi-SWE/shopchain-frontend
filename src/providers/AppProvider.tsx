@@ -5,6 +5,9 @@ import { MetamaskErrorName, MetamaskErrorSeverity } from "types/enums";
 import Web3 from "web3";
 import { AppContext, IAppContext } from "./AppContext";
 import SP from "./SP.json";
+import { Contract } from "web3-eth-contract";
+import { AbiItem } from "web3-utils";
+import { provider } from "web3-core";
 
 const MissingMetamask: MetamaskError = {
     severity: MetamaskErrorSeverity.BLOCKING,
@@ -24,45 +27,59 @@ const Nominal: MetamaskError = {
     description: "Everything is nominal"
 };
 
+const WrongChain: MetamaskError = {
+    severity: MetamaskErrorSeverity.BLOCKING,
+    name: MetamaskErrorName.WRONG_CHAIN,
+    description: "Connect to Fantom Test Net (0xfa2)"
+};
+
+const W3_Error: MetamaskError = {
+    severity: MetamaskErrorSeverity.BLOCKING,
+    name: MetamaskErrorName.W3_ERROR,
+    description: "Error in the web3 library",
+};
+
+const ContractError: MetamaskError = {
+    severity: MetamaskErrorSeverity.BLOCKING,
+    name: MetamaskErrorName.CONTRACT_NOT_LOADED,
+    description: "Contract is not loaded",
+};
+
 const AppProvider = ({ children }: { children: React.ReactChild }) => {
     const [currentAccount, setAccount] = useState<string | null>(null);
     const [currentChain, setChain] = useState<string | null>(null);
     const [ethereum, setProvider] = useState<MetaMaskInpageProvider | null>(null);
-    const [provider_error, setProviderError] = useState<MetamaskError>(Nominal);
     const [waiting, setWaiting] = useState<boolean>(false);
 
     const w3 = useMemo(() => {
-        if (ethereum) return new Web3(ethereum as any);
+        if (ethereum) return new Web3(ethereum as provider);
         return null;
     }, [ethereum]);
 
-    const contract = useMemo(() => {
-        if (w3) return new w3.eth.Contract(SP as any, "0x21461fFe79adb0606456c6214B5569Ba0f40f4B3");
+    const contract: Contract | null = useMemo(() => {
+        if (w3) return new w3.eth.Contract(SP as unknown as AbiItem[], "0x21461fFe79adb0606456c6214B5569Ba0f40f4B3");
         else return null;
     }, [w3]);
 
-    useEffect(() => {
-        if (!currentAccount && provider_error.name === MetamaskErrorName.OK) setProviderError(NotConnected);
-        if (currentAccount && provider_error.name === MetamaskErrorName.NOT_CONNECTED) setProviderError(Nominal);
-    }, [currentAccount, provider_error]);
+    const provider_error: MetamaskError = useMemo(() => {
+        if (!ethereum) return MissingMetamask;
+        else if (!w3) return W3_Error;
+        else if (!contract) return ContractError;
+        else if (!currentAccount) return NotConnected;
+        else if (!currentChain || currentChain !== "0xfa2") return WrongChain;
+        return Nominal;
+    }, [currentAccount, currentChain]);
 
     function handleAccountsChanged(...accounts: unknown[]) {
-        if (accounts.length === 0) {
-            console.log("Please connect to MetaMask.");
-        } else if (accounts[0] !== currentAccount) {
+        if (accounts.length > 0 && accounts[0] !== currentAccount) {
             setAccount((accounts[0] as string[])[0]);
         }
-    }
-
-    function handleChainChanged() {
-        window.location.reload();
     }
 
     useEffect(() => {
         detectEthereumProvider()
             .then((p) => {
-                if (!p) setProviderError(MissingMetamask);
-                else if (p !== window.ethereum) console.error("Conflicting Multiple Wallet installed");
+                if (p && p !== window.ethereum) console.error("Conflicting Multiple Wallet installed");
                 else setProvider(p as MetaMaskInpageProvider | null);
             })
             .catch(err => console.error(err));
@@ -83,7 +100,7 @@ const AppProvider = ({ children }: { children: React.ReactChild }) => {
                 });
 
             ethereum.on("accountsChanged", handleAccountsChanged);
-            ethereum.on("chainChanged", handleChainChanged);
+            ethereum.on("chainChanged", () => window.location.reload());
 
             return () => ethereum.removeAllListeners();
         } return () => { return; };

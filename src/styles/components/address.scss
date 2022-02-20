@@ -20,7 +20,8 @@ span.addr {
     }
 
     & > span.addr-hex {
-        visibility: hidden;
+        // visibility: hidden;
+        visibility: visible;
         z-index: 1;
     }
 

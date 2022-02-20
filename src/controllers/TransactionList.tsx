@@ -2,7 +2,6 @@ import { useAddress } from "hooks";
 import { useOrders } from "hooks/";
 import React, { useMemo } from "react";
 import { TransactionListView } from "views";
-import { Loading } from "resources/svg";
 import { OrderState } from "types/enums";
 import WaitingCall from "./LoadingWrapper";
 
@@ -13,10 +12,10 @@ const TransactionListController = ({ from, state }: { from: "seller" | "buyer", 
 
     const filteredorders = useMemo(() => orders?.filter(el => (state !== undefined) ? el.order.state === state : true), [orders, state]);
 
-    return <WaitingCall>
+    return <WaitingCall loaded={loaded} error={error}>
         {
             filteredorders ?
-                <TransactionListView transactions={filteredorders} />
+                <TransactionListView transactions={filteredorders} from={from}/>
                 :
                 <></>
         }

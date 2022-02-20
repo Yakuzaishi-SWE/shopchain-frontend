@@ -18,7 +18,7 @@ const TransactionInitController = ({ id }: { id: string }) => {
     const handleCreate = () => {
         start();
         create({ amount: t.amount, seller: t.seller, id })
-            .then(() => setTo("/transaction-success/"))
+            .then(() => setTo(`/transaction/out/${id}/success/`))
             .catch(err => console.error(err))
             .finally(() => stop());
     };

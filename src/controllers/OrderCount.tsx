@@ -13,7 +13,7 @@ const OrderCountController =  () => {
             .catch(err => setError(err));
     }, [contract]);
 
-    return <OrderCountView count={count || 0}/>;
+    return <OrderCountView count={count}/>;
 };
 
 export default OrderCountController;

@@ -13,7 +13,7 @@ const BalanceController = () => {
             .catch(err => setError(err));
     }, [contract]);
 
-    return <BalanceView balance={balance || 0} />;
+    return <BalanceView balance={balance} />;
 };
 
 export default BalanceController;

@@ -1,3 +1,37 @@
+.icon-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .15s ease-in-out;
+    &:hover {
+        cursor: pointer;
+    }
+    &.success {
+        background-color: $success;
+        &:hover {
+            background-color: $successDark;
+        }
+    }
+    &.error {
+        background-color: $error;
+        color: white;
+        fill: white;
+        &:hover {
+            background-color: $errorDark;
+        }
+    }
+    &.warning { 
+        background-color: $warning;
+        &:hover {
+            background-color: $warningDark;
+        }
+    }
+}
+
+
 button {
     padding: 0.8em;
     border-radius: 32px;
@@ -7,7 +41,7 @@ button {
 }
 
 button#unlock{
-    background-color: $buttonGreen;
+    background-color: $success;
 }
 
 button#refund{

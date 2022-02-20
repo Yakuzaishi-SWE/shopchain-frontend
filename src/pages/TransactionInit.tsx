@@ -1,12 +1,12 @@
-import { TransactionDetailsController, TransactionInitController } from "controllers";
+import { TransactionInitController } from "controllers";
 import WaitingCall from "controllers/LoadingWrapper";
 import { useOrder } from "hooks";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
-const TransactionPage = () => {
+const TransactionInitPage = () => {
     const { id } = useParams<{ id: string }>();
-    if (!id) return <p>id is missing</p>;
+    if (!id) return <Redirect to="/transaction/init/" />;
 
     const { order, loaded, error } = useOrder(id);
 
@@ -15,10 +15,10 @@ const TransactionPage = () => {
             !order ?
                 <TransactionInitController id={id} />
                 :
-                <TransactionDetailsController id={id} order={order} />
+                <Redirect to={`/transaction/out/${id}/`} />
         }
     </WaitingCall>;
 
 };
 
-export default TransactionPage;
+export default TransactionInitPage;

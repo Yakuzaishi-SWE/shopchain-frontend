@@ -1,5 +1,5 @@
 import React from "react";
-import { formatFTM } from "utils";
+import { WeitoFTM } from "utils";
 
 const TransactionInitView = ({ transaction, id, onCreate }: { transaction: ITransaction, id: string, onCreate: () => void }) => {
     return <>
@@ -12,14 +12,16 @@ const TransactionInitView = ({ transaction, id, onCreate }: { transaction: ITran
             <hr />
             <ul>
                 <li>
-                    <div className="section-head">Transaction id:</div>{id}
+                    <div className="section-head">Transaction id:</div>
+                    {id}
                 </li>
                 <li>
                     <div className="section-head">Transaction seller:</div>
                     {transaction.seller}
                 </li>
                 <li>
-                    <div className="section-head">Amount to pay:</div>{formatFTM(Number(transaction.amount))} FTM
+                    <div className="section-head">Amount to pay:</div>
+                    {WeitoFTM(Number(transaction.amount))} FTM ({transaction.amount} wei)
                 </li>
             </ul>
         </section>

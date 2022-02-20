@@ -2,7 +2,7 @@ import { useLoadingOverlay, useSmartContract } from "hooks";
 import React from "react";
 import { TransactionListElView } from "views";
 
-const TransactionListElController = ({ transaction, id }: { transaction: IOrder, id: string }) => {
+const TransactionListElController = ({ transaction, id, from }: {from: "seller" | "buyer", transaction: IOrder, id: string }) => {
     const [,{unlock}] = useSmartContract();
     const [, {start, stop}] = useLoadingOverlay();
     
@@ -14,7 +14,7 @@ const TransactionListElController = ({ transaction, id }: { transaction: IOrder,
             .finally(() => stop());
     };
 
-    return <TransactionListElView transaction={transaction} id={id} onUnlock={handleUnlock}/>;
+    return <TransactionListElView from={from} transaction={transaction} id={id} onUnlock={handleUnlock}/>;
 };
 
 export default TransactionListElController;
