@@ -6,8 +6,10 @@ const OverlayView = ({ show }: { show: boolean }) => {
         {
             show ?
                 <>
-                    <p>Check your Metamask extension. The payment process may take few seconds ...</p>
-                    <Loading />
+                    <div className="sweet-loading">
+                        <p>Check your Metamask extension. The payment process may take few seconds ...</p>
+                        <Loading />
+                    </div>
                 </>
                 :
                 <></>
