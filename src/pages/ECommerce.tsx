@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { FTMIcon } from "resources/svg";
 import { InputView } from "views";
+import { v4 } from "uuid";
 
 const ECommercePage = () => {
     const [amount, setAmount] = useState<number>(0);
-    const [id, setId] = useState<string>("");
+    const [id, setId] = useState<string>(v4());
     const [redirectLink, setRedirectLink] = useState<string | undefined>(undefined);
 
     const handleSubmit = (e: React.MouseEvent) => {
         e.preventDefault();
-        
+
         const usp = new URLSearchParams();
         usp.set("amount", String(amount));
         setRedirectLink(`/transaction/t/${id}/?${usp}`);
@@ -22,7 +23,7 @@ const ECommercePage = () => {
         {redirectLink ? <Redirect to={redirectLink} /> : <></>}
         <div className="form-wrapper">
             <label>Id</label>
-            <InputView value={id} setValue={setId} placeholder="0000-000000-000000000000000" />
+            <InputView value={id} setValue={setId} placeholder="0000-000000-000000000000000" disabled />
         </div>
         <div className="form-wrapper">
             <label>Amount</label>

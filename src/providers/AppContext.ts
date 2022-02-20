@@ -7,6 +7,11 @@ export interface IAppContext {
         address: string | null,
         chain: string | null,
     },
+    waiting: {
+        state: boolean,
+        start: () => void,
+        stop: () => void,
+    },
     provider_error: MetamaskError,
     contract: Contract | null,
     connect: () => void,
@@ -16,6 +21,11 @@ const initContext: IAppContext = {
     info: {
         address: null,
         chain: null,
+    },
+    waiting: {
+        state: false,
+        start: () => {return;},
+        stop: () => {return;},
     },
     provider_error: {
         severity: MetamaskErrorSeverity.OK,

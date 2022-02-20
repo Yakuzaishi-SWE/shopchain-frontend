@@ -31,6 +31,7 @@ module.exports = {
             types: path.resolve(__dirname, "src/types"),
             hooks: path.resolve(__dirname, "src/hooks"),
             providers: path.resolve(__dirname, "src/providers"),
+            utils: path.resolve(__dirname, "src/utils"),
         },
     },
     module: {

@@ -1,4 +1,5 @@
 import React from "react";
+import { formatFTM } from "utils";
 
 const TransactionInitView = ({ transaction, id, onCreate }: { transaction: ITransaction, id: string, onCreate: () => void }) => {
     return <>
@@ -18,7 +19,7 @@ const TransactionInitView = ({ transaction, id, onCreate }: { transaction: ITran
                     {transaction.seller}
                 </li>
                 <li>
-                    <div className="section-head">Amount to pay:</div>{transaction.amount} FTM
+                    <div className="section-head">Amount to pay:</div>{formatFTM(Number(transaction.amount))} FTM
                 </li>
             </ul>
         </section>

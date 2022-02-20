@@ -1,9 +1,8 @@
 import { TransactionDetailsController, TransactionInitController } from "controllers";
+import WaitingCall from "controllers/LoadingWrapper";
 import { useOrder } from "hooks";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Loading } from "resources/svg";
-
 
 const TransactionPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -11,21 +10,14 @@ const TransactionPage = () => {
 
     const { order, loaded, error } = useOrder(id);
 
-    return <>
+    return <WaitingCall loaded={loaded} error={error}>
         {
-            loaded ?
-                (
-                    !order ?
-                        <TransactionInitController id={id} />
-                        :
-                        <TransactionDetailsController id={id} order={order} />
-                )
+            !order ?
+                <TransactionInitController id={id} />
                 :
-                <div className="sweet-loading">
-                    <Loading />
-                </div>
+                <TransactionDetailsController id={id} order={order} />
         }
-    </>;
+    </WaitingCall>;
 
 };
 

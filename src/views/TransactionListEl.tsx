@@ -1,14 +1,19 @@
-import React from "react";
-import { Lock, MoneyOff, MoneyOn, Unlock } from "resources/svg";
+import React, { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { Launch, Lock, MoneyOff, MoneyOn, Unlock } from "resources/svg";
 import { OrderState } from "types/enums";
 
 const TransactionListElView = ({ transaction, id, onUnlock }: { transaction: IOrder, id: string, onUnlock: () => void }) => {
+    const paid = useMemo(() => transaction.state === OrderState.FILLED || transaction.state === OrderState.CLOSED, [transaction, id]);
+    const unlocked = useMemo(() => transaction.state === OrderState.CLOSED, [transaction, id]);
+
     return <li>
         <div>
             <span className="transaction-id">{id}</span>
+            <Link to={`/transaction/t/${id}/`}><Launch /></Link>
             <div>
-                <button className="btn-paid">{transaction.state > 1 ? <MoneyOn /> : <MoneyOff />}</button>
-                <button className="btn-unlock" onClick={onUnlock}>{transaction.state === OrderState.FILLED ? <Lock /> : <Unlock />}</button>
+                <button className={"btn-paid" + (paid ? " success" : " error")}>{paid ? <MoneyOn /> : <MoneyOff />}</button>
+                <button className={"btn-unlock" + (paid ? " success" : " error")} onClick={onUnlock}>{unlocked ? <Unlock /> : <Lock />}</button>
             </div>
         </div>
         <div>

@@ -29,6 +29,7 @@ const AppProvider = ({ children }: { children: React.ReactChild }) => {
     const [currentChain, setChain] = useState<string | null>(null);
     const [ethereum, setProvider] = useState<MetaMaskInpageProvider | null>(null);
     const [provider_error, setProviderError] = useState<MetamaskError>(Nominal);
+    const [waiting, setWaiting] = useState<boolean>(false);
 
     const w3 = useMemo(() => {
         if (ethereum) return new Web3(ethereum as any);
@@ -106,7 +107,7 @@ const AppProvider = ({ children }: { children: React.ReactChild }) => {
 
     const info = useMemo<IAppContext["info"]>(() => ({ address: currentAccount, chain: currentChain }), [currentAccount, currentChain]);
 
-    const ctx = useMemo<IAppContext>(() => ({ info, contract, provider_error, connect }), [info, contract, provider_error, connect]);
+    const ctx = useMemo<IAppContext>(() => ({ info, waiting: { state: waiting, start: () => setWaiting(true), stop: () => setWaiting(false) }, contract, provider_error, connect }), [info, contract, provider_error, connect]);
 
     return <AppContext.Provider value={ctx}>{children}</AppContext.Provider>;
 };

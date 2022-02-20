@@ -1,15 +1,10 @@
 import { useAddress } from "hooks";
 import { useOrders } from "hooks/";
-import React, { Children, useMemo } from "react";
+import React, { useMemo } from "react";
 import { TransactionListView } from "views";
 import { Loading } from "resources/svg";
 import { OrderState } from "types/enums";
-
-const LoadingWrapper = ({ children }: { children: React.ReactChild, loaded: boolean| undefined, error: string | undefined }) => {
-    return <>
-        {children}
-    </>;
-};
+import WaitingCall from "./LoadingWrapper";
 
 const TransactionListController = ({ from, state }: { from: "seller" | "buyer", state?: OrderState }) => {
     const address = useAddress() || undefined;
@@ -18,26 +13,14 @@ const TransactionListController = ({ from, state }: { from: "seller" | "buyer", 
 
     const filteredorders = useMemo(() => orders?.filter(el => (state !== undefined) ? el.order.state === state : true), [orders, state]);
 
-    return <>
+    return <WaitingCall>
         {
-
-            (loaded) ?
-                (
-                    error ? <p>{error.toString()}</p>
-                        :
-                        (
-                            filteredorders ? <TransactionListView transactions={filteredorders} />
-                                :
-                                <div className="sweet-loading">
-                                    <Loading />
-                                </div>
-                        )
-                ) :
-                <div className="sweet-loading">
-                    <Loading />
-                </div>
+            filteredorders ?
+                <TransactionListView transactions={filteredorders} />
+                :
+                <></>
         }
-    </>;
+    </WaitingCall>;
 };
 
 export default TransactionListController;

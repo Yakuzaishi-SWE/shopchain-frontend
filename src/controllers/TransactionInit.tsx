@@ -1,9 +1,9 @@
-import { useCreate } from "hooks";
+import { useLoadingWrap, useSmartContract } from "hooks";
+import { } from "hooks";
+import useLoadingOverlay from "hooks/useLoadingOverlay";
 import React, { useMemo, useState } from "react";
 import { Redirect, useLocation } from "react-router-dom";
-import { Loading } from "resources/svg";
 import { TransactionInitView } from "views";
-import PageLoaderController from "./PageLoader";
 
 const TransactionInitController = ({ id }: { id: string }) => {
     const { search } = useLocation();
@@ -11,20 +11,24 @@ const TransactionInitController = ({ id }: { id: string }) => {
     const t: ITransaction = { amount, seller: "0x91350E18AE7133052E06436433040E80f2E6988E" };
     const [to, setTo] = useState<string | undefined>(undefined);
 
-    const { create, loaded, error } = useCreate({ onSuccess: () => setTo("/transaction-success/") });
+    const [, { create }] = useSmartContract();
 
-    const handleCreate = () => create({ amount: t.amount, seller: t.seller, id });
+    const [, { start, stop }] = useLoadingOverlay();
 
-    if (loaded !== undefined && !loaded)
-        return <>
-            <p>Check your Metamask extension. The payment process may take few seconds ...</p>
-            <PageLoaderController />
-            {to ? <Redirect to={to} /> : <></>}
-        </>;
-    else
-        return <>
-            <TransactionInitView transaction={t} id={id} onCreate={handleCreate} />
-        </>;
+    const handleCreate = () => {
+        start();
+        create({ amount: t.amount, seller: t.seller, id })
+            .then(() => setTo("/transaction-success/"))
+            .catch(err => console.error(err))
+            .finally(() => stop());
+    };
+
+    return <>
+        {
+            to ? <Redirect to={to}></Redirect> : <></>
+        }
+        <TransactionInitView transaction={t} id={id} onCreate={handleCreate} />;
+    </>;
 };
 
 export default TransactionInitController;

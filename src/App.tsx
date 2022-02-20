@@ -4,10 +4,12 @@ import { EcommercePage, HomePage, TransactionInPage, TransactionOutPage, Transac
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./styles/main.scss";
+import { OverlayController } from "controllers";
 
 export default () => {
     return <BrowserRouter>
         <NavController />
+        <OverlayController/>
         <Switch>
             <Route path="/e-commerce/"><EcommercePage /></Route>
             <Route path="/transaction-success/" ><TransactionSuccess /></Route>
