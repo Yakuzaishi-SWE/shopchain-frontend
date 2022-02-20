@@ -10,32 +10,40 @@ button#unlock{
     background-color: $buttonGreen;
 }
 
+button#refund{
+    background-color: $warning;
+}
+
 button:active {
     transform: translateY(3px);
     box-shadow: 0px 0px;
 }
 
+div.box-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
-
-div.box-button > button {
-    padding: 1.5em;
-    font-size: 1.2em;
-    box-shadow: 0.3em 0.3em rgb(29, 29, 29);
-    margin: 1em;
-    width: 20%;
-    cursor: pointer;
-
-    &.btn-payalone {
-        background-color: $primaryLight;
-    }
+    & > button {
+        padding: 1.5em;
+        font-size: 1.2em;
+        box-shadow: 0.3em 0.3em rgb(29, 29, 29);
+        margin: 1em;
+        width: 20%;
+        cursor: pointer;
     
-    &.btn-moneybox {
-        background-color: #be24e5;
-        color: #bcbcbc;
-        cursor: not-allowed;
-    }
-
-    &:active{
-        box-shadow: 0px 0px;
+        &.btn-payalone {
+            background-color: $primaryLight;
+        }
+        
+        &.btn-moneybox {
+            background-color: #be24e5;
+            color: #bcbcbc;
+            cursor: not-allowed;
+        }
+    
+        &:active{
+            box-shadow: 0px 0px;
+        }
     }
 }

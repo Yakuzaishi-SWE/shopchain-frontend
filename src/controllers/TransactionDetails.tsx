@@ -3,7 +3,7 @@ import React from "react";
 import { TransactionDetailsView } from "views";
 
 const TransactionDetailsController = ({ id, order }: { id: string, order: IOrder }) => {
-    const [,{unlock}] = useSmartContract();
+    const [, {unlock, refund}] = useSmartContract();
     const [, {start, stop}] = useLoadingOverlay();
     
     const handleUnlock = () => {
@@ -14,7 +14,15 @@ const TransactionDetailsController = ({ id, order }: { id: string, order: IOrder
             .finally(() => stop());
     };
 
-    return <TransactionDetailsView order={order} id={id} onUnlock={handleUnlock} />;
+    const handleRefund = () => {
+        start();
+        refund(id)
+            .then(() => {return;})
+            .catch(err => {return;})
+            .finally(() => stop());
+    };
+
+    return <TransactionDetailsView order={order} id={id} onUnlock={handleUnlock} onRefund={handleRefund} />;
 };
 
 export default TransactionDetailsController;

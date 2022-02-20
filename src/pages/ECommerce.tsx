@@ -13,7 +13,7 @@ const ECommercePage = () => {
         e.preventDefault();
 
         const usp = new URLSearchParams();
-        usp.set("amount", String(amount * 10e17));
+        usp.set("amount", String(amount * 1e18));
         setRedirectLink(`/transaction/t/${id}/?${usp}`);
 
         return false;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const TransactionDetailsView = ({ order, id, onUnlock }: { order: IOrder, id: string, onUnlock: () => void }) => {
+const TransactionDetailsView = ({ order, id, onUnlock, onRefund }: { order: IOrder, id: string, onUnlock: () => void, onRefund: () => void }) => {
     return <><section className="transaction-details">
         <ul>
             <li><div className="section-head">Transaction ID:</div>{id}</li>
@@ -10,8 +10,9 @@ const TransactionDetailsView = ({ order, id, onUnlock }: { order: IOrder, id: st
             <li><div className="section-head">State:</div>{order.state}</li>
         </ul>
     </section>
-    <div className="box-button center">
+    <div className="box-button">
         <button id="unlock" onClick={onUnlock}>Unlock</button>
+        <button id="refund" onClick={onRefund}>Refund</button>
     </div>
     </>;
 };
