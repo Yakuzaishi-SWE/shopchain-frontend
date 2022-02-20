@@ -23,10 +23,20 @@
 
                 &.btn-paid {
                     background-color: $buttonGreen;
+                    cursor: pointer;
+                }
+
+                &.btn-paid:hover{
+                    background-color: #81e7b6
                 }
 
                 &.btn-unlock {
                     background-color: orange;
+                    cursor: pointer;
+                }
+
+                &.btn-unlock:hover {
+                    background-color: rgb(245, 190, 89);
                 }
             }
 

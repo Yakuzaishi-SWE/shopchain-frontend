@@ -19,6 +19,10 @@ div#root{
         text-align: center;
         width: 50%;
     }
+
+    & .redirect > a{
+        color: #fff;
+    }
 }
 
 
@@ -26,3 +30,4 @@ div#root{
     display: flex;
     justify-content: center;        
 }
+

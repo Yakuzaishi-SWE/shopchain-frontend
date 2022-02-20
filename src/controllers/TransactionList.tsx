@@ -19,9 +19,6 @@ const TransactionListController = ({ from, state }: { from: "seller" | "buyer", 
     const filteredorders = useMemo(() => orders?.filter(el => (state !== undefined) ? el.order.state === state : true), [orders, state]);
 
     return <>
-        <LoadingWrapper >
-            
-        </LoadingWrapper>
         {
 
             (loaded) ?
