@@ -17,6 +17,7 @@
         "node_modules",
         "doc",
         "build",
+        "dist",
         "coverage",
         "*.test.ts",
         "**/__mocks__/*",

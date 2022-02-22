@@ -2,8 +2,8 @@ span.provider-error {
     box-sizing: border-box;
     margin: 0 4px;
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 25px;
     background-color: black;
     color: white;
@@ -28,7 +28,6 @@ span.provider-error {
     }
 
     &:hover {
-        cursor: pointer;
         div.error-overlay {
             visibility: visible;
             opacity: 1;
@@ -39,12 +38,19 @@ span.provider-error {
         cursor: initial;
         visibility: hidden;
         opacity: 0;
-        background-color: #ccc;
         min-width: 200px;
         transition: 0.25s ease-in;
         position: absolute;
-        top: 50px;
+        top: 44px;
         padding: 8px 16px;
         border-radius: 16px;
+        background-color: $primary;
+        color: white;
+        font-size: 0.8em;
+        font-weight: bold;
+
+        & > p {
+            margin: 5px 0;
+        }
     }
 }

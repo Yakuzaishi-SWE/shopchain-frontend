@@ -1,11 +1,6 @@
 import { AppContext } from "providers";
 import { useContext } from "react";
 
-
-const useConnect = () => {
-    const { connect } = useContext(AppContext);
-
-    return connect;
-};
+const useConnect = () =>  useContext(AppContext).connect;
 
 export default useConnect;

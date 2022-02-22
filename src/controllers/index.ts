@@ -9,3 +9,4 @@ export { default as TransactionDetailsController } from "./TransactionDetails";
 export { default as TransactionInitController } from "./TransactionInit";
 export { default as TransactionListController } from "./TransactionList";
 export { default as TransactionListElController } from "./TransactionListEl";
+export { default as OverlayController } from "./Overlay";

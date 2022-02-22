@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useLoadingWrap from "./useLoadingWrap";
-import useSinglePayment from "./useSinglePayment";
+import useSmartContract from "./useSmartContract";
 
 const useOrders = (filter?: { seller?: string, buyer?: string }): {
     orders: IOrderTuple[] | undefined,
@@ -8,7 +8,7 @@ const useOrders = (filter?: { seller?: string, buyer?: string }): {
     loaded: boolean | undefined,
 } => {
     const { error, loaded, result, setError, setResult, startLoading } = useLoadingWrap<IOrderTuple[]>();
-    const contract = useSinglePayment();
+    const [contract] = useSmartContract();
 
     useEffect(() => {
         if (contract && filter !== undefined) {
