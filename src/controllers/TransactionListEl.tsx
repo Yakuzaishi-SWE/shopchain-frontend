@@ -1,13 +1,20 @@
-import { useUnlock } from "hooks";
+import { useLoadingOverlay, useSmartContract } from "hooks";
 import React from "react";
 import { TransactionListElView } from "views";
 
-const TransactionListElController = ({ transaction, id }: { transaction: IOrder, id: string }) => {
-    const {unlock} =  useUnlock({onSuccess: () => window.location.reload()});
+const TransactionListElController = ({ transaction, id, from }: {from: "seller" | "buyer", transaction: IOrder, id: string }) => {
+    const [,{unlock}] = useSmartContract();
+    const [, {start, stop}] = useLoadingOverlay();
     
-    const handleUnlock = () => unlock(id, transaction.unlockCode);
+    const handleUnlock = () => {
+        start();
+        unlock(id, transaction.unlockCode)
+            .then(() => {return;})
+            .catch(err => {return;})
+            .finally(() => stop());
+    };
 
-    return <TransactionListElView transaction={transaction} id={id} onUnlock={handleUnlock}/>;
+    return <TransactionListElView from={from} transaction={transaction} id={id} onUnlock={handleUnlock}/>;
 };
 
 export default TransactionListElController;

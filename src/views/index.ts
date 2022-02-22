@@ -10,4 +10,4 @@ export { default as TransactionDetailsView } from "./TransactionDetails";
 export { default as TransactionInitView } from "./TransactionInit";
 export { default as TransactionListView } from "./TransactionList";
 export { default as TransactionListElView } from "./TransactionListEl";
-export { default as TransDirectionSelectorView } from "./TransDirectionSelector";
+export { default as OverlayView } from "./Overlay";

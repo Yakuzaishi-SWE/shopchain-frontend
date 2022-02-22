@@ -1,45 +1,34 @@
 import { useAddress } from "hooks";
 import { useOrders } from "hooks/";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useEffect } from "react";
 import { TransactionListView } from "views";
-import { Loading } from "resources/svg";
-import TransDirectionSelectorController from "./TransDirectionSelector";
-import { useHistory, useLocation } from "react-router-dom";
+import { OrderState } from "types/enums";
+import WaitingCall from "./LoadingWrapper";
 
-const TransactionListController = () => {
+const TransactionListController = ({ from, state }: { from: "seller" | "buyer", state?: OrderState }) => {
     const address = useAddress() || undefined;
-    const [isSeller, setIsSeller] = useState<boolean>(true);
-    const { orders, error, loaded } = useOrders({ seller: isSeller ? address : undefined, buyer: !isSeller ? address : undefined });
 
-    const history = useHistory();
-    const { search } = useLocation();
+    const { orders, error, loaded } = useOrders({ seller: from == "seller" ? address : undefined, buyer: from == "buyer" ? address : undefined });
+    const filteredorders = useMemo(() => orders?.filter(el => (state !== undefined) ? el.order.state === state : true), [orders, state]);
 
-    const usp = useMemo(() => {
-        const u = new URLSearchParams();
-        u.set("seller", isSeller ? "true" : "false");
-        return u;
-    }, [search, isSeller]);
+    // check if user has transactions
+    if(filteredorders === undefined || filteredorders.length > 0){
 
-    useEffect(() => {
-        history.push({ search: usp.toString() });
-    }, [usp]);
+        return <WaitingCall loaded={loaded} error={error}>
+            {
+                filteredorders ?
+                    <TransactionListView transactions={filteredorders} from={from}/>
+                    :
+                    <></>
+            }
+        </WaitingCall>;
+    } else {
+        return <p className="user-msg">
+            There are no transactions in this section. <br/>
+            You may try refresh the page or change your Metamask account.
+        </p>;
+    }
 
-    return <>
-        <TransDirectionSelectorController isSeller={isSeller} setIsSeller={setIsSeller} />
-        {
-            (loaded) ?
-                (
-                    error ? <p>{error.toString()}</p>
-                        :
-                        (
-                            orders ? <TransactionListView transactions={orders} />
-                                :
-                                <Loading />
-                        )
-                ) :
-                <Loading />
-        }
-    </>;
 };
 
 export default TransactionListController;

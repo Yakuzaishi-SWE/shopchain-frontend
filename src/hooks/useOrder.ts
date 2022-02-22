@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { OrderState } from "types/enums";
 import useLoadingWrap from "./useLoadingWrap";
-import useSinglePayment from "./useSinglePayment";
+import useSmartContract from "./useSmartContract";
 
 
 
 const useOrder = (id: string) => {
     const { loaded, error, result, setError, setResult, startLoading } = useLoadingWrap<IOrder | null>();
-    const contract = useSinglePayment();
+    const [contract] = useSmartContract();
 
     useEffect(() => {
         if (contract && id !== undefined) {

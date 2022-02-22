@@ -1,0 +1,71 @@
+article.transaction {
+    background-image: linear-gradient(to bottom right, $primary, $primaryLight);
+    padding: 24px;
+    margin-bottom: 1.5em;
+    border-radius: 32px;
+    min-width: 500px;
+    width: auto;
+    max-width: 600px;
+
+    & > header {
+        display: flex;
+        justify-content: flex-end;
+        & > span.transaction-id {
+            flex-grow: 1;
+            font-size: 1.2em;
+            font-weight: bold;
+            & > .btn-linkto {
+                display: flex;
+                align-items: center;
+                color: white;
+                fill: white;
+                & > svg {
+                    margin: 0 4px;
+                }
+            }
+        }
+
+        & > div.transaction-controls {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            & > * {
+                margin-left: 12px;
+            }
+        }
+    }
+
+    & > div {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        width: 100%;
+
+        & > div > button {
+            margin: 0.1em;
+            cursor: pointer;
+        }
+
+        & > span.transaction-id {
+            color: rgb(226, 226, 226);
+        }
+
+        & > div.info-box {
+            display: flex;
+            flex-direction: column;
+
+            & > span.transaction-label {
+                font-size: 1.2em;
+                color: white;
+                margin: 0.4em 0;
+            }
+
+            & > span.transaction-amount {
+                color: white;
+                font-weight: bold;
+            }
+        }
+    }
+}
