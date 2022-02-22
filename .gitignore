@@ -4,3 +4,6 @@ build/
 dist
 stats
 stats.json
+
+
+.DS_Store

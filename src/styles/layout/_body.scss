@@ -1,0 +1,51 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: $background;
+}
+
+div#root{
+     
+    & > h1 {
+        text-align: center;
+        color: white;
+    }
+
+    & > p {
+        margin: 2em auto;
+        color: white;
+        font-size: 1em;
+        text-align: center;
+        width: 50%;
+    }
+
+    & .redirect > a{
+        color: #fff;
+    }
+
+    & > a:visited{
+        color: $primary;
+    }
+}
+
+
+.center {
+    display: flex;
+    justify-content: center;        
+}
+
+.simple-link > a{
+    color: #fff;
+    text-align: initial;
+}
+
+.simple-link > a:visited{
+    color: rgb(0, 186, 183);
+}
+
+div.simple-link{
+    display: block;
+    width: 50%;
+    margin: 5em auto 0 auto;
+}

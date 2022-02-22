@@ -1,18 +1,20 @@
-import ConnectMetamaskController from "controllers/ConnectMetamask";
+import { ConnectMetamaskController, AddressController } from "controllers";
+import MetamaskErrorController from "controllers/MetamaskErrors";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Nav = ({ address }: { address?: string }) => {
     return <header>
-        <a href="/">Shopchain</a>
+        <Link to="/">Shopchain</Link>
+        <MetamaskErrorController/>
         {
             (!address)
                 ?
                 <ConnectMetamaskController />
                 :
-                <span>{address || ""}</span>
-
+                <AddressController/>
         }
-    </header>
-}
+    </header>;
+};
 
 export default Nav;

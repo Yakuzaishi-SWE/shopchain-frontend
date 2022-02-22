@@ -1,32 +1,30 @@
+// Backgroud palette
+$background: #2F2D46;
+$background80: #3f3c5e;
+$background60: #857fbb;
+
+// Primary palette
+$primary: #5046CF;
+$primaryLight: #8670FF;
+$primaryDark: #001B9C;
+
+//Secondary palette
+$secondary: #CFB944;
+
+
+$success: #34C780;
+$successDark: #48a478;
+$warning: #CFB944;
+$warningDark: #b6a441;
+$error: #ec3b3b;
+$errorDark: #ec3b3b;
+
 body {
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: darkgray;
+    color: white;
 }
 
-body > header {
-    display: flex;
-    width: 100%;
-    background-color: #ccf;
-    padding: 8px;
-    box-sizing: border-box;
+@import './layout/';
 
-    & > a {
-        flex-grow: 1;
-        color: black;
-        text-decoration: none;
-        font-size: 1.5em;
-        font-weight: bold;
-    }
+@import './components/';
 
-    & > span {
-        display: flex;
-        align-items: center;
-        font-family: monospace;
-        border-radius: 6px;
-        background-color: #666;
-        color: white;
-        padding: 4px 8px; 
-    }
-}
+@import './sections/';
