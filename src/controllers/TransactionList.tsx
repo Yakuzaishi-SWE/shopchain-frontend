@@ -12,7 +12,7 @@ const TransactionListController = ({ from, state }: { from: "seller" | "buyer", 
     const filteredorders = useMemo(() => orders?.filter(el => (state !== undefined) ? el.order.state === state : true), [orders, state]);
 
     // check if user has transactions
-    if(orders !== undefined && orders.length > 0){
+    if(filteredorders === undefined || filteredorders.length > 0){
 
         return <WaitingCall loaded={loaded} error={error}>
             {
@@ -24,7 +24,7 @@ const TransactionListController = ({ from, state }: { from: "seller" | "buyer", 
         </WaitingCall>;
     } else {
         return <p className="user-msg">
-            There are no transactions made by this account. <br/>
+            There are no transactions in this section. <br/>
             You may try refresh the page or change your Metamask account.
         </p>;
     }

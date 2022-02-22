@@ -11,7 +11,9 @@ const TransactionDetailsPage = () => {
     const { order, loaded, error } = useOrder(id);
 
     return <>
-        <Link to="/transaction/out/" >Your Transactions</Link>
+        <div className="simple-link">
+            <Link to="/transaction/out/" >Go back to your transactions</Link>
+        </div>
         <WaitingCall loaded={loaded} error={error}>
             {
                 !order ?

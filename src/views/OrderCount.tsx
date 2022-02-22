@@ -9,7 +9,7 @@ const OrderCountView = ({ count }: { count: number|undefined }) => {
             </h3>
             <p>Orders</p> 
         </div>
-        <div className="float-right widget-big">
+        <div className="float-right widget-icon">
             <OrderIcon />
         </div>
     </div>;

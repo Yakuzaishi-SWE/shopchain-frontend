@@ -16,6 +16,7 @@
                 font-weight: 200;
                 display: block;
                 text-transform: uppercase;
+
             }
             
             & input[type=text], input[type=number] {
@@ -66,6 +67,12 @@
                         margin-right: 5px;
                     }
                 }
+            }
+
+            & > .ftm-wei{
+                text-align: end;
+                margin: 1.5em;
+                color: #b9b9b9;
             }
         }
 

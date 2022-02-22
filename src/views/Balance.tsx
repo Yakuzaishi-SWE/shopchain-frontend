@@ -11,7 +11,7 @@ const BalanceView = ({ balance }: { balance: number|undefined }) => {
             </h3>
             <p>Contract Balance</p> 
         </div> 
-        <div className="float-right widget-big">
+        <div className="float-right widget-icon">
             <BalanceIcon />
         </div>
     </div>;

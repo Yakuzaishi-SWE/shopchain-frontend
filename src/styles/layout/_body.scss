@@ -23,6 +23,10 @@ div#root{
     & .redirect > a{
         color: #fff;
     }
+
+    & > a:visited{
+        color: $primary;
+    }
 }
 
 
@@ -31,3 +35,17 @@ div#root{
     justify-content: center;        
 }
 
+.simple-link > a{
+    color: #fff;
+    text-align: initial;
+}
+
+.simple-link > a:visited{
+    color: rgb(0, 186, 183);
+}
+
+div.simple-link{
+    display: block;
+    width: 50%;
+    margin: 5em auto 0 auto;
+}

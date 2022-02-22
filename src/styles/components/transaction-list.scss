@@ -10,11 +10,10 @@ ul.transaction-list {
     & > li {
         flex: 1;
         width: auto;
-        text-align: center;
     }
 }
 
 div#root > p.user-msg {
-    margin: 10% auto;
+    margin: 5% auto;
     font-size: 1.1em;
 }

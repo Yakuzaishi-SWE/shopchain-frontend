@@ -39,17 +39,19 @@ const ECommercePage = () => {
             <label>Amount</label>
             <div className="ftm-input">
                 <input type="number" className="clickable-input" value={amount || undefined} onChange={el => setAmount(el.target.value)} placeholder="0.00" />
-                <span>
-                    ({wei}) wei
-                </span>
                 <span className="ftm-icon">
                     <FTMIcon />
                     FTM
                 </span>
             </div>
+            <div className="ftm-wei">
+                <span>
+                    ({wei}) wei
+                </span>
+            </div>
         </div>
         <div className="btn-block">
-            <input type="submit" onClick={handleSubmit}></input>
+            <input type="submit" value="Send" onClick={handleSubmit}></input>
         </div>
     </form>;
 };
