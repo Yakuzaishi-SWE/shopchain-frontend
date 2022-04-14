@@ -38,8 +38,8 @@ describe("Payment", () => {
     })
 
     it("created payment is correct", () => {
-        const payment = Payment.create(dto); 
-        expect(payment).toStrictEqual(Payment.create(dto)); //winzoz
+        const payment = Payment.create(dto);
+        expect(payment).toBeInstanceOf(Payment);
         expect(payment).toBeTruthy;
     })
 });
