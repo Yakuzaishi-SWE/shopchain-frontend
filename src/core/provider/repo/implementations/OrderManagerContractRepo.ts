@@ -16,8 +16,8 @@ export default class OrderManagerContractRepo implements IContractRepo {
         this.w3store = w3store;
         this.address = address;
         this.abis = abis;
-        makeObservable<this, "store" | "address">(this, {
-            store: observable,
+        makeObservable<this, "w3store" | "address">(this, {
+            w3store: observable,
             address: observable,
         })
     }

@@ -11,6 +11,5 @@ const ORDER_MANAGER_ADDRESS = "0x4904D51AB0B8135510A6eD60D2Cc52Fb54B44986";
 export default class MoneyBoxManagerContractRepo extends OrderManagerContractRepo implements IContractRepo {
     constructor(store: W3Store) {
         super(store, ORDER_MANAGER_ADDRESS, MONEYBOX_MANAGER_ABI as AbiItem[]);
-        makeObservable(this);
     }
 }

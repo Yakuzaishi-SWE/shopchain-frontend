@@ -1,7 +1,6 @@
 import OrderManagerContract from "core/provider/contracts/OrderManagerContract";
 import Address from "core/provider/domain/Address";
 import { makeObservable, observable } from "mobx";
-import { Contract } from "web3-eth-contract";
 import IOrderRepo from "../IOrderRepo";
 
 
