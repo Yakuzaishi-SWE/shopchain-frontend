@@ -20,5 +20,12 @@ describe("Amount", () =>  {
         const amount = new Amount(1);
         expect(amount.FTM).toBe(0.000000000000000001);
     });
+
+    it("should create the amount properly", () => {
+        //expect(Amount.create(1)).toBeTruthy();
+        //not sure tho
+        const amount = Amount.create(1);
+        expect(amount.wei).toBe(1);
+    })
     
 });
