@@ -12,6 +12,5 @@ export default class MoneyBoxManager extends OrderManager {
 
     constructor(repo?: IMoneyBoxManagerRepo) {
         super(repo || new MoneyBoxManagerRepo(providerStore.w3.mm));
-        makeObservable(this);
     }
 }
