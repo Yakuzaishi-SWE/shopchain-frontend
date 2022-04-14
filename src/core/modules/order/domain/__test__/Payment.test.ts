@@ -1,12 +1,18 @@
-import { useDebugValue } from "react";
-import { isYieldExpression } from "typescript";
+import PaymentDTO from "../../dtos/PaymentDTO";
 import Amount from "../Amount"
 import Payment from "../Payment"
 
-type PaymentProps = {
+type PaymentProps = {       //per non scrivere ogni volta in ogni test
     from: string;
     amount: Amount;
     timestamp: number;
+}
+
+const dto : PaymentDTO ={
+    from : "0x0",
+    feeAmount : 10,
+    datetime : 10,
+
 }
 
 const a : PaymentProps = {
@@ -32,6 +38,8 @@ describe("Payment", () => {
     })
 
     it("created payment is correct", () => {
-
+        const payment = Payment.create(dto); 
+        expect(payment).toStrictEqual(Payment.create(dto)); //winzoz
+        expect(payment).toBeTruthy;
     })
 });
