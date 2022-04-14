@@ -8,6 +8,10 @@
 		"@babel/proposal-class-properties",
 		"@babel/proposal-object-rest-spread",
 		"@emotion",
-		["@babel/transform-runtime"]
-	]
+		["@babel/transform-runtime"],
+		["@babel/plugin-proposal-class-properties"]
+	],
+	"assumptions": {
+        "setPublicClassFields": false
+    }
 }

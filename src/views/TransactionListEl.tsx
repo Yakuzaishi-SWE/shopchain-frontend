@@ -1,15 +1,15 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Launch, Lock, MoneyOff, MoneyOn, Unlock } from "resources/svg";
-import { OrderState } from "types/enums";
+import { OrderStateEnum } from "types/enums";
 
 const TransactionListElView = ({ transaction, id, onUnlock, from }: { from: "seller" | "buyer", transaction: IOrder, id: string, onUnlock: () => void }) => {
-    const paid = useMemo(() => transaction.state === OrderState.FILLED || transaction.state === OrderState.CLOSED, [transaction, id]);
-    const unlocked = useMemo(() => transaction.state === OrderState.CLOSED, [transaction, id]);
-    const refunded = useMemo(() => transaction.state === OrderState.CANCELLED, [transaction, id]);
-    const canPay = useMemo(() => from !== "seller" && transaction.state === OrderState.CREATED, [transaction, id]);
-    const canUnlock = useMemo(() => from !== "seller" && transaction.state === OrderState.FILLED, [transaction, id]);
-    const canRefund = useMemo(() => from !== "seller" && transaction.state === OrderState.FILLED, [transaction, id]);
+    const paid = useMemo(() => transaction.state === OrderStateEnum.FILLED || transaction.state === OrderStateEnum.CLOSED, [transaction, id]);
+    const unlocked = useMemo(() => transaction.state === OrderStateEnum.CLOSED, [transaction, id]);
+    const refunded = useMemo(() => transaction.state === OrderStateEnum.CANCELLED, [transaction, id]);
+    const canPay = useMemo(() => from !== "seller" && transaction.state === OrderStateEnum.CREATED, [transaction, id]);
+    const canUnlock = useMemo(() => from !== "seller" && transaction.state === OrderStateEnum.FILLED, [transaction, id]);
+    const canRefund = useMemo(() => from !== "seller" && transaction.state === OrderStateEnum.FILLED, [transaction, id]);
 
     return <li>
         <article className="transaction">
@@ -30,7 +30,7 @@ const TransactionListElView = ({ transaction, id, onUnlock, from }: { from: "sel
                 <div className="info-box">
                     <span className="transaction-label">Amount</span>
                     {
-                        transaction.state === OrderState.CANCELLED ?
+                        transaction.state === OrderStateEnum.CANCELLED ?
                             <span>REFUNDED</span> :
                             <></>
                     }

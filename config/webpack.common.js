@@ -8,7 +8,7 @@ module.exports = {
     output: {
         filename: "[name].bundle.js",
         chunkFilename: "[name].chunk.js", //[contenthash]
-        path: path.join(__dirname, "dist"),
+        path: path.join(process.cwd(), "dist"),
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"],
@@ -24,14 +24,16 @@ module.exports = {
             "stream": require.resolve("stream-browserify"),
         },
         alias: {
-            pages: path.resolve(__dirname, "src/pages"),
-            views: path.resolve(__dirname, "src/views"),
-            resources: path.resolve(__dirname, "src/resources"),
-            controllers: path.resolve(__dirname, "src/controllers"),
-            types: path.resolve(__dirname, "src/types"),
-            hooks: path.resolve(__dirname, "src/hooks"),
-            providers: path.resolve(__dirname, "src/providers"),
-            utils: path.resolve(__dirname, "src/utils"),
+            types: path.resolve(process.cwd(), "src/types"),
+            core: path.resolve(process.cwd(), "src/core"),
+            pages: path.resolve(process.cwd(), "src/pages"),
+            views: path.resolve(process.cwd(), "src/views"),
+            resources: path.resolve(process.cwd(), "src/resources"),
+            controllers: path.resolve(process.cwd(), "src/controllers"),
+            types: path.resolve(process.cwd(), "src/types"),
+            hooks: path.resolve(process.cwd(), "src/hooks"),
+            providers: path.resolve(process.cwd(), "src/providers"),
+            utils: path.resolve(process.cwd(), "src/utils"),
         },
     },
     module: {

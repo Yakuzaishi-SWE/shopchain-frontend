@@ -2,10 +2,10 @@ import { useAddress } from "hooks";
 import { useOrders } from "hooks/";
 import React, { useMemo, useEffect } from "react";
 import { TransactionListView } from "views";
-import { OrderState } from "types/enums";
+import { OrderStateEnum } from "types/enums";
 import WaitingCall from "./LoadingWrapper";
 
-const TransactionListController = ({ from, state }: { from: "seller" | "buyer", state?: OrderState }) => {
+const TransactionListController = ({ from, state }: { from: "seller" | "buyer", state?: OrderStateEnum }) => {
     const address = useAddress() || undefined;
 
     const { orders, error, loaded } = useOrders({ seller: from == "seller" ? address : undefined, buyer: from == "buyer" ? address : undefined });

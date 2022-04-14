@@ -1,15 +1,15 @@
 import TransactionListController from "controllers/TransactionList";
 import React from "react";
-import { OrderState } from "types/enums";
+import { OrderStateEnum } from "types/enums";
 
 
 const TransactionsOutPage = () => {
     return <>
         <h1>Your Locked Transactions</h1>
-        <TransactionListController from={"buyer"} state={OrderState.FILLED}/>
+        <TransactionListController from={"buyer"} state={OrderStateEnum.FILLED}/>
 
         <h1>Your Unlocked Transactions</h1>
-        <TransactionListController from={"buyer"} state={OrderState.CLOSED}/>
+        <TransactionListController from={"buyer"} state={OrderStateEnum.CLOSED}/>
     </>;
 };
 

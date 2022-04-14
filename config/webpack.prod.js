@@ -14,7 +14,7 @@ module.exports = merge(common, {
         filename: "[name].[contenthash:8].js",
         chunkFilename: "[name].[contenthash:8].js", //[contenthash]
         path: path.join(__dirname, "/dist"),
-        publicPath: "/",
+        publicPath: "/shopchain-frontend",
     },
     module: {
         rules: [

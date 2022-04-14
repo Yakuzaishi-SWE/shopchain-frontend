@@ -24,6 +24,7 @@
 		"noImplicitAny": false,
 		"downlevelIteration": true,
 		"noImplicitReturns": true,
+		"useDefineForClassFields": true,
 		"typeRoots": [
 			"./node_modules/@types",
 			"./src/types"

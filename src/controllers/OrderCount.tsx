@@ -4,7 +4,7 @@ import { OrderCountView } from "views";
 
 const OrderCountController =  () => {
     const [contract, {getOrderCount}] = useSmartContract();
-    const { error, loaded, result: count, startLoading, setResult, setError } = useLoadingWrap<number>({onResult: (d) => {console.log(d);}, onError: (err )=> console.error(err)});
+    const { result: count, startLoading, setResult, setError } = useLoadingWrap<number>({onResult: (d) => {console.log(d);}, onError: (err )=> console.error(err)});
 
     useEffect(() => {
         startLoading();

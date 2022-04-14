@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { OrderState } from "types/enums";
+import { OrderStateEnum } from "types/enums";
 import useLoadingWrap from "./useLoadingWrap";
 import useSmartContract from "./useSmartContract";
 
@@ -15,7 +15,7 @@ const useOrder = (id: string) => {
             contract.methods
                 .getOrderById(id)
                 .call()
-                .then((data: IOrder) => setResult((data.state !== OrderState.NOT_CREATED) ? data : null))
+                .then((data: IOrder) => setResult((data.state !== OrderStateEnum.NOT_CREATED) ? data : null))
                 .catch(err => setError(err));
         }
     }, [contract]);

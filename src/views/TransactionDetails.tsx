@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
-import { OrderState } from "types/enums";
+import { OrderStateEnum } from "types/enums";
 import { OrderStateToStr, WeitoFTM } from "utils";
 
 const TransactionDetailsView = ({ order, id, onUnlock, onRefund }: { order: IOrder, id: string, onUnlock: () => void, onRefund: () => void }) => {
-    const canUnlock = useMemo(() => order.state === OrderState.FILLED, [order, id]);
-    const canRefund = useMemo(() => order.state === OrderState.FILLED, [order, id]);
+    const canUnlock = useMemo(() => order.state === OrderStateEnum.FILLED, [order, id]);
+    const canRefund = useMemo(() => order.state === OrderStateEnum.FILLED, [order, id]);
 
     return <><section className="transaction-details">
         <ul>

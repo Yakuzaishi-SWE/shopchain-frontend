@@ -1,6 +1,6 @@
 
 
-export enum OrderState {
+export enum OrderStateEnum {
     NOT_CREATED = "0",
     CREATED = "1",
     FILLED = "2",

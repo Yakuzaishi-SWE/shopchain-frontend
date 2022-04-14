@@ -4,6 +4,6 @@ build/
 dist
 stats
 stats.json
-
+coverage
 
 .DS_Store
