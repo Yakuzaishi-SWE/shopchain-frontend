@@ -6,9 +6,8 @@ export default class Chain {
     private readonly store: ProviderStore;
     public chainId: string | null = null;
 
-    constructor(store: ProviderStore, chainId?: string) {
+    constructor(store: ProviderStore) {
         this.store = store;
-        this.chainId = chainId || null;
         makeAutoObservable(this);
 
         autorun(() => {

@@ -18,9 +18,9 @@ const contract: MoneyBoxManagerContract = {
             getMoneyBoxPayments: jest.fn((orderId: string) => {
                 return { call }
             }),
-            // getAmountToFill: jest.fn((orderId: string) => {
-            //     return { call }
-            // }),
+            getAmountToFill: jest.fn((orderId: string) => {
+                return { call }
+            }),
         }
     },
 } as any;
@@ -40,12 +40,14 @@ describe("MoneyBoxOrderRepo", () => {
     // const moneyBoxOrderRepo_undefined = new MoneyBoxOrderRepo(undefinedContract, address);
 
     it("should create an instance of MoneyBoxOrderRepo", () => {
+        const moneyBoxOrderRepo = new MoneyBoxOrderRepo(contract, address);
         expect(moneyBoxOrderRepo).toBeTruthy();
         expect(moneyBoxOrderRepo).not.toBeFalsy();
     });
 
     describe("should do a newPayment", () => {
         it("defined contract instance", async () => {
+            const moneyBoxOrderRepo = new MoneyBoxOrderRepo(contract, address);
             await moneyBoxOrderRepo.newPayment(id1, 1);
             expect(send).toHaveBeenCalled();
             expect(send).toHaveBeenCalledWith({ from: address.address, value: 1 });
@@ -54,9 +56,10 @@ describe("MoneyBoxOrderRepo", () => {
         })
 
         it("undefined contract instance", async () => {
+            const moneyBoxOrderRepo_undefined = new MoneyBoxOrderRepo(undefinedContract, address);
             try {
                 await moneyBoxOrderRepo_undefined.newPayment("0x0", 1)
-            } catch(err) {
+            } catch (err) {
                 expect(err).toBeTruthy();
                 expect(err).toStrictEqual(new Error("Contract not loaded"));
             }
@@ -67,6 +70,7 @@ describe("MoneyBoxOrderRepo", () => {
     describe("should get payments", () => {
 
         it("defined contract instance", async () => {
+            const moneyBoxOrderRepo = new MoneyBoxOrderRepo(contract, address);
             await moneyBoxOrderRepo.newPayment(id1, 1);
             const payments = await moneyBoxOrderRepo.getPayments(id1);
 
@@ -75,17 +79,20 @@ describe("MoneyBoxOrderRepo", () => {
         })
 
         it("undefined contract instance", async () => {
-            await expect(async () => {
+            const moneyBoxOrderRepo_undefined = new MoneyBoxOrderRepo(undefinedContract, address);
+            try {
                 await moneyBoxOrderRepo_undefined.getPayments(id1)
-            })
-                .rejects
-                .toThrow("Contract not loaded");
+            } catch (err) {
+                expect(err).toBeTruthy();
+                expect(err).toStrictEqual(new Error("Contract not loaded"));
+            }
         })
     })
 
     describe("should get the amount to fill", () => {
 
         it("defined contract instance", async () => {
+            const moneyBoxOrderRepo = new MoneyBoxOrderRepo(contract, address);
             await moneyBoxOrderRepo.getAmountToFill(id1);
 
             expect(call).toHaveBeenCalled();
@@ -94,11 +101,13 @@ describe("MoneyBoxOrderRepo", () => {
         })
 
         it("undefined contract instance", async () => {
-            await expect(async () => {
+            const moneyBoxOrderRepo_undefined = new MoneyBoxOrderRepo(undefinedContract, address);
+            try {
                 await moneyBoxOrderRepo_undefined.getAmountToFill(id1)
-            })
-                .rejects
-                .toThrow("Contract not loaded");
+            } catch (err) {
+                expect(err).toBeTruthy();
+                expect(err).toStrictEqual(new Error("Contract not loaded"));
+            }
         })
 
     })

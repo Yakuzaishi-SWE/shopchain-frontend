@@ -16,7 +16,7 @@ export default class ProviderStore {
     w3: W3Store;
 
     constructor(repo?: IProviderRepo) {
-        this.repo = new ProviderRepo(this);
+        this.repo = repo || new ProviderRepo(this);
         this.address = new Address(this);
         this.chain = new Chain(this);
         this.w3 = new W3Store(this);
