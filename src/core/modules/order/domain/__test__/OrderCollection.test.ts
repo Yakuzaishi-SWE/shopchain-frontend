@@ -26,18 +26,16 @@ const orderProps : OrderProps = {
     state: new OrderState("Created"),
 }
 
-const collectionTest : OrderCollection<any> = {
-    addOrder: jest.fn((data: any) => {return;}),
-} as unknown as OrderCollection<any>;
+// const collectionTest : OrderCollection<any> = {
+//     addOrder: jest.fn((data: any) => {return;}),
+// } as unknown as OrderCollection<any>;
 
 describe("test OrderCollection", () => {
 
     // NOPE -> GUARDA GIU
     // it("test addOrder", () => {
     //     const order = new Order(orderStore, id1, orderProps);
-
     //     collectionTest.addOrder(order);
-
     //     expect(collectionTest.addOrder).toBeCalledTimes(1);
     //     expect(collectionTest.addOrder).toBeCalledWith(order);
     // })
