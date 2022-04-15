@@ -1,5 +1,4 @@
 import { computed, makeObservable, observable } from "mobx";
-import { getOwnPropertyDescriptors } from "mobx/dist/internal";
 import OrderDTO from "../dtos/OrderDTO";
 import OrderStore from "../store/OrderStore";
 import Amount from "./Amount";
@@ -28,8 +27,10 @@ export default class Order {
             id: observable,
             props: observable,
             sellerAddress: computed,
+            ownerAddress: computed,
             amount: computed,
             unlockCode: computed,
+            state: computed,
         });
     }
 
@@ -43,8 +44,7 @@ export default class Order {
             ...props,
             amount: amount,
             state: state,
-        }
-        );
+        });
     }
 
     async unlock(code: number): Promise<void> {
@@ -63,15 +63,27 @@ export default class Order {
         return this.props.sellerAddress;
     }
 
-    set sellerAddress(address: string) {
-        this.props.sellerAddress = address;
+    get ownerAddress(): string {
+        return this.props.ownerAddress;
     }
 
     get amount(): Amount {
         return this.props.amount;
     }
-    
+
     get unlockCode(): number {
         return this.props.unlockCode;
+    }
+
+    get state(): OrderState {
+        return this.props.state;
+    }
+
+    set state(state: OrderState) {
+        this.props.state = state;
+    }
+
+    update(other:  Order)  {
+        this.state = other.state;
     }
 }

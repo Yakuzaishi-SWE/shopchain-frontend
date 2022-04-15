@@ -30,7 +30,7 @@ export default class OrderStore {
     async getOrderById(id: string): Promise<void> {
         const orderData = await this.repo.getOrderById(id);
         if (orderData) {
-            this.orders.addOrder(Order.create(this, id, orderData));
+            this.orders.add(Order.create(this, id, orderData));
         }
     }
 

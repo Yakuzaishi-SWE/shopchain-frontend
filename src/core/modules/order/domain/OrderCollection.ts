@@ -3,13 +3,38 @@ import Order from "./Order";
 
 
 export default class OrderCollection<T extends Order> {
-    public orders: T[] = [];
+    orders: Map<string, Order> = new Map<string, Order>();
+
+    get orderarr() {
+        return [...this.orders.values()];
+    }
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    public addOrder(order: T) {
-        this.orders.push(order);
+    getById(orderid: string) {
+        return this.orders.get(orderid);
+    }
+
+    getBySeller(seller: string) {
+        return this.orderarr.filter(order => order.sellerAddress === seller);
+    }
+
+    getByOwner(owner: string) {
+        return this.orderarr.filter(order => order.ownerAddress === owner);
+    }
+
+    add(order: T) {
+        this.orders.set(order.id, order);
+    }
+
+    upd(order: T) {
+        const o = this.orders.get(order.id);
+        if (o) {
+            o.update(o);
+        } else {
+            this.orders.set(order.id, order);
+        }
     }
 }

@@ -32,12 +32,23 @@ const collectionTest : OrderCollection<any> = {
 
 describe("test OrderCollection", () => {
 
+    // NOPE -> GUARDA GIU
+    // it("test addOrder", () => {
+    //     const order = new Order(orderStore, id1, orderProps);
+
+    //     collectionTest.addOrder(order);
+
+    //     expect(collectionTest.addOrder).toBeCalledTimes(1);
+    //     expect(collectionTest.addOrder).toBeCalledWith(order);
+    // })
+
     it("test addOrder", () => {
         const order = new Order(orderStore, id1, orderProps);
 
-        collectionTest.addOrder(order);
+        const ordercoll = new OrderCollection();
 
-        expect(collectionTest.addOrder).toBeCalledTimes(1);
-        expect(collectionTest.addOrder).toBeCalledWith(order);
+        ordercoll.add(order);
+        expect(ordercoll.orders.size).toBe(1);
+        expect(ordercoll.orderarr).toContain(order);
     })
 })

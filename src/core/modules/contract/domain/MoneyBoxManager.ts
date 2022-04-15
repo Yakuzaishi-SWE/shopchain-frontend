@@ -1,6 +1,4 @@
-import MoneyBoxManagerContract from "core/provider/contracts/MoneyBoxManagerContract";
 import { providerStore } from "core/provider/store/ProviderStore";
-import { makeObservable } from "mobx";
 import IMoneyBoxManagerRepo from "../repo/IMoneyBoxManagerRepo";
 import MoneyBoxManagerRepo from "../repo/implementations/MoneyBoxManagerRepo";
 import OrderManager from "./OrderManager";

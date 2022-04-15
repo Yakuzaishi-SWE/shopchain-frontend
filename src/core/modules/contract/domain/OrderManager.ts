@@ -25,17 +25,18 @@ export default class OrderManager {
     }
 
     setCount(count: number) { this.count = count; }
+
     setBalance(balance: number) { this.balance = balance; }
 
     async getOrderCount() {
         const countOrUndefined = await this.repo.getOrderCount();
-        if (countOrUndefined)
+        if (countOrUndefined !== undefined)
             this.setCount(countOrUndefined);
     }
 
     async getContractBalance() {
         const balanceOrUndefined = await this.repo.getContractBalance();
-        if (balanceOrUndefined)
+        if (balanceOrUndefined !== undefined)
             this.setBalance(balanceOrUndefined);
     }
 
