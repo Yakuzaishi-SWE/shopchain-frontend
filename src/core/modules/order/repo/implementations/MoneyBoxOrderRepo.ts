@@ -10,7 +10,6 @@ import OrderRepo from "./OrderRepo";
 export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrderRepo {
     public constructor(contract: MoneyBoxManagerContract, address: Address ) {
         super(contract, address);
-        makeObservable(this);
     }
 
     async newPayment(orderId: string, amount: number): Promise<void> {
