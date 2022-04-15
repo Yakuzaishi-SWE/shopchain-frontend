@@ -28,7 +28,7 @@ export default class OrderRepo implements IOrderRepo {
     async refund(id: string): Promise<void> {
         if (!this.contract.instance) return;
         await this.contract.instance.methods
-            .refundFromOwner(id)
+            .refund(id)
             .send({ from: this.address.address });
     }
 
@@ -37,7 +37,13 @@ export default class OrderRepo implements IOrderRepo {
         return await this.contract.instance.methods.getOrderById(id).call();
     }
 
-    // async getOrdersBySeller(seller: string): Promise<IOrderTuple[]> {
-    //     return await this.conract.methods.getOrdersBySeller(seller).call();
-    // }
+    async getOrdersBySeller(seller: string): Promise<IOrderTuple[]> {
+    if (!this.contract.instance) return [];
+    return await this.contract.instance.methods.getOrdersBySeller(seller).call();
+    }
+
+    async getOrdersByBuyer(buyer: string): Promise<IOrderTuple[]> {
+        if (!this.contract.instance) return [];
+        return await this.contract.instance.methods.getOrdersByBuyer(buyer).call();
+     }
 }

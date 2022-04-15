@@ -8,15 +8,19 @@ const repo : IMoneyBoxManagerRepo = {
 
 describe("MoneyBoxManager", () => {
   
-  it("should create an instance of MoneyBoxManager", () => {
+  describe("should create an instance of MoneyBoxManager", () => {
+
+    it("constructor with parameter", () => {
       const moneyBoxManager = new MoneyBoxManager(repo);
       expect(moneyBoxManager).toBeTruthy();
       expect(moneyBoxManager).not.toBeFalsy();
+    });
 
-      //default constructor
+    it("default constructor", () => {
       const moneyBoxManagerDef = new MoneyBoxManager();
       expect (moneyBoxManagerDef).toBeTruthy();
       expect (moneyBoxManagerDef).not.toBeFalsy();
+    });
   });
   
 });

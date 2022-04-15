@@ -28,13 +28,19 @@ describe('OrderManagerRepo', () => {
         expect(orderManagerRepo).not.toBeFalsy();
     })
 
-    it("should get the contract balance", async () => {
-        const undefOrderManagerRepo = new OrderManagerRepo(undefinedContract);
-        expect(await undefOrderManagerRepo.getContractBalance()).toBeUndefined();
-
-        const orderManagerRepo = new OrderManagerRepo(contract);
-        expect(await orderManagerRepo.getContractBalance()).toBe(1);
-    })
+    describe("should get contract balance", () => {
+        it("undefined instance", async () => {
+            const undefOrderManagerRepo = new OrderManagerRepo(undefinedContract);
+            expect(await undefOrderManagerRepo.getContractBalance()).toBeUndefined();
+        });
+        
+        it("defined instance", async () => {
+            const orderManagerRepo = new OrderManagerRepo(contract);
+            expect(await orderManagerRepo.getContractBalance()).toBe(1);
+            expect(call).toHaveBeenCalled();
+            expect(contract.instance?.methods.getBalance).toHaveBeenCalled();
+        });
+    });
 
     describe("should get the order count", () =>{
 
