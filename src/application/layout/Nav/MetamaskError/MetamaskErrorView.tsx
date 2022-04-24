@@ -1,0 +1,29 @@
+import React from "react";
+import { useState } from "react";
+import { CheckMark, Cross, Warning } from "resources/svg";
+import { MetamaskErrorSeverity } from "types/enums";
+
+
+interface IMetamaskErrorViewModel {
+    severity: MetamaskErrorSeverity, 
+    name: MetamaskErrorName, 
+    description: string,
+}
+
+const MetamaskErrorView = ({ severity, name, description }: IMetamaskErrorViewModel) => {
+    const classSeverity = severity === MetamaskErrorSeverity.BLOCKING ? " error" : (severity === MetamaskErrorSeverity.UNBLOCKING ? " warning" : " success");
+    const iconSeverity = severity === MetamaskErrorSeverity.BLOCKING ? <Cross/> : (severity === MetamaskErrorSeverity.UNBLOCKING ? <Warning/> : <CheckMark/>);
+    const [hidden, setHidden] = useState<boolean>(false);
+
+    const toggle = () => setHidden(!hidden);
+
+    return <span className={"provider-error" + classSeverity} onClick={toggle}>
+        {iconSeverity}
+        <div className={"error-overlay"} onClick={toggle}>
+            <span>{name}</span>
+            <p>{description}</p>
+        </div>
+    </span>;
+};
+
+export default MetamaskErrorView;
