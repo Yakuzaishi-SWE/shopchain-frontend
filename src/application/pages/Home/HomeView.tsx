@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import OrderCountController from "./OrderCount/OrderCountController";
+import BalanceController from "./Balance/BalanceController";
 
 const HomeView = () => {
     return <>
@@ -11,7 +12,7 @@ const HomeView = () => {
             <p>In shopchain until now</p>
             <div className="widget-box">
                 <OrderCountController />
-                {/* <BalanceController /> */}
+                <BalanceController />
             </div>
             <div className="button-box">
                 <Link to="/transaction/out/" className="home-button">Your Transactions</Link>
