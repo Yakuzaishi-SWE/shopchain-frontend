@@ -5,6 +5,15 @@ import { makeAutoObservable } from "mobx";
 
 
 export default class RootStore {
+    private static instance: RootStore;
+
+    static getInstance(): RootStore {
+        if (!RootStore.instance) {
+            RootStore.instance = new RootStore();
+        }
+        return RootStore.instance;
+    }
+
     moneyBoxStore: MoneyBoxOrderStore;
     orderStore: OrderStore;
     contractStore: ContractStore;
