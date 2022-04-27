@@ -1,4 +1,7 @@
 import PageLayout from "application/layout/PageLayout";
+import Checkout from "application/pages/Checkout";
+import CheckoutView from "application/pages/Checkout/CheckoutView";
+import ECommerceController from "application/pages/Checkout/ECommerce/ECommerceController";
 import Home from "application/pages/Home";
 import { OverlayController } from "controllers";
 import NavController from "controllers/Nav";
@@ -17,8 +20,8 @@ export default () => {
         <Routes>
             <Route path="/" element={<PageLayout />}>
                 <Route index element={<Home />} />
-                <Route path="checkout" element={<div><h1>Pagina Checkout</h1><Outlet/></div>}>
-                    <Route index element={<EcommercePage />} />
+                <Route path="checkout" element={<CheckoutView/>}>
+                    <Route index element={<ECommerceController />} />
                     <Route path=":id" element={<TransactionInitPage />} />
                     <Route path="success" element={<TransactionSuccessPage />} />
                 </Route>
