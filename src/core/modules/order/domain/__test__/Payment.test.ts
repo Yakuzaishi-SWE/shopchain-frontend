@@ -32,7 +32,7 @@ describe("Payment", () => {
         expect(payment.amount.wei).toBe(1);
     })
 
-    it("amount is correct", () =>{
+    it("timestamp is correct", () =>{
         const payment = new Payment(a);
         expect(payment.timestamp).toBe(10);
     })
