@@ -31,6 +31,7 @@ export default class Order {
             amount: computed,
             unlockCode: computed,
             state: computed,
+            type: computed,
         });
     }
 
@@ -59,6 +60,10 @@ export default class Order {
      *       GET/SET
      **********************/
 
+    get type(): string {
+        return "ORDER";
+    }
+
     get sellerAddress(): string {
         return this.props.sellerAddress;
     }
@@ -83,7 +88,7 @@ export default class Order {
         this.props.state = state;
     }
 
-    update(other:  Order)  {
+    update(other: Order) {
         this.state = other.state;
     }
 }

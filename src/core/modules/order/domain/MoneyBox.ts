@@ -1,4 +1,4 @@
-import { action, makeObservable } from "mobx";
+import { action, makeObservable, override } from "mobx";
 import MoneyBoxOrderStore from "../store/MoneyBoxOrderStore";
 import Order, { OrderProps } from "./Order";
 import Payment from "./Payment";
@@ -11,6 +11,7 @@ export default class MoneyBox extends Order {
         super(store, id, props);
         makeObservable(this, {
             getAmountToFill: action,
+            type: override,
         });
     }
 
@@ -20,5 +21,9 @@ export default class MoneyBox extends Order {
 
     get payments(): Payment[] {
         return this.store.payments.get(this.id);
+    }
+
+    get type(): string {
+        return "MONEYBOX";
     }
 }
