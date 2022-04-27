@@ -43,7 +43,7 @@ const address: Address = {
 
 describe("OrderRepo", () => {
 
-    it("should create an istance of OrderRrpo", () => {
+    it("should create an istance of OrderRepo", () => {
         const _orderRepo = new OrderRepo(contract, address);
         expect(_orderRepo).toBeTruthy();
         expect(_orderRepo).not.toBeFalsy();
