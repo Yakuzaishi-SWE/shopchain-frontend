@@ -1,5 +1,5 @@
 
-interface IFormViewModel {
+interface IECommerceViewModel {
     amount: number;
     wei: number;
     id: string;
@@ -9,4 +9,4 @@ interface IFormViewModel {
     redirectLink: string|null;
 }
 
-export default IFormViewModel;
+export default IECommerceViewModel;

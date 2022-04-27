@@ -2,11 +2,11 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { FTMIcon } from "resources/svg";
-import IFormViewModel from "./IECommerceViewModel";
-import InputView from "../Input/InputView";
+import IECommerceViewModel from "./IECommerceViewModel";
+import InputView from "./Input/InputView";
 import { NavLink } from "react-router-dom";
 
-export default observer(function FormView({
+export default observer(function ECommerceView({
     amount,
     wei,
     id,
@@ -14,12 +14,12 @@ export default observer(function FormView({
     setAmount,
     handleSubmit,
     redirectLink
-} : IFormViewModel) {
+} : IECommerceViewModel) {
     return <form className="payment-form" onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit();
-        return false;
-    }}>
+            e.preventDefault();
+            handleSubmit();
+            return false;
+        }}>
         {redirectLink ? <NavLink to={redirectLink} /> : <></>}
         <div className="form-wrapper">
             <label>Id</label>

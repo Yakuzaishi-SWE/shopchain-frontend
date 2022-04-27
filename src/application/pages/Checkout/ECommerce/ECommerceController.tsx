@@ -5,13 +5,13 @@ import React, { useMemo, useState } from "react";
 import { v4 } from "uuid";
 import { FTMtoWei } from "utils";
 import Decimal from "decimal.js";
-import FormView from "./ECommerceView";
-import FormViewModel from "./ECommerceViewModel";
+import ECommerceView from "./ECommerceView";
+import ECommerceViewModel from "./ECommerceViewModel";
 
-export default observer(function Form() {
-    const vm = useViewModel(FormViewModel, ProviderStore.arguments);
+export default observer(function ECommerce() {
+    const vm = useViewModel(ECommerceViewModel, ProviderStore.arguments);
 
-    return <FormView 
+    return <ECommerceView 
         amount = {vm.amount}
         wei = {vm.wei}
         id = {vm.id}

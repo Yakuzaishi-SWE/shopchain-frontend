@@ -4,9 +4,6 @@ import { FTMIcon } from "resources/svg";
 import { v4 } from "uuid";
 import { FTMtoWei } from "utils";
 import Decimal from "decimal.js";
-import InputView from "./Input/InputView";
-import FormView from "./ECommerce/ECommerceView";
-import FormController from "./ECommerce/ECommerceController";
 
 const CheckoutView = () => {
     

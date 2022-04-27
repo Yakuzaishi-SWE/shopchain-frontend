@@ -1,12 +1,10 @@
 import Amount from "core/modules/order/domain/Amount";
 import ProviderStore from "core/provider/store/ProviderStore";
-import RootStore from "core/shared/RootStore";
 import { makeAutoObservable } from "mobx";
-import { MouseEvent } from "react";
-import IFormViewModel from "./IECommerceViewModel";
+import IECommerceViewModel from "./IECommerceViewModel";
 
 
-export default class FormViewModel  implements IFormViewModel  {
+export default class ECommerceViewModel  implements IECommerceViewModel  {
     private _amount: Amount = new Amount(0);
     private _id: string = "";
     private _redirectLink: string|null = null;
