@@ -8,9 +8,8 @@ import React from "react";
 
 export default observer(function TransactionListController() {
     const vm = useViewModel(TransactionListViewModel, RootStore.getInstance(), providerStore);
+    
     return <TransactionListView
         transactions={vm.transactions}
-        from={vm.from}
     />
-
 });

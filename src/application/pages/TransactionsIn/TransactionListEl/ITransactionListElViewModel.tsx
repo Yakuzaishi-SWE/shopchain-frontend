@@ -1,0 +1,5 @@
+
+
+interface ITransactionListElViewModel {
+    isPaid: boolean;
+}

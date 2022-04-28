@@ -14,21 +14,15 @@ export default class TransactionListViewModel implements ITransactionListViewMod
 
     private get orders() {
         if (!this.address) return [];
-        if (this.from == "seller") return this.rootStore.orderStore.orders.getBySeller(this.address);
-        return this.rootStore.orderStore.orders.getByOwner(this.address);
+        return this.rootStore.orderStore.orders.getBySeller(this.address);
     }
 
     private get moneyboxOrders() {
         if (!this.address) return [];
-        if (this.from == "seller") return this.rootStore.moneyBoxStore.orders.getBySeller(this.address);
-        return this.rootStore.moneyBoxStore.orders.getByOwner(this.address);
+        return this.rootStore.moneyBoxStore.orders.getBySeller(this.address);
     }
 
-    get from() {
-        return this.from;
-    }
     get transactions() {
         return [...this.orders, ...this.moneyboxOrders];
     }
-
 }
