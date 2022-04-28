@@ -5,6 +5,6 @@ import ITransactionListViewModel from "./ITransactionListViewModel";
 
 export default observer(function TransactionListView({ transactions, from }: ITransactionListViewModel) {
     return <ul className="transaction-list">
-        {transactions.map(el => <TransactionListElController from={from} key={el.id} transaction={el.order} id={el.id} />)}
+        {transactions.map(el => <TransactionListElController key={el.id} from={from} transaction={el.order} id={el.id} />)}
     </ul>;
 });
