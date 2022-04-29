@@ -1,19 +1,13 @@
 import PageLayout from "application/layout/PageLayout";
-import Checkout from "application/pages/Checkout";
 import CheckoutView from "application/pages/Checkout/CheckoutView";
 import ECommerceController from "application/pages/Checkout/ECommerce/ECommerceController";
 import TransactionInitController from "application/pages/Checkout/TransactionInit/TransactionInitController";
 import TransactionSuccess from "application/pages/Checkout/TransactionSuccess";
 import Home from "application/pages/Home";
-import { OverlayController } from "controllers";
-import NavController from "controllers/Nav";
-import { providerStore } from "core/provider/store/ProviderStore";
-import React, { useEffect } from "react";
-import { useParams } from "react-router";
-import { Link, Outlet } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
-import { EcommercePage, HomePage, TransactionDetailsPage, TransactionInitPage, TransactionInPage, TransactionOutPage, TransactionSuccessPage } from "./pages";
+import TransactionDetails from "application/pages/TransactionDetails";
+import React from "react";
+import { HashRouter, Route, Routes } from "react-router-dom";
+import { TransactionInPage, TransactionOutPage } from "./pages";
 import "./styles/main.scss";
 
 
@@ -32,7 +26,7 @@ export default () => {
                 <Route path="transactions/in/" element={<TransactionInPage />} />
 
                 <Route path="moneybox/:id" element={ } />
-                <Route path="order/:id/" element={ } />
+                <Route path="order/:id/" element={<TransactionDetails/>} />
             </Route>
         </Routes>
     </HashRouter>;
