@@ -1,4 +1,5 @@
-import { computed, makeObservable, observable } from "mobx";
+import { computed, makeObservable, observable, transaction } from "mobx";
+import { OrderStateEnum } from "types/enums";
 import OrderDTO from "../dtos/OrderDTO";
 import OrderStore from "../store/OrderStore";
 import Amount from "./Amount";
@@ -82,6 +83,30 @@ export default class Order {
 
     get state(): OrderState {
         return this.props.state;
+    }
+
+    get paid(): boolean {
+        return this.props.state.toString() === OrderStateEnum.FILLED || this.props.state.toString() === OrderStateEnum.CLOSED;
+    }
+
+    get unlocked(): boolean {
+        return this.props.state.toString() === OrderStateEnum.CLOSED;
+    }
+
+    get refunded(): boolean {
+        return this.props.state.toString() === OrderStateEnum.CANCELLED;
+    }
+
+    get canPay(): boolean {
+        return !this.sellerAddress && this.props.state.toString() === OrderStateEnum.CREATED;
+    }
+
+    get canUnlock(): boolean {
+        return !this.sellerAddress && this.props.state.toString() === OrderStateEnum.FILLED;
+    }
+
+    get canRefund(): boolean {
+        return !this.sellerAddress && this.props.state.toString() === OrderStateEnum.FILLED;
     }
 
     set state(state: OrderState) {

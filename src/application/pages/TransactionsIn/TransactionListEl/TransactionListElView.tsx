@@ -3,9 +3,19 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Launch, Lock, MoneyOff, MoneyOn, Unlock } from "resources/svg";
 import { OrderStateEnum } from "types/enums";
+import ITransactionListElViewModel from "./ITransactionListElViewModel";
 
 const TransactionListElView = observer(({
-    isPaid
+    paid,
+    unlocked,
+    refunded,
+    canPay,
+    canUnlock,
+    canRefund,
+    id,
+    transaction,
+    from,
+    onUnlock
 }: ITransactionListElViewModel) => {
     // const paid = useMemo(() => transaction.state === OrderStateEnum.FILLED || transaction.state === OrderStateEnum.CLOSED, [transaction, id]);
     // const unlocked = useMemo(() => transaction.state === OrderStateEnum.CLOSED, [transaction, id]);
@@ -42,6 +52,6 @@ const TransactionListElView = observer(({
             </div>
         </article>
     </li>;
-};
+});
 
 export default TransactionListElView;
