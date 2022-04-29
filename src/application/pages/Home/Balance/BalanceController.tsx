@@ -6,7 +6,7 @@ import BalanceView from "./BalanceView";
 import BalanceViewModel from "./BalanceViewModel";
 
 
-export default observer(function OrderCount() {
+export default observer(function Balance() {
     const vm = useViewModel(BalanceViewModel, RootStore.getInstance());
 
     return <BalanceView

@@ -5,9 +5,12 @@ import { Navigate } from "react-router";
 import ITransactionInitViewModel from "./ITransactionInitViewModel";
 
 export default observer(function TransactionInitView({
-    transaction,
     id,
-    handleCreate
+    ftm,
+    wei,
+    sellerAddress,
+    createOrder,
+    createMoneyBox
 } : ITransactionInitViewModel) {
     return <>
         <section className="transaction-details">
@@ -24,27 +27,17 @@ export default observer(function TransactionInitView({
                 </li>
                 <li>
                     <div className="section-head">Transaction seller:</div>
-                    {transaction.seller}
+                    {sellerAddress}
                 </li>
                 <li>
                     <div className="section-head">Amount to pay:</div>
-                    {WeitoFTM(Number(transaction.amount))} FTM ({transaction.amount} wei)
+                    {ftm} FTM ({wei} wei)
                 </li>
             </ul>
         </section>
         <div className="box-button center">
-            <button onClick={onCreate} className="btn-payalone">Pay Alone</button>
-            <button className="btn-moneybox" disabled>Create Money Box</button>
+            <button onClick={createOrder} className="btn-payalone">Pay Alone</button>
+            <button onClick={createMoneyBox} className="btn-moneybox">Create Money Box</button>
         </div>
     </>;
-    /*
-    return <WaitingCall loaded={loaded} error={error}>
-        {
-            !order ?
-                <TransactionInitController id={id} />
-                :
-                <Navigate to={`/transaction/out/${id}/`} />
-        }
-    </WaitingCall>;
-    */
 })

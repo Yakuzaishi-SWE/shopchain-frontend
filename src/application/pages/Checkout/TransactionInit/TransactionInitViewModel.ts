@@ -1,41 +1,60 @@
 import Amount from "core/modules/order/domain/Amount";
-import Order from "core/modules/order/domain/Order";
 import ProviderStore from "core/provider/store/ProviderStore";
-import { create } from "domain";
-import { useOrder } from "hooks";
+import RootStore from "core/shared/RootStore";
 import { makeAutoObservable } from "mobx";
-import { useParams } from "react-router-dom";
-import { start } from "repl";
+import { useMemo } from "react";
+import { useLocation } from "react-router-dom";
 import ITransactionInitViewModel from "./ITransactionInitViewModel";
 
 
-export default class TransactionInitViewModel  implements ITransactionInitViewModel  {
-    private _transaction: ITransaction;
+export default class TransactionInitViewModel implements ITransactionInitViewModel {
     private _id: string = "";
+    private _amount: Amount = new Amount(0);
+    private _sellerAddress: string = "0x7B44Fba1DB530C59DB6bbBF1FF886d4e49C07aE7";
 
-    constructor(private readonly providerStore: ProviderStore)  {
+    constructor(private readonly providerStore: ProviderStore, private readonly rootStore: RootStore)  {
         makeAutoObservable(this);
-
-        {this._order, this._loaded, this._error} = useOrder(this._id);
     }
 
-    get loaded(): boolean {
-        return this._loaded;
+    setAmount(newAmount: string) {
+        this._amount = new Amount(Number(newAmount));
     }
 
-    get order(): Order|null {
-        return this._order;
+    setId(newId: string) {
+        this._id = newId;
+    }
+
+    // ------------------- VIEW SIDE -------------------------------
+
+    get ftm(): number {
+        return this._amount.FTM;
+    }
+
+    get wei(): number {
+        return this._amount.wei;
     }
 
     get id(): string {
         return this._id;
     }
 
-    handleCreate(): () => {
-        start();
-        create({ amount: this._transaction.amount, seller: this._transaction.seller, this._id })
-            .then(() => setTo(`/transaction/out/${id}/success/`))
-            .catch(err => console.error(err))
-            .finally(() => stop());
+    get sellerAddress(): string {
+        return this._sellerAddress;
+    }
+
+    createOrder(): void {
+        this.rootStore.orderStore.createOrder({
+            seller: this.sellerAddress,
+            amount: String(this.wei),
+            id: this.id
+        })
+    }
+    
+    createMoneyBox(): void {
+        this.rootStore.moneyBoxStore.createOrder({
+            seller: this.sellerAddress,
+            amount: String(this.wei),
+            id: this.id
+        })
     }
 }

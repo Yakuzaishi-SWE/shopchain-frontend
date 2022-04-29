@@ -5,9 +5,10 @@ import React, { useEffect } from "react";
 import ConnectMetamaskView from "./ConnectMetamaskView";
 import ConnectMetamaskViewModel from "./ConnectMetamaskViewModel";
 import {useConnect} from "hooks";
+import { providerStore } from "core/provider/store/ProviderStore";
 
-export default observer(function OrderCount() {
-    const vm = useViewModel(ConnectMetamaskViewModel, RootStore.getInstance());
+export default observer(function ConnectMetamask() {
+    const vm = useViewModel(ConnectMetamaskViewModel, providerStore);
     const connect = useConnect();
 
     return <ConnectMetamaskView

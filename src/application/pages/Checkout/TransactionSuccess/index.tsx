@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 
 export default observer(function TransactionSuccess(){
-
     return <>
         <h1>Transaction Completed Successfully</h1>
         <p className="redirect">
@@ -12,5 +11,4 @@ export default observer(function TransactionSuccess(){
             <Link to="/transaction/out/">See  here</Link>
         </p>
     </>;
-
 });
