@@ -4,7 +4,8 @@ import ECommerceController from "application/pages/Checkout/ECommerce/ECommerceC
 import TransactionInitController from "application/pages/Checkout/TransactionInit/TransactionInitController";
 import TransactionSuccess from "application/pages/Checkout/TransactionSuccess";
 import Home from "application/pages/Home";
-import TransactionDetails from "application/pages/TransactionDetails";
+import MoneyBoxDetails from "application/pages/MoneyBoxDetails";
+import OrderDetails from "application/pages/OrderDetails";
 import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { TransactionInPage, TransactionOutPage } from "./pages";
@@ -25,8 +26,8 @@ export default () => {
                 <Route path="transactions/out/" element={<TransactionOutPage />} />
                 <Route path="transactions/in/" element={<TransactionInPage />} />
 
-                <Route path="moneybox/:id" element={ } />
-                <Route path="order/:id/" element={<TransactionDetails/>} />
+                <Route path="moneybox/:id" element={<MoneyBoxDetails/>} />
+                <Route path="order/:id/" element={<OrderDetails/>} />
             </Route>
         </Routes>
     </HashRouter>;

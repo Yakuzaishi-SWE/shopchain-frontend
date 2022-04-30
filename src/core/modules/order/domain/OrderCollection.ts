@@ -3,7 +3,7 @@ import Order from "./Order";
 
 
 export default class OrderCollection<T extends Order> {
-    orders: Map<string, Order> = new Map<string, Order>();
+    orders: Map<string, T> = new Map<string, T>();
 
     get orderarr() {
         return [...this.orders.values()];

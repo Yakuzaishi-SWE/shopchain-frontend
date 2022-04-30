@@ -1,5 +1,5 @@
 
-interface ITransactionDetailsViewModel {
+interface IOrderDetailsViewModel {
   id: string,
   ownerAddress: string,
   sellerAddress: string,
@@ -10,4 +10,4 @@ interface ITransactionDetailsViewModel {
   unlock(): void,
   refund(): void,
 }
-export default ITransactionDetailsViewModel;
+export default IOrderDetailsViewModel;

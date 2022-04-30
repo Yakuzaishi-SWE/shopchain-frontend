@@ -1,8 +1,9 @@
+import Payment from "core/modules/order/domain/Payment";
 import RootStore from "core/shared/RootStore";
 import { makeAutoObservable } from "mobx";
-import ITransactionDetailsViewModel from "./ITransactionDetailsViewModel";
+import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
-export default class TransactionDetailsViewModel implements ITransactionDetailsViewModel {
+export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewModel {
     _id: string = "";  
 
     constructor(private readonly rootStore: RootStore) {
@@ -14,7 +15,7 @@ export default class TransactionDetailsViewModel implements ITransactionDetailsV
     }
 
     private get order() {
-      return this.rootStore.orderStore.orders.getById(this.id);
+      return this.rootStore.moneyBoxStore.orders.getById(this.id);
       //return RootStore.getInstance().orderStore.getOrderById(this.id);
     }
 
@@ -39,6 +40,24 @@ export default class TransactionDetailsViewModel implements ITransactionDetailsV
       return this.order?.amount?.wei || 0;
     }
 
+    async getFilledFtm() {
+      return await this.getFilledWei() / 10 ** 18;
+    }
+
+    async getFilledWei() {
+      return await this.order?.getAmountToFill() || 0;
+    }
+
+    async getFtmToFill() {
+      let n = await this.getFilledFtm();
+      return this.ftm - n;
+    }
+
+    async getWeiToFill() {
+      let n = await this.getFilledWei();
+      return this.wei - n;
+    }
+
     get state() {
       return this.order?.state.toString() || "";
     }
@@ -58,4 +77,10 @@ export default class TransactionDetailsViewModel implements ITransactionDetailsV
         this.order.refund();
       }
     }
+
+    get partecipants() {
+      return this.order?.payments || [];
+  }
+
+  
 }
