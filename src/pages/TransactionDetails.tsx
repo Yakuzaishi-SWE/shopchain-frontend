@@ -1,4 +1,4 @@
-import { TransactionDetailsController } from "controllers";
+/* import { TransactionDetailsController } from "controllers";
 import WaitingCall from "controllers/LoadingWrapper";
 import { useOrder } from "hooks";
 import React from "react";
@@ -26,4 +26,4 @@ const TransactionDetailsPage = () => {
 
 };
 
-export default TransactionDetailsPage;
+export default TransactionDetailsPage; */

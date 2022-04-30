@@ -1,3 +1,4 @@
+import TaskCacheBuilder from "core/utils/TaskCacheBuilder";
 import { computed, makeObservable, observable, transaction } from "mobx";
 import { OrderStateEnum } from "types/enums";
 import OrderDTO from "../dtos/OrderDTO";
@@ -49,12 +50,12 @@ export default class Order {
         });
     }
 
-    async unlock(code: number): Promise<void> {
-        await this.store.unlock(this.id, code);
+    unlock(code: number) {
+        this.store.unlock(this.id, code);
     }
 
-    async refund(): Promise<void> {
-        await this.store.refund(this.id);
+    refund() {
+        this.store.refund(this.id);
     }
 
     /***********************
@@ -85,35 +86,35 @@ export default class Order {
         return this.props.state;
     }
 
-    get paid(): boolean {
-        return this.props.state.toString() === OrderStateEnum.FILLED || this.props.state.toString() === OrderStateEnum.CLOSED;
-    }
-
-    get unlocked(): boolean {
-        return this.props.state.toString() === OrderStateEnum.CLOSED;
-    }
-
-    get refunded(): boolean {
-        return this.props.state.toString() === OrderStateEnum.CANCELLED;
-    }
-
-    get canPay(): boolean {
-        return !this.sellerAddress && this.props.state.toString() === OrderStateEnum.CREATED;
-    }
-
-    get canUnlock(): boolean {
-        return !this.sellerAddress && this.props.state.toString() === OrderStateEnum.FILLED;
-    }
-
-    get canRefund(): boolean {
-        return !this.sellerAddress && this.props.state.toString() === OrderStateEnum.FILLED;
-    }
-
     set state(state: OrderState) {
         this.props.state = state;
     }
 
-    update(other: Order) {
+    get paid(): boolean {
+        return this.state.isPaid || this.state.isClosed;
+    }
+
+    get unlocked(): boolean {
+        return this.state.isClosed;
+    }
+
+    get refunded(): boolean {
+        return this.state.isCancelled;
+    }
+
+    get canPay(): boolean {
+        return this.state.isCreated;
+    }
+
+    get canUnlock(): boolean {
+        return this.state.isPaid;
+    }
+
+    get canRefund(): boolean {
+        return this.state.isPaid;
+    }
+
+    patch(other: Order) {
         this.state = other.state;
     }
 }

@@ -1,4 +1,4 @@
-import { TransactionInitController } from "controllers";
+/* import { TransactionInitController } from "controllers";
 import WaitingCall from "controllers/LoadingWrapper";
 import { useOrder } from "hooks";
 import React from "react";
@@ -21,4 +21,4 @@ const TransactionInitPage = () => {
 
 };
 
-export default TransactionInitPage;
+export default TransactionInitPage; */

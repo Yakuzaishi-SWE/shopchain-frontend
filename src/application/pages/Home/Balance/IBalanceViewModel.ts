@@ -1,6 +1,8 @@
 
 interface IBalanceViewModel {
-    balance: number;
+    isBusy: boolean;
+    balanceFTM: number;
+    balanceWEI: number;
 }
 
 export default IBalanceViewModel;

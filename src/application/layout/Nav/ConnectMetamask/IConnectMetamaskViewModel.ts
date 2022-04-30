@@ -1,6 +1,6 @@
 
 interface IConnectMetamaskViewModel {
-    onClick(): void;
+    connect(): void;
 }
 
 export default IConnectMetamaskViewModel;

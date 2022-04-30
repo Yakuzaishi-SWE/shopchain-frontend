@@ -7,11 +7,11 @@ import ProviderStore from "core/provider/store/ProviderStore";
 export default class ConnectMetamaskViewModel implements IConnectMetamaskViewModel  {
 
     constructor(private readonly providerStore: ProviderStore) {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     connect(): void {
-        console.log("Cosa fa questa void?");
+        this.providerStore.connect();
     }
 
 }

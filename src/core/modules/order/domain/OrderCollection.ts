@@ -14,7 +14,7 @@ export default class OrderCollection<T extends Order> {
     }
 
     getById(orderid: string) {
-        return this.orders.get(orderid);
+        return this.orders.get(orderid) || null;
     }
 
     getBySeller(seller: string) {
@@ -32,7 +32,7 @@ export default class OrderCollection<T extends Order> {
     upd(order: T) {
         const o = this.orders.get(order.id);
         if (o) {
-            o.update(o);
+            o.patch(o);
         } else {
             this.orders.set(order.id, order);
         }

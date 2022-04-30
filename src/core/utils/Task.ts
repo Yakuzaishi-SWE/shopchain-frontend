@@ -10,11 +10,11 @@ function generateUUID() {
     });
 }
 
-export default class Task<R = void, DEPS extends Task<any>[] = []> {
+export default class Task<R = void, A extends any[] = [], F extends (...a: A) => Promise<R> = (...a: A) => Promise<R>> {
     public id: string;
 
-    protected readonly taskfn: (...deps: DEPS) => Promise<R>;
-    protected readonly deps: DEPS;
+    protected readonly taskfn: F;
+    protected readonly args: A;
 
     /** start time in milliseconds */
     public starttime = 0;
@@ -33,27 +33,15 @@ export default class Task<R = void, DEPS extends Task<any>[] = []> {
     }
 
     get isBusy(): boolean {
-        return this.areDependenciesBusy || this.isTaskBusy;
+        return this.isTaskBusy;
     }
 
     get isLoaded(): boolean {
-        return this.areDependenciesLoaded && this.isTaskLoaded;
+        return this.isTaskLoaded;
     }
 
     get isFailed(): boolean {
-        return this.areDependenciesFailed || this.isTaskFailed;
-    }
-
-    get areDependenciesBusy(): boolean {
-        return this.deps.some(dep => dep.isTaskBusy);
-    }
-
-    get areDependenciesLoaded(): boolean {
-        return this.deps.every(dep => dep.isTaskLoaded);
-    }
-
-    get areDependenciesFailed(): boolean {
-        return this.deps.some(dep => dep.isTaskFailed);
+        return this.isTaskFailed;
     }
 
     /** Age of the task in milliseconds (from the starttime)*/
@@ -82,14 +70,14 @@ export default class Task<R = void, DEPS extends Task<any>[] = []> {
         this.endtime = moment().valueOf();
     }
 
-    constructor(taskfn: (...deps: DEPS) => Promise<R>, ...deps: DEPS) {
+    constructor(taskfn: F, ...args : A) {
         this.id = generateUUID();
         this.taskfn = taskfn;
-        this.deps = deps;
-        makeObservable<this, "taskfn" | "deps" | "start" | "stop" | "setLoaded" | "setFailed">(this, {
+        this.args = args;
+        makeObservable<this, "taskfn" | "args" | "start" | "stop" | "setLoaded" | "setFailed">(this, {
             id: observable,
+            args: observable,
             taskfn: observable,
-            deps: observable,
             starttime: observable,
             endtime: observable,
             isBusy: computed,
@@ -98,9 +86,6 @@ export default class Task<R = void, DEPS extends Task<any>[] = []> {
             isTaskBusy: observable,
             isTaskLoaded: observable,
             isTaskFailed: observable,
-            areDependenciesBusy: computed,
-            areDependenciesLoaded: computed,
-            areDependenciesFailed: computed,
             error: observable,
             taskResponse: observable,
             result: computed,
@@ -122,7 +107,7 @@ export default class Task<R = void, DEPS extends Task<any>[] = []> {
         if (this.isTaskBusy) return this;
 
         this.start();
-        this.taskfn(...this.deps)
+        this.taskfn(...this.args)
             .then((data) => this.setLoaded(data, onsuccess))
             .catch(err => this.setFailed(err, onerror))
             .finally(() => this.stop());

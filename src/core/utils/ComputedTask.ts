@@ -5,7 +5,7 @@ import Task from "./Task";
 
 
 // @ts-expect-error
-export default class ComputedTask<R = void, DEPS extends Task<any>[] = [], RESULT extends R = R> extends Task<R, DEPS> {
+export default class ComputedTask<R = void, args extends any[] = [], RESULT extends R = R> extends Task<R, args> {
         
     private readonly resultfn: (data: R | null) => RESULT;
 
@@ -13,9 +13,9 @@ export default class ComputedTask<R = void, DEPS extends Task<any>[] = [], RESUL
         return this.resultfn(this.taskResponse);
     }
 
-    constructor(taskfn: (...deps: DEPS) => Promise<R>, resultfn: (data: R | null) => RESULT, ...deps: DEPS) {
+    constructor(taskfn: (...deps: args) => Promise<R>, resultfn: (data: R | null) => RESULT, ...deps: args) {
         super(taskfn, ...deps);
-        this.resultfn = computedFn(resultfn);
+        this.resultfn = resultfn;
         makeObservable<this, "resultfn">(this, {
             result: override,
             resultfn: observable,

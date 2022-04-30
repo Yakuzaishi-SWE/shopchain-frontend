@@ -5,11 +5,15 @@ import { WeitoFTM } from "utils";
 import IBalanceViewModel from "./IBalanceViewModel";
 
 
-export default observer(function BalanceView({ balance }: IBalanceViewModel) {
+export default observer(function BalanceView({ 
+    balanceFTM,
+    balanceWEI,
+    isBusy,
+}: IBalanceViewModel) {
     return <div className="widget">
         <div className="float-left widget-text">
             <h3>
-                <span className="count"> {balance ? WeitoFTM(balance, 4) : <Loading width="60" height="60"/>}</span> 
+                <span className="count"> {!isBusy ? balanceFTM : <Loading width="60" height="60"/>}</span> 
                 <span className="currency">FTM</span>
             </h3>
             <p>Contract Balance</p> 
