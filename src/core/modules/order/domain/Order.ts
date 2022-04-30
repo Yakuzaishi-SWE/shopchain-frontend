@@ -89,7 +89,7 @@ export default class Order {
     set state(state: OrderState) {
         this.props.state = state;
     }
-
+    /*
     get paid(): boolean {
         return this.state.isPaid || this.state.isClosed;
     }
@@ -113,7 +113,7 @@ export default class Order {
     get canRefund(): boolean {
         return this.state.isPaid;
     }
-
+    */
     patch(other: Order) {
         this.state = other.state;
     }

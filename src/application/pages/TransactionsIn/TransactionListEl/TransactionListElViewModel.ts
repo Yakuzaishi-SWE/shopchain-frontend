@@ -1,43 +1,46 @@
 import Order from "core/modules/order/domain/Order";
 import ITransactionListElViewModel from "./ITransactionListElViewModel";
-
+import { makeAutoObservable } from "mobx";
 
 export default class TransactionListElViewModel implements ITransactionListElViewModel {
 
     constructor(private readonly order: Order) {
-
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
-    get paid(): boolean {
-        return this.order.paid;
+    get isPaid(): boolean {
+        return (this.order.state.isPaid && this.order.state.isClosed);
     }
 
-    get unlocked(): boolean {
-        return this.order.unlocked;
+    get isUnlocked(): boolean {
+        return this.order.state.isClosed;
     }
 
-    get refunded(): boolean {
-        return this.order.refunded;
+    get isRefunded(): boolean {
+        return this.order.state.isCancelled;
     }
 
-    get canPay(): boolean {
-        return this.order.canPay;
+    canPay(): boolean {
+        if (this.from != "seller" && this.order.state.isPaid) return true;
+        return false;
     }
 
-    get canUnlock(): boolean {
-        return this.order.canUnlock;
+    canUnlock(): boolean {
+        if (this.from != "seller" && this.order.state.isClosed) return true;
+        return false;
     }
 
-    get canRefund(): boolean {
-        return this.order.canRefund;
+    canRefund(): boolean {
+        if (this.from != "seller" && this.order.state.isCancelled) return true;
+        return false;
     }
 
     get id(): string {
         return this.id;
     }
 
-    get transaction(): IOrder {
-        return this.transaction;
+    get transaction(): Order {
+        return this.order;
     };
 
     get from() {

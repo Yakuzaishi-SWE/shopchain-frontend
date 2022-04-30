@@ -6,9 +6,9 @@ import { OrderStateEnum } from "types/enums";
 import ITransactionListElViewModel from "./ITransactionListElViewModel";
 
 const TransactionListElView = observer(({
-    paid,
-    unlocked,
-    refunded,
+    isPaid,
+    isUnlocked,
+    isRefunded,
     canPay,
     canUnlock,
     canRefund,
@@ -31,8 +31,8 @@ const TransactionListElView = observer(({
                     <Link to={`/transaction/out/${id}/`} className="btn-linkto">{id}<Launch /></Link>
                 </span>
                 <div className="transaction-controls">
-                    <button className={"icon-btn btn-paid" + (paid ? " success" : (refunded ? " error" : " warning"))} disabled={!canPay}>{paid ? <MoneyOn /> : <MoneyOff />}</button>
-                    <button className={"icon-btn btn-unlock" + (unlocked ? " success" : " warning")} disabled={!canRefund} onClick={onUnlock}>{unlocked ? <Unlock /> : <Lock />}</button>
+                    <button className={"icon-btn btn-paid" + (isPaid ? " success" : (isRefunded ? " error" : " warning"))} disabled={!canPay}>{isPaid ? <MoneyOn /> : <MoneyOff />}</button>
+                    <button className={"icon-btn btn-unlock" + (isUnlocked ? " success" : " warning")} disabled={!canRefund} onClick={onUnlock}>{isUnlocked ? <Unlock /> : <Lock />}</button>
                 </div>
             </header>
             <div className="content">
@@ -43,11 +43,11 @@ const TransactionListElView = observer(({
                 <div className="info-box">
                     <span className="transaction-label">Amount</span>
                     {
-                        transaction.state === OrderStateEnum.CANCELLED ?
+                        transaction.state.toString() === OrderStateEnum.CANCELLED ?
                             <span>REFUNDED</span> :
                             <></>
                     }
-                    <span className="transaction-amount">{Math.floor(transaction.amount * 100 / 1e18) / 100} FTM</span>
+                    <span className="transaction-amount">{Math.floor(transaction.amount.amount * 100 / 1e18) / 100} FTM</span>
                 </div>
             </div>
         </article>

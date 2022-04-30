@@ -1,6 +1,5 @@
-import TransactionListController from "controllers/TransactionList";
 import React from "react";
-
+import TransactionListController from "./TransactionList/TransactionListController";
 
 const TransactionInPage = () => {
     return <>
