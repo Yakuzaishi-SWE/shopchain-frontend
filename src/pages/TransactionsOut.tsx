@@ -1,4 +1,4 @@
-import TransactionListController from "controllers/TransactionList";
+/* import TransactionListController from "controllers/TransactionList";
 import React from "react";
 import { OrderStateEnum } from "types/enums";
 
@@ -14,4 +14,4 @@ const TransactionsOutPage = () => {
 };
 
 
-export default TransactionsOutPage;
+export default TransactionsOutPage; */

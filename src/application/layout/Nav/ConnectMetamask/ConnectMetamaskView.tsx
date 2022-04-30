@@ -3,8 +3,8 @@ import React from "react";
 import IConnectMetamaskViewModel from "./IConnectMetamaskViewModel";
 
 
-export default observer(function OrderCountView( {onClick} : IConnectMetamaskViewModel) {
-    return <button className="btn-connect" onClick={onClick}>
+export default observer(function OrderCountView({ connect }: IConnectMetamaskViewModel) {
+    return <button className="btn-connect" onClick={connect}>
         Connect Metamask
     </button>;
 });

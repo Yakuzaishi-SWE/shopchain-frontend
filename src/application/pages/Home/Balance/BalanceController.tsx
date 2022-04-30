@@ -10,6 +10,8 @@ export default observer(function Balance() {
     const vm = useViewModel(BalanceViewModel, RootStore.getInstance());
 
     return <BalanceView
-        balance={vm.balance}
+        balanceWEI={vm.balanceWEI}
+        isBusy={vm.isBusy}
+        balanceFTM={vm.balanceFTM}
     />;
 })

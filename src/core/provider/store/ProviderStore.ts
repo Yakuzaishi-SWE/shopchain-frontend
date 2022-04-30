@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, makeObservable, observable } from "mobx";
+import { action, makeAutoObservable, makeObservable, observable, reaction } from "mobx";
 import Address from "../domain/Address";
 import Chain from "../domain/Chain";
 import W3Store from "../domain/W3Store";
@@ -19,19 +19,14 @@ export default class ProviderStore {
         this.address = new Address(this);
         this.chain = new Chain(this);
         this.w3 = new W3Store(this);
-        makeObservable(this, {
+        makeAutoObservable<this, "provider">(this, {
             provider: observable.ref,
-            address: observable,
-            chain: observable,
-            w3: observable,
-            connect: action,
-            getProvider: action,
-            getAccounts: action,
-            getChainId: action,
-            subscribeAddressChanged: action,
-            unsubscribeAddressChanged: action,
-            subscribeChainChanged: action,
-            unsubscribeChainChanged: action,
+        });
+        reaction(() => this.provider, (p) => {
+            if (p) {
+                this.getAccounts();
+                this.getChainId();
+            }
         });
     }
 

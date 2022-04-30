@@ -1,4 +1,4 @@
-import TransactionListController from "controllers/TransactionList";
+/* import TransactionListController from "controllers/TransactionList";
 import React from "react";
 
 
@@ -10,4 +10,4 @@ const TransactionInPage = () => {
 };
 
 
-export default TransactionInPage;
+export default TransactionInPage; */

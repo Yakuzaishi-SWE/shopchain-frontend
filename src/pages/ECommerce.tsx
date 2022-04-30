@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+/* import React, { useMemo, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { FTMIcon } from "resources/svg";
 import { InputView } from "views";
@@ -57,3 +57,4 @@ const ECommercePage = () => {
 };
 
 export default ECommercePage;
+ */

@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 //import { EmojiAddressController } from "controllers";
 import React from "react";
-import IAddressViewModel from "./IAddressViewModel";
 
 interface IAddressViewModel {
     address: string

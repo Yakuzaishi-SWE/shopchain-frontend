@@ -19,7 +19,7 @@ export default class OrderManagerContractRepo implements IContractRepo {
         makeObservable<this, "w3store" | "address">(this, {
             w3store: observable,
             address: observable,
-        })
+        });
     }
 
     init(): Contract {

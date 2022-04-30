@@ -4,14 +4,27 @@ import ECommerceController from "application/pages/Checkout/ECommerce/ECommerceC
 import TransactionInitController from "application/pages/Checkout/TransactionInit/TransactionInitController";
 import TransactionSuccess from "application/pages/Checkout/TransactionSuccess";
 import Home from "application/pages/Home";
-import TransactionDetails from "application/pages/TransactionDetails";
-import React from "react";
+import OrderDetails from "application/pages/OrderDetails";
+import { providerStore } from "core/provider/store/ProviderStore";
+import { runInAction } from "mobx";
+import React, { useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
-import { TransactionInPage, TransactionOutPage } from "./pages";
 import "./styles/main.scss";
 
 
 export default () => {
+
+    useEffect(() =>{
+        providerStore.getProvider();
+    }, []);
+
+    useEffect(() => {
+        if (providerStore.provider) {
+            providerStore.getAccounts();
+            providerStore.getChainId();
+        }
+    }, [providerStore.provider, providerStore.getAccounts, providerStore.getChainId]);
+
     return <HashRouter>
         <Routes>
             <Route path="/" element={<PageLayout />}>
@@ -22,11 +35,11 @@ export default () => {
                     <Route path="success" element={<TransactionSuccess />} />
                 </Route>
 
-                <Route path="transactions/out/" element={<TransactionOutPage />} />
-                <Route path="transactions/in/" element={<TransactionInPage />} />
+                {/* <Route path="transactions/out/" element={<TransactionOutPage />} />
+                <Route path="transactions/in/" element={<TransactionInPage />} /> */}
 
-                <Route path="moneybox/:id" element={ } />
-                <Route path="order/:id/" element={<TransactionDetails/>} />
+                {/* <Route path="moneybox/:id" element={ } /> */}
+                <Route path="order/:id/" element={<OrderDetails/>} />
             </Route>
         </Routes>
     </HashRouter>;
