@@ -1,16 +1,17 @@
 import Amount from "core/modules/order/domain/Amount";
 import ProviderStore from "core/provider/store/ProviderStore";
 import { makeAutoObservable } from "mobx";
+import { v4 } from "uuid";
 import IECommerceViewModel from "./IECommerceViewModel";
 
 
 export default class ECommerceViewModel  implements IECommerceViewModel  {
     private _amount: Amount = new Amount(0);
-    private _id: string = "";
-    private _redirectLink: string|null = null;
+    private _id = v4();
+    private _redirectLink = "";
 
     constructor(private readonly providerStore: ProviderStore)  {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {}, {autoBind: true});
     }
 
     get amount(): number {
@@ -25,16 +26,12 @@ export default class ECommerceViewModel  implements IECommerceViewModel  {
         return this._id;
     }
 
-    get redirectLink(): string|null {
+    get redirectLink(): string {
         return this._redirectLink;
     }
 
-    setId(newId: string) {
-        this._id = newId;
-    }
-
     setAmount(newAmount: number) {
-        this._amount.setAmount(newAmount);
+        this._amount.setAmountFTM(newAmount);
     }
 
     handleSubmit() {
