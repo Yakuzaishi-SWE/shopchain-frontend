@@ -1,7 +1,6 @@
-import TransactionListView from "application/pages/TransactionsIn/TransactionList/TransactionListView";
 import { observer } from "mobx-react";
 import React from "react";
-import { Navigate } from "react-router";
+import { Outlet } from "react-router";
 import ITransactionInitViewModel from "./ITransactionInitViewModel";
 
 export default observer(function TransactionInitView({
@@ -9,8 +8,6 @@ export default observer(function TransactionInitView({
     ftm,
     wei,
     sellerAddress,
-    createOrder,
-    createMoneyBox
 } : ITransactionInitViewModel) {
     return <>
         <section className="transaction-details">
@@ -35,9 +32,6 @@ export default observer(function TransactionInitView({
                 </li>
             </ul>
         </section>
-        <div className="box-button center">
-            <button onClick={createOrder} className="btn-payalone">Pay Alone</button>
-            <button onClick={createMoneyBox} className="btn-moneybox">Create Money Box</button>
-        </div>
+         
     </>;
-})
+});

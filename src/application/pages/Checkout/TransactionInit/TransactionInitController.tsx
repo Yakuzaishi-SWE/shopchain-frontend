@@ -2,7 +2,6 @@ import { useViewModel } from "application/utils/useViewModel";
 import Amount from "core/modules/order/domain/Amount";
 import ProviderStore, { providerStore } from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
-import { useLoadingOverlay, useSmartContract } from "hooks";
 import { transaction } from "mobx";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useMemo, useState } from "react";

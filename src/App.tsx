@@ -1,6 +1,8 @@
 import PageLayout from "application/layout/PageLayout";
 import CheckoutView from "application/pages/Checkout/CheckoutView";
 import ECommerceController from "application/pages/Checkout/ECommerce/ECommerceController";
+import Choice from "application/pages/Checkout/TransactionInit/Choice";
+import PickAmount from "application/pages/Checkout/TransactionInit/PickAmount";
 import TransactionInitController from "application/pages/Checkout/TransactionInit/TransactionInitController";
 import TransactionSuccess from "application/pages/Checkout/TransactionSuccess";
 import Home from "application/pages/Home";
@@ -31,7 +33,10 @@ export default () => {
                 <Route index element={<Home />} />
                 <Route path="checkout" element={<CheckoutView/>}>
                     <Route index element={<ECommerceController />} />
-                    <Route path=":id" element={<TransactionInitController />} />
+                    <Route path=":id" element={<TransactionInitController />} >
+                        <Route index element={<Choice/>} />
+                        <Route path="moneybox" element={<PickAmount/>} />
+                    </Route>
                     <Route path="success" element={<TransactionSuccess />} />
                 </Route>
 
