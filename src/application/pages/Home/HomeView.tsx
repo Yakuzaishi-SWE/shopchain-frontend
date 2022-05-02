@@ -7,7 +7,7 @@ const HomeView = () => {
     return <>
         <div className="home-card">
             <div className="button-box">
-                <Link to="/transaction/init/" className="home-button">Checkout Page</Link>
+                <Link to="/checkout" className="home-button">Checkout Page</Link>
             </div>
             <p>In shopchain until now</p>
             <div className="widget-box">

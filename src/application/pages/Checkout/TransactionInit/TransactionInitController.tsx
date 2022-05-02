@@ -20,12 +20,12 @@ export default observer(function TransactionInit() {
     const amount = useMemo(() => new URLSearchParams(search).get("amount"), [search]) || "0";
 
     useEffect (() => {
-        if(amount) vm.setAmount(amount)
-    },[amount])
+        if(amount) vm.setAmount(amount);
+    },[amount]);
 
     useEffect (() => {
-        if(id) vm.setId(id)
-    },[id])
+        if(id) vm.setId(id);
+    },[id]);
 
     return <TransactionInitView
         id = {vm.id}
