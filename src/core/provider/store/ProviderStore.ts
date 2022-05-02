@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, makeObservable, observable, reaction } from "mobx";
+import { makeAutoObservable, observable, reaction } from "mobx";
 import Address from "../domain/Address";
 import Chain from "../domain/Chain";
 import W3Store from "../domain/W3Store";
@@ -7,6 +7,15 @@ import IProviderRepo from "../repo/IProviderRepo";
 
 
 export default class ProviderStore {
+    private static instance: ProviderStore;
+
+    static getInstance(): ProviderStore {
+        if (!ProviderStore.instance) {
+            ProviderStore.instance = new ProviderStore();
+        }
+        return ProviderStore.instance;
+    }
+    
     repo: IProviderRepo;
     provider: MetaMaskInpageProvider | null = null;
 
@@ -14,7 +23,7 @@ export default class ProviderStore {
     chain: Chain;
     w3: W3Store;
 
-    constructor(repo?: IProviderRepo) {
+    private constructor(repo?: IProviderRepo) {
         this.repo = repo || new ProviderRepo(this);
         this.address = new Address(this);
         this.chain = new Chain(this);
@@ -69,7 +78,6 @@ export default class ProviderStore {
     unsubscribeChainChanged(callback: (chain: unknown) => void) {
         this.repo.unsubscribeChainChanged(callback);
     }
-
 }
 
-export const providerStore = new ProviderStore();
+export const providerStore = ProviderStore.getInstance();
