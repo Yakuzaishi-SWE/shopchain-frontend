@@ -16,7 +16,7 @@ import "./styles/main.scss";
 
 export default () => {
 
-    useEffect(() =>{
+    useEffect(() => {
         providerStore.getProvider();
     }, []);
 
@@ -31,11 +31,11 @@ export default () => {
         <Routes>
             <Route path="/" element={<PageLayout />}>
                 <Route index element={<Home />} />
-                <Route path="checkout" element={<CheckoutView/>}>
+                <Route path="checkout" element={<CheckoutView />}>
                     <Route index element={<ECommerceController />} />
                     <Route path=":id" element={<TransactionInitController />} >
-                        <Route index element={<Choice/>} />
-                        <Route path="moneybox" element={<PickAmount/>} />
+                        <Route index element={<Choice />} />
+                        <Route path="moneybox" element={<PickAmount />} />
                     </Route>
                     <Route path="success" element={<TransactionSuccess />} />
                 </Route>
@@ -43,8 +43,11 @@ export default () => {
                 {/* <Route path="transactions/out/" element={<TransactionOutPage />} />
                 <Route path="transactions/in/" element={<TransactionInPage />} /> */}
 
-                <Route path="moneybox/:id" element={<MoneyBoxDetails/>} />
-                <Route path="order/:id/" element={<OrderDetails/>} />
+                <Route path="moneybox/:id" element={<MoneyBoxDetails />} >
+                    <Route index />
+                    <Route index />
+                </Route>
+                <Route path="order/:id/" element={<OrderDetails />} />
             </Route>
         </Routes>
     </HashRouter>;

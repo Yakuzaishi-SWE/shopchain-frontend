@@ -5,13 +5,13 @@ import { v4 } from "uuid";
 import IECommerceViewModel from "./IECommerceViewModel";
 
 
-export default class ECommerceViewModel  implements IECommerceViewModel  {
+export default class ECommerceViewModel implements IECommerceViewModel {
     private _amount: Amount = new Amount(0);
     private _id = v4();
-    private _redirectLink = "";
+    public redirectLink: string | null = null;
 
-    constructor(private readonly providerStore: ProviderStore)  {
-        makeAutoObservable(this, {}, {autoBind: true});
+    constructor(private readonly providerStore: ProviderStore) {
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     get amount(): number {
@@ -26,10 +26,6 @@ export default class ECommerceViewModel  implements IECommerceViewModel  {
         return this._id;
     }
 
-    get redirectLink(): string {
-        return this._redirectLink;
-    }
-
     setAmount(newAmount: number) {
         this._amount.setAmountFTM(newAmount);
     }
@@ -37,7 +33,7 @@ export default class ECommerceViewModel  implements IECommerceViewModel  {
     handleSubmit() {
         const usp = new URLSearchParams();
         usp.set("amount", String(this.wei));
-        this._redirectLink = `${this._id}/?${usp}`;
+        this.redirectLink = `${this._id}/?${usp}`;
     }
 }
 

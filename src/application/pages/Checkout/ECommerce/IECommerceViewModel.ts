@@ -5,7 +5,6 @@ interface IECommerceViewModel {
     id: string;
     setAmount: (val: number) => void;
     handleSubmit: () => void;
-    redirectLink: string;
 }
 
 export default IECommerceViewModel;

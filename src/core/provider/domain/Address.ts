@@ -1,4 +1,4 @@
-import { autorun, makeAutoObservable, reaction } from "mobx";
+import { makeAutoObservable, reaction } from "mobx";
 import ProviderStore from "../store/ProviderStore";
 
 export default class Address {
@@ -10,7 +10,7 @@ export default class Address {
         makeAutoObservable(this, {}, { autoBind: true });
         reaction(() => this.store.provider, (p) => {
             this.store.subscribeAddressChanged(this.setAddress);
-        })
+        });
     }
 
     get isSet() {
