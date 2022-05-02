@@ -1,27 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { computedFn } from "mobx-utils";
 import ComputedTask from "./ComputedTask";
-import Task from "./Task";
-
-
-interface DataRequestFromID {
-    id: string,
-}
-
-interface DataRequestFromPage {
-    filter: Record<string, string | number | boolean | null | undefined> | undefined,
-    cursor?: string | null,
-}
-
-/* export function serializeDataRequestFromPage(dataRequest: DataRequestFromPage): string {
-    return JSON.stringify({
-        filter: dataRequest.filter ? Object.keys(dataRequest.filter).sort().reduce((acc, key, arr) => {
-            acc[key] = dataRequest.filter ? dataRequest.filter[key]: undefined;
-            return acc;
-        }, {}) : {},
-        cursor: dataRequest.cursor || null,
-    });
-} */
 
 /**
  * Thought for "cache first" or "NOT stale while revalidate" strategy
@@ -75,14 +54,14 @@ export default class TaskCache<R = void, A extends any[] = [], RESULT extends R 
 
     private idfn: (...deps: A) => string;
     private taskfn: (...deps: A) => Promise<R>;
-    private resultfn: (data: R | null) => RESULT;
+    private resultfn: (data: R | null, ...args: A) => RESULT;
 
     /**
      * when expireTime is set as 0, it means that cache is disabled and it only checks that one action per data request is runned
      * Example:  if I create a session for [guest_id] and call revalidate multiple time, only the first will exec the task and until it leaves the busy state none of the other calls to create the session for that guest_id will be considered 
      * @param expireTime in milliseconds
      */
-    constructor(expireTime: number = TaskCache.DEFAULT_EXPIRE_TIME, idfn: (...deps: A) => string, taskfn: (...deps: A) => Promise<R>, resultfn: (data: R | null) => RESULT) {
+    constructor(expireTime: number = TaskCache.DEFAULT_EXPIRE_TIME, idfn: (...deps: A) => string, taskfn: (...deps: A) => Promise<R>, resultfn: (data: R | null, ...args: A) => RESULT) {
         this.expireTime = expireTime;
         this.idfn = computedFn(idfn);
         this.taskfn = taskfn;

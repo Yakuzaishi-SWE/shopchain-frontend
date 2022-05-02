@@ -44,10 +44,10 @@ export default class Order {
         return new Order(
             store,
             id, {
-            ...props,
-            amount: amount,
-            state: state,
-        });
+                ...props,
+                amount: amount,
+                state: state,
+            });
     }
 
     unlock(code: number) {

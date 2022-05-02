@@ -1,86 +1,115 @@
+import Amount from "core/modules/order/domain/Amount";
+import MoneyBox from "core/modules/order/domain/MoneyBox";
 import Payment from "core/modules/order/domain/Payment";
+import { providerStore } from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
+import ComputedTask from "core/utils/ComputedTask";
 import { makeAutoObservable } from "mobx";
 import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
 export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewModel {
-    _id: string = "";  
+    _id = "";
 
     constructor(private readonly rootStore: RootStore) {
-        makeAutoObservable(this, {}, {autoBind: true,});
+        makeAutoObservable(this, {}, { autoBind: true, });
     }
 
     setOrderId(id: string) {
-      this._id = id;
+        this._id = id;
     }
 
-    private get order() {
-      return this.rootStore.moneyBoxStore.orders.getById(this.id);
-      //return RootStore.getInstance().orderStore.getOrderById(this.id);
+    private get moneyboxTask() {
+        if (!providerStore.provider) return null;
+        return this.rootStore.moneyBoxStore.getOrderById(this._id) as ComputedTask<MoneyBox | null, [id: string], MoneyBox | null>;
+    }
+
+    private get moneybox() {
+        return this.moneyboxTask?.result;
+    }
+
+    private get amountToFillTask() {
+        if (!this.moneybox) return null;
+        return this.moneybox.amountToFill;
+    }
+
+    private get partecipantsTask() {
+        if (!this.moneybox) return null;
+        return this.moneybox.payments;
+    }
+
+    private get amountFilledWei() {
+        if (!this.moneybox) return 0;
+        if (!this.amountToFillTask) return 0;
+        if (!this.amountToFillTask.result) return 0;
+        return this.moneybox.amount.wei - this.amountToFillTask.result.wei;
+    }
+
+    private get AmountFilled() {
+        return new Amount(this.amountFilledWei);
     }
 
     // -------------------------------- view --------------------------------------
     get id() {
-      return this.id;
+        return this.id;
     }
 
     get ownerAddress() {
-      return this.order?.ownerAddress || "";
+        return this.moneybox?.ownerAddress || "";
     }
 
     get sellerAddress() {
-      return this.order?.sellerAddress || "";
+        return this.moneybox?.sellerAddress || "";
     }
 
     get ftm() {
-      return this.order?.amount?.FTM || 0;
+        return this.moneybox?.amount?.FTM || 0;
     }
 
     get wei() {
-      return this.order?.amount?.wei || 0;
+        return this.moneybox?.amount?.wei || 0;
     }
 
-    async getFilledFtm() {
-      return await this.getFilledWei() / 10 ** 18;
+    get getFilledFtm()  {
+        return this.AmountFilled.FTM;
     }
 
-    async getFilledWei() {
-      return await this.order?.getAmountToFill() || 0;
+    get getFilledWei() {
+        return this.AmountFilled.wei;
     }
 
-    async getFtmToFill() {
-      let n = await this.getFilledFtm();
-      return this.ftm - n;
+    get getFtmToFill() {
+        return this.amountToFillTask?.result?.FTM || 0;
     }
 
-    async getWeiToFill() {
-      let n = await this.getFilledWei();
-      return this.wei - n;
+    get getWeiToFill() {
+        return this.amountToFillTask?.result?.wei || 0;
     }
 
     get state() {
-      return this.order?.state.toString() || "";
+        return this.moneybox?.state.toString() || "";
     }
 
     get isPaid() {
-      return this.order?.state.isPaid || false;
+        return this.moneybox?.state.isPaid || false;
     }
 
     unlock() {
-      if(this.order) {
-        this.order.unlock(this.order.unlockCode);
-      }
+        if (this.moneybox) {
+            this.moneybox.unlock(this.moneybox.unlockCode);
+        }
     }
 
     refund() {
-      if(this.order) {
-        this.order.refund();
-      }
+        if (this.moneybox) {
+            this.moneybox.refund();
+        }
     }
 
     get partecipants() {
-      return this.order?.payments || [];
-  }
+        if (!this.partecipantsTask) return [];
+        if (!this.partecipantsTask.result) return [];
+        return this.partecipantsTask.result;
+    }
 
-  
+
 }

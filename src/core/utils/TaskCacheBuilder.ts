@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { action } from "mobx";
 import ComputedTask from "./ComputedTask";
 import TaskCache from "./TaskCache";
 
@@ -7,7 +7,7 @@ export default class TaskCacheBuilder<R = any, A extends any[] = [], RESULT exte
     private idfn: (...args: A) => string = () => "";
     private whenfn: (...args: A) => boolean = () => true;
     private taskfn: (...args: A) => Promise<R> = () => { throw new Error("Method not implemented"); };
-    private resultfn: (data: R | null) => RESULT = () => { throw new Error("Method not implemented"); };
+    private resultfn: (data: R | null, ...args: A) => RESULT = () => { throw new Error("Method not implemented"); };
 
     private constructor() { 
         //makeAutoObservable(this, {}, { autoBind: true });
@@ -42,13 +42,13 @@ export default class TaskCacheBuilder<R = any, A extends any[] = [], RESULT exte
         return this;
     }
 
-    result(fn: (data: R | null) => RESULT): this {
+    result(fn: (data: R | null, ...args: A) => RESULT): this {
         this.resultfn = fn;
         return this;
     }
 
     get revaildate(): (...args: A) => ComputedTask<R, A, RESULT> {
         const cache = new TaskCache<R, A, RESULT>(this.expireTime, this.idfn, this.taskfn, this.resultfn);
-        return (...args) => cache.revalidate(...args)
+        return action((...args) => cache.revalidate(...args));
     }
 }

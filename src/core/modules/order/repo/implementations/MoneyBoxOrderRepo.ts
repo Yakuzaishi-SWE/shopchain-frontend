@@ -1,15 +1,27 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import MoneyBoxManagerContract from "core/provider/contracts/MoneyBoxManagerContract";
 import Address from "core/provider/domain/Address";
-import { makeObservable } from "mobx";
+import Amount from "../../domain/Amount";
+import MoneyBox from "../../domain/MoneyBox";
+import Payment from "../../domain/Payment";
+import OrderDTO from "../../dtos/OrderDTO";
 import PaymentDTO from "../../dtos/PaymentDTO";
+import MoneyBoxOrderStore from "../../store/MoneyBoxOrderStore";
 import IMoneyBoxOrderRepo from "../IMoneyBoxOrderRepo";
 import OrderRepo from "./OrderRepo";
 
 
 export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrderRepo {
-    public constructor(contract: MoneyBoxManagerContract, address: Address ) {
-        super(contract, address);
+    declare protected readonly store: MoneyBoxOrderStore;
+
+    public constructor(store: MoneyBoxOrderStore, contract: MoneyBoxManagerContract, address: Address ) {
+        super(store, contract, address);
+    }
+
+    async getOrderById(id: string): Promise<MoneyBox | undefined> {
+        if (!this.contract.instance) return undefined;
+        const order: OrderDTO = await this.contract.instance.methods.getOrderById(id).call();
+        return MoneyBox.create(this.store, id, order);
     }
 
     async newPayment(orderId: string, amount: number): Promise<void> {
@@ -19,17 +31,19 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
             .send({ from: this.address.address, value: amount });
     }
 
-    async getPayments(orderId: string): Promise<PaymentDTO[]> {
+    async getPayments(orderId: string): Promise<Payment[]> {
         if (!this.contract.instance) throw Error("Contract not loaded");
-        return await this.contract.instance.methods
+        const data: PaymentDTO[] = await this.contract.instance.methods
             .getMoneyBoxPayments(orderId)
             .call();
+        return data.map(el => Payment.create(el));
     }
 
-    async getAmountToFill(orderId: string): Promise<number> {
+    async getAmountToFill(orderId: string): Promise<Amount> {
         if (!this.contract.instance) throw Error("Contract not loaded");
-        return await this.contract.instance.methods
+        const amount = await this.contract.instance.methods
             .getAmountToFill(orderId)
             .call();
+        return Amount.create(amount);
     }
 }

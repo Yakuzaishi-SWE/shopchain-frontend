@@ -1,11 +1,14 @@
 import OrderManagerContract from "core/provider/contracts/OrderManagerContract";
 import Address from "core/provider/domain/Address";
 import { makeObservable, observable } from "mobx";
+import Order from "../../domain/Order";
+import OrderDTO from "../../dtos/OrderDTO";
+import OrderStore from "../../store/OrderStore";
 import IOrderRepo from "../IOrderRepo";
 
 
 export default class OrderRepo implements IOrderRepo {
-    public constructor(protected readonly contract: OrderManagerContract, protected readonly address: Address) { 
+    public constructor(protected readonly store: OrderStore, protected readonly contract: OrderManagerContract, protected readonly address: Address) {
         makeObservable<this, "contract">(this, {
             contract: observable,
         });
@@ -32,18 +35,19 @@ export default class OrderRepo implements IOrderRepo {
             .send({ from: this.address.address });
     }
 
-    async getOrderById(id: string): Promise<IOrder | undefined> {
+    async getOrderById(id: string): Promise<Order | undefined> {
         if (!this.contract.instance) return undefined;
-        return await this.contract.instance.methods.getOrderById(id).call();
+        const order: OrderDTO = await this.contract.instance.methods.getOrderById(id).call();
+        return Order.create(this.store, id, order);
     }
 
     async getOrdersBySeller(seller: string): Promise<IOrderTuple[]> {
-    if (!this.contract.instance) return [];
-    return await this.contract.instance.methods.getOrdersBySeller(seller).call();
+        if (!this.contract.instance) return [];
+        return await this.contract.instance.methods.getOrdersBySeller(seller).call();
     }
 
     async getOrdersByBuyer(buyer: string): Promise<IOrderTuple[]> {
         if (!this.contract.instance) return [];
         return await this.contract.instance.methods.getOrdersByBuyer(buyer).call();
-     }
+    }
 }

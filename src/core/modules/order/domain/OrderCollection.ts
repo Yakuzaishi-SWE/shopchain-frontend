@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 import Order from "./Order";
 
 
-export default class OrderCollection<T extends Order> {
+export default class OrderCollection<T extends Order = Order> {
     orders: Map<string, T> = new Map<string, T>();
 
     get orderarr() {
@@ -13,7 +13,7 @@ export default class OrderCollection<T extends Order> {
         makeAutoObservable(this);
     }
 
-    getById(orderid: string) {
+    getById(orderid: string): T | null {
         return this.orders.get(orderid) || null;
     }
 

@@ -44,6 +44,8 @@
             "error",
             "always"
         ],
-        "prefer-arrow-callback": "error"
+        "no-unused-expressions":"warn",
+        "no-duplicate-imports":"error",
+        "func-name-matching":"warn"
     }
 }

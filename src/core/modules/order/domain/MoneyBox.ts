@@ -1,9 +1,9 @@
-import TaskCacheBuilder from "core/utils/TaskCacheBuilder";
-import { action, makeObservable, override } from "mobx";
+import { computed, makeObservable, override } from "mobx";
+import OrderDTO from "../dtos/OrderDTO";
 import MoneyBoxOrderStore from "../store/MoneyBoxOrderStore";
 import Amount from "./Amount";
 import Order, { OrderProps } from "./Order";
-import Payment from "./Payment";
+import OrderState from "./OrderState";
 
 
 export default class MoneyBox extends Order {
@@ -12,24 +12,34 @@ export default class MoneyBox extends Order {
     constructor(store: MoneyBoxOrderStore, id: string, props: OrderProps) {
         super(store, id, props);
         makeObservable(this, {
-            getAmountToFill: action,
+            amountToFill: computed,
             type: override,
         });
     }
 
-    getAmountToFill = TaskCacheBuilder.build<Amount | null>()
-        .task(async () => {
-            const paymentOrUndefined = await this.store.getAmountToFill(this.id);
-            return paymentOrUndefined ? new Amount(paymentOrUndefined) : null;
-        })
-        .result((d) => d)
-        .revaildate;
+    get amountToFill() {
+        return this.store.getAmountToFill(this.id);
+    }
 
-    get payments(): Payment[] {
-        return this.store.payments.get(this.id);
+    get payments() {
+        return this.store.getPayments(this.id);
     }
 
     get type(): string {
         return "MONEYBOX";
+    }
+
+    static create(store: MoneyBoxOrderStore, id: string, props: OrderDTO) {
+        const amount = new Amount(props.amount);
+        const state = new OrderState(props.state);
+
+        return new MoneyBox(
+            store,
+            id,
+            {
+                ...props,
+                amount: amount,
+                state: state,
+            });
     }
 }

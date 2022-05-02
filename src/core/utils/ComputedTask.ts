@@ -1,20 +1,17 @@
-import { makeAutoObservable, makeObservable, observable, override } from "mobx";
-import { computedFn } from "mobx-utils";
+import { makeObservable, observable, override } from "mobx";
 import Task from "./Task";
 
-
-
-// @ts-expect-error
-export default class ComputedTask<R = void, args extends any[] = [], RESULT extends R = R> extends Task<R, args> {
+// @ts-expect-error: lancia errore a caso
+export default class ComputedTask<R = void, A extends any[] = [], RESULT extends R = R> extends Task<R, A> {
         
-    private readonly resultfn: (data: R | null) => RESULT;
+    private readonly resultfn: (data: R | null, ...args: A) => RESULT;
 
     get result(): RESULT {
-        return this.resultfn(this.taskResponse);
+        return this.resultfn(this.taskResponse, ...this.args);
     }
 
-    constructor(taskfn: (...deps: args) => Promise<R>, resultfn: (data: R | null) => RESULT, ...deps: args) {
-        super(taskfn, ...deps);
+    constructor(taskfn: (...deps: A) => Promise<R>, resultfn: (data: R | null, ...args: A) => RESULT, ...args: A) {
+        super(taskfn, ...args);
         this.resultfn = resultfn;
         makeObservable<this, "resultfn">(this, {
             result: override,
@@ -22,7 +19,7 @@ export default class ComputedTask<R = void, args extends any[] = [], RESULT exte
         });
     }
 
-    public static create<R = void, DEPS extends Task<any>[] = [], RESULT extends R = R>(taskfn: (...deps: DEPS) => Promise<R>, resultfn: (data: R | null) => RESULT, ...deps: DEPS): ComputedTask<R, DEPS, RESULT> {
+    public static create<R = void, A extends any[] = [], RESULT extends R = R>(taskfn: (...deps: A) => Promise<R>, resultfn: (data: R | null, ...args: A) => RESULT, ...deps: A): ComputedTask<R, A, RESULT> {
         return new ComputedTask(taskfn, resultfn, ...deps);
     }
 }
