@@ -18,7 +18,6 @@ export default class Address {
     }
 
     setAddress(...address: unknown[]) {
-        console.log(address);
         if (address.length > 0 && address[0] !== this.address && !!address[0] && typeof address[0] === "string")
             this.address = address[0];
     }

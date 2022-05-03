@@ -38,6 +38,6 @@
 		"**/*.test.ts",
 	],
 	"include": [
-		"src"
-, "legacy/pages", "legacy/hooks", "legacy/providers"	]
+		"src"	
+	],
 }

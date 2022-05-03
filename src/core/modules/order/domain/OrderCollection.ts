@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, reaction } from "mobx";
 import Order from "./Order";
 
 
@@ -10,7 +10,7 @@ export default class OrderCollection<T extends Order = Order> {
     }
 
     constructor() {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     getById(orderid: string): T | null {
@@ -18,11 +18,11 @@ export default class OrderCollection<T extends Order = Order> {
     }
 
     getBySeller(seller: string) {
-        return this.orderarr.filter(order => order.sellerAddress === seller);
+        return this.orderarr.filter(order => order.sellerAddress.toLowerCase() === seller.toLowerCase());
     }
 
-    getByOwner(owner: string) {
-        return this.orderarr.filter(order => order.ownerAddress === owner);
+    getByBuyer(buyer: string) {
+        return this.orderarr.filter(order => order.ownerAddress.toLowerCase() == buyer.toLowerCase());
     }
 
     add(order: T) {

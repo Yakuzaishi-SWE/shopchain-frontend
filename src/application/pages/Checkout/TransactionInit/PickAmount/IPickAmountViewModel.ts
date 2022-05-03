@@ -1,9 +1,9 @@
 
 
 interface IPickAmountViewModel {
-    amount: number;
+    initFTM: number;
     setInitFTM(value: number): void;
-    wei:  number
+    initWei:  number
     createMoneyBox(): void;
 }
 

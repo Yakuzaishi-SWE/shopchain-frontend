@@ -25,8 +25,28 @@ export default class OrderStore {
             createOrder: false,
             unlock: false,
             refund: false,
-        });
+        }, { autoBind: true });
     }
+
+    readonly getBySeller = TaskCacheBuilder.build<Order[], [id: string]>()
+        .task(async (id) => {
+            const orderData = await this.repo.getOrdersBySeller(id);
+            orderData.forEach(el => this.orders.add(el));
+            return orderData;
+        })
+        .result((_o, id) => this.orders.getBySeller(id))
+        .id((id) => id)
+        .revaildate;
+
+    readonly getByBuyer = TaskCacheBuilder.build<Order[], [id: string]>()
+        .task(async (id) => {
+            const orderData = await this.repo.getOrdersByBuyer(id);
+            orderData.forEach(el => this.orders.add(el));
+            return orderData;
+        })
+        .result((_o, id) => this.orders.getByBuyer(id))
+        .id((id) => id)
+        .revaildate;
 
     readonly getOrderById = TaskCacheBuilder.build<Order | null, [id: string]>()
         .task(async (id) => {
@@ -40,12 +60,12 @@ export default class OrderStore {
         .id((id) => id)
         .revaildate;
 
-    readonly createOrder = TaskCacheBuilder.build<void, [{ seller: string, amount: string, id: string }]>()
-        .task(async (data) => {
-            await this.repo.createOrder(data);
+    readonly createOrder = TaskCacheBuilder.build<void, [data: { seller: string, amount: string, id: string }, initAmount?: string]>()
+        .task(async (data, initAmount = data.amount) => {
+            await this.repo.createOrder(data, initAmount);
         })
         .expireIn(0)
-        .result(() => {return;})
+        .result(() => { return; })
         .revaildate;
 
     readonly unlock = TaskCacheBuilder.build<void, [string, number]>()
@@ -54,7 +74,7 @@ export default class OrderStore {
         })
         .id((id: string, code: number) => `${id}-${code}`)
         .expireIn(0)
-        .result(() => {return;})
+        .result(() => { return; })
         .revaildate;
 
     readonly refund = TaskCacheBuilder.build<void, [string]>()
@@ -63,6 +83,6 @@ export default class OrderStore {
         })
         .id((id: string) => id)
         .expireIn(0)
-        .result(() => {return;})
+        .result(() => { return; })
         .revaildate;
 }

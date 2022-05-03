@@ -24,6 +24,18 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         return MoneyBox.create(this.store, id, order);
     }
 
+    async getOrdersBySeller(seller: string): Promise<MoneyBox[]> {
+        if (!this.contract.instance) return [];
+        const ordertouples: IOrderTuple[] = await this.contract.instance.methods.getOrdersBySeller(seller).call();
+        return ordertouples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
+    }
+
+    async getOrdersByBuyer(buyer: string): Promise<MoneyBox[]> {
+        if (!this.contract.instance) return [];
+        const ordertouples: IOrderTuple[] =  await this.contract.instance.methods.getOrdersByBuyer(buyer).call();
+        return ordertouples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
+    }
+
     async newPayment(orderId: string, amount: number): Promise<void> {
         if (!this.contract.instance) throw Error("Contract not loaded");
         await this.contract.instance.methods

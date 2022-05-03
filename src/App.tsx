@@ -8,6 +8,7 @@ import TransactionSuccess from "application/pages/Checkout/TransactionSuccess";
 import Home from "application/pages/Home";
 import MoneyBoxDetails from "application/pages/MoneyBoxDetails";
 import OrderDetails from "application/pages/OrderDetails";
+import TransactionsOutPage from "application/pages/TransactionOut/TransactionsOutView";
 import { providerStore } from "core/provider/store/ProviderStore";
 import React, { useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
@@ -40,8 +41,8 @@ export default () => {
                     <Route path="success" element={<TransactionSuccess />} />
                 </Route>
 
-                {/* <Route path="transactions/out/" element={<TransactionOutPage />} />
-                <Route path="transactions/in/" element={<TransactionInPage />} /> */}
+                <Route path="transaction/out/" element={<TransactionsOutPage />} />
+                {/* <Route path="transactions/in/" element={<TransactionInPage />} /> */}
 
                 <Route path="moneybox/:id" element={<MoneyBoxDetails />} >
                     <Route index />

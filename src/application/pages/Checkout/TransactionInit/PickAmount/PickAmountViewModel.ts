@@ -24,7 +24,7 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
         this._id = newId;
     }
 
-    get amount(): number {
+    get initFTM(): number {
         return this._initAmount.FTM;
     }
 
@@ -32,7 +32,7 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
         this._initAmount.setAmountFTM(value);
     }
 
-    get wei(): number {
+    get initWei(): number {
         return this._initAmount.wei;
     }
 
@@ -41,6 +41,6 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
             seller: this._sellerAddress,
             amount: String(this._amount.wei),
             id: this._id
-        });
+        }, String(this._initAmount.wei));
     }
 }

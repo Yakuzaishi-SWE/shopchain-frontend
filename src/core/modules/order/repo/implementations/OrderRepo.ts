@@ -14,11 +14,11 @@ export default class OrderRepo implements IOrderRepo {
         });
     }
 
-    async createOrder(data: { seller: string, amount: string, id: string }): Promise<void> {
+    async createOrder(data: { seller: string, amount: string, id: string }, initAmount: string = data.amount): Promise<void> {
         if (!this.contract.instance) return;
         await this.contract.instance.methods
             .newOrder(data.seller, data.amount, data.id)
-            .send({ from: this.address.address, value: data.amount });
+            .send({ from: this.address.address, value: initAmount});
     }
 
     async unlock(id: string, code: number): Promise<void> {
@@ -41,13 +41,15 @@ export default class OrderRepo implements IOrderRepo {
         return Order.create(this.store, id, order);
     }
 
-    async getOrdersBySeller(seller: string): Promise<IOrderTuple[]> {
+    async getOrdersBySeller(seller: string): Promise<Order[]> {
         if (!this.contract.instance) return [];
-        return await this.contract.instance.methods.getOrdersBySeller(seller).call();
+        const ordertouples: IOrderTuple[] = await this.contract.instance.methods.getOrdersBySeller(seller).call();
+        return ordertouples.map(tuple => Order.create(this.store, tuple.id, tuple.order));
     }
 
-    async getOrdersByBuyer(buyer: string): Promise<IOrderTuple[]> {
+    async getOrdersByBuyer(buyer: string): Promise<Order[]> {
         if (!this.contract.instance) return [];
-        return await this.contract.instance.methods.getOrdersByBuyer(buyer).call();
+        const ordertouples: IOrderTuple[] =  await this.contract.instance.methods.getOrdersByBuyer(buyer).call();
+        return ordertouples.map(tuple => Order.create(this.store, tuple.id, tuple.order));
     }
 }

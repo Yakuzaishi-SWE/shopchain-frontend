@@ -23,8 +23,8 @@ export default observer(function PickAmount() {
     },[id]);
 
     return <PickAmountView 
-        amount={vm.amount}
-        wei={vm.wei}
+        initFTM={vm.initFTM}
+        initWei={vm.initWei}
         createMoneyBox={vm.createMoneyBox}
         setInitFTM={vm.setInitFTM}
     />;
