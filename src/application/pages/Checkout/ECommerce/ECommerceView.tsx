@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { FTMIcon } from "resources/svg";
 import IECommerceViewModel from "./IECommerceViewModel";
 
@@ -23,7 +22,7 @@ export default observer(function ECommerceView({
         <div className="form-wrapper">
             <label>Amount</label>
             <div className="ftm-input">
-                <input type="number" className="clickable-input" value={amount || undefined} onChange={el => setAmount(el.target.valueAsNumber)} placeholder="0.00" />
+                <input type="number" step="any" min="0.000000000000000001" className="clickable-input" value={amount || undefined} onChange={el => setAmount(el.target.valueAsNumber)} placeholder="0.00" />
                 <span className="ftm-icon">
                     <FTMIcon />
                     FTM
