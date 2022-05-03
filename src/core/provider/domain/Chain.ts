@@ -10,6 +10,7 @@ export default class Chain {
         this.store = store;
         makeAutoObservable(this, {}, { autoBind: true });
         reaction(() => this.store.provider, (p) => {
+            window.location.reload();
             this.store.subscribeChainChanged(this.setChainId);
         });
     }

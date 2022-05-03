@@ -23,14 +23,14 @@ export default class ProviderStore {
     address: Address;
     chain: Chain;
     w3: W3Store;
-    providerState: ProviderState;
+    state: ProviderState;
 
     private constructor(repo?: IProviderRepo) {
         this.repo = repo || new ProviderRepo(this);
         this.address = new Address(this);
         this.chain = new Chain(this);
         this.w3 = new W3Store(this);
-        this.providerState = new ProviderState(this);
+        this.state = new ProviderState(this);
 
         makeAutoObservable<this, "provider">(this, {
             provider: observable.ref,
@@ -65,10 +65,6 @@ export default class ProviderStore {
     async getChainId() {
         const chainId = await this.repo.getChainId();
         this.chain.setChainId(chainId);
-    }
-
-    getProviderState() {
-        return this.providerState.getState;    
     }
 
     subscribeAddressChanged(callback: (...address: unknown[]) => void) {

@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { CheckMark, Cross, Warning } from "resources/svg";
 import { MetamaskErrorSeverity } from "types/enums";
+import IMetamaskErrorViewModel from "./IMetamaskError";
 
-
-interface IMetamaskErrorViewModel {
-    severity: MetamaskErrorSeverity, 
-    name: MetamaskErrorName, 
-    description: string,
-}
 
 const MetamaskErrorView = ({ severity, name, description }: IMetamaskErrorViewModel) => {
     const classSeverity = severity === MetamaskErrorSeverity.BLOCKING ? " error" : (severity === MetamaskErrorSeverity.UNBLOCKING ? " warning" : " success");

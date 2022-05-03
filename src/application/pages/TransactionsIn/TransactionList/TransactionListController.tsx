@@ -11,5 +11,5 @@ export default observer(function TransactionListController() {
     
     return <TransactionListView
         transactions={vm.transactions}
-    />
+    />;
 });

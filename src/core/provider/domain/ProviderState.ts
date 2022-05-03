@@ -3,6 +3,7 @@ import { type } from "os";
 import { MetamaskErrorName, MetamaskErrorSeverity } from "types/enums";
 import ProviderStore from "../store/ProviderStore";
 
+
 const MissingMetamask: MetamaskError = {
     severity: MetamaskErrorSeverity.BLOCKING,
     name: MetamaskErrorName.METAMASK_NOT_INSTALLED,
@@ -42,31 +43,31 @@ const ContractError: MetamaskError = {
 export default class ProviderState {
     private readonly store: ProviderStore;
 
-    public state: MetamaskError = Nominal;
 
     constructor(store: ProviderStore) {
         this.store = store;
-        this.setState();
-        makeAutoObservable(this, {}, { autoBind: true});
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
-    get getState() {
-        return this.state;
+    private get value(): MetamaskError {
+        if (!this.store.provider) return MissingMetamask;
+        if (!this.store.w3) return W3_Error;
+        if (!this.store.w3.mm) return ContractError;
+        if (!this.store.w3.om) return ContractError;
+        if (!this.store.address) return NotConnected;
+        if (!this.store.chain.isFantomTestnet) return WrongChain;
+        else return Nominal;
     }
 
-    setState(){
-        /*
-        if(newState !== this.state && !!this.state)
-            this.state = newState;
-        */
-        //if (!ethereum) return MissingMetamask;
-        if (!this.store.w3) this.state = W3_Error;
-        else if (!this.store.address) this.state = ContractError;
-        //else if (!currentAccount) return NotConnected;
-        else if (!this.store.chain || this.store.chain.chainId !== "0xfa2") this.state = WrongChain;
-        else this.state = Nominal;
+    get severity() {
+        return this.value.severity;
     }
 
+    get description() {
+        return this.value.description;
+    }
 
-
+    get name() {
+        return this.value.name;
+    }
 }
