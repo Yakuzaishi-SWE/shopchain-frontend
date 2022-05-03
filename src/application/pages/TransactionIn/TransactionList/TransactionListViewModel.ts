@@ -1,16 +1,13 @@
-import MoneyBox from "core/modules/order/domain/MoneyBox";
-import ProviderStore from "core/provider/store/ProviderStore";
+import { makeAutoObservable } from "mobx";
 import RootStore from "core/shared/RootStore";
-import ComputedTask from "core/utils/ComputedTask";
-import { makeAutoObservable, reaction } from "mobx";
+import ProviderStore from "core/provider/store/ProviderStore";
 import ITransactionListViewModel from "./ITransactionListViewModel";
+import ComputedTask from "core/utils/ComputedTask";
+import MoneyBox from "core/modules/order/domain/MoneyBox";
 
 export default class TransactionListViewModel implements ITransactionListViewModel {
     constructor(private readonly rootStore: RootStore, private readonly providerStore: ProviderStore) {
-        makeAutoObservable(this, {}, { autoBind: true });
-        reaction(() => this.ordersResult, (o) => {
-            console.log(o);
-        });
+        makeAutoObservable(this);
     }
 
     private get address() {
@@ -19,7 +16,7 @@ export default class TransactionListViewModel implements ITransactionListViewMod
 
     private get ordersTask() {
         if (!this.address) return null;
-        return this.rootStore.orderStore.getByBuyer(this.address);
+        return this.rootStore.orderStore.getBySeller(this.address);
     }
 
     private get ordersResult() {
@@ -29,7 +26,7 @@ export default class TransactionListViewModel implements ITransactionListViewMod
 
     private get moneyboxOrdersTask() {
         if (!this.address) return null;
-        return this.rootStore.moneyBoxStore.getByBuyer(this.address) as ComputedTask<MoneyBox[], [address: string]>;
+        return this.rootStore.moneyBoxStore.getBySeller(this.address) as ComputedTask<MoneyBox[], [address: string]>;
     }
 
     private get moneyboxResult() {
