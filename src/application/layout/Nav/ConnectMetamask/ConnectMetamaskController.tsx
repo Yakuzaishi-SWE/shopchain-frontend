@@ -11,4 +11,4 @@ export default observer(function ConnectMetamask() {
     return <ConnectMetamaskView
         connect={vm.connect}
     />;
-})
+});

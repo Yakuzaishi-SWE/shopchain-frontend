@@ -9,8 +9,13 @@ import NavViewModel from "./NavViewModel";
 
 export default observer(function Nav() {
     const vm = useViewModel(NavViewModel, providerStore);
+
+    
     
     return <NavView
         address={vm.address}
+        severity = {vm.severity}
+        name = {vm.name}
+        description = {vm.description}
     />;
 });

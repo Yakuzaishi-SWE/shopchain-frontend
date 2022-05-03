@@ -1,6 +1,7 @@
 import { makeAutoObservable, observable, reaction } from "mobx";
 import Address from "../domain/Address";
 import Chain from "../domain/Chain";
+import ProviderState from "../domain/ProviderState";
 import W3Store from "../domain/W3Store";
 import ProviderRepo from "../repo/implementations/ProviderRepo";
 import IProviderRepo from "../repo/IProviderRepo";
@@ -22,12 +23,15 @@ export default class ProviderStore {
     address: Address;
     chain: Chain;
     w3: W3Store;
+    providerState: ProviderState;
 
     private constructor(repo?: IProviderRepo) {
         this.repo = repo || new ProviderRepo(this);
         this.address = new Address(this);
         this.chain = new Chain(this);
         this.w3 = new W3Store(this);
+        this.providerState = new ProviderState(this);
+
         makeAutoObservable<this, "provider">(this, {
             provider: observable.ref,
         });
@@ -61,6 +65,10 @@ export default class ProviderStore {
     async getChainId() {
         const chainId = await this.repo.getChainId();
         this.chain.setChainId(chainId);
+    }
+
+    getProviderState() {
+        return this.providerState.getState;    
     }
 
     subscribeAddressChanged(callback: (...address: unknown[]) => void) {

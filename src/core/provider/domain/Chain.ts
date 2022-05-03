@@ -11,7 +11,7 @@ export default class Chain {
         makeAutoObservable(this, {}, { autoBind: true });
         reaction(() => this.store.provider, (p) => {
             this.store.subscribeChainChanged(this.setChainId);
-        })
+        });
     }
 
     get isSet() {

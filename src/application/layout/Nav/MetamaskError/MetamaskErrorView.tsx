@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { CheckMark, Cross, Warning } from "resources/svg";
 import { MetamaskErrorSeverity } from "types/enums";
 
