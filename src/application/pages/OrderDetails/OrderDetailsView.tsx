@@ -7,7 +7,7 @@ export default observer(function OrderDetailsView({ id, ownerAddress, sellerAddr
 
     return <><section className="transaction-details">
         <div className="simple-link">
-        <Link to="/transaction/out/" >Go back to your transactions</Link>
+            <Link to="/transaction/out/" >Go back to your transactions</Link>
         </div>
         <ul>
             <li><div className="section-head">Transaction ID:</div>{id}</li>

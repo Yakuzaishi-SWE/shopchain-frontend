@@ -7,27 +7,26 @@ import OrderDetailsView from "./OrderDetailsView";
 import OrderDetailsViewModel from "./OrderDetailsViewModel";
 
 export default observer(function OrderDetails() {
-  const vm = useViewModel(OrderDetailsViewModel, RootStore.getInstance());
-  const { id } = useParams<{ id: string }>();
-  
-  useEffect(() => {
-      if(id) {
-        vm.setOrderId(id);
-      }
-  }, [id]);
+    const vm = useViewModel(OrderDetailsViewModel, RootStore.getInstance());
+    const { id } = useParams<{ id: string }>();
 
-  //if (!id) return <Navigate to="/transaction/out/" />;
+    useEffect(() => {
+        if (id) {
+            vm.setOrderId(id);
+        }
+    }, [id]);
 
-  return <OrderDetailsView 
-    id={vm.id}
-    ownerAddress={vm.ownerAddress}
-    sellerAddress={vm.sellerAddress}
-    ftm={vm.ftm}
-    wei={vm.wei}
-    state={vm.state}
-    isPaid={vm.isPaid}
-    unlock={vm.unlock}
-    refund={vm.refund}
-  />;
+    //if (!id) return <Navigate to="/transaction/out/" />;
 
-})
+    return <OrderDetailsView
+        id={vm.id}
+        ownerAddress={vm.ownerAddress}
+        sellerAddress={vm.sellerAddress}
+        ftm={vm.ftm}
+        wei={vm.wei}
+        state={vm.state}
+        isPaid={vm.isPaid}
+        unlock={vm.unlock}
+        refund={vm.refund}
+    />;
+});

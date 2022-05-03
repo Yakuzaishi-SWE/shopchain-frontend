@@ -6,8 +6,6 @@ import MetamaskErrorView from "./MetamaskErrorView";
 import MetamaskErrorViewModel from "./MetamaskErroViewModel";
 
 
-
-
 export default observer(function MetamaskError() {
     const vm = useViewModel(MetamaskErrorViewModel, ProviderStore.getInstance());
 

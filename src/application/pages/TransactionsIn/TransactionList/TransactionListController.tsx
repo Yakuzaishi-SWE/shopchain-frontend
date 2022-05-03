@@ -1,9 +1,9 @@
-import { observer } from "mobx-react-lite";
-import { useViewModel } from "application/utils/useViewModel"
-import TransactionListViewModel from "./TransactionListViewModel";
+// import TransactionListView from "application/pages/TransactionOut/TransactionList/TransactionListView";
+// import TransactionListViewModel from "application/pages/TransactionOut/TransactionList/TransactionListViewModel";
+import { useViewModel } from "application/utils/useViewModel";
+import { providerStore } from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
-import ProviderStore, { providerStore } from "core/provider/store/ProviderStore";
-import TransactionListView from "./TransactionListView";
+import { observer } from "mobx-react-lite";
 import React from "react";
 
 export default observer(function TransactionListController() {

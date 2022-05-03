@@ -17,7 +17,6 @@ import "./styles/main.scss";
 
 
 export default () => {
-
     useEffect(() => {
         providerStore.getProvider();
     }, []);

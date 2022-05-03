@@ -5,6 +5,6 @@ import TransactionListElController from "../TransactionListEl/TransactionListElC
 
 export default observer(function TransactionListView({ transactions }: ITransactionListViewModel) {
     return <ul className="transaction-list">
-        {transactions.map(el => <TransactionListElController order={el} />)}
+        {transactions.map(el => <TransactionListElController key={el.id} order={el} />)}
     </ul>;
 });

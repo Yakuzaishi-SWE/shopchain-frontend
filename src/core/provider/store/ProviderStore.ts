@@ -16,7 +16,7 @@ export default class ProviderStore {
         }
         return ProviderStore.instance;
     }
-    
+
     repo: IProviderRepo;
     provider: MetaMaskInpageProvider | null = null;
 
@@ -45,11 +45,13 @@ export default class ProviderStore {
 
     setProvider(provider: MetaMaskInpageProvider) {
         this.provider = provider;
+        this.subscribeAddressChanged(this.address.setAddress);
+        this.subscribeChainChanged(this.chain.setChainId);
     }
 
     async connect() {
         const addresses = await this.repo.connect();
-        this.address.setAddress(...addresses);
+        this.address.setAddress(addresses);
     }
 
     async getProvider() {
@@ -59,7 +61,7 @@ export default class ProviderStore {
 
     async getAccounts() {
         const accounts = await this.repo.getAccounts();
-        this.address.setAddress(...accounts);
+        this.address.setAddress(accounts);
     }
 
     async getChainId() {
@@ -67,20 +69,12 @@ export default class ProviderStore {
         this.chain.setChainId(chainId);
     }
 
-    subscribeAddressChanged(callback: (...address: unknown[]) => void) {
+    subscribeAddressChanged(callback: (address: unknown[]) => void) {
         this.repo.subscribeAddressChanged(callback);
-    }
-
-    unsubscribeAddressChanged(callback: (...address: unknown[]) => void) {
-        this.repo.unsubscribeAddressChanged(callback);
     }
 
     subscribeChainChanged(callback: (chain: unknown) => void) {
         this.repo.subscribeChainChanged(callback);
-    }
-
-    unsubscribeChainChanged(callback: (chain: unknown) => void) {
-        this.repo.unsubscribeChainChanged(callback);
     }
 }
 

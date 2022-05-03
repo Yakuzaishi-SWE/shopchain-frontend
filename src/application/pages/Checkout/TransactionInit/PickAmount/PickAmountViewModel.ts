@@ -29,6 +29,7 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
     }
 
     setInitFTM(value: number): void {
+        if (value > this._amount.FTM) return;
         this._initAmount.setAmountFTM(value);
     }
 

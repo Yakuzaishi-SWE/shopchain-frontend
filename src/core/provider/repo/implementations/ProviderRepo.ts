@@ -8,7 +8,7 @@ import IProviderRepo from "../IProviderRepo";
 
 export default class ProviderRepo implements IProviderRepo {
     constructor(private readonly providerStore: ProviderStore) { 
-        makeAutoObservable(this);
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     /** Connette e ritorna gli account connessi */
@@ -33,19 +33,19 @@ export default class ProviderRepo implements IProviderRepo {
         return await this.providerStore.provider.request({ method: "eth_chainId" }) as string;
     }
 
-    subscribeAddressChanged(callback: (...address: unknown[]) => void) {
+    subscribeAddressChanged(callback: (address: unknown[]) => void) {
         if (!this.providerStore.provider) throw new Error("Provider is not set");
-        this.providerStore.provider.addListener("accountsChanged", callback);
+        this.providerStore.provider.addListener("accountsChanged", callback as any);
     }
 
-    unsubscribeAddressChanged(callback: (...address: unknown[]) => void) {
+    unsubscribeAddressChanged(callback: (address: unknown[]) => void) {
         if (!this.providerStore.provider) throw new Error("Provider is not set");
         this.providerStore.provider.removeListener("accountsChanged", callback);
     }
 
-    subscribeChainChanged(callback: (chain: unknown) => void) {
+    subscribeChainChanged(_callback: (chain: unknown) => void) {
         if (!this.providerStore.provider) throw new Error("Provider is not set");
-        this.providerStore.provider.addListener("chainChanged", callback);
+        this.providerStore.provider.addListener("chainChanged", () => window.location.reload());
     }
 
     unsubscribeChainChanged(callback: (chain: unknown) => void) {

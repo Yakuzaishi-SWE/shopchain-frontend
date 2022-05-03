@@ -19,5 +19,5 @@ export default observer(function TransactionListElController({ order }: { order:
         transaction={vm.transaction}
         from={vm.from}
         onUnlock={vm.onUnlock}
-    />
-})
+    />;
+});

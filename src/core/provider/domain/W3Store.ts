@@ -32,7 +32,7 @@ export default class W3Store {
             if (this.providerStore.provider) {
                 this.setWeb3(new Web3(this.providerStore.provider as provider));
             }
-        })
+        });
     }
 
     // private getWeb3Cache: TaskCache<Web3 | null> = new TaskCache(0);

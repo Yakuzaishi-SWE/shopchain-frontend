@@ -2,15 +2,12 @@ import MoneyBox from "core/modules/order/domain/MoneyBox";
 import ProviderStore from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import ComputedTask from "core/utils/ComputedTask";
-import { makeAutoObservable, reaction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import ITransactionListViewModel from "./ITransactionListViewModel";
 
 export default class TransactionListViewModel implements ITransactionListViewModel {
     constructor(private readonly rootStore: RootStore, private readonly providerStore: ProviderStore) {
         makeAutoObservable(this, {}, { autoBind: true });
-        reaction(() => this.ordersResult, (o) => {
-            console.log(o);
-        });
     }
 
     private get address() {

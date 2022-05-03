@@ -11,6 +11,7 @@ export default class NavViewModel implements INavViewModel {
     }
 
     get address() {
-        return this.providerStore.address.address || "";
+        if (!this.providerStore.address.address) return "";
+        return this.providerStore.address.address;
     }
 }

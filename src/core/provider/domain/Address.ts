@@ -1,4 +1,4 @@
-import { makeAutoObservable, reaction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import ProviderStore from "../store/ProviderStore";
 
 export default class Address {
@@ -8,17 +8,16 @@ export default class Address {
     constructor(store: ProviderStore) {
         this.store = store;
         makeAutoObservable(this, {}, { autoBind: true });
-        reaction(() => this.store.provider, (p) => {
-            this.store.subscribeAddressChanged(this.setAddress);
-        });
     }
 
     get isSet() {
         return this.address !== null;
     }
 
-    setAddress(...address: unknown[]) {
-        if (address.length > 0 && address[0] !== this.address && !!address[0] && typeof address[0] === "string")
-            this.address = address[0];
+    setAddress(accounts: unknown[]) {
+        console.log(accounts);
+        if (accounts.length > 0 && accounts[0] !== this.address) {
+            this.address = ((accounts[0] as string));
+        } else this.address = null;
     }
 }

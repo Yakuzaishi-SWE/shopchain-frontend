@@ -1,10 +1,11 @@
+import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { CheckMark, Cross, Warning } from "resources/svg";
 import { MetamaskErrorSeverity } from "types/enums";
 import IMetamaskErrorViewModel from "./IMetamaskError";
 
 
-const MetamaskErrorView = ({ severity, name, description }: IMetamaskErrorViewModel) => {
+export default observer(function MetamaskErroView({ severity, name, description }: IMetamaskErrorViewModel) {
     const classSeverity = severity === MetamaskErrorSeverity.BLOCKING ? " error" : (severity === MetamaskErrorSeverity.UNBLOCKING ? " warning" : " success");
     const iconSeverity = severity === MetamaskErrorSeverity.BLOCKING ? <Cross/> : (severity === MetamaskErrorSeverity.UNBLOCKING ? <Warning/> : <CheckMark/>);
     const [hidden, setHidden] = useState<boolean>(false);
@@ -18,6 +19,4 @@ const MetamaskErrorView = ({ severity, name, description }: IMetamaskErrorViewMo
             <p>{description}</p>
         </div>
     </span>;
-};
-
-export default MetamaskErrorView;
+});

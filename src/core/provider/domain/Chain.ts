@@ -1,4 +1,4 @@
-import { autorun, makeAutoObservable, reaction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import ProviderStore from "../store/ProviderStore";
 
 
@@ -9,10 +9,6 @@ export default class Chain {
     constructor(store: ProviderStore) {
         this.store = store;
         makeAutoObservable(this, {}, { autoBind: true });
-        reaction(() => this.store.provider, (p) => {
-            window.location.reload();
-            this.store.subscribeChainChanged(this.setChainId);
-        });
     }
 
     get isSet() {
