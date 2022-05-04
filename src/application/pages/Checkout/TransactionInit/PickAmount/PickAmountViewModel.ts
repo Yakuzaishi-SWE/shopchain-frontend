@@ -1,6 +1,7 @@
 import Amount from "core/modules/order/domain/Amount";
 import RootStore from "core/shared/RootStore";
 import { makeAutoObservable } from "mobx";
+import { useLocation } from "react-router";
 import IPickAmountViewModel from "./IPickAmountViewModel";
 
 
@@ -35,6 +36,15 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
 
     get initWei(): number {
         return this._initAmount.wei;
+    }
+
+    back(): string {
+        const location = useLocation();
+        let path = location.pathname;
+        const search = location.search;
+        path = path.replace("/moneybox","");
+        path = path + search;
+        return path;
     }
 
     createMoneyBox(): void {

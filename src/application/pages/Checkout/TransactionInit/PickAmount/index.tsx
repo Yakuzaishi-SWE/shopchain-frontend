@@ -2,7 +2,7 @@ import { useViewModel } from "application/utils/useViewModel";
 import RootStore from "core/shared/RootStore";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useMemo } from "react";
-import { useParams, useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import PickAmountView from "./PickAmountView";
 import PickAmountViewModel from "./PickAmountViewModel";
 
@@ -27,5 +27,6 @@ export default observer(function PickAmount() {
         initWei={vm.initWei}
         createMoneyBox={vm.createMoneyBox}
         setInitFTM={vm.setInitFTM}
+        back={vm.back}
     />;
 });
