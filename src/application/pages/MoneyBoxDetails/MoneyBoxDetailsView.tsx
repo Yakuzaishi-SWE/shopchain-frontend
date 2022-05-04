@@ -32,7 +32,7 @@ export default observer(function MoneyBoxDetailsView({
 
         <div className="two-cols">
             <div className="img-box">
-                <p>Immagine</p>
+                <p className="piggy-img">piggyBank image</p>
             </div>
             <div className="details">
                 <ul>
