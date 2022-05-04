@@ -13,7 +13,7 @@ export default observer(function ChoiceView({
             <Link to={{
                 pathname: "moneybox",
                 search: location.search,
-            }} className="btn-moneybox">Create Money Box</Link>
+            }} className="btn-moneybox btn-shadow">Create Money Box</Link>
         </div>
     </>;
 });

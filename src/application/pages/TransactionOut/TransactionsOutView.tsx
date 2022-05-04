@@ -4,10 +4,10 @@ import TransactionListController from "./TransactionList/TransactionListControll
 
 export default observer(function TransactionOutView() {
     return <>
-        <h1>Your Locked Transactions</h1>
+        <h1 className="center">Your Locked Transactions</h1>
         <TransactionListController  />
 
-        <h1>Your Unlocked Transactions</h1>
+        <h1 className="center">Your Unlocked Transactions</h1>
         <TransactionListController  />
     </>;
 });

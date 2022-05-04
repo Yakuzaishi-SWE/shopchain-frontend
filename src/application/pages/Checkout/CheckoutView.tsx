@@ -8,7 +8,7 @@ import Decimal from "decimal.js";
 const CheckoutView = () => {
     
     return <div>
-        <h1>Pagina Checkout</h1>
+        <h1 className="center">Checkout Page</h1>
         <Outlet/>
     </div>;
 

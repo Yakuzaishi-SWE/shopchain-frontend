@@ -7,9 +7,10 @@ body{
 
 div#root{
      
-    & > h1 {
+    & div > h1 {
         text-align: center;
         color: white;
+        margin: 1em 0;
     }
 
     & > p {

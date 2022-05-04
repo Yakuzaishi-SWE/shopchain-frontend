@@ -4,7 +4,7 @@ import TransactionListController from "./TransactionList/TransactionListControll
 
 export default observer(function TransactionInView() {
     return <>
-        <h1>Inbound transactions</h1>
+        <h1 className="center">Inbound transactions</h1>
         <TransactionListController  />
     </>;
 });  

@@ -10,7 +10,7 @@ export default observer(function ECommerceView({
     setAmount,
     handleSubmit,
 } : IECommerceViewModel) {
-    return <form className="payment-form" onSubmit={(e) => {
+    return <form className="payment-form checkout-form" onSubmit={(e) => {
         e.preventDefault();
         handleSubmit();
         return false;
