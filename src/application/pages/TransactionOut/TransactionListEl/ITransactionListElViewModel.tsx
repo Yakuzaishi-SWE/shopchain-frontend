@@ -11,6 +11,7 @@ interface ITransactionListElViewModel {
     transaction: Order;
     from: "seller" | "buyer";
     onUnlock(): void;
+    orderType: string;
 }
 
 export default ITransactionListElViewModel;

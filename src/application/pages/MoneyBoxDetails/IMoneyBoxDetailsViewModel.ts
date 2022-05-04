@@ -14,6 +14,7 @@ interface ITransactionDetailsViewModel {
   isPaid: boolean,
   unlock(): void,
   refund(): void,
+  newPayment(): void,
   partecipants: Payment[],
 }
 export default ITransactionDetailsViewModel;

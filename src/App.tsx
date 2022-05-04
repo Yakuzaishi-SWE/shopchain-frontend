@@ -44,10 +44,7 @@ export default () => {
                 <Route path="transaction/out/" element={<TransactionOutView />} />
                 <Route path="transaction/in/" element={<TransactionInView />} />
 
-                <Route path="moneybox/:id" element={<MoneyBoxDetails />} >
-                    <Route index />
-                    <Route index />
-                </Route>
+                <Route path="moneybox/:id" element={<MoneyBoxDetails />} />
                 <Route path="order/:id/" element={<OrderDetails />} />
             </Route>
         </Routes>

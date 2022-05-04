@@ -32,6 +32,7 @@ export default observer(function MoneyBoxDetails() {
         isPaid={vm.isPaid}
         unlock={vm.unlock}
         refund={vm.refund}
+        newPayment={vm.newPayment}
         partecipants={vm.partecipants}
     />;
 

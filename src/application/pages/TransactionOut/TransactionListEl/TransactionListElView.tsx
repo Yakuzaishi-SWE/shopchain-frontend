@@ -15,7 +15,8 @@ const TransactionListElView = observer(({
     id,
     transaction,
     from,
-    onUnlock
+    onUnlock,
+    orderType
 }: ITransactionListElViewModel) => {
     /*const paid = useMemo(() => transaction.state === OrderStateEnum.FILLED || transaction.state === OrderStateEnum.CLOSED, [transaction, id]);
     const unlocked = useMemo(() => transaction.state === OrderStateEnum.CLOSED, [transaction, id]);
@@ -28,7 +29,7 @@ const TransactionListElView = observer(({
         <article className="transaction">
             <header>
                 <span className="transaction-id">
-                    <Link to={`/transaction/out/${id}/`} className="btn-linkto">{id}<Launch /></Link>
+                    <Link to={`/${orderType}/${id}/`} className="btn-linkto">{id}<Launch /></Link>
                 </span>
                 <div className="transaction-controls">
                     <button className={"icon-btn btn-paid" + (isPaid ? " success" : (isRefunded ? " error" : " warning"))} disabled={!canPay}>{isPaid ? <MoneyOn /> : <MoneyOff />}</button>

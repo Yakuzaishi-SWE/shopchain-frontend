@@ -43,6 +43,10 @@ export default class TransactionListElViewModel implements ITransactionListElVie
         return this.order;
     }
 
+    get orderType(): string {
+        return this.order.type.toLowerCase();
+    }
+
     get from(): "seller" | "buyer" {
         return "seller";
     }

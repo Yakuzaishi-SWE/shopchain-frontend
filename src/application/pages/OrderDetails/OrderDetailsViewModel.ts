@@ -23,7 +23,7 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
 
     // -------------------------------- view --------------------------------------
     get id() {
-        return this.id;
+        return this._id;
     }
 
     get ownerAddress() {

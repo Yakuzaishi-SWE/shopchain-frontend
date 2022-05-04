@@ -1,9 +1,11 @@
 import { computed, makeObservable, override } from "mobx";
 import OrderDTO from "../dtos/OrderDTO";
+import PaymentDTO from "../dtos/PaymentDTO";
 import MoneyBoxOrderStore from "../store/MoneyBoxOrderStore";
 import Amount from "./Amount";
 import Order, { OrderProps } from "./Order";
 import OrderState from "./OrderState";
+import Payment from "./Payment";
 
 
 export default class MoneyBox extends Order {
@@ -41,5 +43,14 @@ export default class MoneyBox extends Order {
                 amount: amount,
                 state: state,
             });
+    }
+    
+    newPayment(store: MoneyBoxOrderStore, id: string, props: PaymentDTO) {
+        const amount = new Amount(props.feeAmount);
+        /*
+        return new Payment(
+            props
+        );
+        */
     }
 }

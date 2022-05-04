@@ -50,7 +50,7 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
 
     // -------------------------------- view --------------------------------------
     get id() {
-        return this.id;
+        return this._id;
     }
 
     get ownerAddress() {
@@ -104,6 +104,13 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
             this.moneybox.refund();
         }
     }
+    /*
+    newPayment(): void {
+        if (this.moneybox) {
+            this.;
+        }        
+    }
+    */
 
     get partecipants() {
         if (!this.partecipantsTask) return [];
