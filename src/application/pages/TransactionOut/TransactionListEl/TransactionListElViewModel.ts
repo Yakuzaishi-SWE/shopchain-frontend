@@ -9,7 +9,7 @@ export default class TransactionListElViewModel implements ITransactionListElVie
     }
 
     get isPaid(): boolean {
-        return (this.order.state.isPaid && this.order.state.isClosed);
+        return this.order.state.isPaid;
     }
 
     get isUnlocked(): boolean {
@@ -18,21 +18,6 @@ export default class TransactionListElViewModel implements ITransactionListElVie
 
     get isRefunded(): boolean {
         return this.order.state.isCancelled;
-    }
-
-    canPay(): boolean {
-        if (this.from != "seller" && this.order.state.isPaid) return true;
-        return false;
-    }
-
-    canUnlock(): boolean {
-        if (this.from != "seller" && this.order.state.isClosed) return true;
-        return false;
-    }
-
-    canRefund(): boolean {
-        if (this.from != "seller" && this.order.state.isCancelled) return true;
-        return false;
     }
 
     get id(): string {
@@ -45,13 +30,5 @@ export default class TransactionListElViewModel implements ITransactionListElVie
 
     get orderType(): string {
         return this.order.type.toLowerCase();
-    }
-
-    get from(): "seller" | "buyer" {
-        return "seller";
-    }
-
-    onUnlock(): void {
-        return;
     }
 }

@@ -21,7 +21,7 @@ export default observer(function MoneyBoxDetailsView({
     feeAmountWei,
     setFeeAmount, 
     newPayment,
-    partecipants
+    partecipants,
 }: IMoneyBoxDetailsViewModel) {
 
     return <><section className="transaction-details">
@@ -73,10 +73,10 @@ export default observer(function MoneyBoxDetailsView({
             </thead>
             <tbody>
                 {partecipants && partecipants.map(partecipant =>
-                    <tr>
+                    <tr key={partecipant.from}>
                         <td>{partecipant.from}</td>
                         <td>{partecipant.amount.FTM}</td>
-                        <td>{partecipant.timestamp}</td>
+                        <td>{new Date(partecipant.timestamp*1000).toLocaleDateString()}</td>
                     </tr>
                 )}
             </tbody>
@@ -85,7 +85,7 @@ export default observer(function MoneyBoxDetailsView({
         <div className="box-button">
             <button id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
             <button id="refund" onClick={refund} disabled={!isPaid}>Refund</button>
-            <button id="copy-invite-link" onClick={() => {navigator.clipboard.writeText(location.href);}} disabled={isPaid}>Copy invite link</button>
+            <button id="copy-invite-link" onClick={() => {navigator.clipboard.writeText(window.location.href).then(function() {alert("succesfully copied");});}} disabled={isPaid}>Copy invite link</button>
         </div>
         
     </section>

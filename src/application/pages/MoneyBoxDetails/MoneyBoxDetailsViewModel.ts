@@ -133,5 +133,4 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.partecipantsTask.result;
     }
 
-
 }
