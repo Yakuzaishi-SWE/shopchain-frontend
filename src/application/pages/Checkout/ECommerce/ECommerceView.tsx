@@ -16,11 +16,11 @@ export default observer(function ECommerceView({
         return false;
     }}>
         <div className="form-wrapper">
-            <label>Id</label>
+            <label className="toTheLeft">Id</label>
             <input type="text" value={id} onChange={() => {return;}} placeholder="0000-000000-000000000000000" disabled />
         </div>
         <div className="form-wrapper">
-            <label>Amount</label>
+            <label className="toTheLeft">Amount</label>
             <div className="ftm-input">
                 <input type="number" step="any" min="0.000000000000000001" className="clickable-input" value={amount || undefined} onChange={el => setAmount(el.target.valueAsNumber)} placeholder="0.00" />
                 <span className="ftm-icon">

@@ -16,6 +16,11 @@
             text-align: center;
         }
 
+        & label.toTheLeft{
+            text-align: left;
+            
+        }
+
         & input[type=text],
         input[type=number] {
             width: 100%;
@@ -101,7 +106,6 @@
         font-weight: 200;
         display: block;
         text-transform: uppercase;
-
     }
 }
 
