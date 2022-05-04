@@ -36,7 +36,7 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         return ordertouples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
     }
 
-    async newPayment(orderId: string, amount: number): Promise<void> {
+    async newPayment(orderId: string, amount: string): Promise<void> {
         if (!this.contract.instance) throw Error("Contract not loaded");
         await this.contract.instance.methods
             .newPayment(orderId, amount)

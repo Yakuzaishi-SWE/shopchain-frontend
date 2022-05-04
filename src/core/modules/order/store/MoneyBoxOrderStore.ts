@@ -31,7 +31,7 @@ export default class MoneyBoxOrderStore extends OrderStore {
         });
     }
 
-    readonly newPayment = TaskCacheBuilder.build<void, [orderId: string, amount: number]>()
+    readonly newPayment = TaskCacheBuilder.build<void, [orderId: string, amount: string]>()
         .expireIn(0)
         .task(async (orderId, amount) => {
             await this.repo.newPayment(orderId, amount);

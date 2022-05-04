@@ -9,6 +9,7 @@ import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
 export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewModel {
     _id = "";
+    _feeAmount = new Amount(0);
 
     constructor(private readonly rootStore: RootStore) {
         makeAutoObservable(this, {}, { autoBind: true, });
@@ -93,6 +94,18 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.moneybox?.state.isPaid || false;
     }
 
+    get feeAmountFTM() {
+        return this._feeAmount.FTM;
+    }
+
+    get feeAmountWei() {
+        return this._feeAmount.wei;
+    }
+
+    setFeeAmount(newAmount: number): void {
+        this._feeAmount.setAmountFTM(newAmount);
+    }
+
     unlock() {
         if (this.moneybox) {
             this.moneybox.unlock(this.moneybox.unlockCode);
@@ -104,13 +117,15 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
             this.moneybox.refund();
         }
     }
-    /*
+    
     newPayment(): void {
         if (this.moneybox) {
-            this.;
+            this.rootStore.moneyBoxStore.newPayment(
+                this.id, 
+                String(this.feeAmountWei)
+            );
         }        
     }
-    */
 
     get partecipants() {
         if (!this.partecipantsTask) return [];

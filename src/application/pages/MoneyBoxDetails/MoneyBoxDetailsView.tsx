@@ -16,31 +16,40 @@ export default observer(function MoneyBoxDetailsView({
     state, 
     isPaid, 
     unlock, 
-    refund, 
+    refund,
+    feeAmountFTM,
+    feeAmountWei,
+    setFeeAmount, 
     newPayment,
     partecipants
 }: IMoneyBoxDetailsViewModel) {
 
     return <><section className="transaction-details">
-        <ul>
-            <li><div className="section-head">Transaction ID:</div>{id}</li>
-            <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
-            <li><div className="section-head">Total Amount:</div>{ftm} FTM ({wei} wei)</li>
-            <li><div className="section-head">Filled:</div>{getFilledFtm} FTM ({getFilledWei} wei)</li>
-            <li><div className="section-head">To be Filled:</div>{getFtmToFill} FTM ({getWeiToFill} wei)</li>
-            <li><div className="section-head">State:</div>{state}</li>
-        </ul>
+        
+        <div className="simple-link">
+            <Link to="/transaction/out/" >Go back to your transactions</Link>
+        </div>
 
-        <div className="box-button">
-            <button id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
-            <button id="refund" onClick={refund} disabled={!isPaid}>Refund</button>
-            <button id="copy-invite-link" onClick={refund} disabled={isPaid}>Copy invite link</button>
+        <div className="two-cols">
+            <div className="img-box">
+                <p>Immagine</p>
+            </div>
+            <div class="details">
+                <ul>
+                    <li><div className="section-head">Transaction ID:</div>{id}</li>
+                    <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
+                    <li><div className="section-head">Total Amount:</div>{ftm} FTM ({wei} wei)</li>
+                    <li><div className="section-head">Filled:</div>{getFilledFtm} FTM ({getFilledWei} wei)</li>
+                    <li><div className="section-head">To be Filled:</div>{getFtmToFill} FTM ({getWeiToFill} wei)</li>
+                    <li><div className="section-head">State:</div>{state}</li>
+                </ul>
+            </div>
         </div>
 
         <div className="box-contribute">
             <label>Amount</label>
             <div className="ftm-input">
-                <input type="number" step="any" min="0.000000000000000001" className="clickable-input" /*value={amount || undefined} onChange={el => setAmount(el.target.valueAsNumber)}*/ placeholder="0.00" />
+                <input type="number" step="any" min="0.000000000000000001" max={getFtmToFill} className="clickable-input" value={feeAmountFTM || undefined} onChange={el => setFeeAmount(el.target.valueAsNumber)} placeholder="0.00" />
                 <span className="ftm-icon">
                     <FTMIcon />
                     FTM
@@ -48,31 +57,35 @@ export default observer(function MoneyBoxDetailsView({
             </div>
             <div className="ftm-wei">
                 <span>
-                    ({wei}) wei
+                    ({feeAmountWei}) wei
                 </span>
             </div>
-            <button id="contribute" onClick={refund} disabled={isPaid}>Contribute</button>
+            <button id="contribute" onClick={newPayment} disabled={isPaid}>Contribute</button>
         </div>
 
-        <table>
+        <table id="table-payments">
             <thead>
                 <tr>
                     <th>Partecipant Address</th>
                     <th>Paid Amount</th>
+                    <th>Timestamp</th>
                 </tr>
             </thead>
             <tbody>
                 {partecipants && partecipants.map(partecipant =>
                     <tr>
                         <td>{partecipant.from}</td>
-                        <td>{partecipant.amount.amount}</td>
+                        <td>{partecipant.amount.FTM}</td>
+                        <td>{partecipant.timestamp}</td>
                     </tr>
                 )}
             </tbody>
         </table>
 
-        <div className="simple-link">
-            <Link to="/transaction/out/" >Go back to your transactions</Link>
+        <div className="box-button">
+            <button id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
+            <button id="refund" onClick={refund} disabled={!isPaid}>Refund</button>
+            <button id="copy-invite-link" onClick={() => {navigator.clipboard.writeText(location.href);}} disabled={isPaid}>Copy invite link</button>
         </div>
         
     </section>

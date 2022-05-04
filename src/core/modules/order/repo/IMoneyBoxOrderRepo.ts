@@ -5,7 +5,7 @@ import IOrderRepo from "./IOrderRepo";
 
 
 interface IMoneyBoxOrderRepo extends IOrderRepo {
-    newPayment(orderId: string, amount: number): Promise<void>;
+    newPayment(orderId: string, amount: string): Promise<void>;
     getPayments(orderId: string): Promise<Payment[]>;
     getAmountToFill(orderId: string): Promise<Amount>;
     getOrderById(id: string): Promise<MoneyBox | undefined>;

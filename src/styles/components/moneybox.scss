@@ -1,0 +1,9 @@
+div.two-cols {
+    & > div.img-box {
+        width: 40%;
+    }
+
+    & > div.details {
+        width: 60%;
+    }
+}
