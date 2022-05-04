@@ -43,10 +43,11 @@ export default class TransactionListElViewModel implements ITransactionListElVie
         return this.order;
     };
 
-    get from() {
-        return this.from;
+    get from(): "seller" | "buyer" {
+        return "seller";
     }
 
     onUnlock(): void {
+        return;
     }
 }
