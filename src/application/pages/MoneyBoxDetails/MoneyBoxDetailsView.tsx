@@ -34,7 +34,7 @@ export default observer(function MoneyBoxDetailsView({
             <div className="img-box">
                 <p>Immagine</p>
             </div>
-            <div class="details">
+            <div className="details">
                 <ul>
                     <li><div className="section-head">Transaction ID:</div>{id}</li>
                     <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
