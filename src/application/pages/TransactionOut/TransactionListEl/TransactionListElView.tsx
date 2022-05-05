@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Launch, Lock, MoneyOff, MoneyOn, Unlock } from "resources/svg";
+import { Launch, Lock, MoneyOff, MoneyOn, OrderIcon, Unlock } from "resources/svg";
 import ITransactionListElViewModel from "./ITransactionListElViewModel";
 
 const TransactionListElView = observer(({
@@ -23,7 +23,7 @@ const TransactionListElView = observer(({
                 <div className="transaction-controls">
                     <button className={"icon-btn btn-paid" + ((isPaid || isUnlocked) ? " success" : (isRefunded ? " error" : " warning"))} disabled={true}>{(isPaid || isUnlocked) ? <MoneyOn /> : <MoneyOff />}</button>
                     <button className={"icon-btn btn-unlock" + (isUnlocked ? " success" : " warning")} disabled={true}>{isUnlocked ? <Unlock /> : <Lock />}</button>
-                    <span className={"transaction-type " + orderType + "-type"}>Order type: {orderType === "order" ? "Single Payment" : "MoneyBox" }</span> {/* sostituire con svg */}
+                    <OrderIcon className={"transaction-type " + orderType + "-type"}/> {/* sostituire con svg corretto*/}
                 </div>
             </header>
             <div className="content">
