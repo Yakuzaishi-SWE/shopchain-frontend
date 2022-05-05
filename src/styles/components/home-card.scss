@@ -1,13 +1,14 @@
 .home-card {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    //align-items: center;
     justify-content: center;
-    margin: 12.5% auto;
+    //margin: 12.5% auto;
+    margin: auto;
     width: 50%;
 
     & > p {
-        margin: 5%;
+        margin-top: 5%;
         margin-bottom: 1%;
         font-weight: bold;
         font-size: 1.5em;
@@ -18,9 +19,9 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-        margin: 5%;
+        //margin: 5%;
         margin-top: 0;
-        width: 90%;
+        //width: 90%;
 
 
         
