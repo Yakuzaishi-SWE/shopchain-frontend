@@ -6,7 +6,8 @@ import MONEYBOX_MANAGER_ABI from "./MoneyBoxManagerContractABI.json";
 import OrderManagerContractRepo from "./OrderManagerContractRepo";
 
 
-const ORDER_MANAGER_ADDRESS = "0x4904D51AB0B8135510A6eD60D2Cc52Fb54B44986";
+//const ORDER_MANAGER_ADDRESS = "0x4904D51AB0B8135510A6eD60D2Cc52Fb54B44986";
+const ORDER_MANAGER_ADDRESS = "0x2ED62B4B5B1212044EFdC325A1ce1f061e7668C2";
 
 export default class MoneyBoxManagerContractRepo extends OrderManagerContractRepo implements IContractRepo {
     constructor(store: W3Store) {
