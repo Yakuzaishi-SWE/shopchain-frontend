@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Launch, Lock, MoneyOff, MoneyOn, OrderIcon, Unlock } from "resources/svg";
+import { BalanceIcon, Launch, Lock, MoneyOff, MoneyOn, OrderIcon, Unlock } from "resources/svg";
 import ITransactionListElViewModel from "./ITransactionListElViewModel";
 
 const TransactionListElView = observer(({
@@ -20,9 +20,12 @@ const TransactionListElView = observer(({
                     <Link to={`/${orderType}/${id}/`} className="btn-linkto">{id}<Launch /></Link>
                 </span>
                 <div className="transaction-controls">
+                    {orderType == "order" ?
+                        <OrderIcon className={"transaction-type " + orderType + "-type"} /> :
+                        <BalanceIcon className={"transaction-type " + orderType + "-type"} />
+                    }  
                     <button className={"icon-btn btn-paid" + ((isPaid || isUnlocked) ? " success" : (isRefunded ? " error" : " warning"))} disabled={true}>{(isPaid || isUnlocked) ? <MoneyOn /> : <MoneyOff />}</button>
                     <button className={"icon-btn btn-unlock" + (isUnlocked ? " success" : " warning")} disabled={true}>{isUnlocked ? <Unlock /> : <Lock />}</button>
-                    <OrderIcon className={"transaction-type " + orderType + "-type"} />  {/* sostituire con svg corretto */}
                 </div>
             </header>
             <div className="content">
@@ -37,7 +40,7 @@ const TransactionListElView = observer(({
                             :
                             <div className="amount-box">
                                 <span className="transaction-label">Amount</span>
-                                <br/>
+                                <br />
                                 <span className="transaction-amount">{transaction.amount.FTM} FTM</span>
                             </div>
                     }

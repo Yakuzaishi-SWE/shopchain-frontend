@@ -21,9 +21,9 @@ const TransactionListElView = observer(({
                 </span>
                 
                 <div className="transaction-controls">
+                    <OrderIcon className={"transaction-type " + orderType + "-type"}/> {/* sostituire con svg corretto*/}
                     <button className={"icon-btn btn-paid" + ((isPaid || isUnlocked) ? " success" : (isRefunded ? " error" : " warning"))} disabled={true}>{(isPaid || isUnlocked) ? <MoneyOn /> : <MoneyOff />}</button>
                     <button className={"icon-btn btn-unlock" + (isUnlocked ? " success" : " warning")} disabled={true}>{isUnlocked ? <Unlock /> : <Lock />}</button>
-                    <OrderIcon className={"transaction-type " + orderType + "-type"}/> {/* sostituire con svg corretto*/}
                 </div>
             </header>
             <div className="content">
