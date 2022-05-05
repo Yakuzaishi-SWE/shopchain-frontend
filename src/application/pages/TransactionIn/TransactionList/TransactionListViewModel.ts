@@ -1,13 +1,16 @@
-import { makeAutoObservable } from "mobx";
-import RootStore from "core/shared/RootStore";
-import ProviderStore from "core/provider/store/ProviderStore";
-import ITransactionListViewModel from "./ITransactionListViewModel";
-import ComputedTask from "core/utils/ComputedTask";
 import MoneyBox from "core/modules/order/domain/MoneyBox";
+import ProviderStore from "core/provider/store/ProviderStore";
+import RootStore from "core/shared/RootStore";
+import ComputedTask from "core/utils/ComputedTask";
+import { makeAutoObservable } from "mobx";
+import ITransactionListViewModel from "./ITransactionListViewModel";
 
 export default class TransactionListViewModel implements ITransactionListViewModel {
+    _stateFilter = "";
+    _typeFilter = "";
+
     constructor(private readonly rootStore: RootStore, private readonly providerStore: ProviderStore) {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     private get address() {
@@ -37,4 +40,28 @@ export default class TransactionListViewModel implements ITransactionListViewMod
     get transactions() {
         return [...this.ordersResult, ...this.moneyboxResult];
     }
+
+    get stateFilter() {
+        return this._stateFilter;
+    }
+
+    get typeFilter() {
+        return this._typeFilter;
+    }
+
+    setStateFilter(filter: string) {
+        this._stateFilter = filter;
+    }
+
+    setTypeFilter(filter: string) {
+        this._typeFilter = filter;
+    }
+
+    transactionsFilter(stateFilter: string, typeFilter: string) {
+        let t = this.transactions;
+        if(stateFilter != "") t = t.filter(order => order.state.toString() == stateFilter);
+        if(typeFilter != "") t = t.filter(order => order.type == typeFilter);
+        return t;
+    }
+
 }

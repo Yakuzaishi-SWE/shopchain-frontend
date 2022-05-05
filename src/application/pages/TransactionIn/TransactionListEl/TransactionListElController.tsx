@@ -12,12 +12,8 @@ export default observer(function TransactionListElController({ order }: { order:
         isPaid={vm.isPaid}
         isUnlocked={vm.isUnlocked}
         isRefunded={vm.isRefunded}
-        canPay={vm.canPay}
-        canUnlock={vm.canUnlock}
-        canRefund={vm.canRefund}
         id={order.id}
         transaction={vm.transaction}
-        from={vm.from}
-        onUnlock={vm.onUnlock}
-    />
-})
+        orderType={vm.orderType}
+    />;
+});
