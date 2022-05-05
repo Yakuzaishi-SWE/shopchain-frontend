@@ -1,6 +1,5 @@
 import Amount from "core/modules/order/domain/Amount";
 import MoneyBox from "core/modules/order/domain/MoneyBox";
-import Payment from "core/modules/order/domain/Payment";
 import { providerStore } from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import ComputedTask from "core/utils/ComputedTask";
@@ -94,6 +93,14 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.moneybox?.state.isPaid || false;
     }
 
+    get isUnlocked() {
+        return this.moneybox?.state.isClosed || false;
+    }
+
+    get isRefunded() {
+        return this.moneybox?.state.isCancelled || false;
+    }
+
     get feeAmountFTM() {
         return this._feeAmount.FTM;
     }
@@ -119,12 +126,16 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     }
     
     newPayment(): void {
-        if (this.moneybox) {
-            this.rootStore.moneyBoxStore.newPayment(
-                this.id, 
-                String(this.feeAmountWei)
-            );
-        }        
+        if(this._feeAmount.FTM <= this.getFtmToFill) {
+            if (this.moneybox) {
+                this.rootStore.moneyBoxStore.newPayment(
+                    this.id, 
+                    String(this.feeAmountWei)
+                );
+            }
+        } else {
+            alert("The chosen amount is greater than the amount needed to fill the moneybox (" + this.getFtmToFill + ")");
+        }
     }
 
     get partecipants() {

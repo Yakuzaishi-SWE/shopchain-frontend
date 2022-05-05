@@ -14,7 +14,9 @@ export default observer(function MoneyBoxDetailsView({
     getFtmToFill, 
     getWeiToFill, 
     state, 
-    isPaid, 
+    isPaid,
+    isUnlocked,
+    isRefunded, 
     unlock, 
     refund,
     feeAmountFTM,
@@ -46,7 +48,7 @@ export default observer(function MoneyBoxDetailsView({
             </div>
         </div>
 
-        <div className="box-contribute">
+        <div className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"}>
             <label>Amount</label>
             <div className="ftm-input">
                 <input type="number" step="any" min="0.000000000000000001" max={getFtmToFill} className="clickable-input" value={feeAmountFTM || undefined} onChange={el => setFeeAmount(el.target.valueAsNumber)} placeholder="0.00" />
@@ -83,9 +85,9 @@ export default observer(function MoneyBoxDetailsView({
         </table>
 
         <div className="box-button">
-            <button id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
-            <button id="refund" onClick={refund}>Refund</button>
-            <button id="copy-invite-link" onClick={() => {navigator.clipboard.writeText(window.location.href).then(function() {alert("succesfully copied");});}} disabled={isPaid}>Copy invite link</button>
+            <button className={isPaid ? "" : "hide"} id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
+            <button className={(isUnlocked || isRefunded) ? "hide" : ""} id="refund" onClick={refund} disabled={isUnlocked}>Refund</button>
+            <button className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"} id="copy-invite-link" onClick={() => {navigator.clipboard.writeText("Help me fill my MoneyBox, I'm poor...\n\n" + window.location.href).then(function() {alert("Invite Link Successfully Copied!");});}} disabled={isPaid}>Copy invite link</button>
         </div>
         
     </section>

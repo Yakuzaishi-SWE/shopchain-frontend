@@ -58,4 +58,5 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
             .call();
         return Amount.create(amount);
     }
+
 }

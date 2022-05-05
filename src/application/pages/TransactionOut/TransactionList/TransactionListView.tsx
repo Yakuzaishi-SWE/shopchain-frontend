@@ -8,7 +8,7 @@ export default observer(function TransactionListView({ transactionsFilter, state
         <div className="center filter">
             <div>
                 <label>Order Type</label>
-                <select id="type-dropdown" onChange={(e) => setTypeFilter(e.target.value)}>
+                <select defaultValue={""} id="type-dropdown" onChange={(e) => setTypeFilter(e.target.value)}>
                     <option value="" selected>All</option>
                     <option value="ORDER">Single Payment</option>
                     <option value="MONEYBOX">MoneyBox</option>
@@ -17,7 +17,7 @@ export default observer(function TransactionListView({ transactionsFilter, state
 
             <div>
                 <label>Order State</label>
-                <select id="state-dropdown" onChange={(e) => setStateFilter(e.target.value)}>
+                <select defaultValue={""} id="type-dropdown" onChange={(e) => setStateFilter(e.target.value)}>
                     <option value="" selected>All</option>
                     <option value="Paid">Paid but Locked</option>
                     <option value="Unlocked">Unlocked</option>
@@ -25,7 +25,7 @@ export default observer(function TransactionListView({ transactionsFilter, state
                 </select>
             </div>
         </div>
-
+        
         <ul className="transaction-list">
             {transactionsFilter(stateFilter, typeFilter).map(el => <TransactionListElController key={el.id} order={el} />)}
         </ul>

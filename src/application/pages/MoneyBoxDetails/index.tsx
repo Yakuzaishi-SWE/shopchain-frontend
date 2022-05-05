@@ -30,6 +30,8 @@ export default observer(function MoneyBoxDetails() {
         getWeiToFill={vm.getWeiToFill}
         state={vm.state}
         isPaid={vm.isPaid}
+        isUnlocked={vm.isUnlocked}
+        isRefunded={vm.isRefunded}
         unlock={vm.unlock}
         refund={vm.refund}
         feeAmountFTM={vm.feeAmountFTM}

@@ -12,6 +12,8 @@ interface ITransactionDetailsViewModel {
   getWeiToFill: number,
   state: string,
   isPaid: boolean,
+  isUnlocked: boolean,
+  isRefunded: boolean,
   unlock(): void,
   refund(): void,
   feeAmountFTM: number,
