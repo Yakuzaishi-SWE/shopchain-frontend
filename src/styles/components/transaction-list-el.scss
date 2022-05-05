@@ -7,35 +7,43 @@ article.transaction {
     width: auto;
     max-width: 600px;
 
-    & > header {
+    &>header {
         display: flex;
         justify-content: flex-end;
-        & > span.transaction-id {
+
+        &>span.transaction-id {
             flex-grow: 1;
             font-size: 1.2em;
             font-weight: bold;
-            & > .btn-linkto {
+
+            &>.btn-linkto {
                 display: flex;
                 align-items: center;
                 color: white;
                 fill: white;
-                & > svg {
+
+                &>svg {
                     margin: 0 4px;
                 }
             }
         }
 
-        & > div.transaction-controls {
+        &>div.transaction-controls {
             display: flex;
             align-items: center;
             flex-direction: row;
-            & > * {
+
+            &>* {
                 margin-left: 12px;
             }
+
+            // &>.moneybox-type {}
+
+            // &>.order-type {}
         }
     }
 
-    & > div {
+    &>div {
         display: flex;
         -webkit-box-align: center;
         align-items: center;
@@ -43,26 +51,26 @@ article.transaction {
         justify-content: space-between;
         width: 100%;
 
-        & > div > button {
+        &>div>button {
             margin: 0.1em;
             cursor: pointer;
         }
 
-        & > span.transaction-id {
+        &>span.transaction-id {
             color: rgb(226, 226, 226);
         }
 
-        & > div.info-box {
+        &>div.info-box {
             display: flex;
             flex-direction: column;
 
-            & > span.transaction-label {
+            &>span.transaction-label {
                 font-size: 1.2em;
                 color: white;
                 margin: 0.4em 0;
             }
 
-            & > span.transaction-amount {
+            &>span.transaction-amount {
                 color: white;
                 font-weight: bold;
             }

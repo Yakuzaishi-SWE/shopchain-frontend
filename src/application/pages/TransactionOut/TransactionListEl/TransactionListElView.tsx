@@ -19,14 +19,15 @@ const TransactionListElView = observer(({
                 <span className="transaction-id">
                     <Link to={`/${orderType}/${id}/`} className="btn-linkto">{id}<Launch /></Link>
                 </span>
+                
                 <div className="transaction-controls">
                     <button className={"icon-btn btn-paid" + ((isPaid || isUnlocked) ? " success" : (isRefunded ? " error" : " warning"))} disabled={true}>{(isPaid || isUnlocked) ? <MoneyOn /> : <MoneyOff />}</button>
                     <button className={"icon-btn btn-unlock" + (isUnlocked ? " success" : " warning")} disabled={true}>{isUnlocked ? <Unlock /> : <Lock />}</button>
+                    <span className={"transaction-type " + orderType + "-type"}>Order type: {orderType === "order" ? "Single Payment" : "MoneyBox" }</span> {/* sostituire con svg */}
                 </div>
             </header>
             <div className="content">
                 <div className="info-box">
-                    <span className="transaction-type">Order type: {orderType === "order" ? "Single Payment" : "MoneyBox" }</span>
                     {/* <span className="transaction-label">Buyer</span> */}
                     <span className="addr">{transaction.ownerAddress}</span>
                 </div>
