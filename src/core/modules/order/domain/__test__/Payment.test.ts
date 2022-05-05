@@ -10,8 +10,8 @@ type PaymentProps = {       //per non scrivere ogni volta in ogni test
 
 const dto : PaymentDTO ={
     from : "0x0",
-    feeAmount : 10,
-    datetime : 10,
+    amount : 10,
+    timestamp : 10,
 
 }
 

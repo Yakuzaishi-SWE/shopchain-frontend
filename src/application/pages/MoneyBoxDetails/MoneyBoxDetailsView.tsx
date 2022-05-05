@@ -84,7 +84,7 @@ export default observer(function MoneyBoxDetailsView({
 
         <div className="box-button">
             <button id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
-            <button id="refund" onClick={refund} disabled={!isPaid}>Refund</button>
+            <button id="refund" onClick={refund}>Refund</button>
             <button id="copy-invite-link" onClick={() => {navigator.clipboard.writeText(window.location.href).then(function() {alert("succesfully copied");});}} disabled={isPaid}>Copy invite link</button>
         </div>
         

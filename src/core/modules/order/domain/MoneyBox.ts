@@ -46,8 +46,8 @@ export default class MoneyBox extends Order {
     }
     
     newPayment(store: MoneyBoxOrderStore, id: string, props: PaymentDTO) {
-        const amount = new Amount(props.feeAmount);
-        const timestamp = props.datetime;
+        const amount = new Amount(props.amount);
+        const timestamp = props.timestamp;
         
         return new Payment(
             {

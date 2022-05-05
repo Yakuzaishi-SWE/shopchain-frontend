@@ -7,7 +7,7 @@ export default observer(function OrderDetailsView({ id, ownerAddress, sellerAddr
 
     return <><section className="transaction-details">
         <div className="simple-link">
-            <Link to="/transaction/out/" >Go back to your transactions</Link>
+            <Link to="/transaction/out/">Go back to your transactions</Link>
         </div>
         <ul>
             <li><div className="section-head">Transaction ID:</div>{id}</li>
@@ -17,7 +17,7 @@ export default observer(function OrderDetailsView({ id, ownerAddress, sellerAddr
             <li><div className="section-head">State:</div>{state}</li>
         </ul>
 
-        <div className="box-button">
+        <div className={"box-button " + ((state.toString() === "Unlocked" || state.toString() === "Refunded")? "hide" : "")}>
             <button id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
             <button id="refund" onClick={refund} disabled={!isPaid}>Refund</button>
         </div>

@@ -30,9 +30,9 @@ export default class Payment {
 
     static create(props: PaymentDTO) {
         return new Payment({
-            timestamp: props.datetime,
+            timestamp: props.timestamp,
             from: props.from,
-            amount: Amount.create(props.feeAmount),
+            amount: Amount.create(props.amount),
         });
     }
 }
