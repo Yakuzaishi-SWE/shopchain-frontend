@@ -1,16 +1,6 @@
 div.two-cols {
     &>div.img-box {
         width: 40%;
-
-        &>.piggy-img {
-            font-size: 10em;
-            background-image: url("./images/piggybank.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: left;
-            margin: 10%;
-            text-indent: -999999em;
-        }
     }
 
     &>div.details {

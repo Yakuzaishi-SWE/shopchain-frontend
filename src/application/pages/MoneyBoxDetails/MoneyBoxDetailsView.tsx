@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Link } from "react-router-dom";
-import { FTMIcon } from "resources/svg";
+import { FTMIcon, PiggyBank } from "resources/svg";
 import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
 export default observer(function MoneyBoxDetailsView({ 
@@ -34,8 +34,8 @@ export default observer(function MoneyBoxDetailsView({
         </div>
 
         <div className="two-cols">
-            <div className="img-box">
-                <p className="piggy-img">piggyBank image</p> {/* sostituire con svg*/}
+        <div className="img-box">
+                <PiggyBank className="bigPiggy"/>
             </div>
             <div className="details">
                 <ul>
