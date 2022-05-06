@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import OrderCountController from "./OrderCount/OrderCountController";
 import BalanceController from "./Balance/BalanceController";
 import { OrderIcon } from "resources/svg";
+import MoneyBoxCountController from "./MoneyBoxCount/MoneyBoxCountController";
+import MoneyBoxBalanceController from "./MoneyBoxBalance/MoneyBoxBalanceController";
 
 const HomeView = () => {
     return <div className="page-container">
@@ -28,13 +30,13 @@ const HomeView = () => {
             <p>Total Registered Orders in our contracts</p>
             <div className="widget-box">
                 <OrderCountController />
-                <OrderCountController />
+                <MoneyBoxCountController />
             </div>
 
             <p>Total FTM</p>
             <div className="widget-box">
                 <BalanceController />
-                <BalanceController />
+                <MoneyBoxBalanceController />
             </div>
             
         </div>
