@@ -304,6 +304,54 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "customerAddress",
+				"type": "address"
+			}
+		],
+		"name": "getAllPaymentsByCustomerAddress",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "moneyboxId",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address payable",
+								"name": "from",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct MoneyBoxManager.Payment",
+						"name": "payment",
+						"type": "tuple"
+					}
+				],
+				"internalType": "struct MoneyBoxManager.PaymentTuple[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "contract OrderManager",
 				"name": "superContract",
 				"type": "address"

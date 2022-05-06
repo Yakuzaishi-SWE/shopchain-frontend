@@ -21,5 +21,6 @@ interface ITransactionDetailsViewModel {
   setFeeAmount(newAmount: number): void, 
   newPayment(): void,
   partecipants: Payment[],
+  dateNtime(partecipant: Payment): string,
 }
 export default ITransactionDetailsViewModel;

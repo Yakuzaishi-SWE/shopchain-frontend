@@ -10,5 +10,4 @@ export default observer(function TransactionSuccess(){
             <h2>Remember to release the money when you have received your package</h2>
             <Link to="/transaction/out/">See  here</Link>
         </p>
-    </>;
-});
+    </>;});

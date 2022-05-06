@@ -1,5 +1,6 @@
 import Amount from "core/modules/order/domain/Amount";
 import MoneyBox from "core/modules/order/domain/MoneyBox";
+import Payment from "core/modules/order/domain/Payment";
 import { providerStore } from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import ComputedTask from "core/utils/ComputedTask";
@@ -142,6 +143,11 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         if (!this.partecipantsTask) return [];
         if (!this.partecipantsTask.result) return [];
         return this.partecipantsTask.result;
+    }
+
+    dateNtime(partecipant: Payment): string {
+        const date = new Date(partecipant.timestamp*1000);
+        return date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 
 }

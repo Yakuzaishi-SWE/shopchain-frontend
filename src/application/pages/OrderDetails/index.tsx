@@ -16,6 +16,7 @@ export default observer(function OrderDetails() {
         }
     }, [id]);
 
+
     //if (!id) return <Navigate to="/transaction/out/" />;
 
     return <OrderDetailsView

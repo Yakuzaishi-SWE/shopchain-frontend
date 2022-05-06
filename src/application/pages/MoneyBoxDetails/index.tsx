@@ -39,6 +39,7 @@ export default observer(function MoneyBoxDetails() {
         setFeeAmount={vm.setFeeAmount}
         newPayment={vm.newPayment}
         partecipants={vm.partecipants}
+        dateNtime={vm.dateNtime}
     />;
 
 });

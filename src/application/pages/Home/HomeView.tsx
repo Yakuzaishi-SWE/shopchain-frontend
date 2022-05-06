@@ -40,13 +40,13 @@ const HomeView = () => {
                     <h3>
                         <span className="count">Pay with friends</span>
                     </h3>
-                    <p>Create a moneybox and split an order payment</p> 
+                    <p>Create a MoneyBox and split an order payment</p> 
                 </div>
                 <div className="widget service">
                     <h3>
                         <span className="count">Refund Garanteed</span>
                     </h3>
-                    <p>You don't receive your order? Ask for a refund.</p> 
+                    <p>You didn't receive your order? Ask for a refund</p> 
                 </div>
             </div>
 

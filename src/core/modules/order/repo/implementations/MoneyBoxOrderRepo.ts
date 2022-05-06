@@ -59,4 +59,12 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         return Amount.create(amount);
     }
 
+    // async getPaymentsByBuyer(buyer: string): Promise<Payment[]> {
+    //     if (!this.contract.instance) throw Error("Contract not loaded");
+    //     const data: PaymentDTO[] = await this.contract.instance.methods
+    //         .getPaymentsByBuyer(buyer)
+    //         .call();
+    //     return data.map(el => Payment.create(el));
+    // }
+
 }

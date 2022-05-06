@@ -5,4 +5,4 @@ import CheckoutView from "./CheckoutView";
 
 export default observer(function Home() {
     return <CheckoutView/>;
-})
+});

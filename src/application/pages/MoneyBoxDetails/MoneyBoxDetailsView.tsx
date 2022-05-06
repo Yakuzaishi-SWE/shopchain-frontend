@@ -24,6 +24,7 @@ export default observer(function MoneyBoxDetailsView({
     setFeeAmount, 
     newPayment,
     partecipants,
+    dateNtime,
 }: IMoneyBoxDetailsViewModel) {
 
     return <><section className="transaction-details">
@@ -78,7 +79,7 @@ export default observer(function MoneyBoxDetailsView({
                     <tr key={partecipant.from}>
                         <td>{partecipant.from}</td>
                         <td>{partecipant.amount.FTM}</td>
-                        <td>{new Date(partecipant.timestamp*1000).toLocaleDateString()}</td>
+                        <td>{dateNtime(partecipant)}</td>
                     </tr>
                 )}
             </tbody>

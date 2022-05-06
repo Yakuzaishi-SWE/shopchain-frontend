@@ -57,4 +57,13 @@ export default class MoneyBoxOrderStore extends OrderStore {
         .id((id) => id)
         .result((data) => data)
         .revaildate;
+
+    // readonly getPaymentsByBuyer = TaskCacheBuilder.build<Payment[], [buyer: string]>()
+    //     .task(async (buyer: string) => {
+    //         const pays = await this.repo.getPaymentsByBuyer(buyer);
+    //         return pays;
+    //     })
+    //     .id((buyer) => buyer)
+    //     .result((d, buyer) => )
+    //     .revaildate;
 }
