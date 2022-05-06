@@ -2,20 +2,17 @@
 div.page-container{
     display: flex;
     justify-content: space-between;
-
-    & h2 {
-        text-align: center;
-        margin: 0;
-    }
 }
 
 
 div.home-menu {
-    margin-top: 10%;
+    padding-top: 10%;
     display: flex;
     flex-direction: column;
+    //max-width: 250px;
     width: 20%;
-    max-width: 200px;
+    height: 120vh;
+    background-color: $background80;
 
     & svg {
         fill: white;

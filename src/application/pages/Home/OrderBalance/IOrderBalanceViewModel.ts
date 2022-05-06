@@ -1,8 +1,8 @@
 
-interface IBalanceViewModel {
+interface IOrderBalanceViewModel {
     isBusy: boolean;
     balanceFTM: number;
     balanceWEI: number;
 }
 
-export default IBalanceViewModel;
+export default IOrderBalanceViewModel;

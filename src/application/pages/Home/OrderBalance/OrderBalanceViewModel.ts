@@ -1,7 +1,7 @@
 import { providerStore } from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import { makeAutoObservable } from "mobx";
-import IBalanceViewModel from "./IBalanceViewModel";
+import IBalanceViewModel from "./IOrderBalanceViewModel";
 
 export default class BalanceViewModel  implements IBalanceViewModel  {
     constructor(private readonly rootStore: RootStore)  {
