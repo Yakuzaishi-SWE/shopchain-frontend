@@ -1,6 +1,6 @@
 import Payment from "core/modules/order/domain/Payment";
 
-interface ITransactionDetailsViewModel {
+interface IMoneyBoxDetailsViewModel {
   id: string,
   ownerAddress: string,
   sellerAddress: string,
@@ -23,4 +23,4 @@ interface ITransactionDetailsViewModel {
   partecipants: Payment[],
   dateNtime(partecipant: Payment): string,
 }
-export default ITransactionDetailsViewModel;
+export default IMoneyBoxDetailsViewModel;
