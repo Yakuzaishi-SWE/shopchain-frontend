@@ -4,6 +4,7 @@ import Address from "core/provider/domain/Address";
 import Amount from "../../domain/Amount";
 import MoneyBox from "../../domain/MoneyBox";
 import Payment from "../../domain/Payment";
+import PaymentCollection from "../../domain/PaymentCollection";
 import OrderDTO from "../../dtos/OrderDTO";
 import PaymentDTO from "../../dtos/PaymentDTO";
 import MoneyBoxOrderStore from "../../store/MoneyBoxOrderStore";
@@ -59,12 +60,15 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         return Amount.create(amount);
     }
 
-    // async getPaymentsByBuyer(buyer: string): Promise<Payment[]> {
-    //     if (!this.contract.instance) throw Error("Contract not loaded");
-    //     const data: PaymentDTO[] = await this.contract.instance.methods
-    //         .getPaymentsByBuyer(buyer)
-    //         .call();
-    //     return data.map(el => Payment.create(el));
-    // }
-
+    async getAllPaymentsByCustomerId(customer: string): Promise<{moneybox: MoneyBox, payments: Payment[]}[]> {
+        if (!this.contract.instance) throw Error("Contract not loaded");
+        const paymentsTuple: IPaymentTuple[] = await this.contract.instance.methods
+            .getAllPaymentsByCustomerId(customer)
+            .call();
+        
+        const tuples: {moneybox: MoneyBox, payments: Payment[]}[] = [];
+        paymentsTuple.forEach(tuple => {
+            if(tuple.moneyboxId )
+        });
+    }
 }

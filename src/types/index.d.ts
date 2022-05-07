@@ -21,10 +21,10 @@ declare interface IOrderTuple {
     order: IOrder,
 }
 
-// declare interface IPaymentTuple {
-//     moneyboxId: string,
-//     payments: Payment[],
-// }
+declare interface IPaymentTuple {
+    moneyboxId: string,
+    payment: Payment,
+}
 
 declare interface ITransaction {
     seller: string,
