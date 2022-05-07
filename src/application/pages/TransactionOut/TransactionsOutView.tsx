@@ -3,9 +3,8 @@ import React from "react";
 import TransactionListController from "./TransactionList/TransactionListController";
 
 export default observer(function TransactionOutView() {
-    return <>
+    return <><div className="content-card">
         <h1 className="center">Your Transactions</h1>
-        <TransactionListController  />
-
-    </>;
+        <TransactionListController />
+    </div></>;
 });

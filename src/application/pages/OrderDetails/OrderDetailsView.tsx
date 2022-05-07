@@ -5,7 +5,7 @@ import IOrderDetailsViewModel from "./IOrderDetailsViewModel";
 
 export default observer(function OrderDetailsView({ id, ownerAddress, sellerAddress, ftm, wei, state, isPaid, unlock, refund }: IOrderDetailsViewModel) {
 
-    return <>
+    return <><div className="content-card">
         <section className="transaction-details">
             <div className="simple-link">
                 <Link to="/transaction/out/">Go back to your transactions</Link>
@@ -18,10 +18,10 @@ export default observer(function OrderDetailsView({ id, ownerAddress, sellerAddr
                 <li><div className="section-head">State:</div>{state}</li>
             </ul>
 
-            <div className={"box-button " + ((state.toString() === "Unlocked" || state.toString() === "Refunded")? "hide" : "")}>
+            <div className={"box-button " + ((state.toString() === "Unlocked" || state.toString() === "Refunded") ? "hide" : "")}>
                 <button id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
                 <button id="refund" onClick={refund} disabled={!isPaid}>Refund</button>
             </div>
         </section>
-    </>;
+    </div></>;
 });

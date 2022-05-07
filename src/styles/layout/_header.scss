@@ -4,6 +4,9 @@ body > div#root > header {
     background-color: $primaryLight;
     padding: 8px;
     box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
 
     & > a {
         flex-grow: 1;

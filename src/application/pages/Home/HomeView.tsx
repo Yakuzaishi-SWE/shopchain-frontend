@@ -8,20 +8,6 @@ import MoneyBoxCountController from "./MoneyBoxCount/MoneyBoxCountController";
 
 const HomeView = () => {
     return <div className="page-container">
-        <div className="home-menu">
-            <Link to="/checkout" className="home-button">
-                <ShoppingCartIcon />
-                Checkout Page
-            </Link>
-            <Link to="/transaction/out/" className="home-button">
-                <PaidFillIcon />
-                Your Transactions
-            </Link>
-            <Link to="/transaction/in/" className="home-button">
-                <WalletIcon />   
-                Inbound Transactions
-            </Link>
-        </div>
         <div className="home-card">
             <h1>Hey FraBro, welcome in Shopchain Verse!</h1>
 

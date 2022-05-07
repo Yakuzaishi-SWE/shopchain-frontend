@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const CheckoutView = () => {
     
-    return <div>
+    return <div className="content-card">
         <h1 className="center">Checkout Page</h1>
         <Outlet/>
     </div>;

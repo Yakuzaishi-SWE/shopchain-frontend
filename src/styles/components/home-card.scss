@@ -1,11 +1,11 @@
 .home-card {
-    display: flex;
-    flex-direction: column;
     //align-items: center;
     //justify-content: center;
     //margin: 12.5% auto;
-    margin: 50px auto;
-    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin: 5% auto 0 27%;
+    width: 65%;
 
     & > h1 {
         font-size: 2.5em;
