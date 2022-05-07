@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Launch, Lock, MoneyOff, MoneyOn, OrderIcon, PiggyBank, SingleOrder, Unlock } from "resources/svg";
+import { Launch, Lock, MoneyOff, MoneyOn, PiggyBank, SingleOrder, Unlock } from "resources/svg";
 import ITransactionListElViewModel from "./ITransactionListElViewModel";
 
 const TransactionListElView = observer(({
@@ -10,14 +10,14 @@ const TransactionListElView = observer(({
     isRefunded,
     id,
     transaction,
-    orderType
+    orderType,
 }: ITransactionListElViewModel) => {
 
     return <li>
         <article className="transaction">
             <header>
                 <span className="transaction-id">
-                    <Link to={`/${orderType}/${id}/`} className="btn-linkto">{id}<Launch /></Link>
+                    <Link to={"/out/"+orderType+"/"+id+"/"}  className="btn-linkto">{id}<Launch /></Link>
                 </span>
 
                 <div className="transaction-controls">

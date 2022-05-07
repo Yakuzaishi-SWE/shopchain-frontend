@@ -1,14 +1,27 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
+import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import IOrderDetailsViewModel from "./IOrderDetailsViewModel";
 
-export default observer(function OrderDetailsView({ id, ownerAddress, sellerAddress, ftm, wei, state, isPaid, unlock, refund }: IOrderDetailsViewModel) {
+export default observer(function OrderDetailsView({
+    id,
+    ownerAddress, 
+    sellerAddress, 
+    ftm, 
+    wei,
+    state, 
+    isPaid, 
+    unlock, 
+    refund,
+    back,
+}: IOrderDetailsViewModel) {
+    const location = useLocation();
 
     return <><div className="content-card">
         <section className="transaction-details">
             <div className="simple-link">
-                <Link to="/transaction/out/">Go back to your transactions</Link>
+                <Link to={back(location.pathname)}>Go back to your transactions</Link>
             </div>
             <ul>
                 <li><div className="section-head">Transaction ID:</div>{id}</li>

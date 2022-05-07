@@ -29,5 +29,6 @@ export default observer(function OrderDetails() {
         isPaid={vm.isPaid}
         unlock={vm.unlock}
         refund={vm.refund}
+        back={vm.back}
     />;
 });

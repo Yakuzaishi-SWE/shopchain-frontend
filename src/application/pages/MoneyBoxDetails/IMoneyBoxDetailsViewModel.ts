@@ -22,5 +22,6 @@ interface IMoneyBoxDetailsViewModel {
   newPayment(): void,
   partecipants: Payment[],
   dateNtime(partecipant: Payment): string,
+  back(route: string): string,
 }
 export default IMoneyBoxDetailsViewModel;

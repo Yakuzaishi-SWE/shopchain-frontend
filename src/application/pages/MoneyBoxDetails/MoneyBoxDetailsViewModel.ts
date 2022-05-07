@@ -5,7 +5,6 @@ import ProviderStore, { providerStore } from "core/provider/store/ProviderStore"
 import RootStore from "core/shared/RootStore";
 import ComputedTask from "core/utils/ComputedTask";
 import { makeAutoObservable } from "mobx";
-import { Provider } from "react";
 import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
 export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewModel {
@@ -155,15 +154,19 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         }
     }
 
-    get partecipants() {
-        if (!this.partecipantsTask) return [];
-        if (!this.partecipantsTask.result) return [];
-        return this.partecipantsTask.result;
+    get partecipants(){
+        return this.partecipantsPayments;
     }
 
     dateNtime(partecipant: Payment): string {
         const date = new Date(partecipant.timestamp*1000);
         return date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    }
+
+    back(route: string) {
+        if(route.includes("out")) return "/transaction/out";
+        if(route.includes("in")) return "/transaction/in";
+        return "";
     }
 
 }

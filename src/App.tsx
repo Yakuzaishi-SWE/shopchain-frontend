@@ -43,11 +43,18 @@ export default () => {
                     <Route path="success/moneybox" element={<MoneyBoxCreationSuccess />} />
                 </Route>
 
-                <Route path="transaction/out/" element={<TransactionOutView />} />
-                <Route path="transaction/in/" element={<TransactionInView />} />
+                <Route path="transaction/out" element={<TransactionOutView />} />
+                <Route path="transaction/in" element={<TransactionInView />} />
 
-                <Route path="moneybox/:id" element={<MoneyBoxDetails />} />
-                <Route path="order/:id/" element={<OrderDetails />} />
+                <Route path="out/" >
+                    <Route path="moneybox/:id" element={<MoneyBoxDetails />} />
+                    <Route path="order/:id" element={<OrderDetails />} />
+                </Route>
+
+                <Route path="in/" >
+                    <Route path="moneybox/:id" element={<MoneyBoxDetails />} />
+                    <Route path="order/:id" element={<OrderDetails />} />
+                </Route>
             </Route>
         </Routes>
     </HashRouter>;

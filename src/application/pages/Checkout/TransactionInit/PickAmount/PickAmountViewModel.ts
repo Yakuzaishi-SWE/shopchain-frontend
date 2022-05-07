@@ -34,8 +34,11 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
     }
 
     setInitFTM(value: number): void {
-        if (value > this._amount.FTM) return;
         this._initAmount.setAmountFTM(value);
+    }
+
+    get amountFtm(): number {
+        return this._amount.FTM;
     }
 
     get initWei(): number {
@@ -44,11 +47,15 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
 
     createMoneyBoxTask: ComputedTask<void, [data: { seller: string; amount: string; id: string; }, initAmount?: string | undefined], void> | null = null;
     createMoneyBox(): void {
-        this.createMoneyBoxTask = this.rootStore.moneyBoxStore.createOrder({
-            seller: this._sellerAddress,
-            amount: String(this._amount.wei),
-            id: this._id
-        }, String(this._initAmount.wei));
+        if(this._initAmount.FTM <= this._amount.FTM) {
+            this.createMoneyBoxTask = this.rootStore.moneyBoxStore.createOrder({
+                seller: this._sellerAddress,
+                amount: String(this._amount.wei),
+                id: this._id
+            }, String(this._initAmount.wei));
+        } else {
+            alert("The chosen amount is greater than the amount needed to fill the moneybox (" + this._amount + ")");
+        }
     }
 
     get canRedirect(): boolean {

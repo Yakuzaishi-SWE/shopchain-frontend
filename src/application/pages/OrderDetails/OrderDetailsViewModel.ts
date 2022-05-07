@@ -61,4 +61,11 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
             this.order.refund();
         }
     }
+
+    back(route: string) {
+        if(route.includes("out")) return "/transaction/out";
+        if(route.includes("in")) return "/transaction/in";
+        return "";
+    }
+    
 }

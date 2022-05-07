@@ -31,4 +31,5 @@ export default class TransactionListElViewModel implements ITransactionListElVie
     get orderType(): string {
         return this.order.type.toLowerCase();
     }
+
 }

@@ -9,6 +9,7 @@ interface IOrderDetailsViewModel {
     isPaid: boolean,
     unlock(): void,
     refund(): void,
+    back(route: string): string,
 }
 
 export default IOrderDetailsViewModel;

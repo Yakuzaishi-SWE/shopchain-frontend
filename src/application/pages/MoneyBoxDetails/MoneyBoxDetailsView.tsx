@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FTMIcon, PiggyBank } from "resources/svg";
 import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
@@ -25,13 +25,16 @@ export default observer(function MoneyBoxDetailsView({
     newPayment,
     partecipants,
     dateNtime,
+    back,
 }: IMoneyBoxDetailsViewModel) {
+
+    const location = useLocation();
 
     return <div className="content-card">
         <section className="transaction-details">
 
             <div className="simple-link">
-                <Link to="/transaction/out/" >Go back to your transactions</Link>
+                <Link to={back(location.pathname)} >Go back to your transactions</Link>
             </div>
 
             <div className="two-cols">

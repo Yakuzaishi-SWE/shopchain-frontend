@@ -7,6 +7,7 @@ interface IPickAmountViewModel {
     createMoneyBox(): void;
     id: string;
     canRedirect: boolean;
+    amountFtm: number;
 }
 
 export default IPickAmountViewModel;

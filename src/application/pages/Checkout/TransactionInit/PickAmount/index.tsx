@@ -34,5 +34,6 @@ export default observer(function PickAmount() {
         createMoneyBox={vm.createMoneyBox}
         setInitFTM={vm.setInitFTM}
         canRedirect={vm.canRedirect}
+        amountFtm={vm.amountFtm}
     />;
 });

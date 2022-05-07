@@ -13,6 +13,7 @@ export default observer(function PickAmountView({
     initWei,
     createMoneyBox,
     setInitFTM,
+    amountFtm,
 }: IPickAmountViewModel) {
     const location =  useLocation();
     return <>
@@ -22,7 +23,7 @@ export default observer(function PickAmountView({
                 <div className="form-wrapper">
                     <label>Your Contribute:</label>
                     <div className="ftm-input">
-                        <input className="clickable-input addOnCreate-moneybox" type="number" value={initFTM} onChange={e => setInitFTM(e.target.valueAsNumber)} />
+                        <input className="clickable-input addOnCreate-moneybox" type="number" step="any" min="0.000000000000000001" max={amountFtm} value={initFTM} onChange={e => setInitFTM(e.target.valueAsNumber)} />
                         <span className="ftm-icon"><FTMIcon />FTM</span>
                     </div>
                     <div className="ftm-wei center">

@@ -40,6 +40,7 @@ export default observer(function MoneyBoxDetails() {
         newPayment={vm.newPayment}
         partecipants={vm.partecipants}
         dateNtime={vm.dateNtime}
+        back={vm.back}
     />;
 
 });
