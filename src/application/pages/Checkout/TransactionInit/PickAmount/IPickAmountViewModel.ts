@@ -6,6 +6,7 @@ interface IPickAmountViewModel {
     initWei:  number
     createMoneyBox(): void;
     back(): string;
+    id: string;
 }
 
 export default IPickAmountViewModel;

@@ -20,6 +20,10 @@ export default class Payment {
         return this.props.from;
     }
 
+    isFrom(address: string) {
+        return this.from === address;
+    }
+
     get amount() {
         return this.props.amount;
     }

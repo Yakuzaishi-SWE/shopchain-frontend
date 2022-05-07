@@ -1,5 +1,6 @@
 import { observer } from "mobx-react";
 import React from "react";
+import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { FTMIcon } from "resources/svg";
 import IPickAmountViewModel from "./IPickAmountViewModel";
@@ -7,15 +8,17 @@ import IPickAmountViewModel from "./IPickAmountViewModel";
 
 
 export default observer(function PickAmountView({
+    id,
     initFTM,
     initWei,
     createMoneyBox,
     setInitFTM,
     back,
 }: IPickAmountViewModel) {
+    const location =  useLocation();
     return <>
         <div className="center">
-            <Link to={back()} className="icon-btn back-btn btn-shadow">Go Back</Link>
+            <Link to={{ pathname: `/checkout/${id}/`,  search: location.search }} className="icon-btn back-btn btn-shadow">Go Back</Link>
             <div className="payment-form">
                 <div className="form-wrapper">
                     <label>Your Contribute:</label>

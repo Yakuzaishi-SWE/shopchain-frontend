@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-empty-collection */
 /* eslint-disable sonarjs/no-duplicate-string */
 import MoneyBoxManagerContract from "core/provider/contracts/MoneyBoxManagerContract";
 import Address from "core/provider/domain/Address";
@@ -60,15 +61,17 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         return Amount.create(amount);
     }
 
-    async getAllPaymentsByCustomerId(customer: string): Promise<{moneybox: MoneyBox, payments: Payment[]}[]> {
+    async getAllPaymentsByCustomerId(customer: string): Promise<{moneyboxID: string, payments: Payment[]}[]> {
         if (!this.contract.instance) throw Error("Contract not loaded");
         const paymentsTuple: IPaymentTuple[] = await this.contract.instance.methods
             .getAllPaymentsByCustomerId(customer)
             .call();
-        
-        const tuples: {moneybox: MoneyBox, payments: Payment[]}[] = [];
+        const moneyboxMap = new Map<string, MoneyBox>(); 
+        const tuples: {moneybox: string, payments: Payment[]}[] = [];
         paymentsTuple.forEach(tuple => {
-            if(tuple.moneyboxId )
+            if (!moneyboxMap.has(tuple.moneyboxId)) {
+                moneyboxMap.set(tuple.moneyboxId, MoneyBox.create(this.store, tuple.moneyboxId));
+            }
         });
     }
 }

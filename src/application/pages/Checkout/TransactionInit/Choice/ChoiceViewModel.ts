@@ -1,6 +1,7 @@
 import Amount from "core/modules/order/domain/Amount";
 import ProviderStore from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
+import ComputedTask from "core/utils/ComputedTask";
 import { makeAutoObservable } from "mobx";
 import IChoiceViewModel from "./IChoiceViewModel";
 
@@ -24,11 +25,19 @@ export default class ChoiceViewModel implements IChoiceViewModel {
 
     // ------------------- VIEW SIDE -------------------------------
 
+
+    createOrderTask: ComputedTask<any, any> | null = null;
     createOrder(): void {
-        this.rootStore.orderStore.createOrder({
+        this.createOrderTask = this.rootStore.orderStore.createOrder({
             seller: this._sellerAddress,
             amount: String(this._amount.wei),
             id: this._id
         });
+    }
+
+    get redirectLink(): string | null {
+        if (!this.createOrderTask) return null;
+        if (!this.createOrderTask.isLoaded) return null;
+        return "success";
     }
 }

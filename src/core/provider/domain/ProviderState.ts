@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import { type } from "os";
 import { MetamaskErrorName, MetamaskErrorSeverity } from "types/enums";
 import ProviderStore from "../store/ProviderStore";
 
@@ -50,13 +49,30 @@ export default class ProviderState {
     }
 
     private get value(): MetamaskError {
-        if (!this.store.provider) return MissingMetamask;
-        if (!this.store.w3) return W3_Error;
-        if (!this.store.w3.mm) return ContractError;
-        if (!this.store.w3.om) return ContractError;
-        if (!this.store.address) return NotConnected;
-        if (!this.store.chain.isFantomTestnet) return WrongChain;
-        else return Nominal;
+        const checks = [
+            !this.store.provider,
+            !this.store.w3,
+            !this.store.w3.mm,
+            !this.store.w3.om,
+            !this.store.address,
+            !this.store.chain.isFantomTestnet,
+        ];
+
+        if (checks[0]) return MissingMetamask;
+        if (checks[1]) return W3_Error;
+        if (checks[2]) return ContractError;
+        if (checks[3]) return ContractError;
+        if (checks[4]) return NotConnected;
+        if (checks[5]) return WrongChain;
+        return Nominal;
+    }
+
+    get isOK() {
+        return this.severity === MetamaskErrorSeverity.OK;
+    }
+
+    get isBlocking() {
+        return this.value.severity === MetamaskErrorSeverity.BLOCKING;
     }
 
     get severity() {

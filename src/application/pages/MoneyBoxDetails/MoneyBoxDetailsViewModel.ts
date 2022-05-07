@@ -1,17 +1,20 @@
 import Amount from "core/modules/order/domain/Amount";
 import MoneyBox from "core/modules/order/domain/MoneyBox";
 import Payment from "core/modules/order/domain/Payment";
-import { providerStore } from "core/provider/store/ProviderStore";
+import ProviderStore, { providerStore } from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import ComputedTask from "core/utils/ComputedTask";
 import { makeAutoObservable } from "mobx";
+import { Provider } from "react";
 import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
 export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewModel {
     _id = "";
     _feeAmount = new Amount(0);
+    providerStore: ProviderStore;
 
-    constructor(private readonly rootStore: RootStore) {
+    constructor(private readonly rootStore: RootStore, providerStore: ProviderStore = ProviderStore.getInstance()) {
+        this.providerStore = providerStore;
         makeAutoObservable(this, {}, { autoBind: true, });
     }
 
@@ -36,6 +39,19 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     private get partecipantsTask() {
         if (!this.moneybox) return null;
         return this.moneybox.payments;
+    }
+
+    private get partecipantsPayments() {
+        if (!this.partecipantsTask) return [];
+        if (!this.partecipantsTask.result) return [];
+        return this.partecipantsTask.result;
+    }
+
+    private get myPayments() {
+        return this.partecipantsPayments.filter(payment => {
+            if (!this.providerStore.address.address) return false;
+            return payment.isFrom(this.providerStore.address.address);
+        });
     }
 
     private get amountFilledWei() {

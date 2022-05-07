@@ -21,6 +21,10 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
         this._amount = new Amount(Number(newAmount));
     }
 
+    get id(): string {
+        return this._id;
+    }
+
     setId(newId: string) {
         this._id = newId;
     }

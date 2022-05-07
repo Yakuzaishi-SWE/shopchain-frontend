@@ -12,7 +12,7 @@ interface IMoneyBoxOrderRepo extends IOrderRepo {
     getOrderById(id: string): Promise<MoneyBox | undefined>;
     getOrdersBySeller(seller: string): Promise<MoneyBox[]>;
     getOrdersByBuyer(seller: string): Promise<MoneyBox[]>;
-    getAllPaymentsByCustomerId(customer: string): Promise<{moneybox: MoneyBox, payments: Payment[]}[]>;
+    getAllPaymentsByCustomerId(customer: string): Promise<{moneyboxID: string, payments: Payment[]}[]>;
 }
 
 export default IMoneyBoxOrderRepo;

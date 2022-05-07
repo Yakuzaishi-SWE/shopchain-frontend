@@ -23,6 +23,7 @@ export default observer(function PickAmount() {
     },[id]);
 
     return <PickAmountView 
+        id={vm.id}
         initFTM={vm.initFTM}
         initWei={vm.initWei}
         createMoneyBox={vm.createMoneyBox}
