@@ -5,8 +5,8 @@ interface IPickAmountViewModel {
     setInitFTM(value: number): void;
     initWei:  number
     createMoneyBox(): void;
-    back(): string;
     id: string;
+    canRedirect: boolean;
 }
 
 export default IPickAmountViewModel;

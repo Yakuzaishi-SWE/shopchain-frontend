@@ -13,7 +13,6 @@ export default observer(function PickAmountView({
     initWei,
     createMoneyBox,
     setInitFTM,
-    back,
 }: IPickAmountViewModel) {
     const location =  useLocation();
     return <>

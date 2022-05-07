@@ -9,5 +9,5 @@ export default function PageLayout() {
         <Nav />
         {/* <OverlayController /> */}
         <Outlet/>
-    </>
+    </>;
 }

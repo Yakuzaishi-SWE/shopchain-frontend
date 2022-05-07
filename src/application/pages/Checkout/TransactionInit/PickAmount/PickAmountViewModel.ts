@@ -1,7 +1,7 @@
 import Amount from "core/modules/order/domain/Amount";
 import RootStore from "core/shared/RootStore";
+import ComputedTask from "core/utils/ComputedTask";
 import { makeAutoObservable } from "mobx";
-import { useLocation } from "react-router";
 import IPickAmountViewModel from "./IPickAmountViewModel";
 
 
@@ -42,20 +42,18 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
         return this._initAmount.wei;
     }
 
-    back(): string {
-        const location = useLocation();
-        let path = location.pathname;
-        const search = location.search;
-        path = path.replace("/moneybox","");
-        path = path + search;
-        return path;
-    }
-
+    createMoneyBoxTask: ComputedTask<void, [data: { seller: string; amount: string; id: string; }, initAmount?: string | undefined], void> | null = null;
     createMoneyBox(): void {
-        this.rootStore.moneyBoxStore.createOrder({
+        this.createMoneyBoxTask = this.rootStore.moneyBoxStore.createOrder({
             seller: this._sellerAddress,
             amount: String(this._amount.wei),
             id: this._id
         }, String(this._initAmount.wei));
+    }
+
+    get canRedirect(): boolean {
+        if (!this.createMoneyBoxTask) return false;
+        if (!this.createMoneyBoxTask.isLoaded) return false;
+        return true;
     }
 }

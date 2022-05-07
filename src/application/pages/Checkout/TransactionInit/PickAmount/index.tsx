@@ -2,13 +2,14 @@ import { useViewModel } from "application/utils/useViewModel";
 import RootStore from "core/shared/RootStore";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useMemo } from "react";
-import { useLocation, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import PickAmountView from "./PickAmountView";
 import PickAmountViewModel from "./PickAmountViewModel";
 
 
 export default observer(function PickAmount() {
     const vm = useViewModel(PickAmountViewModel, RootStore.getInstance());
+    const navigate = useNavigate();
 
     const { id } = useParams<{ id: string }>();
     const { search } = useLocation();
@@ -22,12 +23,16 @@ export default observer(function PickAmount() {
         if(id) vm.setId(id);
     },[id]);
 
+    useEffect(() => {
+        if (vm.canRedirect) navigate("/checkout/success/moneybox");
+    }, [vm.canRedirect]);
+
     return <PickAmountView 
         id={vm.id}
         initFTM={vm.initFTM}
         initWei={vm.initWei}
         createMoneyBox={vm.createMoneyBox}
         setInitFTM={vm.setInitFTM}
-        back={vm.back}
+        canRedirect={vm.canRedirect}
     />;
 });

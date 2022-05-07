@@ -3,7 +3,7 @@ import { providerStore } from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useMemo } from "react";
-import { useLocation, useNavigate, useNavigationType, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import ChoiceView from "./ChoiceView";
 import ChoiceViewModel from "./ChoiceViewModel";
 
@@ -26,10 +26,11 @@ export default observer(function Choice() {
     },[id]);
 
     useEffect(() => {
-        if (vm.redirectLink) navigate(vm.redirectLink);
-    }, [vm.redirectLink]);
+        if (vm.canRedirect) navigate("/checkout/success/order");
+    }, [vm.canRedirect]);
 
     return <ChoiceView
         createOrder = {vm.createOrder}
+        canRedirect = {vm.canRedirect}
     />;
 });

@@ -26,7 +26,7 @@ export default class ChoiceViewModel implements IChoiceViewModel {
     // ------------------- VIEW SIDE -------------------------------
 
 
-    createOrderTask: ComputedTask<any, any> | null = null;
+    createOrderTask: ComputedTask<void, [data: { seller: string; amount: string; id: string; }, initAmount?: string | undefined], void> | null = null;
     createOrder(): void {
         this.createOrderTask = this.rootStore.orderStore.createOrder({
             seller: this._sellerAddress,
@@ -35,9 +35,9 @@ export default class ChoiceViewModel implements IChoiceViewModel {
         });
     }
 
-    get redirectLink(): string | null {
-        if (!this.createOrderTask) return null;
-        if (!this.createOrderTask.isLoaded) return null;
-        return "success";
+    get canRedirect(): boolean {
+        if (!this.createOrderTask) return false;
+        if (!this.createOrderTask.isLoaded) return false;
+        return true;
     }
 }

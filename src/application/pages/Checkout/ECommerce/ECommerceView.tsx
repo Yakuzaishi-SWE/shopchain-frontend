@@ -13,11 +13,15 @@ export default observer(function ECommerceView({
     handleSubmit,
 } : IECommerceViewModel) {
     return <>
+        
         <form className="payment-form checkout-form" onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();
             return false;
         }}>
+            <div className="simple-link">
+                <Link to="/">Go back to homepage</Link>
+            </div>
             <div className="form-wrapper">
                 <label className="toTheLeft">Id</label>
                 <input type="text" value={id} onChange={() => {return;}} placeholder="0000-000000-000000000000000" disabled />
@@ -41,6 +45,5 @@ export default observer(function ECommerceView({
                 <input type="submit" value="Send"></input>
             </div>
         </form>
-        <Link to={"/"} className="icon-btn back-btn btn-shadow">Go Back</Link>
     </>;
 });

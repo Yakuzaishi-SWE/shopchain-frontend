@@ -14,6 +14,7 @@ import { providerStore } from "core/provider/store/ProviderStore";
 import React, { useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import "./styles/main.scss";
+import MoneyBoxCreationSuccess from "application/pages/Checkout/MoneyBoxCreationSuccess";
 
 
 export default () => {
@@ -38,7 +39,8 @@ export default () => {
                         <Route index element={<Choice />} />
                         <Route path="moneybox" element={<PickAmount />} />
                     </Route>
-                    <Route path="success" element={<TransactionSuccess />} />
+                    <Route path="success/order" element={<TransactionSuccess />} />
+                    <Route path="success/moneybox" element={<MoneyBoxCreationSuccess />} />
                 </Route>
 
                 <Route path="transaction/out/" element={<TransactionOutView />} />

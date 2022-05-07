@@ -19,6 +19,7 @@ export default observer(function TransactionListView({ transactionsFilter, state
                 <label>Order State</label>
                 <select defaultValue={""} id="state-dropdown" onChange={(e) => setStateFilter(e.target.value)}>
                     <option value="" selected>All</option>
+                    <option value="Created">Not Paid</option>
                     <option value="Paid">Paid but Locked</option>
                     <option value="Unlocked">Unlocked</option>
                     <option value="Refunded">Refunded</option>
