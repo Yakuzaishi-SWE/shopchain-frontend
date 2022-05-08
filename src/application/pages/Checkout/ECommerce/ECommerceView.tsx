@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import path from "path";
 import React from "react";
 import { Link } from "react-router-dom";
 import { FTMIcon } from "resources/svg";
@@ -12,6 +11,7 @@ export default observer(function ECommerceView({
     setAmount,
     handleSubmit,
 } : IECommerceViewModel) {
+
     return <>
         
         <form className="payment-form checkout-form" onSubmit={(e) => {

@@ -4,7 +4,7 @@ interface IPickAmountViewModel {
     initFTM: number;
     setInitFTM(value: number): void;
     initWei:  number
-    createMoneyBox(): void;
+    createMoneyBox(): boolean;
     id: string;
     canRedirect: boolean;
     amountFtm: number;

@@ -85,19 +85,19 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.moneybox?.amount?.wei || 0;
     }
 
-    get getFilledFtm()  {
+    get filledFtm()  {
         return this.AmountFilled.FTM;
     }
 
-    get getFilledWei() {
+    get filledWei() {
         return this.AmountFilled.wei;
     }
 
-    get getFtmToFill() {
+    get ftmToFill() {
         return this.amountToFillTask?.result?.FTM || 0;
     }
 
-    get getWeiToFill() {
+    get weiToFill() {
         return this.amountToFillTask?.result?.wei || 0;
     }
 
@@ -117,7 +117,7 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.moneybox?.state.isCancelled || false;
     }
 
-    get feeAmountFTM() {
+    get feeAmountFtm() {
         return this._feeAmount.FTM;
     }
 
@@ -141,16 +141,18 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         }
     }
     
-    newPayment(): void {
-        if(this._feeAmount.FTM <= this.getFtmToFill) {
+    newPayment(): boolean {
+        if(this._feeAmount.FTM <= this.ftmToFill) {
             if (this.moneybox) {
                 this.rootStore.moneyBoxStore.newPayment(
                     this.id, 
                     String(this.feeAmountWei)
                 );
+                return false;
             }
+            return true;
         } else {
-            alert("The chosen amount is greater than the amount needed to fill the moneybox (" + this.getFtmToFill + ")");
+            return true;
         }
     }
 

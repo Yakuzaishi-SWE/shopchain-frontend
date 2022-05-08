@@ -1,5 +1,6 @@
+import Popup from "application/utils/Popup";
 import { observer } from "mobx-react";
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { FTMIcon } from "resources/svg";
@@ -16,6 +17,8 @@ export default observer(function PickAmountView({
     amountFtm,
 }: IPickAmountViewModel) {
     const location =  useLocation();
+    const [buttonPopup, setButtonPopup] = useState(false);
+
     return <>
         <div className="center">
             <Link to={{ pathname: `/checkout/${id}/`,  search: location.search }} className="icon-btn back-btn btn-shadow">Go Back</Link>
@@ -31,7 +34,11 @@ export default observer(function PickAmountView({
                     </div>
                 </div>
             </div>
-            <button onClick={createMoneyBox} className="btn-create">Create MoneyBox</button>
+            <button onClick={() => setButtonPopup(createMoneyBox)} className="btn-create">Create MoneyBox</button>
         </div>
+        <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+            <h3>Warning</h3>
+            <p>The chosen amount is greater than the amount needed to fill the moneybox ({amountFtm})</p>
+        </Popup>
     </>;
 });
