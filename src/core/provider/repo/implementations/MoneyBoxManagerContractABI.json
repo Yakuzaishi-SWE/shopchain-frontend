@@ -1,5 +1,23 @@
 [
 	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "id",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_unlockCode",
+				"type": "uint256"
+			}
+		],
+		"name": "confirmReceived",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -41,6 +59,47 @@
 		],
 		"name": "ItemReceived",
 		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_seller",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_orderId",
+				"type": "string"
+			}
+		],
+		"name": "newOrder",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "moneyBoxId",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "newPayment",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -208,14 +267,9 @@
 				"internalType": "string",
 				"name": "id",
 				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_unlockCode",
-				"type": "uint256"
 			}
 		],
-		"name": "confirmReceived",
+		"name": "refund",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -294,54 +348,6 @@
 					}
 				],
 				"internalType": "struct OrderManager.OrderTuple[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "customerAddress",
-				"type": "address"
-			}
-		],
-		"name": "getAllPaymentsByCustomerAddress",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "string",
-						"name": "moneyboxId",
-						"type": "string"
-					},
-					{
-						"components": [
-							{
-								"internalType": "address payable",
-								"name": "from",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "amount",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "timestamp",
-								"type": "uint256"
-							}
-						],
-						"internalType": "struct MoneyBoxManager.Payment",
-						"name": "payment",
-						"type": "tuple"
-					}
-				],
-				"internalType": "struct MoneyBoxManager.PaymentTuple[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -458,6 +464,69 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "participantAddress",
+				"type": "address"
+			}
+		],
+		"name": "getMoneyBoxesByParticipantAddress",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address payable",
+								"name": "sellerAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "ownerAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "unlockCode",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum OrderManager.OrderState",
+								"name": "state",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct OrderManager.Order",
+						"name": "order",
+						"type": "tuple"
+					}
+				],
+				"internalType": "struct OrderManager.OrderTuple[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "id",
 				"type": "string"
@@ -550,25 +619,6 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "id",
-				"type": "string"
-			}
-		],
-		"name": "getOrderState",
-		"outputs": [
-			{
-				"internalType": "enum OrderManager.OrderState",
-				"name": "",
-				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",
@@ -708,6 +758,25 @@
 				"type": "string"
 			}
 		],
+		"name": "getOrderState",
+		"outputs": [
+			{
+				"internalType": "enum OrderManager.OrderState",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "id",
+				"type": "string"
+			}
+		],
 		"name": "getOwnerAddress",
 		"outputs": [
 			{
@@ -755,60 +824,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address payable",
-				"name": "_seller",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_orderId",
-				"type": "string"
-			}
-		],
-		"name": "newOrder",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "moneyBoxId",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "newPayment",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "id",
-				"type": "string"
-			}
-		],
-		"name": "refund",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

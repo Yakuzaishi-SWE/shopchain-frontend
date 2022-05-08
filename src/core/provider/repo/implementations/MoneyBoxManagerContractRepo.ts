@@ -7,7 +7,7 @@ import OrderManagerContractRepo from "./OrderManagerContractRepo";
 
 //const ORDER_MANAGER_ADDRESS = "0x4904D51AB0B8135510A6eD60D2Cc52Fb54B44986"; first
 // const ORDER_MANAGER_ADDRESS = "0x2ED62B4B5B1212044EFdC325A1ce1f061e7668C2"; second
-const ORDER_MANAGER_ADDRESS = "0x4ce112589E1c3dAa8C2dB4e549f9248D974D26a1";
+const ORDER_MANAGER_ADDRESS = "0x0fb49e06F0F02DE6d5E5b85E39502162a876ED6D";
 
 export default class MoneyBoxManagerContractRepo extends OrderManagerContractRepo implements IContractRepo {
     constructor(store: W3Store) {
