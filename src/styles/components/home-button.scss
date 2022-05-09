@@ -5,6 +5,11 @@
 }
 
 .home-button {
+
+    &.active {
+        
+    }
+
     color: white;
     text-decoration: none;
     //background: $primary;

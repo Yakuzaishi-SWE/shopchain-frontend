@@ -1,3 +1,4 @@
+import Popup from "application/utils/Popup";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -5,6 +6,7 @@ import IChoiceViewModel from "./IChoiceViewModel";
 
 export default observer(function ChoiceView({
     createOrder,
+    isBusy,
 }: IChoiceViewModel) {
     const location = useLocation();
     return <>
@@ -15,5 +17,8 @@ export default observer(function ChoiceView({
                 search: location.search,
             }} className="btn-moneybox btn-shadow">Create Money Box</Link>
         </div>
+        <Popup show={isBusy} close={() => {return;}}>
+            <h3>Warning</h3>
+        </Popup>
     </>;
 });

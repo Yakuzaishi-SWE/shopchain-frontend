@@ -1,4 +1,3 @@
-import Popup from "application/utils/Popup";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";

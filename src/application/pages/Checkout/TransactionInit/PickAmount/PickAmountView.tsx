@@ -36,7 +36,7 @@ export default observer(function PickAmountView({
             </div>
             <button onClick={() => setButtonPopup(createMoneyBox)} className="btn-create">Create MoneyBox</button>
         </div>
-        <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+        <Popup show={buttonPopup} close={() => setButtonPopup(false)}>
             <h3>Warning</h3>
             <p>The chosen amount is greater than the amount needed to fill the moneybox ({amountFtm})</p>
         </Popup>

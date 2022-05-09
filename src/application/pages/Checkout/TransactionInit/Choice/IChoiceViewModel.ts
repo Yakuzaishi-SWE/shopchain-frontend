@@ -1,6 +1,6 @@
 interface IChoiceViewModel {
     createOrder(): void,
-    canRedirect: boolean,
+    isBusy: boolean,
 }
 
 export default IChoiceViewModel;

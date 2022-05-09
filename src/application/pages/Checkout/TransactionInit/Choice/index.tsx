@@ -17,20 +17,20 @@ export default observer(function Choice() {
     const amount = useMemo(() => new URLSearchParams(search).get("amount"), [search]) || "0";
     const navigate = useNavigate();
 
-    useEffect (() => {
-        if(amount) vm.setAmount(amount);
-    },[amount]);
+    useEffect(() => {
+        if (amount) vm.setAmount(amount);
+    }, [amount]);
 
-    useEffect (() => {
-        if(id) vm.setId(id);
-    },[id]);
+    useEffect(() => {
+        if (id) vm.setId(id);
+    }, [id]);
 
     useEffect(() => {
         if (vm.canRedirect) navigate("/checkout/success/order");
     }, [vm.canRedirect]);
 
     return <ChoiceView
-        createOrder = {vm.createOrder}
-        canRedirect = {vm.canRedirect}
+        isBusy={vm.isBusy}
+        createOrder={vm.createOrder}
     />;
 });

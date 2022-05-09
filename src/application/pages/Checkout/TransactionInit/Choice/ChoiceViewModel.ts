@@ -25,7 +25,6 @@ export default class ChoiceViewModel implements IChoiceViewModel {
 
     // ------------------- VIEW SIDE -------------------------------
 
-
     createOrderTask: ComputedTask<void, [data: { seller: string; amount: string; id: string; }, initAmount?: string | undefined], void> | null = null;
     createOrder(): void {
         this.createOrderTask = this.rootStore.orderStore.createOrder({
@@ -39,5 +38,10 @@ export default class ChoiceViewModel implements IChoiceViewModel {
         if (!this.createOrderTask) return false;
         if (!this.createOrderTask.isLoaded) return false;
         return true;
+    }
+
+    get isBusy(): boolean {
+        if (!this.createOrderTask) return false;
+        return this.createOrderTask.isBusy;
     }
 }
