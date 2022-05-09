@@ -28,14 +28,14 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
 
     async getOrdersBySeller(seller: string): Promise<MoneyBox[]> {
         if (!this.contract.instance) return [];
-        const ordertouples: IOrderTuple[] = await this.contract.instance.methods.getOrdersBySeller(seller).call();
-        return ordertouples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
+        const ordertuples: IOrderTuple[] = await this.contract.instance.methods.getOrdersBySeller(seller).call();
+        return ordertuples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
     }
 
     async getOrdersByBuyer(buyer: string): Promise<MoneyBox[]> {
         if (!this.contract.instance) return [];
-        const ordertouples: IOrderTuple[] =  await this.contract.instance.methods.getOrdersByBuyer(buyer).call();
-        return ordertouples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
+        const ordertuples: IOrderTuple[] =  await this.contract.instance.methods.getOrdersByBuyer(buyer).call();
+        return ordertuples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
     }
 
     async newPayment(orderId: string, amount: string): Promise<void> {
@@ -61,19 +61,16 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         return Amount.create(amount);
     }
 
-    /*
-    async getAllPaymentsByCustomerId(customer: string): Promise<{moneyboxID: string, payments: Payment[]}[]> {
-        if (!this.contract.instance) throw Error("Contract not loaded");
-        const paymentsTuple: IPaymentTuple[] = await this.contract.instance.methods
-            .getAllPaymentsByCustomerId(customer)
+    async getMoneyBoxesByParticipantAddress(participant: string): Promise<MoneyBox[]> {
+        if (!this.contract.instance) return [];
+         
+        let ordertuples: IOrderTuple[] = await this.contract.instance.methods
+            .getMoneyBoxesByParticipantAddress(participant)
             .call();
-        const moneyboxMap = new Map<string, MoneyBox>(); 
-        const tuples: {moneybox: string, payments: Payment[]}[] = [];
-        paymentsTuple.forEach(tuple => {
-            if (!moneyboxMap.has(tuple.moneyboxId)) {
-                moneyboxMap.set(tuple.moneyboxId, MoneyBox.create(this.store, tuple.moneyboxId));
-            }
-        });
+        const mySet = new Set(ordertuples); 
+        ordertuples = [...mySet];
+        return ordertuples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
     }
-    */
+        
+
 }

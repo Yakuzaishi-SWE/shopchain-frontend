@@ -104,9 +104,9 @@ export default observer(function MoneyBoxDetailsView({
             </section>
         </div>
         
-        <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+        {/* <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
             <h3>Warning</h3>
             <p>The chosen amount is greater than the amount needed to fill the moneybox ({ftmToFill})</p>
-        </Popup>
+        </Popup> */}
     </>;
 });

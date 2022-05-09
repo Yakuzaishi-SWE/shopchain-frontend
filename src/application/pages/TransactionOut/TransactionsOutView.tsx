@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import { Link } from "react-router-dom";
 import { BackArrowIcon } from "resources/svg";
+import ContributesListController from "./ContributesList/ContributesListController";
 import TransactionListController from "./TransactionList/TransactionListController";
 
 export default observer(function TransactionOutView() {
@@ -16,25 +17,8 @@ export default observer(function TransactionOutView() {
             </div>
 
             <div className="right-col">
-                <h1>Your contributes</h1>
-                <table id="table-payments">
-                    <thead>
-                        <tr>
-                            <th>MoneyBox Id</th>
-                            <th>Paid Amount</th>
-                            <th>Timestamp</th>
-                            <th>State</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="">e3632b70-65de-465f-b0eb-94bafd32999a</a></td>
-                            <td>1 FTM</td>
-                            <td>05/12/2023</td>
-                            <td>Open</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h1 className="center">Your Contributes</h1>
+                <ContributesListController />
             </div>
         </div>
     
