@@ -8,8 +8,8 @@ const CheckoutView = () => {
         <div className="simple-link">
             <Link to="/"><BackArrowIcon className="svg-white"/>Go back to homepage</Link>
         </div>
-        <div className="page-container">
-            <h1 className="center">Checkout Page</h1>
+        <div className="page-container column">
+            <h1>Checkout Page</h1>
             <Outlet/>
         </div>
     </>;
