@@ -58,6 +58,7 @@ export default class MoneyBoxOrderStore extends OrderStore {
         .result((data) => data)
         .revaildate;
 
+    /*
     readonly getAllPaymentsByCustomerId = TaskCacheBuilder.build<PaymentCollection, [customer: string]>()
         .task(async (customer: string) => {
             const pays = await this.repo.getAllPaymentsByCustomerId(customer);
@@ -66,4 +67,5 @@ export default class MoneyBoxOrderStore extends OrderStore {
         .id((customer) => customer)
         .result((d, customer) => this.payments.getByCustomer(customer))
         .revaildate;
+    */
 }

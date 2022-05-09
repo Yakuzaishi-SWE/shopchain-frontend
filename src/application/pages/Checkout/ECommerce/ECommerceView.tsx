@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Link } from "react-router-dom";
-import { FTMIcon } from "resources/svg";
+import { BackArrowIcon, FTMIcon } from "resources/svg";
 import IECommerceViewModel from "./IECommerceViewModel";
 
 export default observer(function ECommerceView({
@@ -19,9 +19,6 @@ export default observer(function ECommerceView({
             handleSubmit();
             return false;
         }}>
-            <div className="simple-link">
-                <Link to="/">Go back to homepage</Link>
-            </div>
             <div className="form-wrapper">
                 <label className="toTheLeft">Id</label>
                 <input type="text" value={id} onChange={() => {return;}} placeholder="0000-000000-000000000000000" disabled />

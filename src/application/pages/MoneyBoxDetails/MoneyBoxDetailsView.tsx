@@ -2,7 +2,7 @@ import Popup from "application/utils/Popup";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FTMIcon, PiggyBank } from "resources/svg";
+import { BackArrowIcon, FTMIcon, PiggyBank } from "resources/svg";
 import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
 export default observer(function MoneyBoxDetailsView({
@@ -33,16 +33,17 @@ export default observer(function MoneyBoxDetailsView({
     const [buttonPopup, setButtonPopup] = useState(false);
 
     return <>
-        <div className="content-card">
+        <div className="simple-link fixed-top-left">
+            <Link to={back(location.pathname)}><BackArrowIcon className="svg-white"/>Go back to homepage</Link>
+        </div>
+        <div className="page-container column">
+            <h1>MoneyBox Details</h1>
             <section className="transaction-details">
-
-                <div className="simple-link">
-                    <Link to={back(location.pathname)} >Go back to your transactions</Link>
-                </div>
 
                 <div className="two-cols">
                     <div className="img-box">
                         <PiggyBank className="bigPiggy" />
+                        <span className="moneybox-percentage">{(filledFtm/ftm)*100}% filled</span>
                     </div>
                     <div className="details">
                         <ul>
@@ -53,24 +54,26 @@ export default observer(function MoneyBoxDetailsView({
                             <li><div className="section-head">To be Filled:</div>{ftmToFill} FTM ({weiToFill} wei)</li>
                             <li><div className="section-head">State:</div>{state}</li>
                         </ul>
-                    </div>
-                </div>
 
-                <div className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"}>
-                    <label>Amount</label>
-                    <div className="ftm-input">
-                        <input type="number" step="any" min="0.000000000000000001" max={ftmToFill} className="clickable-input" value={feeAmountFtm || undefined} onChange={el => setFeeAmount(el.target.valueAsNumber)} placeholder="0.00" />
-                        <span className="ftm-icon">
-                            <FTMIcon />
-                            FTM
-                        </span>
+                        <form className="payment-form">
+                            <div className={!(isPaid || isUnlocked || isRefunded) ? "form-wrapper" : "hide"}>
+                                <label>Select the amount that you want to send</label>
+                                <div className="ftm-input">
+                                    <input type="number" step="any" min="0.000000000000000001" max={ftmToFill} className="clickable-input" value={feeAmountFtm || undefined} onChange={el => setFeeAmount(el.target.valueAsNumber)} placeholder="0.00" />
+                                    <span className="ftm-icon">
+                                        <FTMIcon />
+                                        FTM
+                                    </span>
+                                </div>
+                                <div className="ftm-wei">
+                                    <span>
+                                        ({feeAmountWei}) wei
+                                    </span>
+                                </div>
+                                <button id="contribute" onClick={() => setButtonPopup(newPayment)} disabled={isPaid}>Contribute</button>
+                            </div>
+                        </form>
                     </div>
-                    <div className="ftm-wei">
-                        <span>
-                            ({feeAmountWei}) wei
-                        </span>
-                    </div>
-                    <button id="contribute" onClick={() => setButtonPopup(newPayment)} disabled={isPaid}>Contribute</button>
                 </div>
 
                 <table id="table-payments">

@@ -61,6 +61,7 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         return Amount.create(amount);
     }
 
+    /*
     async getAllPaymentsByCustomerId(customer: string): Promise<{moneyboxID: string, payments: Payment[]}[]> {
         if (!this.contract.instance) throw Error("Contract not loaded");
         const paymentsTuple: IPaymentTuple[] = await this.contract.instance.methods
@@ -74,4 +75,5 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
             }
         });
     }
+    */
 }

@@ -2,6 +2,7 @@ import { observer } from "mobx-react";
 import React from "react";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
+import { BackArrowIcon } from "resources/svg";
 import ITransactionInitViewModel from "./ITransactionInitViewModel";
 
 export default observer(function TransactionInitView({
@@ -13,7 +14,7 @@ export default observer(function TransactionInitView({
     return <>
         <section className="transaction-details">
             <div className="simple-link">
-                <Link to="/">Go to homepage</Link>
+                <Link to="/"><BackArrowIcon className="svg-white"/>Go to homepage</Link>
             </div>
             <header>Transaction Details</header>
             <p>Please choose the payment type that you prefer.<br />

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { PaidFillIcon, ShoppingCartIcon, WalletIcon } from "resources/svg";
 
 export default observer(function MenuView() {
-    return <nav id="home-menu">
+    return <nav id="side-menu">
         <ul>
             <li>
                 <Link to="/checkout" className="home-button">
@@ -25,5 +25,5 @@ export default observer(function MenuView() {
                 </Link>
             </li>
         </ul>
-    </nav>
+    </nav>;
 });

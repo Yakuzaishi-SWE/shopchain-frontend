@@ -49,11 +49,17 @@ div#root{
 }
 
 .simple-link > a:visited{
-    color: rgb(0, 186, 183);
+    color: #d0b6ff;
 }
 
 div.simple-link{
     display: block;
+    margin: 1em 0;
+
+    &.fixed-top-left {
+        margin-top: 5em;
+        margin-left: 360px;
+    }
 }
 
 div.two-cols {

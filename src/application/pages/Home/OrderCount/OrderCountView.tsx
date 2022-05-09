@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Loading, OrderIcon } from "resources/svg";
+import { Loading, OrderIcon, SingleOrder } from "resources/svg";
 import IOrderCountViewModel from "./IOrderCountViewModel";
 
 
@@ -13,7 +13,7 @@ export default observer(function OrderCountView({ count, isBusy }: IOrderCountVi
             <p>Orders</p>
         </div>
         <div className="float-right widget-icon">
-            <OrderIcon />
+            <SingleOrder />
         </div>
     </div>;
 });

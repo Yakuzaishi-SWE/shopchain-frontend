@@ -1,11 +1,11 @@
 article.transaction {
     background-image: linear-gradient(to bottom right, $primary, $primaryLight);
     padding: 24px;
-    margin-bottom: 1.5em;
+    margin: 1em auto;
     border-radius: 32px;
     min-width: 500px;
-    width: auto;
-    max-width: 600px;
+    width: 100%;
+    max-width: 650px;
 
     &>header {
         display: flex;

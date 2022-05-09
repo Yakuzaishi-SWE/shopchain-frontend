@@ -1,7 +1,6 @@
 import Amount from "../domain/Amount";
 import MoneyBox from "../domain/MoneyBox";
 import Payment from "../domain/Payment";
-import PaymentCollection from "../domain/PaymentCollection";
 import IOrderRepo from "./IOrderRepo";
 
 
@@ -12,7 +11,7 @@ interface IMoneyBoxOrderRepo extends IOrderRepo {
     getOrderById(id: string): Promise<MoneyBox | undefined>;
     getOrdersBySeller(seller: string): Promise<MoneyBox[]>;
     getOrdersByBuyer(seller: string): Promise<MoneyBox[]>;
-    getAllPaymentsByCustomerId(customer: string): Promise<{moneyboxID: string, payments: Payment[]}[]>;
+    //getAllPaymentsByCustomerId(customer: string): Promise<{moneyboxID: string, payments: Payment[]}[]>;
 }
 
 export default IMoneyBoxOrderRepo;
