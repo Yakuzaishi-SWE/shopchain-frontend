@@ -25,6 +25,10 @@ export default class OrderCollection<T extends Order = Order> {
         return this.orderarr.filter(order => order.ownerAddress.toLowerCase() == buyer.toLowerCase());
     }
 
+    getAll() {
+        return this.orderarr;
+    }
+
     add(order: T) {
         this.orders.set(order.id, order);
     }

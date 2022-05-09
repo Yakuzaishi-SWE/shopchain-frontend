@@ -21,19 +21,19 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
     }
 
     async getOrderById(id: string): Promise<MoneyBox | undefined> {
-        if (!this.contract.instance) return undefined;
+        if (!this.contract.instance) throw Error("Contract not loaded");
         const order: OrderDTO = await this.contract.instance.methods.getOrderById(id).call();
         return MoneyBox.create(this.store, id, order);
     }
 
     async getOrdersBySeller(seller: string): Promise<MoneyBox[]> {
-        if (!this.contract.instance) return [];
+        if (!this.contract.instance) throw Error("Contract not loaded");
         const ordertuples: IOrderTuple[] = await this.contract.instance.methods.getOrdersBySeller(seller).call();
         return ordertuples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
     }
 
     async getOrdersByBuyer(buyer: string): Promise<MoneyBox[]> {
-        if (!this.contract.instance) return [];
+        if (!this.contract.instance) throw Error("Contract not loaded");
         const ordertuples: IOrderTuple[] =  await this.contract.instance.methods.getOrdersByBuyer(buyer).call();
         return ordertuples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
     }
@@ -62,13 +62,14 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
     }
 
     async getMoneyBoxesByParticipantAddress(participant: string): Promise<MoneyBox[]> {
-        if (!this.contract.instance) return [];
-         
+        if (!this.contract.instance) throw Error("Contract not loaded");
         let ordertuples: IOrderTuple[] = await this.contract.instance.methods
             .getMoneyBoxesByParticipantAddress(participant)
             .call();
-        const mySet = new Set(ordertuples); 
-        ordertuples = [...mySet];
+        // creo una mappa di id -> moneybox (per evitare duplicati)
+        const ordertuplesMap = ordertuples.reduce((prev, current) => prev.set(current.id,  current.order), new Map<string, IOrder>());
+        // ritorno da mappa a ordertouple
+        ordertuples = [...ordertuplesMap].map(el => ({ id: el[0], order: el[1] }));
         return ordertuples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
     }
         
