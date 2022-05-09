@@ -35,5 +35,6 @@ export default observer(function PickAmount() {
         setInitFTM={vm.setInitFTM}
         canRedirect={vm.canRedirect}
         amountFtm={vm.amountFtm}
+        isBusy={vm.isBusy}
     />;
 });

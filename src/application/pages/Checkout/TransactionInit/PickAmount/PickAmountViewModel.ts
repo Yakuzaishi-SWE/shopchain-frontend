@@ -64,4 +64,9 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
         if (!this.createMoneyBoxTask.isLoaded) return false;
         return true;
     }
+
+    get isBusy(): boolean {
+        if (!this.createMoneyBoxTask) return false;
+        return this.createMoneyBoxTask.isBusy;
+    }
 }
