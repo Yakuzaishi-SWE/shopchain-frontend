@@ -46,12 +46,12 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.partecipantsTask.result;
     }
 
-    private get myPayments() {
-        return this.partecipantsPayments.filter(payment => {
-            if (!this.providerStore.address.address) return false;
-            return payment.isFrom(this.providerStore.address.address);
-        });
-    }
+    // private get myPayments() {
+    //     return this.partecipantsPayments.filter(payment => {
+    //         if (!this.providerStore.address.address) return false;
+    //         return payment.isFrom(this.providerStore.address.address);
+    //     });
+    // }
 
     private get amountFilledWei() {
         if (!this.moneybox) return 0;

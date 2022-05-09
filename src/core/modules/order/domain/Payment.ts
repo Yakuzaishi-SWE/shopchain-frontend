@@ -21,7 +21,7 @@ export default class Payment {
     }
 
     isFrom(address: string) {
-        return this.from === address;
+        return this.from.toLowerCase() === address;
     }
 
     get amount() {

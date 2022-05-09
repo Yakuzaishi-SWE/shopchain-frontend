@@ -43,7 +43,7 @@ export default observer(function MoneyBoxDetailsView({
                 <div className="two-cols">
                     <div className="img-box">
                         <PiggyBank className="bigPiggy" />
-                        <span className="moneybox-percentage">{(filledFtm/ftm)*100}% filled</span>
+                        <span className="moneybox-percentage">{((filledFtm/ftm)*100).toFixed(0)}% filled</span>
                     </div>
                     <div className="details">
                         <ul>

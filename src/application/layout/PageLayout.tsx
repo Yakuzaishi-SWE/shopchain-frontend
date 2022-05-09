@@ -10,6 +10,6 @@ export default function PageLayout() {
         <Nav />
         <MenuView />
         {/* <OverlayController /> */}
-            <Outlet />
+        <Outlet />
     </>;
 }

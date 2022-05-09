@@ -10,7 +10,8 @@ export default observer(function ContributesListController() {
     const vm = useViewModel(ContributesListViewModel, RootStore.getInstance(), ProviderStore.getInstance());
     
     return <ContributesListView
-        contributes={vm.contributes}
+        moneyBoxesContributed={vm.moneyBoxesContributed}
+        getContributesFromMoneyBox={vm.getContributesFromMoneyBox}
         dateNtime={vm.dateNtime}
     />;
 });

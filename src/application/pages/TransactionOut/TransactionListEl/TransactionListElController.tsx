@@ -1,9 +1,9 @@
+import { useViewModel } from "application/utils/useViewModel";
 import Order from "core/modules/order/domain/Order";
 import { observer } from "mobx-react-lite";
-import React, { useEffect } from "react";
+import React from "react";
 import TransactionListElView from "./TransactionListElView";
 import TransactionListElViewModel from "./TransactionListElViewModel";
-import { useViewModel } from "application/utils/useViewModel";
 
 export default observer(function TransactionListElController({ order }: { order: Order }) {
     const vm = useViewModel(TransactionListElViewModel, order);
