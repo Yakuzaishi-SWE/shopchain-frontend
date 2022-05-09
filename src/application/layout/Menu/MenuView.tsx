@@ -7,7 +7,7 @@ export default observer(function MenuView() {
     return <nav id="side-menu">
         <ul>
             <li>
-                <NavLink to="/" className="home-button">
+                <NavLink to="/" id="homeTab" className="home-button">
                     <HomeIcon />
                     Home
                 </NavLink>

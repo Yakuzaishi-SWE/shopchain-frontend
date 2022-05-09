@@ -1,14 +1,13 @@
 div.page-container {
     display: flex;
     justify-content: space-between;
-    //margin-top: 6em;
     position: relative;
     overflow: auto;
     margin-left: 300px;
+    margin-top: 5%;
 
     &.column {
         flex-direction: column;
-        margin: 5% 0 0 12%;
     }
 
     & > .redirect{
@@ -47,15 +46,15 @@ div.page-container {
     }
 
     & a.home-button:hover {
-        background-color: $background;
+        background-color: $primaryLight;
     }
 
     & .active {
-        background-color: $primaryLight;
+        background-color: $background60;
         cursor: default;
     }
 
     & a.active:hover{
-        background-color: $primaryLight;
+        background-color: $background60;
     }
 }
