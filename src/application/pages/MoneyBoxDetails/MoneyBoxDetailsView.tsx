@@ -1,3 +1,4 @@
+import Popup from "application/utils/Popup";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -26,8 +27,10 @@ export default observer(function MoneyBoxDetailsView({
     partecipants,
     dateNtime,
     back,
+    isOwner,
+    isSeller,
+    ownerAddress,
 }: IMoneyBoxDetailsViewModel) {
-
     const location = useLocation();
     const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -44,6 +47,7 @@ export default observer(function MoneyBoxDetailsView({
                     <div className="details">
                         <ul>
                             <li><div className="section-head">Transaction ID:</div>{id}</li>
+                            <li><div className="section-head">Owner:</div>{ownerAddress}</li>
                             <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
                             <li><div className="section-head">Total Amount:</div>{ftm} FTM ({wei} wei)</li>
                             <li><div className="section-head">Filled:</div>{filledFtm} FTM ({filledWei} wei)</li>
@@ -66,7 +70,7 @@ export default observer(function MoneyBoxDetailsView({
                                         ({feeAmountWei}) wei
                                     </span>
                                 </div>
-                                <button id="contribute" onClick={() => setButtonPopup(newPayment)} disabled={isPaid}>Contribute</button>
+                                <button id="contribute" onClick={newPayment} disabled={isPaid}>Contribute</button>
                             </div>
                         </form>
                     </div>
@@ -90,19 +94,18 @@ export default observer(function MoneyBoxDetailsView({
                         )}
                     </tbody>
                 </table>
-
                 <div className="box-button">
-                    <button className={isPaid ? "" : "hide"} id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
-                    <button className={(isUnlocked || isRefunded) ? "hide" : ""} id="refund" onClick={refund} disabled={isUnlocked}>Refund</button>
+                    <button className={(isPaid && isOwner) ? "" : "hide"} id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
+                    <button className={(isUnlocked || isRefunded || !(isOwner || isSeller)) ? "hide" : ""} id="refund" onClick={refund} disabled={isUnlocked}>Refund</button>
                     <button className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"} id="copy-invite-link" onClick={() => { navigator.clipboard.writeText("Help me fill my MoneyBox, I'm poor...\n\n" + window.location.href).then(function () { alert("Invite Link Successfully Copied!"); }); }} disabled={isPaid}>Copy invite link</button>
                 </div>
 
             </section>
         </div>
         
-        {/* <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+        <Popup show={buttonPopup} close={() => setButtonPopup(false)}>
             <h3>Warning</h3>
             <p>The chosen amount is greater than the amount needed to fill the moneybox ({ftmToFill})</p>
-        </Popup> */}
+        </Popup>
     </>;
 });

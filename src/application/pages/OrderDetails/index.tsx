@@ -1,4 +1,5 @@
 import { useViewModel } from "application/utils/useViewModel";
+import ProviderStore from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
@@ -7,17 +8,15 @@ import OrderDetailsView from "./OrderDetailsView";
 import OrderDetailsViewModel from "./OrderDetailsViewModel";
 
 export default observer(function OrderDetails() {
-    const vm = useViewModel(OrderDetailsViewModel, RootStore.getInstance());
+    const vm = useViewModel(OrderDetailsViewModel, RootStore.getInstance(), ProviderStore.getInstance());
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
-        if (id) {
-            vm.setOrderId(id);
-        }
+        if (id) vm.setOrderId(id);
     }, [id]);
 
 
-    //if (!id) return <Navigate to="/transaction/out/" />;
+    
 
     return <OrderDetailsView
         id={vm.id}
@@ -30,5 +29,7 @@ export default observer(function OrderDetails() {
         unlock={vm.unlock}
         refund={vm.refund}
         back={vm.back}
+        isOwner={vm.isOwner}
+        isSeller={vm.isSeller}
     />;
 });

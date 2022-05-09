@@ -46,13 +46,6 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.partecipantsTask.result;
     }
 
-    // private get myPayments() {
-    //     return this.partecipantsPayments.filter(payment => {
-    //         if (!this.providerStore.address.address) return false;
-    //         return payment.isFrom(this.providerStore.address.address);
-    //     });
-    // }
-
     private get amountFilledWei() {
         if (!this.moneybox) return 0;
         if (!this.amountToFillTask) return 0;
@@ -169,6 +162,16 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         if(route.includes("out")) return "/transaction/out";
         if(route.includes("in")) return "/transaction/in";
         return "";
+    }
+
+    get isOwner() {
+        if(!this.providerStore.address.address) return false;
+        return this.ownerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
+    }
+
+    get isSeller() {
+        if(!this.providerStore.address.address) return false;
+        return this.sellerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
     }
 
 }

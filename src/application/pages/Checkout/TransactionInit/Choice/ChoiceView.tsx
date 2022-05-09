@@ -2,6 +2,7 @@ import Popup from "application/utils/Popup";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Loading } from "resources/svg";
 import IChoiceViewModel from "./IChoiceViewModel";
 
 export default observer(function ChoiceView({
@@ -17,8 +18,11 @@ export default observer(function ChoiceView({
                 search: location.search,
             }} className="btn-moneybox btn-shadow">Create Money Box</Link>
         </div>
-        <Popup show={isBusy} close={() => {return;}}>
-            <h3>Warning</h3>
+        <Popup show={isBusy}>
+            <div className="sweet-loading">
+                <p>Check your Metamask extension. The payment process may take few seconds...</p>
+                <Loading />
+            </div>
         </Popup>
     </>;
 });

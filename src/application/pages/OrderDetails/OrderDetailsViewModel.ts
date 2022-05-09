@@ -1,3 +1,4 @@
+import ProviderStore from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import { makeAutoObservable } from "mobx";
 import IOrderDetailsViewModel from "./IOrderDetailsViewModel";
@@ -5,7 +6,7 @@ import IOrderDetailsViewModel from "./IOrderDetailsViewModel";
 export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
     _id = "";
 
-    constructor(private readonly rootStore: RootStore) {
+    constructor(private readonly rootStore: RootStore, private readonly providerStore: ProviderStore) {
         makeAutoObservable(this, {}, { autoBind: true, });
     }
 
@@ -66,6 +67,16 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
         if(route.includes("out")) return "/transaction/out";
         if(route.includes("in")) return "/transaction/in";
         return "";
+    }
+
+    get isOwner() {
+        if(!this.providerStore.address.address) return false;
+        return this.ownerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
+    }
+
+    get isSeller() {
+        if(!this.providerStore.address.address) return false;
+        return this.sellerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
     }
     
 }

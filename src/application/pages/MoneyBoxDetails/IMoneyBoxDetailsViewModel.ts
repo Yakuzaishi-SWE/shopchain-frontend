@@ -23,5 +23,7 @@ interface IMoneyBoxDetailsViewModel {
   partecipants: Payment[],
   dateNtime(partecipant: Payment): string,
   back(route: string): string,
+  isOwner: boolean,
+  isSeller: boolean,
 }
 export default IMoneyBoxDetailsViewModel;

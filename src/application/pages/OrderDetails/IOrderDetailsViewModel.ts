@@ -10,6 +10,8 @@ interface IOrderDetailsViewModel {
     unlock(): void,
     refund(): void,
     back(route: string): string,
+    isOwner: boolean,
+    isSeller: boolean,
 }
 
 export default IOrderDetailsViewModel;

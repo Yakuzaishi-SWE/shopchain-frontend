@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-import { FTMIcon } from "resources/svg";
+import { FTMIcon, Loading } from "resources/svg";
 import IPickAmountViewModel from "./IPickAmountViewModel";
 
 
@@ -37,8 +37,11 @@ export default observer(function PickAmountView({
             </div>
             <button onClick={() => setButtonPopup(createMoneyBox)} className="btn-create">Create MoneyBox</button>
         </div>
-        <Popup show={isBusy} close={() => {return;}}>
-            <h3>Warning</h3>
+        <Popup show={isBusy}>
+            <div className="sweet-loading">
+                <p>Check your Metamask extension. The payment process may take few seconds...</p>
+                <Loading />
+            </div>
         </Popup>
         <Popup show={buttonPopup} close={() => setButtonPopup(false)}>
             <h3>Warning</h3>

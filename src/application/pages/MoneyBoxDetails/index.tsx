@@ -41,6 +41,8 @@ export default observer(function MoneyBoxDetails() {
         partecipants={vm.partecipants}
         dateNtime={vm.dateNtime}
         back={vm.back}
+        isOwner={vm.isOwner}
+        isSeller={vm.isSeller}
     />;
 
 });
