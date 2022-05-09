@@ -21,9 +21,6 @@ export default observer(function OrderDetailsView({
 
     return <><div className="content-card">
         <section className="transaction-details">
-            <div className="simple-link">
-                <Link to={back(location.pathname)}><BackArrowIcon className="svg-white"/>Go back to your transactions</Link>
-            </div>
             <ul>
                 <li><div className="section-head">Transaction ID:</div>{id}</li>
                 <li><div className="section-head">Order Owner:</div>{ownerAddress}</li>

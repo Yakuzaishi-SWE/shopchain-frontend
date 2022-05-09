@@ -32,9 +32,6 @@ export default observer(function MoneyBoxDetailsView({
     const [buttonPopup, setButtonPopup] = useState(false);
 
     return <>
-        <div className="simple-link fixed-top-left">
-            <Link to={back(location.pathname)}><BackArrowIcon className="svg-white"/>Go back to homepage</Link>
-        </div>
         <div className="page-container column">
             <h1>MoneyBox Details</h1>
             <section className="transaction-details">

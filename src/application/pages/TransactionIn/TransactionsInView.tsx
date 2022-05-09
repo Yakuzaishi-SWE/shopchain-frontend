@@ -6,9 +6,6 @@ import TransactionListController from "./TransactionList/TransactionListControll
 
 export default observer(function TransactionInView() {
     return <>
-        <div className="simple-link fixed-top-left">
-            <Link to="/"><BackArrowIcon className="svg-white"/>Go back to homepage</Link>
-        </div>
         <div className="content-card">
             <h1 className="center">Inbound transactions</h1>
             <TransactionListController />

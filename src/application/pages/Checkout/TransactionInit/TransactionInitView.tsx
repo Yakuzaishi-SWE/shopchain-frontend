@@ -13,9 +13,6 @@ export default observer(function TransactionInitView({
 }: ITransactionInitViewModel) {
     return <>
         <section className="transaction-details">
-            <div className="simple-link">
-                <Link to="/"><BackArrowIcon className="svg-white"/>Go to homepage</Link>
-            </div>
             <header>Transaction Details</header>
             <p>Please choose the payment type that you prefer.<br />
                 If you select “Pay Alone” you will redirect to checkout page and you will pay the entire order amount.<br />

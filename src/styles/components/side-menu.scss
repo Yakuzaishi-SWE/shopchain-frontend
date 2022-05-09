@@ -8,6 +8,11 @@ div.page-container {
 
     &.column {
         flex-direction: column;
+        margin: 5% 0 0 12%;
+    }
+
+    & > .redirect{
+        text-align: center;
     }
 }
 
@@ -43,5 +48,14 @@ div.page-container {
 
     & a.home-button:hover {
         background-color: $background;
+    }
+
+    & .active {
+        background-color: $primaryLight;
+        cursor: default;
+    }
+
+    & a.active:hover{
+        background-color: $primaryLight;
     }
 }

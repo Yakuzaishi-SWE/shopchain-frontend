@@ -7,9 +7,6 @@ import TransactionListController from "./TransactionList/TransactionListControll
 
 export default observer(function TransactionOutView() {
     return <>
-        <div className="simple-link fixed-top-left">
-            <Link to="/"><BackArrowIcon className="svg-white"/>Go back to homepage</Link>
-        </div>
         <div className="page-container">
             <div className="left-col">
                 <h1 className="center">Your Transactions</h1>

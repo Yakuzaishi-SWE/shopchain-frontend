@@ -52,16 +52,6 @@ div#root{
     color: #d0b6ff;
 }
 
-div.simple-link{
-    display: block;
-    margin: 1em 0;
-
-    &.fixed-top-left {
-        margin-top: 5em;
-        margin-left: 360px;
-    }
-}
-
 div.two-cols {
     display: flex;
     flex-direction: row;
