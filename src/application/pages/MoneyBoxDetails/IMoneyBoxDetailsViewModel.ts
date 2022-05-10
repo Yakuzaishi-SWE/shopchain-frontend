@@ -15,8 +15,8 @@ interface IMoneyBoxDetailsViewModel {
   isUnlocked: boolean,
   isRefunded: boolean,
   date: string,
-  unlock(): void,
-  refund(): void,
+  unlock(): boolean,
+  refund(): boolean,
   feeAmountFtm: number,
   feeAmountWei: number,
   setFeeAmount(newAmount: number): void, 
@@ -26,5 +26,9 @@ interface IMoneyBoxDetailsViewModel {
   back(route: string): string,
   isOwner: boolean,
   isSeller: boolean,
+  isBusy: boolean,
+  unlockCode: number,
+  code: number,
+  setCode(code: number): void,
 }
 export default IMoneyBoxDetailsViewModel;

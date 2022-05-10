@@ -44,6 +44,10 @@ export default observer(function MoneyBoxDetails() {
         isOwner={vm.isOwner}
         isSeller={vm.isSeller}
         date={vm.date}
+        isBusy={vm.isBusy}
+        unlockCode={vm.unlockCode}
+        code={vm.code}
+        setCode={vm.setCode}
     />;
 
 });

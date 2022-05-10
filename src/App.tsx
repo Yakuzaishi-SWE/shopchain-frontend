@@ -39,8 +39,8 @@ export default () => {
                         <Route index element={<Choice />} />
                         <Route path="moneybox" element={<PickAmount />} />
                     </Route>
-                    <Route path="success/order" element={<TransactionSuccess />} />
-                    <Route path="success/moneybox" element={<MoneyBoxCreationSuccess />} />
+                    <Route path="success/order/:id" element={<TransactionSuccess />} />
+                    <Route path="success/moneybox/:id" element={<MoneyBoxCreationSuccess />} />
                 </Route>
 
                 <Route path="transaction/out" element={<TransactionOutView />} />

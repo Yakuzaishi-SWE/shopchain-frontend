@@ -8,11 +8,14 @@ interface IOrderDetailsViewModel {
     state: string,
     date: string,
     isPaid: boolean,
-    unlock(): void,
-    refund(): void,
+    unlock(): boolean,
+    refund(): boolean,
     back(route: string): string,
     isOwner: boolean,
     isSeller: boolean,
+    unlockCode: number,
+    setCode(code: number): void,
+    code: number,
 }
 
 export default IOrderDetailsViewModel;

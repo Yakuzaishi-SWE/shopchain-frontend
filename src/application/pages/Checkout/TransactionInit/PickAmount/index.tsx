@@ -24,7 +24,7 @@ export default observer(function PickAmount() {
     },[id]);
 
     useEffect(() => {
-        if (vm.canRedirect) navigate("/checkout/success/moneybox");
+        if (vm.canRedirect) navigate("/checkout/success/moneybox/"+id);
     }, [vm.canRedirect]);
 
     return <PickAmountView 

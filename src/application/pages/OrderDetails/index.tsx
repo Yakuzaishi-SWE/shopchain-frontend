@@ -32,5 +32,8 @@ export default observer(function OrderDetails() {
         isOwner={vm.isOwner}
         isSeller={vm.isSeller}
         date={vm.date}
+        unlockCode={vm.unlockCode}
+        setCode={vm.setCode}
+        code={vm.code}
     />;
 });

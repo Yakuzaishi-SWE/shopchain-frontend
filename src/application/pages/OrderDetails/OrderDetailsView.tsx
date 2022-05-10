@@ -1,5 +1,6 @@
+import Popup from "application/utils/Popup";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { BackArrowIcon } from "resources/svg";
@@ -19,8 +20,13 @@ export default observer(function OrderDetailsView({
     isOwner,
     isSeller,
     date,
+    unlockCode,
+    setCode,
+    code,
 }: IOrderDetailsViewModel) {
     const location = useLocation();
+    const [popUnlock, setPopUnlock] = useState(false);
+    const [popRefund, setPopRefund] = useState(false);
 
     return <>
         <div className="page-container column">
@@ -39,10 +45,22 @@ export default observer(function OrderDetailsView({
                 </ul>
 
                 <div className={"box-button " + ((state.toString() === "Unlocked" || state.toString() === "Refunded" || !(isOwner || isSeller)) ? "hide" : "")}>
-                    <button className={isSeller ? "hide" : ""} id="unlock" onClick={unlock} disabled={!isPaid}>Unlock</button>
-                    <button id="refund" onClick={refund} disabled={!isPaid}>Refund</button>
+                    <button className={isSeller ? "hide" : ""} id="unlock" onClick={() => setPopUnlock(true)} disabled={!isPaid}>Unlock</button>
+                    <button id="refund" onClick={() => setPopRefund(true)} disabled={!isPaid}>Refund</button>
                 </div>
             </section>
         </div>
+        <Popup show={popUnlock} close={() => setPopUnlock(false)}>
+            <form>
+                <h2>Insert the Unlock Code: {unlockCode}</h2>
+                <input type="number" value={code || undefined} onChange={el => setCode(el.target.valueAsNumber)}/>
+            </form>
+            <button onClick={() => setPopUnlock(unlock)}>Confirm</button>
+        </Popup>
+        <Popup show={popRefund} close={() => setPopRefund(false)}>
+            <h2>You sure?</h2> 
+            <button onClick={() => setPopRefund(refund)}>Confirm</button>
+        </Popup>
+
     </>;
 });

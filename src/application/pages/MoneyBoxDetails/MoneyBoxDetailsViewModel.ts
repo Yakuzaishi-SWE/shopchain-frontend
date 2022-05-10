@@ -10,6 +10,7 @@ import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewModel {
     _id = "";
     _feeAmount = new Amount(0);
+    _code = 0;
     providerStore: ProviderStore;
 
     constructor(private readonly rootStore: RootStore, providerStore: ProviderStore = ProviderStore.getInstance()) {
@@ -27,7 +28,8 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     }
 
     private get moneybox() {
-        return this.moneyboxTask?.result;
+        if(!this.moneyboxTask) return null;
+        return this.moneyboxTask.result;
     }
 
     private get amountToFillTask() {
@@ -118,26 +120,43 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this._feeAmount.wei;
     }
 
+    get unlockCode() {
+        return this.moneybox?.unlockCode || 0;
+    }
+
+    get code() {
+        return this._code;
+    }
+
+    setCode(code: number): void {
+        this._code = code;
+    }
+
     setFeeAmount(newAmount: number): void {
         this._feeAmount.setAmountFTM(newAmount);
     }
 
     unlock() {
-        if (this.moneybox) {
+        if (this.moneybox && this.code === this.unlockCode) {
             this.moneybox.unlock(this.moneybox.unlockCode);
+            return false;
         }
+        return true;
     }
 
     refund() {
         if (this.moneybox) {
             this.moneybox.refund();
+            return false;
         }
+        return true;
     }
     
+    newPaymentTask: ComputedTask<void, [orderId: string, amount: string], void> | null = null;
     newPayment(): boolean {
         if(this._feeAmount.FTM <= this.ftmToFill) {
             if (this.moneybox) {
-                this.rootStore.moneyBoxStore.newPayment(
+                this.newPaymentTask = this.rootStore.moneyBoxStore.newPayment(
                     this.id, 
                     String(this.feeAmountWei)
                 );
@@ -180,4 +199,8 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 
+    get isBusy(): boolean {
+        if (!this.newPaymentTask) return false;
+        return this.newPaymentTask.isBusy;
+    }
 }

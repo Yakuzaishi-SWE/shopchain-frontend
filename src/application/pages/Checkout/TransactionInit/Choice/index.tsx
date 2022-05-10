@@ -26,7 +26,7 @@ export default observer(function Choice() {
     }, [id]);
 
     useEffect(() => {
-        if (vm.canRedirect) navigate("/checkout/success/order");
+        if (vm.canRedirect) navigate("/checkout/success/order/"+id);
     }, [vm.canRedirect]);
 
     return <ChoiceView

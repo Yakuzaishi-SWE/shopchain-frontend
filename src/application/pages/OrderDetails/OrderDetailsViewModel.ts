@@ -5,6 +5,7 @@ import IOrderDetailsViewModel from "./IOrderDetailsViewModel";
 
 export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
     _id = "";
+    _code = 0;
 
     constructor(private readonly rootStore: RootStore, private readonly providerStore: ProviderStore) {
         makeAutoObservable(this, {}, { autoBind: true, });
@@ -12,6 +13,10 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
 
     setOrderId(id: string) {
         this._id = id;
+    }
+
+    setCode(code: number) {
+        this._code = code;
     }
 
     private get orderTask() {
@@ -55,20 +60,28 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
         return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 
+    get unlockCode() {
+        return this.order?.unlockCode || 0;
+    }
+
     get isPaid() {
         return this.order?.state.isPaid || false;
     }
 
     unlock() {
-        if (this.order) {
+        if (this.order && this.unlockCode == this._code) {
             this.order.unlock(this.order.unlockCode);
+            return false;
         }
+        return true;
     }
 
     refund() {
         if (this.order) {
             this.order.refund();
+            return false;
         }
+        return true;
     }
 
     back(route: string) {
@@ -85,6 +98,10 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
     get isSeller() {
         if (!this.providerStore.address.address) return false;
         return this.sellerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
+    }
+
+    get code() {
+        return this._code;
     }
 
 }

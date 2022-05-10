@@ -1,8 +1,6 @@
 import { observer } from "mobx-react";
 import React from "react";
 import { Outlet } from "react-router";
-import { Link } from "react-router-dom";
-import { BackArrowIcon } from "resources/svg";
 import ITransactionInitViewModel from "./ITransactionInitViewModel";
 
 export default observer(function TransactionInitView({

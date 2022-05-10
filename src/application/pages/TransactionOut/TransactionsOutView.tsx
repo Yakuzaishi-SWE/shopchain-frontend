@@ -1,7 +1,5 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Link } from "react-router-dom";
-import { BackArrowIcon } from "resources/svg";
 import ContributesListController from "./ContributesList/ContributesListController";
 import TransactionListController from "./TransactionList/TransactionListController";
 
