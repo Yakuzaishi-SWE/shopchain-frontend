@@ -30,6 +30,9 @@
         font-weight: bold;
         width: 25%;
         float: left;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 2em;
     }
 
     & span.moneybox-percentage {

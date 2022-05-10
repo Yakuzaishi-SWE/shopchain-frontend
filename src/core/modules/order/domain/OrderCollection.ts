@@ -22,7 +22,7 @@ export default class OrderCollection<T extends Order = Order> {
     }
 
     getByBuyer(buyer: string) {
-        return this.orderarr.filter(order => order.ownerAddress.toLowerCase() == buyer.toLowerCase());
+        return this.orderarr.filter(order => order.ownerAddress.toLowerCase() === buyer.toLowerCase());
     }
 
     getAll() {

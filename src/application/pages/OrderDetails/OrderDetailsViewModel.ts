@@ -15,10 +15,12 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
     }
 
     private get orderTask() {
+        if (!this.providerStore.w3.om.instance) return null;
         return this.rootStore.orderStore.getOrderById(this.id);
     }
 
     private get order() {
+        if (!this.orderTask) return null;
         return this.orderTask.result;
     }
 
