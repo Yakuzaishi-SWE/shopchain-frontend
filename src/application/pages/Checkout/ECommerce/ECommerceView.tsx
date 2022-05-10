@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Link } from "react-router-dom";
-import { BackArrowIcon, FTMIcon } from "resources/svg";
+import { FTMIcon } from "resources/svg";
 import IECommerceViewModel from "./IECommerceViewModel";
 
 export default observer(function ECommerceView({

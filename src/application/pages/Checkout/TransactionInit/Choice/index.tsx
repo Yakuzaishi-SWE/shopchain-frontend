@@ -32,5 +32,6 @@ export default observer(function Choice() {
     return <ChoiceView
         isBusy={vm.isBusy}
         createOrder={vm.createOrder}
+        isFailed={vm.isFailed}
     />;
 });

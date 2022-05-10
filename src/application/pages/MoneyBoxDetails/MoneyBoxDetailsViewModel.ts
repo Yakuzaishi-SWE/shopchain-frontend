@@ -174,4 +174,10 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.sellerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
     }
 
+    get date() {
+        if (!this.moneybox) return "error";
+        const date = new Date(this.moneybox.timestamp * 1000);
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    }
+
 }

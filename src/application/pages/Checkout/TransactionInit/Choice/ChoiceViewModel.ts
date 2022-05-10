@@ -44,4 +44,9 @@ export default class ChoiceViewModel implements IChoiceViewModel {
         if (!this.createOrderTask) return false;
         return this.createOrderTask.isBusy;
     }
+
+    get isFailed(): boolean {
+        if (!this.createOrderTask) return false;
+        return this.createOrderTask.isFailed;
+    }
 }

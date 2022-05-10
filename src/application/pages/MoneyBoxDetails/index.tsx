@@ -43,6 +43,7 @@ export default observer(function MoneyBoxDetails() {
         back={vm.back}
         isOwner={vm.isOwner}
         isSeller={vm.isSeller}
+        date={vm.date}
     />;
 
 });

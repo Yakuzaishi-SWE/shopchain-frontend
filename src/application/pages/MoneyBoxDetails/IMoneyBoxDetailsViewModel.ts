@@ -14,6 +14,7 @@ interface IMoneyBoxDetailsViewModel {
   isPaid: boolean,
   isUnlocked: boolean,
   isRefunded: boolean,
+  date: string,
   unlock(): void,
   refund(): void,
   feeAmountFtm: number,

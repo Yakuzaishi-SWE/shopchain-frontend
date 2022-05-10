@@ -6,6 +6,7 @@ interface IOrderDetailsViewModel {
     ftm: number,
     wei: number,
     state: string,
+    date: string,
     isPaid: boolean,
     unlock(): void,
     refund(): void,

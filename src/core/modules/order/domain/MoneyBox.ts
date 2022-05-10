@@ -1,3 +1,4 @@
+import { timeStamp } from "console";
 import { computed, makeObservable, override } from "mobx";
 import OrderDTO from "../dtos/OrderDTO";
 import PaymentDTO from "../dtos/PaymentDTO";
@@ -34,6 +35,7 @@ export default class MoneyBox extends Order {
     static create(store: MoneyBoxOrderStore, id: string, props: OrderDTO) {
         const amount = new Amount(props.amount);
         const state = new OrderState(props.state);
+        const timestamp = props.timestamp;
 
         return new MoneyBox(
             store,
@@ -42,6 +44,7 @@ export default class MoneyBox extends Order {
                 ...props,
                 amount: amount,
                 state: state,
+                timestamp: timestamp,
             });
     }
     

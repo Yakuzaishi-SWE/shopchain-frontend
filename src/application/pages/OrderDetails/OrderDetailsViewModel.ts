@@ -47,6 +47,12 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
         return this.order?.state.toString() || "";
     }
 
+    get date() {
+        if (!this.order) return "error";
+        const date = new Date(this.order.timestamp * 1000);
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    }
+
     get isPaid() {
         return this.order?.state.isPaid || false;
     }
@@ -64,19 +70,19 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
     }
 
     back(route: string) {
-        if(route.includes("out")) return "/transaction/out";
-        if(route.includes("in")) return "/transaction/in";
+        if (route.includes("out")) return "/transaction/out";
+        if (route.includes("in")) return "/transaction/in";
         return "";
     }
 
     get isOwner() {
-        if(!this.providerStore.address.address) return false;
+        if (!this.providerStore.address.address) return false;
         return this.ownerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
     }
 
     get isSeller() {
-        if(!this.providerStore.address.address) return false;
+        if (!this.providerStore.address.address) return false;
         return this.sellerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
     }
-    
+
 }

@@ -26,16 +26,20 @@ export default observer(function MoneyBoxDetailsView({
     newPayment,
     partecipants,
     dateNtime,
-    back,
     isOwner,
     isSeller,
     ownerAddress,
+    date,
+    back,
 }: IMoneyBoxDetailsViewModel) {
-    const location = useLocation();
     const [buttonPopup, setButtonPopup] = useState(false);
+    const location = useLocation();
 
     return <>
         <div className="page-container column">
+            <div className="simple-link">
+                <Link to={back(location.pathname)}><BackArrowIcon className="svg-white" />Go back to your transactions</Link>
+            </div>
             <h1>MoneyBox Details</h1>
             <section className="transaction-details">
 
@@ -53,6 +57,7 @@ export default observer(function MoneyBoxDetailsView({
                             <li><div className="section-head">Filled:</div>{filledFtm} FTM ({filledWei} wei)</li>
                             <li><div className="section-head">To be Filled:</div>{ftmToFill} FTM ({weiToFill} wei)</li>
                             <li><div className="section-head">State:</div>{state}</li>
+                            <li><div className="section-head">Date:</div>{date}</li>
                         </ul>
 
                         <form className="payment-form">
@@ -70,7 +75,7 @@ export default observer(function MoneyBoxDetailsView({
                                         ({feeAmountWei}) wei
                                     </span>
                                 </div>
-                                <button id="contribute" onClick={newPayment} disabled={isPaid}>Contribute</button>
+                                <button id="contribute" onClick={() => setButtonPopup(newPayment)} disabled={isPaid}>Contribute</button>
                             </div>
                         </form>
                     </div>

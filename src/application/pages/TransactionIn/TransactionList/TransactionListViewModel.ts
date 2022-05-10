@@ -61,7 +61,7 @@ export default class TransactionListViewModel implements ITransactionListViewMod
         let t = this.transactions;
         if(stateFilter != "") t = t.filter(order => order.state.toString() == stateFilter);
         if(typeFilter != "") t = t.filter(order => order.type == typeFilter);
-        return t;
+        return t.filter(order => order.state.isPaid || order.state.isClosed || order.state.isCancelled);
     }
 
 }

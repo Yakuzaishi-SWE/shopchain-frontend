@@ -31,5 +31,6 @@ export default observer(function OrderDetails() {
         back={vm.back}
         isOwner={vm.isOwner}
         isSeller={vm.isSeller}
+        date={vm.date}
     />;
 });

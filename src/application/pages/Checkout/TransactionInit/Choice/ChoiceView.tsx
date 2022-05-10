@@ -1,6 +1,6 @@
 import Popup from "application/utils/Popup";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Loading } from "resources/svg";
 import IChoiceViewModel from "./IChoiceViewModel";
@@ -8,8 +8,11 @@ import IChoiceViewModel from "./IChoiceViewModel";
 export default observer(function ChoiceView({
     createOrder,
     isBusy,
+    isFailed,
 }: IChoiceViewModel) {
     const location = useLocation();
+    const [failedPopup, setFailedPopup] = useState(false);
+
     return <>
         <div className="box-button center">
             <button onClick={createOrder} className="btn-payalone">Pay Alone</button>
@@ -24,5 +27,9 @@ export default observer(function ChoiceView({
                 <Loading />
             </div>
         </Popup>
+        {/* <Popup show={isFailed} close={() => setFailedPopup(false)}>
+            <h3>Warning</h3>
+            <p>Transaction cancelled</p>
+        </Popup> */}
     </>;
 });

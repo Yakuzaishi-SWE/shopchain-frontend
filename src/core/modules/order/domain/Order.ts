@@ -9,7 +9,8 @@ export type OrderProps = {
     ownerAddress: string,
     amount: Amount,
     unlockCode: number,
-    state: OrderState
+    state: OrderState,
+    timestamp: number,
 };
 
 export default class Order {
@@ -86,6 +87,10 @@ export default class Order {
 
     set state(state: OrderState) {
         this.props.state = state;
+    }
+
+    get timestamp(): number {
+        return this.props.timestamp;
     }
     
     patch(other: Order) {
