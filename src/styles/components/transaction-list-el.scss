@@ -11,22 +11,22 @@ article.transaction {
         display: flex;
         justify-content: flex-end;
 
-        &>span.transaction-id {
-            flex-grow: 1;
-            font-size: 1.2em;
-            font-weight: bold;
+        // &>span.transaction-id {
+        //     flex-grow: 1;
+        //     font-size: 1.2em;
+        //     font-weight: bold;
 
-            &>.btn-linkto {
-                display: flex;
-                align-items: center;
-                color: white;
-                fill: white;
+        //     &>.btn-linkto {
+        //         display: flex;
+        //         align-items: center;
+        //         color: white;
+        //         fill: white;
 
-                &>svg {
-                    margin: 0 4px;
-                }
-            }
-        }
+        //         &>svg {
+        //             margin: 0 4px;
+        //         }
+        //     }
+        // }
 
         &>div.transaction-controls {
             display: flex;
@@ -63,6 +63,7 @@ article.transaction {
         &>div.info-box {
             display: flex;
             flex-direction: column;
+            margin-top: 1em;
 
             &>span.transaction-label {
                 font-size: 1.2em;
@@ -76,4 +77,57 @@ article.transaction {
             }
         }
     }
+}
+
+span.transaction-id {
+    flex-grow: 1;
+    font-size: 1.2em;
+    font-weight: bold;
+
+    a.btn-linkto {
+        display: flex;
+        align-items: center;
+        color: white;
+        fill: white;
+    
+        &>svg {
+            margin: 0 4px;
+        }
+    }
+}
+
+article.contribute {
+    background-image: linear-gradient(to bottom right, $primary, $primaryLight);
+    padding: 24px;
+    margin: 1em auto;
+    border-radius: 32px;
+    min-width: 500px;
+    width: 100%;
+    max-width: 650px;
+
+    &>header {
+        display: flex;
+        justify-content: flex-end;
+
+        span.transaction-state {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    }
+
+    table {
+        width: 100%;
+        margin: 4px 0 0.5em 0;
+        text-align: center;
+
+        thead > tr > th {
+            padding: 0.8em 1.8em;
+        }
+
+        tbody > tr > td {
+            padding: 0.6em 0;
+            background-color: #3f3c5e;
+        }        
+    }
+
 }

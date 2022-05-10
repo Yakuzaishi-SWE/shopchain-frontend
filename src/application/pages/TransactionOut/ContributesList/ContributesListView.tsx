@@ -13,18 +13,17 @@ export default observer(function ContributesListView({
         <ul className="transaction-list">
             {moneyBoxesContributed && moneyBoxesContributed.map(moneybox =>
                 <li>
-                    <article className="transaction">
+                    <article className="contribute">
                         <header>
                             <span className="transaction-id">
-                                <Link to={"/out/moneybox/"+moneybox.id+"/"}>{moneybox.id}<Launch/></Link>
+                                <Link to={"/out/moneybox/"+moneybox.id+"/"}  className="btn-linkto">{moneybox.id}<Launch/></Link>
                             </span>
-
                             <span className="transaction-state">
                                 State: {moneybox.state.toString()}
                             </span>
                         </header>
 
-                        <table id="table-payments">
+                        <table>
                             <thead>
                                 <tr>
                                     <th>Paid Amount</th>
@@ -35,7 +34,7 @@ export default observer(function ContributesListView({
                                 {getContributesFromMoneyBox(moneybox).map(contribute =>
                                     <>
                                         <tr key={contribute.timestamp}>
-                                            <td>{contribute.amount.FTM}</td>
+                                            <td>{contribute.amount.FTM} FTM</td>
                                             <td>{dateNtime(contribute)}</td>
                                         </tr>
                                     </>
