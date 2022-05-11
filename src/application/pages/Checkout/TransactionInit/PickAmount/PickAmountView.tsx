@@ -21,9 +21,8 @@ export default observer(function PickAmountView({
     const [buttonPopup, setButtonPopup] = useState(false);
 
     return <>
-        <div className="center">
-            <Link to={{ pathname: `/checkout/${id}/`,  search: location.search }} className="icon-btn back-btn btn-shadow">Go Back</Link>
-            <div className="payment-form">
+        <div>
+            <div className="payment-form center">
                 <div className="form-wrapper">
                     <label>Your Contribute:</label>
                     <div className="ftm-input">
@@ -35,7 +34,10 @@ export default observer(function PickAmountView({
                     </div>
                 </div>
             </div>
-            <button onClick={() => setButtonPopup(createMoneyBox)} className="btn-create">Create MoneyBox</button>
+            <div className="box-button">
+                <Link to={{ pathname: `/checkout/${id}/`,  search: location.search }} className="back-btn btn-shadow">Go Back</Link>
+                <button onClick={() => setButtonPopup(createMoneyBox)} className="btn-shadow btn-moneybox">Create MoneyBox</button>
+            </div>
         </div>
         <Popup show={isBusy}>
             <div className="sweet-loading">

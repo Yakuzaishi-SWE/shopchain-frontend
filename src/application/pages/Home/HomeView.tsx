@@ -1,9 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import OrderCountController from "./OrderCount/OrderCountController";
 import OrderBalanceController from "./OrderBalance/OrderBalanceController";
 import MoneyBoxBalanceController from "./MoneyBoxBalance/MoneyBoxBalanceController";
-import { PaidFillIcon, ShoppingCartIcon, WalletIcon } from "resources/svg";
 import MoneyBoxCountController from "./MoneyBoxCount/MoneyBoxCountController";
 
 const HomeView = () => {

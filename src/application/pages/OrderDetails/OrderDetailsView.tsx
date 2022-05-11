@@ -31,7 +31,7 @@ export default observer(function OrderDetailsView({
     return <>
         <div className="page-container column">
             <div className="simple-link">
-                <Link to={back(location.pathname)}><BackArrowIcon className="svg-white" />Go back to your transactions</Link>
+                {/*<Link to={back(location.pathname)}><BackArrowIcon className="svg-white" />Go back to your transactions</Link>*/}
             </div>
             <h1>Order Details</h1>
             <section className="transaction-details">

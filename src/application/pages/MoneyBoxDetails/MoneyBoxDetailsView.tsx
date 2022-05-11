@@ -44,7 +44,7 @@ export default observer(function MoneyBoxDetailsView({
     return <>
         <div className="page-container column">
             <div className="simple-link">
-                <Link to={back(location.pathname)}><BackArrowIcon className="svg-white" />Go back to your transactions</Link>
+                {/*<Link to={back(location.pathname)}><BackArrowIcon className="svg-white" />Go back to your transactions</Link>*/}
             </div>
             <h1>MoneyBox Details</h1>
             <section className="transaction-details">
