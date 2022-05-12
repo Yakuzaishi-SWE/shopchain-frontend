@@ -21,7 +21,7 @@ export default observer(function LockOverlayView({
                     <p id="redp">
                         {providerStore.state.description === "Connect Metamask" 
                             ?
-                            <p id="redp">Please connect to Metamask to continue</p>
+                            <p id="redp">Please connect to Metamask</p>
                             :
                             providerStore.state.description}
                     </p> 
