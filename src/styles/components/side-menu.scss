@@ -58,3 +58,19 @@ div.page-container {
         background-color: $background60;
     }
 }
+
+
+@media only screen and (max-width: 1300px) {
+
+    div.page-container {
+        flex-direction: column;
+    }
+
+    div.left-col {
+        width: 100%;
+    }
+
+    div.right-col {
+        width: 100%;
+    }
+}

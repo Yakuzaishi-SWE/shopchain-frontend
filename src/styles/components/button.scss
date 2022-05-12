@@ -56,19 +56,6 @@ button,
     border: none;
 }
 
-a.back-btn {
-    padding: 1.5em;
-    font-size: 1.2em;
-    background-color: #fff;
-    text-align: center;
-    text-decoration: none;
-    color: #000;
-    width: 100px;
-    margin: auto 10em;
-    padding: 0.2% 1%;
-    box-shadow: 0.3em 0.3em #1d1d1d;
-}
-
 .btn-create {
     background-color: #be24e5;
     box-shadow: 0.3em 0.3em #1d1d1d;
@@ -103,15 +90,15 @@ a.btn-shadow:active {
 div.box-button {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
 
-    &>button {
+    & button {
         padding: 1.5em;
         font-size: 1.2em;
         box-shadow: 0.3em 0.3em rgb(29, 29, 29);
-        margin: 1em;
-        width: 20%;
+        //margin: 1em;
         cursor: pointer;
+        width: 20%;
 
         &.btn-payalone {
             background-color: $primaryLight;
@@ -122,11 +109,10 @@ div.box-button {
         }
     }
 
-    &>.btn-moneybox {
+    & .btn-moneybox {
         padding: 1.5em;
         font-size: 1.2em;
         box-shadow: 0.3em 0.3em #1d1d1d;
-        margin: 1em;
         width: 20%;
         border-radius: 32px;
         cursor: pointer;
@@ -137,5 +123,17 @@ div.box-button {
         &.btn-moneybox {
             background-color: #be24e5;
         }
+    }
+
+    a.back-btn {
+        padding: 1.5em;
+        font-size: 1.2em;
+        background-color: #00a1ff;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        //margin: auto 10em;
+        box-shadow: 0.3em 0.3em #1d1d1d;
+        width: 16%;
     }
 }

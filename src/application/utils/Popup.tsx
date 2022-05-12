@@ -5,7 +5,7 @@ function Popup({ show, children, close }: { show: boolean, children: React.React
 
     if(close) return <div className="popup">
         <div className="popup-inner">
-            <button onClick={close} className="close-btn">close</button>
+            <button onClick={close} className="close-btn">X</button>
             {children}
         </div>
     </div>;
