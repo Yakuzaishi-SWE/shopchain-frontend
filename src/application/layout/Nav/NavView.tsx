@@ -11,7 +11,7 @@ export default observer(function NavView({
     address,
 }: INavViewModel) {
 
-    return <header>
+    return <header key={address}>
         <NavLink to="/">Shopchain</NavLink>
         <MetamaskError/>
         {

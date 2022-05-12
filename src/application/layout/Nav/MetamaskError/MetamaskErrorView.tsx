@@ -9,7 +9,6 @@ export default observer(function MetamaskErrorView({ severity, name, description
     const classSeverity = severity === MetamaskErrorSeverity.BLOCKING ? " error" : (severity === MetamaskErrorSeverity.UNBLOCKING ? " warning" : " success");
     const iconSeverity = severity === MetamaskErrorSeverity.BLOCKING ? <Cross/> : (severity === MetamaskErrorSeverity.UNBLOCKING ? <Warning/> : <CheckMark/>);
     const [hidden, setHidden] = useState<boolean>(false);
-    console.log("severity", severity);
     const toggle = () => setHidden(!hidden);
 
     return <span className={"provider-error" + classSeverity} onClick={toggle}>

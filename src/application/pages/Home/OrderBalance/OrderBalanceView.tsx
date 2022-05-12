@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { BalanceIcon, Loading } from "resources/svg";
-import { WeitoFTM } from "utils";
 import IOrderBalanceViewModel from "./IOrderBalanceViewModel";
 
 

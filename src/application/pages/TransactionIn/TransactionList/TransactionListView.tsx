@@ -9,7 +9,7 @@ export default observer(function TransactionListView({ transactionsFilter, state
             <div>
                 <label>Order Type</label>
                 <select defaultValue={""} id="type-dropdown" onChange={(e) => setTypeFilter(e.target.value)}>
-                    <option value="" selected>All</option>
+                    <option value="">All</option>
                     <option value="ORDER">Single Payment</option>
                     <option value="MONEYBOX">MoneyBox</option>
                 </select>
@@ -18,7 +18,7 @@ export default observer(function TransactionListView({ transactionsFilter, state
             <div>
                 <label>Order State</label>
                 <select defaultValue={""} id="state-dropdown" onChange={(e) => setStateFilter(e.target.value)}>
-                    <option value="" selected>All</option>
+                    <option value="">All</option>
                     <option value="Paid">Paid but Locked</option>
                     <option value="Unlocked">Unlocked</option>
                     <option value="Refunded">Refunded</option>

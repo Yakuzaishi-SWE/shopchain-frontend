@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Loading, OrderIcon, SingleOrder } from "resources/svg";
+import { Loading, SingleOrder } from "resources/svg";
 import IOrderCountViewModel from "./IOrderCountViewModel";
 
 

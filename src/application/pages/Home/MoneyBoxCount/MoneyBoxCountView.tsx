@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Loading, OrderIcon, PiggyBank } from "resources/svg";
+import { Loading, PiggyBank } from "resources/svg";
 import IMoneyBoxCountViewModel from "./IMoneyBoxCountViewModel";
 
 
