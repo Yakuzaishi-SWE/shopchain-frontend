@@ -54,7 +54,7 @@ export default class ProviderState {
             !this.store.w3,
             !this.store.w3.mm,
             !this.store.w3.om,
-            !this.store.address,
+            !this.store.address.address,
             !this.store.chain.isFantomTestnet,
         ];
 

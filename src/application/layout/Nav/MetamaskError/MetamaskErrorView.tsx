@@ -5,11 +5,11 @@ import { MetamaskErrorSeverity } from "types/enums";
 import IMetamaskErrorViewModel from "./IMetamaskError";
 
 
-export default observer(function MetamaskErroView({ severity, name, description }: IMetamaskErrorViewModel) {
+export default observer(function MetamaskErrorView({ severity, name, description }: IMetamaskErrorViewModel) {
     const classSeverity = severity === MetamaskErrorSeverity.BLOCKING ? " error" : (severity === MetamaskErrorSeverity.UNBLOCKING ? " warning" : " success");
     const iconSeverity = severity === MetamaskErrorSeverity.BLOCKING ? <Cross/> : (severity === MetamaskErrorSeverity.UNBLOCKING ? <Warning/> : <CheckMark/>);
     const [hidden, setHidden] = useState<boolean>(false);
-
+    console.log("severity", severity);
     const toggle = () => setHidden(!hidden);
 
     return <span className={"provider-error" + classSeverity} onClick={toggle}>

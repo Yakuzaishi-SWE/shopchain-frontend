@@ -3,7 +3,7 @@ import ProviderStore from "core/provider/store/ProviderStore";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import MetamaskErrorView from "./MetamaskErrorView";
-import MetamaskErrorViewModel from "./MetamaskErroViewModel";
+import MetamaskErrorViewModel from "./MetamaskErrorViewModel";
 
 
 export default observer(function MetamaskError() {
