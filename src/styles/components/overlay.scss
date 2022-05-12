@@ -15,3 +15,17 @@
         display: none;
     }
 }
+
+
+.lock-overlay{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5%;
+    margin-left: 300px;
+
+    & > h1#ovrl, p#redp{
+        text-align: center;
+        color: red;
+    }
+}

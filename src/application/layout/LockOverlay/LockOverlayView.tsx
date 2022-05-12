@@ -10,8 +10,8 @@ export default observer(function LockOverlayView({
 
     return <Popup show={!isConnected}>
         <div className="lock-overlay">
-            <h1>METAMASK NOT CONNECTED</h1>
-            <p>Please connect to Metamask to continue</p>
+            <h1 id="ovrl">METAMASK NOT CONNECTED</h1>
+            <p id="redp">Please connect to Metamask to continue</p>
         </div>
     </Popup>;
 });
