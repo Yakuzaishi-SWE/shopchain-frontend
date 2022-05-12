@@ -10,6 +10,6 @@ export default class LockOverlayViewModel implements ILockOverlayViewModel {
 
     get isConnected() {
         if (!this.providerStore) return false;
-        return this.providerStore.address.address ? true : false;
+        return this.providerStore.state.isOK;
     }
 }
