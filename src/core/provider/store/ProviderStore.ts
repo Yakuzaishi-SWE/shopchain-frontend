@@ -39,6 +39,7 @@ export default class ProviderStore {
 
         reaction(() => this.provider, (p) => {
             if (p) {
+                console.log("Provider connected");
                 this.getAccounts();
                 this.getChainId();
             }
@@ -47,6 +48,7 @@ export default class ProviderStore {
 
     async connect() {
         const addresses = await this.repo.connect();
+        this.subscribeAddressChanged(this.address.setAddress);
         this.address.setAddress(addresses);
     }
 
