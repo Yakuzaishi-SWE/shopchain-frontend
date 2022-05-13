@@ -54,7 +54,8 @@ export default class ProviderStore {
         const provider = await this.repo.getProvider();
         runInAction(() => {
             this.provider = provider;
-            
+            this.subscribeAddressChanged(this.address.setAddress);
+            this.subscribeChainChanged(this.chain.setChainId);
         });
     }
 
