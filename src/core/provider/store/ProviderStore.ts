@@ -47,12 +47,11 @@ export default class ProviderStore {
     }
 
     async connect() {
-        const addresses = await this.repo.connect();
-        this.subscribeAddressChanged(this.address.setAddress);
-        this.address.setAddress(addresses);
+        await this.repo.connect();
     }
 
     async getProvider() {
+        console.log("getProvider");
         const provider = await this.repo.getProvider();
         runInAction(() => {
             this.provider = provider;
@@ -72,10 +71,12 @@ export default class ProviderStore {
     }
 
     subscribeAddressChanged(callback: (address: unknown[]) => void) {
+        console.log("subscribeAddressChanged");
         this.repo.subscribeAddressChanged(callback);
     }
 
     subscribeChainChanged(callback: (chain: unknown) => void) {
+        console.log("subscribeChainChanged");
         this.repo.subscribeChainChanged(callback);
     }
 }

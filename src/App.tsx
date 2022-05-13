@@ -22,13 +22,6 @@ export default () => {
         providerStore.getProvider();
     }, []);
 
-    useEffect(() => {
-        if (providerStore.provider) {
-            providerStore.getAccounts();
-            providerStore.getChainId();
-        }
-    }, [providerStore.provider, providerStore.getAccounts, providerStore.getChainId]);
-
     return <HashRouter>
         <Routes>
             <Route path="/" element={<PageLayout />}>
