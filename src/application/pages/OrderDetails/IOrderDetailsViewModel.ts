@@ -16,6 +16,7 @@ interface IOrderDetailsViewModel {
     unlockCode: number,
     setCode(code: number): void,
     code: number,
+    isBusy: boolean,
 }
 
 export default IOrderDetailsViewModel;

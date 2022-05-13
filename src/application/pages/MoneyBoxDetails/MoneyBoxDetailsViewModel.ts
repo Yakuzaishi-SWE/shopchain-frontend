@@ -136,17 +136,19 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         this._feeAmount.setAmountFTM(newAmount);
     }
 
+    unlockTask: ComputedTask<void, [string, number], void> | null = null;
     unlock() {
         if (this.moneybox && this.code === this.unlockCode) {
-            this.moneybox.unlock(this.moneybox.unlockCode);
+            this.unlockTask = this.moneybox.unlock(this.moneybox.unlockCode);
             return false;
         }
         return true;
     }
 
+    refundTask: ComputedTask<void, [string], void> | null = null;
     refund() {
         if (this.moneybox) {
-            this.moneybox.refund();
+            this.refundTask = this.moneybox.refund();
             return false;
         }
         return true;
@@ -200,7 +202,9 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     }
 
     get isBusy(): boolean {
-        if (!this.newPaymentTask) return false;
-        return this.newPaymentTask.isBusy;
+        if (this.newPaymentTask) return this.newPaymentTask.isBusy;
+        if (this.unlockTask) return this.unlockTask.isBusy;
+        if (this.refundTask) return this.refundTask.isBusy;
+        return false;
     }
 }

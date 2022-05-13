@@ -35,5 +35,6 @@ export default observer(function OrderDetails() {
         unlockCode={vm.unlockCode}
         setCode={vm.setCode}
         code={vm.code}
+        isBusy={vm.isBusy}
     />;
 });

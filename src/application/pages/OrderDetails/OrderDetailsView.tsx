@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-import { BackArrowIcon } from "resources/svg";
+import { BackArrowIcon, Loading } from "resources/svg";
 import IOrderDetailsViewModel from "./IOrderDetailsViewModel";
 
 export default observer(function OrderDetailsView({
@@ -23,6 +23,7 @@ export default observer(function OrderDetailsView({
     unlockCode,
     setCode,
     code,
+    isBusy,
 }: IOrderDetailsViewModel) {
     const location = useLocation();
     const [popUnlock, setPopUnlock] = useState(false);
@@ -30,9 +31,9 @@ export default observer(function OrderDetailsView({
 
     return <>
         <div className="page-container column">
-            <div className="simple-link">
-                {/*<Link to={back(location.pathname)}><BackArrowIcon className="svg-white" />Go back to your transactions</Link>*/}
-            </div>
+            {/* <div className="simple-link">
+                <Link to={back(location.pathname)}><BackArrowIcon className="svg-white" />Go back to your transactions</Link>
+            </div> */}
             <h1>Order Details</h1>
             <section className="transaction-details">
                 <ul>
@@ -65,6 +66,11 @@ export default observer(function OrderDetailsView({
             <p><span className="danger-text">Attention!</span> This operation is not reversible.</p>
             <button onClick={() => setPopRefund(refund)}>Confirm</button>
         </Popup>
-
+        <Popup show={isBusy}>
+            <div className="sweet-loading">
+                <p>Check your Metamask extension. The process may take few seconds...</p>
+                <Loading />
+            </div>
+        </Popup>
     </>;
 });

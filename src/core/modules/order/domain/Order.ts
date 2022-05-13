@@ -50,11 +50,11 @@ export default class Order {
     }
 
     unlock(code: number) {
-        this.store.unlock(this.id, code);
+        return this.store.unlock(this.id, code);
     }
 
     refund() {
-        this.store.refund(this.id);
+        return this.store.refund(this.id);
     }
 
     /***********************

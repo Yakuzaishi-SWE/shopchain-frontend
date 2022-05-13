@@ -1,5 +1,6 @@
 import ProviderStore from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
+import ComputedTask from "core/utils/ComputedTask";
 import { makeAutoObservable } from "mobx";
 import IOrderDetailsViewModel from "./IOrderDetailsViewModel";
 
@@ -68,17 +69,19 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
         return this.order?.state.isPaid || false;
     }
 
+    unlockTask: ComputedTask<void, [string, number], void> | null = null;
     unlock() {
         if (this.order && this.unlockCode == this._code) {
-            this.order.unlock(this.order.unlockCode);
+            this.unlockTask = this.order.unlock(this.order.unlockCode);
             return false;
         }
         return true;
     }
 
+    refundTask: ComputedTask<void, [string], void> | null = null;
     refund() {
         if (this.order) {
-            this.order.refund();
+            this. refundTask = this.order.refund();
             return false;
         }
         return true;
@@ -102,6 +105,12 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
 
     get code() {
         return this._code;
+    }
+
+    get isBusy() {
+        if (this.unlockTask) return this.unlockTask.isBusy;
+        if (this.refundTask) return this.refundTask.isBusy;
+        return false;
     }
 
 }
