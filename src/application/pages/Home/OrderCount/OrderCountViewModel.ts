@@ -15,7 +15,7 @@ export default class OrderCountViewModel  implements IOrderCountViewModel  {
     }
 
     get count(): number {
-        if (!providerStore.provider) return -1;
-        return this.rootStore.contractStore.orderManager.getOrderCount().result || -1;
+        if (!providerStore.provider) return 0;
+        return this.rootStore.contractStore.orderManager.getOrderCount().result || 0;
     }
 }

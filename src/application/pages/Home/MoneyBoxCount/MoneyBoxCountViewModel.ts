@@ -15,7 +15,7 @@ export default class MoneyBoxCountViewModel  implements IMoneyBoxCountViewModel 
     }
 
     get count(): number {
-        if (!providerStore.provider) return -1;
-        return this.rootStore.contractStore.moneyBoxManager.getOrderCount().result || -1;
+        if (!providerStore.provider) return 0;
+        return this.rootStore.contractStore.moneyBoxManager.getOrderCount().result || 0;
     }
 }

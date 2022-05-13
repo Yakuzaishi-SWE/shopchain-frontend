@@ -18,16 +18,16 @@ export default class MoneyBoxBalanceViewModel  implements IMoneyBoxBalanceViewMo
     }
 
     get balanceFTM(): number {
-        if (!providerStore.provider) return -1;
-        if (!this.balance) return -1;
-        if (!this.balance.result) return -1;
+        if (!providerStore.provider) return 0;
+        if (!this.balance) return 0;
+        if (!this.balance.result) return 0;
         return this.balance.result.FTM;
     }
 
     get balanceWEI(): number {
-        if (!providerStore.provider) return -1;
-        if (!this.balance) return -1;
-        if (!this.balance.result) return -1;
+        if (!providerStore.provider) return 0;
+        if (!this.balance) return 0;
+        if (!this.balance.result) return 0;
         return this.balance.result.wei;
     }
 }

@@ -61,9 +61,11 @@ export default class OrderStore {
         .revaildate;
 
     readonly createOrder = TaskCacheBuilder.build<void, [data: { seller: string, amount: string, id: string }, initAmount?: string]>()
-        .task(async (data, initAmount = data.amount) => {
+        .task(async (data, initAmount) => {
+            if (initAmount === undefined) initAmount = data.amount;
             await this.repo.createOrder(data, initAmount);
         })
+        .id((data, initAmount) => JSON.stringify([data, initAmount]))
         .expireIn(0)
         .result(() => { return; })
         .revaildate;
