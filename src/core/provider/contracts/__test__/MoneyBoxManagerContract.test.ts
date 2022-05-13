@@ -1,11 +1,12 @@
-import W3Store from "core/provider/domain/W3Store";
 import IContractRepo from "core/provider/repo/IContractRepo";
-import MoneyBoxManagerContractRepo from "core/provider/repo/implementations/MoneyBoxManagerContractRepo";
 import MoneyBoxManagerContract from "../MoneyBoxManagerContract";
 import { Contract } from "web3-eth-contract";
+import { observable } from "mobx";
 
 
-const w3store: W3Store = {} as any;
+const w3store = observable({
+    web3: null,
+} as any);
 
 const repo:  IContractRepo = {
     init: jest.fn(() => ({} as Contract)),
@@ -22,10 +23,13 @@ describe("MoneyBoxManagerContract", () => {
         expect(contract).toBeInstanceOf(MoneyBoxManagerContract);
     });
 
-    it("should init", () => {
+    it("should get instance", async () => {
         const contract = new MoneyBoxManagerContract(w3store, repo);
-        contract.init();
-        expect(repo.init).toHaveBeenCalled();
-        expect(contract.instance).toBeDefined();
+        const i = contract.instance;
+        expect(i).toBeNull();
+        expect(repo.init).toHaveBeenCalledTimes(0);
+        w3store.web3 = new Date();
+        contract.instance;
+        expect(repo.init).toHaveBeenCalledTimes(1);
     });
 });

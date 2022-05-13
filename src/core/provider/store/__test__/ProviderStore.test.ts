@@ -1,9 +1,13 @@
-import IProviderRepo from "core/provider/repo/IProviderRepo";
+import { MetaMaskInpageProvider } from "@metamask/providers";
+import IProviderRepo from "../../repo/IProviderRepo";
 import ProviderStore from "../ProviderStore";
+
+
+const provider: MetaMaskInpageProvider = { superprovider: "420" } as any;
 
 const providerRepo: IProviderRepo = {
     connect: jest.fn(async () => ["0xfa2", "0xfa3"]),
-    getProvider: jest.fn(),
+    getProvider: jest.fn(async () => provider),
     getAccounts: jest.fn(async () => ["0xfa2", "0xfa3"]),
     getChainId: jest.fn(async () => "0x1"),
     subscribeAddressChanged: jest.fn(),
@@ -11,9 +15,6 @@ const providerRepo: IProviderRepo = {
     subscribeChainChanged: jest.fn(),
     unsubscribeChainChanged: jest.fn(),
 }
-
-const provider: MetaMaskInpageProvider = { superprovider: "420" } as any;
-
 
 describe("ProviderStore", () => {
 
@@ -24,14 +25,6 @@ describe("ProviderStore", () => {
         expect(providerStore.address).toBeDefined();
         expect(providerStore.chain).toBeDefined();
         expect(providerStore.w3).toBeDefined();
-    });
-
-
-    it("sets the provider", () => {
-        const providerStore = new ProviderStore(providerRepo);
-        expect(providerStore.provider).toBe(null);
-        providerStore.setProvider(provider);
-        expect(providerStore.provider).toStrictEqual(provider); 
     });
 
     it("connects to the provider", async () => {
@@ -70,27 +63,11 @@ describe("ProviderStore", () => {
         expect(providerRepo.subscribeAddressChanged).toHaveBeenCalledWith(callback);
     });
 
-    it("unsubscribes to address changes", () => {
-        const providerStore = new ProviderStore(providerRepo);
-        expect(providerStore.provider).toBe(null);
-        const callback = jest.fn();
-        providerStore.unsubscribeAddressChanged(callback);
-        expect(providerRepo.unsubscribeAddressChanged).toHaveBeenCalledWith(callback);
-    });
-
     it("subscribes to chain changes", () => {
         const providerStore = new ProviderStore(providerRepo);
         expect(providerStore.provider).toBe(null);
         const callback = jest.fn();
         providerStore.subscribeChainChanged(callback);
         expect(providerRepo.subscribeChainChanged).toHaveBeenCalledWith(callback);
-    });
-
-    it("unsubscribes to chain changes", () => {
-        const providerStore = new ProviderStore(providerRepo);
-        expect(providerStore.provider).toBe(null);
-        const callback = jest.fn();
-        providerStore.unsubscribeChainChanged(callback);
-        expect(providerRepo.unsubscribeChainChanged).toHaveBeenCalledWith(callback);
     });
 })

@@ -71,9 +71,9 @@ export default class ProviderState {
         return this.severity === MetamaskErrorSeverity.OK;
     }
 
-    get isBlocking() {
+    /* get isBlocking() {
         return this.value.severity === MetamaskErrorSeverity.BLOCKING;
-    }
+    } */
 
     get severity() {
         return this.value.severity;

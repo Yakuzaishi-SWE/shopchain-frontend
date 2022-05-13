@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import detectEthereumProvider from "@metamask/detect-provider";
 import { MetaMaskInpageProvider } from "@metamask/providers";
 import { makeAutoObservable } from "mobx";

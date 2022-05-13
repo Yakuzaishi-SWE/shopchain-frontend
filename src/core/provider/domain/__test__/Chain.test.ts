@@ -1,5 +1,5 @@
-import ProviderStore from "core/provider/store/ProviderStore";
 import { makeObservable, observable, runInAction, when } from "mobx";
+import ProviderStore from "../../store/ProviderStore";
 import Chain from "../Chain";
 
 const providerStore: ProviderStore = {
@@ -8,14 +8,14 @@ const providerStore: ProviderStore = {
 } as any;
 
 
-makeObservable(providerStore, { provider: observable });
+makeObservable(providerStore, { provider: observable.ref });
 
 const providerStoreNull: ProviderStore = {
     provider: null,
     subscribeChainChanged: jest.fn(),
 } as any;
 
-makeObservable(providerStoreNull, { provider: observable });
+makeObservable(providerStoreNull, { provider: observable.ref });
 
 
 describe("Chain", () => {
@@ -24,19 +24,7 @@ describe("Chain", () => {
         const chain = new Chain(providerStore);
         expect(chain).toBeInstanceOf(Chain);
         expect(chain.chainId).toBeNull();
-        expect(providerStore.subscribeChainChanged).toHaveBeenCalledTimes(1);
     });
-
-    it("should create chain", async () => {
-        const chain = new Chain(providerStoreNull);
-        expect(chain).toBeInstanceOf(Chain);
-        expect(chain.chainId).toBeNull();
-        expect(providerStoreNull.subscribeChainChanged).toHaveBeenCalledTimes(0);
-        runInAction(() => providerStoreNull.provider = 1 as any);
-        await when(() => providerStoreNull.provider !== null);
-        expect(providerStoreNull.subscribeChainChanged).toHaveBeenCalledTimes(1);
-    });
-
 
     it("should set chain id", () => {
         const chain = new Chain(providerStore);

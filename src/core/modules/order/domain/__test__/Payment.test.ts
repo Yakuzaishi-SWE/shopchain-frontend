@@ -20,6 +20,7 @@ const a : PaymentProps = {
     amount : new Amount(1),
     timestamp : 10,
 }
+
 describe("Payment", () => {
 
     it("from address is correct", () =>{

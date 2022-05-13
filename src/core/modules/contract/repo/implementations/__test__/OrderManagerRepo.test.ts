@@ -11,6 +11,9 @@ const contract: OrderManagerContract = {
             }),
             getOrderCount: jest.fn(() => {
                 return { call }
+            }),
+            contractBalance: jest.fn(() => {
+                return {call}
             })
         }
     },
@@ -21,6 +24,10 @@ const undefinedContract: OrderManagerContract = {
 } as any;
 
 describe('OrderManagerRepo', () => {
+
+    beforeEach(() => {
+        call.mockClear();
+    })
 
     it("should create an instance of OrderManagerRepo", () => {
         const orderManagerRepo = new OrderManagerRepo(contract);
@@ -38,7 +45,7 @@ describe('OrderManagerRepo', () => {
             const orderManagerRepo = new OrderManagerRepo(contract);
             expect(await orderManagerRepo.getContractBalance()).toBe(1);
             expect(call).toHaveBeenCalled();
-            expect(contract.instance?.methods.getBalance).toHaveBeenCalled();
+            expect(contract.instance?.methods.contractBalance).toHaveBeenCalled();
         });
     });
 

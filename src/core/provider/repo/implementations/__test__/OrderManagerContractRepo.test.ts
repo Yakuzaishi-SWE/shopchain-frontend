@@ -1,9 +1,8 @@
-import W3Store from "core/provider/domain/W3Store";
-import Web3 from "web3";
-import IContractRepo from "../../IContractRepo";
-import OrderManagerContractRepo from "../OrderManagerContractRepo";
 import { Contract } from "web3-eth-contract";
 import { AbiItem } from "web3-utils";
+import W3Store from "../../../domain/W3Store";
+import IContractRepo from "../../IContractRepo";
+import OrderManagerContractRepo from "../OrderManagerContractRepo";
 
 
 const w3store: W3Store = {

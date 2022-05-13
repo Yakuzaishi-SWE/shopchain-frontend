@@ -5,7 +5,6 @@ import Address from "core/provider/domain/Address";
 import Amount from "../../domain/Amount";
 import MoneyBox from "../../domain/MoneyBox";
 import Payment from "../../domain/Payment";
-import PaymentCollection from "../../domain/PaymentCollection";
 import OrderDTO from "../../dtos/OrderDTO";
 import PaymentDTO from "../../dtos/PaymentDTO";
 import MoneyBoxOrderStore from "../../store/MoneyBoxOrderStore";
@@ -20,7 +19,7 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         super(store, contract, address);
     }
 
-    async getOrderById(id: string): Promise<MoneyBox | undefined> {
+    async getOrderById(id: string): Promise<MoneyBox> {
         if (!this.contract.instance) throw Error("Contract not loaded");
         const order: OrderDTO = await this.contract.instance.methods.getOrderById(id).call();
         return MoneyBox.create(this.store, id, order);

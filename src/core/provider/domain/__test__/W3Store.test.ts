@@ -1,8 +1,7 @@
-import IProviderRepo from "core/provider/repo/IProviderRepo";
-import ProviderStore from "core/provider/store/ProviderStore";
 import { makeObservable, observable, runInAction, when } from "mobx";
-import W3Store from "../W3Store";
 import Web3 from "web3";
+import ProviderStore from "../../store/ProviderStore";
+import W3Store from "../W3Store";
 
 jest.mock("web3");
 

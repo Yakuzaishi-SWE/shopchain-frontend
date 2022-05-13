@@ -1,19 +1,19 @@
-import Amount from "../Amount"
-import { OrderStateEnum } from "types/enums";
-import OrderState from "../OrderState"
-import OrderDTO from "../../dtos/OrderDTO"
-
-import RootStore from "core/shared/RootStore";
+import { OrderStateEnum } from "../../../../../types/enums";
+import RootStore from "../../../../shared/RootStore";
+import OrderDTO from "../../dtos/OrderDTO";
 import IOrderRepo from "../../repo/IOrderRepo";
 import OrderStore from "../../store/OrderStore";
+import Amount from "../Amount";
 import Order from "../Order";
-import { create } from "domain";
+import OrderState from "../OrderState";
+
 
 const id1 = "550e8400-e29b-41d4-a716-446655440000";
 const id2 = "770e8400-e29b-41d4-a716-446655440000";
 
 // Order store things
 const rootStore: RootStore = {
+    
 } as RootStore;
 
 const orderDTO:  OrderDTO = {
@@ -22,11 +22,14 @@ const orderDTO:  OrderDTO = {
     amount: 10,
     unlockCode: 0,
     state: OrderStateEnum.CREATED,
+    timestamp: 123,
 }
 
 const repo: IOrderRepo = {
-    createOrder: jest.fn(async (data: any) => { return; }),
-    getOrderById: jest.fn(async (id: string) => { return orderDTO; }),
+    createOrder: jest.fn(),
+    getOrderById: jest.fn(),
+    getOrdersBySeller: jest.fn(),
+    getOrdersByBuyer: jest.fn(),
     refund: jest.fn(async (id: string) => { return; }),
     unlock: jest.fn(async (id: string, code: number) => { return; }),
 };
@@ -36,7 +39,8 @@ type OrderProps = {
     ownerAddress: string,
     amount: Amount,
     unlockCode: number,
-    state: OrderState
+    state: OrderState,
+    timestamp: number,
 };
 
 const orderProps : OrderProps = {
@@ -45,6 +49,7 @@ const orderProps : OrderProps = {
     amount: new Amount(1),
     unlockCode: 123,
     state: new OrderState("Created"),
+    timestamp: 123,
 }
 
 const orderStore : OrderStore = {
@@ -90,15 +95,23 @@ describe("Order", () => {
         const order1 = new Order(orderStore, id1, orderProps);
 
         const unlockCode = order1.unlockCode;
-        await order1.unlock(unlockCode);
+        order1.unlock(unlockCode);
         expect(orderStore.unlock).toHaveBeenCalledTimes(1);
         expect(orderStore.unlock).toBeCalledWith(id1, orderProps.unlockCode);
+    })
+
+    it("get types", () => {
+        const order1 = new Order(orderStore, id1, orderProps);
+
+        const types = order1.type;
+        expect(types).toBeTruthy();
+        expect(types).toBe("ORDER");
     })
 
     it("refund", async () => {
         const order1 = new Order(orderStore, id1, orderProps);
 
-        await order1.refund();
+        order1.refund();
         expect(orderStore.refund).toHaveBeenCalledTimes(1);
         expect(orderStore.refund).toBeCalledWith(id1);
     })
@@ -116,7 +129,7 @@ describe("Order", () => {
             state: new OrderState("Paid"),
         });
         expect(order1.state).toStrictEqual(new OrderState("Created"));
-        order1.update(order2);
+        order1.patch(order2);
         expect(order1.state).toStrictEqual(new OrderState("Paid"));
     })
 })

@@ -19,7 +19,8 @@ type OrderProps = {
     ownerAddress: string,
     amount: Amount,
     unlockCode: number,
-    state: OrderState
+    state: OrderState,
+    timestamp: number,
 };
 
 const orderProps : OrderProps = {
@@ -28,6 +29,7 @@ const orderProps : OrderProps = {
     amount: new Amount(1),
     unlockCode: 123,
     state: new OrderState("Created"),
+    timestamp: 1234
 }
 
 describe("test OrderCollection", () => {
@@ -71,7 +73,7 @@ describe("test OrderCollection", () => {
         ordercoll.add(order1);
         ordercoll.add(order2);
 
-        const order_array = ordercoll.getByOwner(addr2);
+        const order_array = ordercoll.getByBuyer(addr2);
         expect(order_array.length).toBe(2);
         expect(order_array[0]).toBeInstanceOf(Order);
         expect(order_array[1]).toBeInstanceOf(Order);

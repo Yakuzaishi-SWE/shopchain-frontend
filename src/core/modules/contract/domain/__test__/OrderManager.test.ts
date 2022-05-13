@@ -35,14 +35,12 @@ describe("OrderManager", () => {
             const orderManager = new OrderManager(repo);
             await orderManager.getOrderCount();
             expect(repo.getOrderCount).toBeCalledTimes(1);
-            expect(orderManager.count).toBe(1);
         });
 
         it("undefined instance", async () => {
             const orderManager = new OrderManager(repoUndef);
             await orderManager.getOrderCount();
             expect(repoUndef.getOrderCount).toBeCalledTimes(1);
-            expect(orderManager.count).toBe(null);
         });
     });
 
@@ -51,14 +49,12 @@ describe("OrderManager", () => {
             const orderManager = new OrderManager(repo);
             await orderManager.getContractBalance();
             expect(repo.getContractBalance).toBeCalledTimes(1);
-            expect(orderManager.balance).toBe(1);
         });
 
         it("undefined instance", async () => {
             const orderManager = new OrderManager(repoUndef);
             await orderManager.getContractBalance();
             expect(repoUndef.getContractBalance).toBeCalledTimes(1);
-            expect(orderManager.balance).toBe(null);
         });
     });
 });

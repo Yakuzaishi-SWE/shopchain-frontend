@@ -1,4 +1,5 @@
-import { makeAutoObservable, observable, reaction } from "mobx";
+import { makeAutoObservable, observable, reaction, runInAction } from "mobx";
+import { runInContext } from "vm";
 import Address from "../domain/Address";
 import Chain from "../domain/Chain";
 import ProviderState from "../domain/ProviderState";
@@ -10,9 +11,9 @@ import IProviderRepo from "../repo/IProviderRepo";
 export default class ProviderStore {
     private static instance: ProviderStore;
 
-    static getInstance(): ProviderStore {
+    static getInstance(repo?: IProviderRepo): ProviderStore {
         if (!ProviderStore.instance) {
-            ProviderStore.instance = new ProviderStore();
+            ProviderStore.instance = new ProviderStore(repo);
         }
         return ProviderStore.instance;
     }
@@ -25,28 +26,23 @@ export default class ProviderStore {
     w3: W3Store;
     state: ProviderState;
 
-    private constructor(repo?: IProviderRepo) {
+    constructor(repo?: IProviderRepo) {
         this.repo = repo || new ProviderRepo(this);
         this.address = new Address(this);
         this.chain = new Chain(this);
         this.w3 = new W3Store(this);
         this.state = new ProviderState(this);
 
-        makeAutoObservable<this, "provider">(this, {
+        makeAutoObservable(this, {
             provider: observable.ref,
         });
+
         reaction(() => this.provider, (p) => {
             if (p) {
                 this.getAccounts();
                 this.getChainId();
             }
         });
-    }
-
-    setProvider(provider: MetaMaskInpageProvider) {
-        this.provider = provider;
-        this.subscribeAddressChanged(this.address.setAddress);
-        this.subscribeChainChanged(this.chain.setChainId);
     }
 
     async connect() {
@@ -56,7 +52,10 @@ export default class ProviderStore {
 
     async getProvider() {
         const provider = await this.repo.getProvider();
-        this.setProvider(provider);
+        runInAction(() => {
+            this.provider = provider;
+            
+        });
     }
 
     async getAccounts() {
