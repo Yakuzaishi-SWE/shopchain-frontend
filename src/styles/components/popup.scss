@@ -13,7 +13,7 @@
 
     h2, p {
         color: white;
-        text-align: left;
+        text-align: center;
     }
 
     h2 {
@@ -61,6 +61,14 @@
     background-color: $background80;
     color: white;
     border-radius: 32px;
+
+    & > h2.refundPopup{
+        font-size: 2em;
+    }
+
+    & > p.refundPopup{
+        font-size: 1.2em;
+    }
 }
 
 .popup-inner .close-btn {

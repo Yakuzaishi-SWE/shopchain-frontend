@@ -56,14 +56,14 @@ export default observer(function OrderDetailsView({
                 <h2>Please insert the Unlock Code to confirm your choice:</h2>
                 <span className="unlock-code">{unlockCode}</span>
                 <div className="unlock-input">
-                    <input type="number" value={code || undefined} onChange={el => setCode(el.target.valueAsNumber)}/>
+                    <input type="number" value={code || undefined} onChange={el => setCode(el.target.valueAsNumber)} />
                 </div>
             </form>
             <button onClick={() => setPopUnlock(unlock)}>Confirm</button>
         </Popup>
         <Popup show={popRefund} close={() => setPopRefund(false)}>
-            <h2>You sure?</h2>
-            <p><span className="danger-text">Attention!</span> This operation is not reversible.</p>
+            <h2 className="refundPopup">Are you sure?</h2>
+            <p className="refundPopup"><span className="danger-text">Attention!</span> This operation is not reversible.</p>
             <button onClick={() => setPopRefund(refund)}>Confirm</button>
         </Popup>
         <Popup show={isBusy}>

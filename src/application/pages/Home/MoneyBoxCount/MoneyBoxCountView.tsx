@@ -13,7 +13,7 @@ export default observer(function MoneyBoxCountView({ count, isBusy }: IMoneyBoxC
             <p>MoneyBoxes</p>
         </div>
         <div className="float-right widget-icon" id="piggyFill">
-            <PiggyBank/>
+            <PiggyBank className="homePiggy"/>
         </div>
     </div>;
 });

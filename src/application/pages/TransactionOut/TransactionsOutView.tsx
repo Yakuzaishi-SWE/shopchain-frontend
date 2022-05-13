@@ -12,7 +12,7 @@ export default observer(function TransactionOutView() {
             </div>
 
             <div className="right-col">
-                <h1 className="center">Your Contribution</h1>
+                <h1 className="center">Your Contributions</h1>
                 <ContributesListController />
             </div>
         </div>

@@ -16,19 +16,19 @@ const HomeView = () => {
             <div className="widget-box">
                 <div className="widget service">
                     <h3>
-                        <span className="count">less than $0.001</span>
+                        <span className="ourServices">Less than $0.001</span>
                     </h3>
                     <p>Avg. cost per transaction</p> 
                 </div>
                 <div className="widget service">
                     <h3>
-                        <span className="count">Pay with friends</span>
+                        <span className="ourServices">Pay with friends</span>
                     </h3>
                     <p>Create a MoneyBox and split an order payment</p> 
                 </div>
                 <div className="widget service">
                     <h3>
-                        <span className="count">Refund Garanteed</span>
+                        <span className="ourServices">Refund Garanteed</span>
                     </h3>
                     <p>You didn't receive your order? Ask for a refund</p> 
                 </div>

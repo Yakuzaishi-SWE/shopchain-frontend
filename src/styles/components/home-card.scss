@@ -26,6 +26,7 @@
 
     & > p {
         font-size: 1.3em;
+        text-align: center;
     }
 
     & > .widget-box {
@@ -47,6 +48,10 @@
             & > .widget-icon{
                 margin: 0.8em 0;
                 
+                & > .homePiggy{
+                    height: 64px;
+                    width: 48px;
+                }
 
                 & > span {
                     font-size: 2em;
@@ -87,7 +92,12 @@
     float: right;
 }
 
-.currency, .count{
+.currency, .ourservices{
     font-size: 30px;
+    font-weight: 500;
+}
+
+.count{
+    font-size: 40px;
     font-weight: 500;
 }
