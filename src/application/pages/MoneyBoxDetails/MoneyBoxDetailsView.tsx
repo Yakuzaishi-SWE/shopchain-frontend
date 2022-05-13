@@ -36,7 +36,7 @@ export default observer(function MoneyBoxDetailsView({
     code,
     setCode,
 }: IMoneyBoxDetailsViewModel) {
-    const [buttonPopup, setButtonPopup] = useState(false);
+    const [error, setError] = useState(false);
     const [popUnlock, setPopUnlock] = useState(false);
     const [popRefund, setPopRefund] = useState(false);
     const location = useLocation();
@@ -69,8 +69,9 @@ export default observer(function MoneyBoxDetailsView({
                         <form className="payment-form">
                             <div className={!(isPaid || isUnlocked || isRefunded) ? "form-wrapper" : "hide"}>
                                 <label>Select the amount that you want to send</label>
-                                <div className="ftm-input">
-                                    <input type="number" step="any" min="0.000000000000000001" max={ftmToFill} className="clickable-input" value={feeAmountFtm || undefined} onChange={el => setFeeAmount(el.target.valueAsNumber)} placeholder="0.00" />
+                                <p className={error ? "err_p" : "hide"}>Amount must be between 1 wei and {ftmToFill} FTM</p>
+                                <div className={error ? "ftm-input err_input" : "ftm-input"}>
+                                    <input type="number" step="any" className="clickable-input" value={feeAmountFtm || undefined} onChange={el => setFeeAmount(el.target.valueAsNumber)} placeholder="0.00" />
                                     <span className="ftm-icon">
                                         <FTMIcon />
                                         FTM
@@ -81,7 +82,7 @@ export default observer(function MoneyBoxDetailsView({
                                         ({feeAmountWei}) wei
                                     </span>
                                 </div>
-                                <button id="contribute" onClick={() => setButtonPopup(newPayment)} disabled={isPaid}>Contribute</button>
+                                <button id="contribute" onClick={() => setError(newPayment)} disabled={isPaid}>Contribute</button>
                             </div>
                         </form>
                     </div>
@@ -119,12 +120,6 @@ export default observer(function MoneyBoxDetailsView({
                 <Loading />
             </div>
         </Popup>
-
-        <Popup show={buttonPopup} close={() => setButtonPopup(false)}>
-            <h3>Warning</h3>
-            <p>The chosen amount is greater than the amount needed to fill the moneybox ({ftmToFill})</p>
-        </Popup>
-
         <Popup show={popUnlock} close={() => setPopUnlock(false)}>
             <form>
                 <h2>Please insert the Unlock Code to confirm your choice:</h2>

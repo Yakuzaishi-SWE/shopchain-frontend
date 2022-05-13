@@ -18,16 +18,18 @@ export default observer(function PickAmountView({
     isBusy,
 }: IPickAmountViewModel) {
     const location =  useLocation();
-    const [buttonPopup, setButtonPopup] = useState(false);
+    const [error, setError] = useState(false);
 
     return <>
         <div>
             <div className="payment-form center">
                 <div className="form-wrapper">
                     <label>Your Contribute:</label>
-                    <div className="ftm-input">
-                        <input className="clickable-input addOnCreate-moneybox" type="number" step="any" min="0.000000000000000001" max={amountFtm} value={initFTM} onChange={e => setInitFTM(e.target.valueAsNumber)} />
+                    <p className={error ? "err_p" : "hide"}>Amount must be between 0 and {amountFtm} FTM</p>
+                    <div className={error ? "ftm-input err_input" : "ftm-input"}>
+                        <input className="clickable-input addOnCreate-moneybox" type="number" step="any" value={initFTM} onChange={e => setInitFTM(e.target.valueAsNumber)}/>
                         <span className="ftm-icon"><FTMIcon />FTM</span>
+                        
                     </div>
                     <div className="ftm-wei center">
                         <span>({initWei}) wei</span>
@@ -36,7 +38,7 @@ export default observer(function PickAmountView({
             </div>
             <div className="box-button">
                 <Link to={{ pathname: `/checkout/${id}/`,  search: location.search }} className="back-btn btn-shadow">Go Back</Link>
-                <button onClick={() => setButtonPopup(createMoneyBox)} className="btn-shadow btn-moneybox">Create MoneyBox</button>
+                <button onClick={() => setError(createMoneyBox)} className="btn-shadow btn-moneybox">Create MoneyBox</button>
             </div>
         </div>
         <Popup show={isBusy}>
@@ -44,10 +46,6 @@ export default observer(function PickAmountView({
                 <p>Check your MetaMask extension. The payment process may take few seconds...</p>
                 <Loading />
             </div>
-        </Popup>
-        <Popup show={buttonPopup} close={() => setButtonPopup(false)}>
-            <h3>Warning</h3>
-            <p>The chosen amount is greater than the amount needed to fill the moneybox ({amountFtm})</p>
         </Popup>
     </>;
 });

@@ -31,9 +31,11 @@ export default class ECommerceViewModel implements IECommerceViewModel {
     }
 
     handleSubmit() {
-        const usp = new URLSearchParams();
-        usp.set("amount", String(this.wei));
-        this.redirectLink = `${this._id}/?${usp}`;
+        if(this.amount > 0 ) {
+            const usp = new URLSearchParams();
+            usp.set("amount", String(this.wei));
+            this.redirectLink = `${this._id}/?${usp}`;
+        }
     }
 }
 

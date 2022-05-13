@@ -49,7 +49,7 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
     createMoneyBoxTask: ComputedTask<void, [data: { seller: string; amount: string; id: string; }, initAmount?: string | undefined], void> | null = null;
     createMoneyBox(): boolean {
         console.log(this._initAmount.wei,  this._amount.FTM);
-        if(this._initAmount.FTM <= this._amount.FTM) {
+        if(this._initAmount.FTM <= this._amount.FTM && this._initAmount.FTM >= 0) {
             this.createMoneyBoxTask = this.rootStore.moneyBoxStore.createOrder({
                 seller: this._sellerAddress,
                 amount: String(this._amount.wei),
