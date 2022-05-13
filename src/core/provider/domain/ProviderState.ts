@@ -6,13 +6,13 @@ import ProviderStore from "../store/ProviderStore";
 const MissingMetamask: MetamaskError = {
     severity: MetamaskErrorSeverity.BLOCKING,
     name: MetamaskErrorName.METAMASK_NOT_INSTALLED,
-    description: "please install metamask",
+    description: "Please install MetaMask",
 };
 
 const NotConnected: MetamaskError = {
     severity: MetamaskErrorSeverity.BLOCKING,
     name: MetamaskErrorName.NOT_CONNECTED,
-    description: "Connect Metamask",
+    description: "Connect MetaMask",
 };
 
 const Nominal: MetamaskError = {

@@ -115,7 +115,7 @@ export default observer(function MoneyBoxDetailsView({
         </div>
         <Popup show={isBusy}>
             <div className="sweet-loading">
-                <p>Check your Metamask extension. The payment process may take few seconds...</p>
+                <p>Check your MetaMask extension. The payment process may take few seconds...</p>
                 <Loading />
             </div>
         </Popup>

@@ -18,7 +18,7 @@ const MissingMetamask: MetamaskError = {
 const NotConnected: MetamaskError = {
     severity: MetamaskErrorSeverity.BLOCKING,
     name: MetamaskErrorName.NOT_CONNECTED,
-    description: "Connect Metamask",
+    description: "Connect MetaMask",
 };
 
 const Nominal: MetamaskError = {
@@ -115,7 +115,7 @@ const AppProvider = ({ children }: { children: React.ReactChild }) => {
                     if (err.code === 4001) {
                         // EIP-1193 userRejectedRequest error
                         // If this happens, the user rejected the connection request.
-                        console.log("Please connect to MetaMask.");
+                        console.log("Please connect MetaMask.");
                     } else {
                         console.error(err);
                     }

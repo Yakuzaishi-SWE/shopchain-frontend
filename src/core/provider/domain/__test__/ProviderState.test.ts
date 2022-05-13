@@ -21,6 +21,6 @@ describe("providerstate", () => {
         const p = new ProviderState(store);
         expect(p.isOK).toBeFalsy();
         expect(p.name).toEqual("METAMASK_NOT_INSTALLED");
-        expect(p.description).toEqual("please install metamask");
+        expect(p.description).toEqual("Please install MetaMask");
     });
 })

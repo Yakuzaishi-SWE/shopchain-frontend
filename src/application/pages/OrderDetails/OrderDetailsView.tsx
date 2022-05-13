@@ -68,7 +68,7 @@ export default observer(function OrderDetailsView({
         </Popup>
         <Popup show={isBusy}>
             <div className="sweet-loading">
-                <p>Check your Metamask extension. The process may take few seconds...</p>
+                <p>Check your MetaMask extension. The process may take few seconds...</p>
                 <Loading />
             </div>
         </Popup>

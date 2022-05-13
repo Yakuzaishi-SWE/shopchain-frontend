@@ -23,9 +23,23 @@
     justify-content: center;
     margin: 5%;
     margin-left: 300px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0 3em;
+    border-radius: 32px;
+    
 
-    & > h1#ovrl, p#redp{
+    & > h1#ovrl{
         text-align: center;
-        color: red;
+        color: $primaryLight;
+        margin: 2em 0 1em 0;
+    }
+
+    & > p > p#layerP {
+        margin: 1em 0 2em 0;
+    }
+
+    & > .LockStyle{
+        fill: white;
+        margin: auto;
     }
 }

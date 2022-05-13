@@ -5,6 +5,6 @@ import IConnectMetamaskViewModel from "./IConnectMetamaskViewModel";
 
 export default observer(function OrderCountView({ connect }: IConnectMetamaskViewModel) {
     return <button className="btn-connect" onClick={connect}>
-        Connect Metamask
+        Connect MetaMask
     </button>;
 });
