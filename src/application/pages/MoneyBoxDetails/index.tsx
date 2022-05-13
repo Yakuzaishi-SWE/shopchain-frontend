@@ -16,6 +16,10 @@ export default observer(function MoneyBoxDetails() {
         }
     }, [id]);
 
+    useEffect(() => {
+        if(vm.canReload) window.location.reload();
+    }, [vm.canReload]);
+
     //if (!id) return <Navigate to="/transaction/out/" />;
 
     return <MoneyBoxDetailsView 
@@ -48,6 +52,7 @@ export default observer(function MoneyBoxDetails() {
         unlockCode={vm.unlockCode}
         code={vm.code}
         setCode={vm.setCode}
+        canReload={vm.canReload}
     />;
 
 });

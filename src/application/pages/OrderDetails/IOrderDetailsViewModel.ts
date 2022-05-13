@@ -17,6 +17,7 @@ interface IOrderDetailsViewModel {
     setCode(code: number): void,
     code: number,
     isBusy: boolean,
+    canReload: boolean,
 }
 
 export default IOrderDetailsViewModel;

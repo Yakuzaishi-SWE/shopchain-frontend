@@ -15,6 +15,9 @@ export default observer(function OrderDetails() {
         if (id) vm.setOrderId(id);
     }, [id]);
 
+    useEffect(() => {
+        if(vm.canReload) window.location.reload();
+    }, [vm.canReload]);
 
     
 
@@ -36,5 +39,6 @@ export default observer(function OrderDetails() {
         setCode={vm.setCode}
         code={vm.code}
         isBusy={vm.isBusy}
+        canReload={vm.canReload}
     />;
 });

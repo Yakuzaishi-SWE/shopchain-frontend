@@ -30,5 +30,6 @@ interface IMoneyBoxDetailsViewModel {
   unlockCode: number,
   code: number,
   setCode(code: number): void,
+  canReload: boolean,
 }
 export default IMoneyBoxDetailsViewModel;

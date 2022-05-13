@@ -202,9 +202,16 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     }
 
     get isBusy(): boolean {
-        if (this.newPaymentTask) return this.newPaymentTask.isBusy;
-        if (this.unlockTask) return this.unlockTask.isBusy;
-        if (this.refundTask) return this.refundTask.isBusy;
+        if (this.newPaymentTask && this.newPaymentTask.isBusy) return true;
+        if (this.unlockTask && this.unlockTask.isBusy) return true;
+        if (this.refundTask && this.refundTask.isBusy) return true;
+        return false;
+    }
+
+    get canReload() {
+        if (this.newPaymentTask && this.newPaymentTask.isLoaded) return true;
+        if (this.unlockTask && this.unlockTask.isLoaded) return true;
+        if (this.refundTask && this.refundTask.isLoaded) return true;
         return false;
     }
 }

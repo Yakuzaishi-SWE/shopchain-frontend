@@ -108,8 +108,14 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
     }
 
     get isBusy() {
-        if (this.unlockTask) return this.unlockTask.isBusy;
-        if (this.refundTask) return this.refundTask.isBusy;
+        if (this.unlockTask && this.unlockTask.isBusy) return true;
+        if (this.refundTask && this.refundTask.isBusy) return true;
+        return false;
+    }
+
+    get canReload() {
+        if (this.unlockTask && this.unlockTask.isLoaded) return true;
+        if (this.refundTask && this.refundTask.isLoaded) return true;
         return false;
     }
 
