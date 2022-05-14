@@ -138,7 +138,9 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
 
     unlockTask: ComputedTask<void, [string, number], void> | null = null;
     unlock() {
-        if (this.moneybox && this.code === this.unlockCode) {
+        console.log("unlockCode", this.unlockCode);
+        console.log("code", this.code);
+        if (this.moneybox && this.code == this.unlockCode) {
             this.unlockTask = this.moneybox.unlock(this.moneybox.unlockCode);
             return false;
         }
