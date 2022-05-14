@@ -20,6 +20,7 @@ export default observer(function ECommerceView({
             return false;
         }}>
             <div className="form-wrapper">
+                <h2 className="center">Transaction Initialization</h2>
                 <label className="toTheLeft">Id</label>
                 <input type="text" value={id} onChange={() => {return;}} placeholder="0000-000000-000000000000000" disabled />
             </div>
