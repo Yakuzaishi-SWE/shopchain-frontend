@@ -12,11 +12,7 @@ export default class PaymentCollection {
     }
 
     add(orderid: string, ...payments: Payment[]) {
-        if (!this.payments.has(orderid)) {
-            this.payments.set(orderid, []);
-        }
-        const paymentarr = this.payments.get(orderid);
-        if (paymentarr) paymentarr.push(...payments);
+        this.payments.set(orderid, payments);
     }
 
     get(orderid: string) {
