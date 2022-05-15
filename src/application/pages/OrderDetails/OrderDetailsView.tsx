@@ -25,7 +25,7 @@ export default observer(function OrderDetailsView({
     code,
     isBusy,
 }: IOrderDetailsViewModel) {
-    const location = useLocation();
+    // const location = useLocation();
     const [popUnlock, setPopUnlock] = useState(false);
     const [popRefund, setPopRefund] = useState(false);
 

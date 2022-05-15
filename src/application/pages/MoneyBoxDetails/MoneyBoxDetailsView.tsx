@@ -39,13 +39,13 @@ export default observer(function MoneyBoxDetailsView({
     const [error, setError] = useState(false);
     const [popUnlock, setPopUnlock] = useState(false);
     const [popRefund, setPopRefund] = useState(false);
-    const location = useLocation();
+    // const location = useLocation();
 
     return <>
         <div className="page-container column">
-            <div className="simple-link">
-                {/*<Link to={back(location.pathname)}><BackArrowIcon className="svg-white" />Go back to your transactions</Link>*/}
-            </div>
+            {/* <div className="simple-link">
+                <Link to={back(location.pathname)}><BackArrowIcon className="svg-white" />Go back to your transactions</Link>
+            </div> */}
             <h1>MoneyBox Details</h1>
             <section className="transaction-details">
 
