@@ -10,7 +10,7 @@ export default observer(function TransactionListController() {
     const vm = useViewModel(TransactionListViewModel, RootStore.getInstance(), ProviderStore.getInstance());
     
     return <TransactionListView
-        transactionsFilter={vm.transactionsFilter}
+        filtered_transactions={vm.filtered_transactions}
         stateFilter={vm.stateFilter}
         typeFilter={vm.typeFilter}
         setStateFilter={vm.setStateFilter}

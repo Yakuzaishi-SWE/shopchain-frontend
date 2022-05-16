@@ -6,8 +6,8 @@ import { makeAutoObservable } from "mobx";
 import ITransactionListViewModel from "./ITransactionListViewModel";
 
 export default class TransactionListViewModel implements ITransactionListViewModel {
-    _stateFilter = "";
-    _typeFilter = "";
+    private _stateFilter = "";
+    private _typeFilter = "";
 
     constructor(private readonly rootStore: RootStore, private readonly providerStore: ProviderStore) {
         makeAutoObservable(this, {}, { autoBind: true });
@@ -57,10 +57,10 @@ export default class TransactionListViewModel implements ITransactionListViewMod
         this._typeFilter = filter;
     }
 
-    transactionsFilter(stateFilter: string, typeFilter: string) {
+    get filtered_transactions() {
         let t = this.transactions;
-        if(stateFilter != "") t = t.filter(order => order.state.toString() == stateFilter);
-        if(typeFilter != "") t = t.filter(order => order.type == typeFilter);
+        if (this.stateFilter != "") t = t.filter(order => order.state.toString() == this.stateFilter);
+        if (this.typeFilter != "") t = t.filter(order => order.type == this.typeFilter);
         return t.filter(order => order.state.isPaid || order.state.isClosed || order.state.isCancelled);
     }
 

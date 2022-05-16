@@ -31,7 +31,7 @@ export default class ContributesListViewModel implements IContributesListElViewM
     }
 
 
-//----------------------------------- View ------------------------------------
+    //----------------------------------- View ------------------------------------
 
     dateNtime(partecipant: Payment): string {
         const date = new Date(partecipant.timestamp*1000);

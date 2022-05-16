@@ -3,7 +3,7 @@ import Order from "core/modules/order/domain/Order";
 interface ITransactionListViewModel {
     stateFilter: string,
     typeFilter: string,
-    transactionsFilter(stateFilter: string, typeFilter: string): Order[],
+    filtered_transactions: Order[],
     setStateFilter(filter: string): void,
     setTypeFilter(filter: string): void,
 }

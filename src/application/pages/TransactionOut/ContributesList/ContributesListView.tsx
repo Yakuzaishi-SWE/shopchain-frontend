@@ -16,7 +16,7 @@ export default observer(function ContributesListView({
                     <article className="contribute">
                         <header>
                             <span className="transaction-id">
-                                <Link to={"/out/moneybox/"+moneybox.id+"/"}  className="btn-linkto">{moneybox.id}<Launch/></Link>
+                                <Link to={`/out/moneybox/${moneybox.id}/`}  className="btn-linkto">{moneybox.id}<Launch/></Link>
                             </span>
                             <span className="transaction-state">
                                 State: {moneybox.state.toString()}

@@ -11,7 +11,7 @@ export default observer(function TransactionListController() {
     
     return <TransactionListView
         //transactions={vm.transactions}
-        transactionsFilter={vm.transactionsFilter}
+        filtered_transactions={vm.filtered_transactions}
         stateFilter={vm.stateFilter}
         typeFilter={vm.typeFilter}
         setStateFilter={vm.setStateFilter}
