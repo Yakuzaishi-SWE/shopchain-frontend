@@ -25,6 +25,36 @@
 				"internalType": "string",
 				"name": "id",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "sellerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "ownerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "enum OrderManager.OrderState",
+				"name": "state",
+				"type": "uint8"
 			}
 		],
 		"name": "ItemReceived",
@@ -62,7 +92,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "_feeAmount",
+				"name": "_amount",
 				"type": "uint256"
 			}
 		],
@@ -77,11 +107,29 @@
 			{
 				"indexed": false,
 				"internalType": "string",
-				"name": "id",
+				"name": "moneybox_id",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "fee_amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
 			}
 		],
-		"name": "NewPayment",
+		"name": "NewPaymentCreated",
 		"type": "event"
 	},
 	{
@@ -106,19 +154,19 @@
 				"type": "address"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "uint256",
-				"name": "unlockCode",
+				"name": "timestamp",
 				"type": "uint256"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "enum OrderManager.OrderState",
 				"name": "state",
 				"type": "uint8"
@@ -135,6 +183,36 @@
 				"internalType": "string",
 				"name": "id",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "sellerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "ownerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "enum OrderManager.OrderState",
+				"name": "state",
+				"type": "uint8"
 			}
 		],
 		"name": "OrderCreated",
@@ -148,6 +226,36 @@
 				"internalType": "string",
 				"name": "id",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "sellerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "ownerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "enum OrderManager.OrderState",
+				"name": "state",
+				"type": "uint8"
 			}
 		],
 		"name": "OwnerRefunded",
@@ -225,7 +333,7 @@
 							},
 							{
 								"internalType": "uint256",
-								"name": "datetime",
+								"name": "timestamp",
 								"type": "uint256"
 							},
 							{
@@ -293,7 +401,7 @@
 							},
 							{
 								"internalType": "uint256",
-								"name": "datetime",
+								"name": "timestamp",
 								"type": "uint256"
 							},
 							{
@@ -356,6 +464,69 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "participantAddress",
+				"type": "address"
+			}
+		],
+		"name": "getMoneyBoxesByParticipantAddress",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address payable",
+								"name": "sellerAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "ownerAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "unlockCode",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum OrderManager.OrderState",
+								"name": "state",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct OrderManager.Order",
+						"name": "order",
+						"type": "tuple"
+					}
+				],
+				"internalType": "struct OrderManager.OrderTuple[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "id",
 				"type": "string"
@@ -372,12 +543,12 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "feeAmount",
+						"name": "amount",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "datetime",
+						"name": "timestamp",
 						"type": "uint256"
 					}
 				],
@@ -423,7 +594,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "datetime",
+						"name": "timestamp",
 						"type": "uint256"
 					},
 					{
@@ -494,7 +665,7 @@
 							},
 							{
 								"internalType": "uint256",
-								"name": "datetime",
+								"name": "timestamp",
 								"type": "uint256"
 							},
 							{
@@ -557,7 +728,7 @@
 							},
 							{
 								"internalType": "uint256",
-								"name": "datetime",
+								"name": "timestamp",
 								"type": "uint256"
 							},
 							{

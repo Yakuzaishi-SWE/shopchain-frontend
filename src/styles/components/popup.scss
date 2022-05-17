@@ -1,0 +1,82 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    h2, p {
+        color: white;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    p {
+       margin: 2em 0 3em 0; 
+    }
+
+    span.unlock-code {
+        font-size: 3em;
+    }
+
+    span.danger-text {
+        font-size: larger;
+        color: $error;
+    }
+
+    div.unlock-input {
+        display: flex;
+        justify-content: center;
+        margin: 1.6em auto;
+
+        input {
+            width: 33%;
+            padding: 1em 1em;
+            font-size: 1em;
+            border-radius: 32px;
+        }
+    }
+
+    button {
+        padding: 1.2em 3em;
+        font-size: 1.2em;
+        background-color: $success;
+    }
+}
+
+.popup-inner {
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+    background-color: $background80;
+    color: white;
+    border-radius: 32px;
+
+    & > h2.refundPopup{
+        font-size: 2em;
+    }
+
+    & > p.refundPopup{
+        font-size: 1.2em;
+    }
+}
+
+.popup-inner .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    padding: 8px 10px;
+    background-color: $primaryLight;
+    font-size: 0.8em;
+}

@@ -7,6 +7,36 @@
 				"internalType": "string",
 				"name": "id",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "sellerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "ownerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "enum OrderManager.OrderState",
+				"name": "state",
+				"type": "uint8"
 			}
 		],
 		"name": "ItemReceived",
@@ -34,19 +64,19 @@
 				"type": "address"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "uint256",
-				"name": "unlockCode",
+				"name": "timestamp",
 				"type": "uint256"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "enum OrderManager.OrderState",
 				"name": "state",
 				"type": "uint8"
@@ -63,6 +93,36 @@
 				"internalType": "string",
 				"name": "id",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "sellerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "ownerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "enum OrderManager.OrderState",
+				"name": "state",
+				"type": "uint8"
 			}
 		],
 		"name": "OrderCreated",
@@ -76,6 +136,36 @@
 				"internalType": "string",
 				"name": "id",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "sellerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "ownerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "enum OrderManager.OrderState",
+				"name": "state",
+				"type": "uint8"
 			}
 		],
 		"name": "OwnerRefunded",
@@ -165,7 +255,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "datetime",
+						"name": "timestamp",
 						"type": "uint256"
 					},
 					{
@@ -255,7 +345,7 @@
 							},
 							{
 								"internalType": "uint256",
-								"name": "datetime",
+								"name": "timestamp",
 								"type": "uint256"
 							},
 							{
@@ -318,7 +408,7 @@
 							},
 							{
 								"internalType": "uint256",
-								"name": "datetime",
+								"name": "timestamp",
 								"type": "uint256"
 							},
 							{
