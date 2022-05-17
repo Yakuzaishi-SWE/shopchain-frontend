@@ -1,8 +1,6 @@
 import { providerStore } from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
-import TaskCacheBuilder from "core/utils/TaskCacheBuilder";
-import { makeObservable, observable } from "mobx";
-import Amount from "../domain/Amount";
+import { action, makeObservable, observable } from "mobx";
 import MoneyBox from "../domain/MoneyBox";
 import OrderCollection from "../domain/OrderCollection";
 import Payment from "../domain/Payment";
@@ -13,59 +11,35 @@ import OrderStore from "./OrderStore";
 
 
 export default class MoneyBoxOrderStore extends OrderStore {
-    declare protected repo: IMoneyBoxOrderRepo;
-
-    private readonly payments: PaymentCollection;
-    declare protected readonly orders: OrderCollection<MoneyBox>;
+    repo: IMoneyBoxOrderRepo;
+    
+    readonly payments: PaymentCollection;
+    declare readonly orders: OrderCollection<MoneyBox>;
 
     constructor(store: RootStore, repo?: IMoneyBoxOrderRepo) {
-        super(store);
-        this.repo = repo || new MoneyBoxOrderRepo(this, providerStore.w3.mm, providerStore.address);
-        this.payments = new PaymentCollection();
-        makeObservable<this, "payments">(this, {
+        const temprepo = repo || new MoneyBoxOrderRepo(providerStore.w3.mm, providerStore.address);
+        super(store, temprepo); 
+        this.repo = temprepo;
+        this.payments = new PaymentCollection();  
+        makeObservable(this,{
             payments: observable,
-            getOrderById: false,
-            newPayment: false,
-            getPayments: false,
-            getAmountToFill: false,
+            newPayment: action,
+            getPayments: action,
+            getAmountToFill: action,
         });
     }
 
-    readonly newPayment = TaskCacheBuilder.build<void, [orderId: string, amount: string]>()
-        .expireIn(0)
-        .task(async (orderId, amount) => {
-            await this.repo.newPayment(orderId, amount);
-        })
-        .id((orderId, amount) => `${orderId}-${amount}`)
-        .result(() => { return; })
-        .revaildate;
+    async newPayment(orderId: string, amount: number) {
+        await this.repo.newPayment(orderId, amount);
+    }
 
-    readonly getPayments = TaskCacheBuilder.build<Payment[], [id: string]>()
-        .task(async (orderid: string) => {
-            const pays = await this.repo.getPayments(orderid);
-            this.payments.add(orderid, ...pays);
-            return pays;
-        })
-        .id((id) => id)
-        .result((d, id) => this.payments.get(id))
-        .revaildate;
+    async getPayments(orderId: string) {
+        const dtos = await this.repo.getPayments(orderId);
+        const pays = dtos.map(dto => Payment.create(dto));
+        this.payments.set(orderId, pays);
+    }
 
-    readonly getAmountToFill = TaskCacheBuilder.build<Amount | null, [id: string]>()
-        .task(async (id) => {
-            return await this.repo.getAmountToFill(id);
-        })
-        .id((id) => id)
-        .result((data) => data)
-        .revaildate;
-
-    readonly getMoneyBoxesByParticipantAddress = TaskCacheBuilder.build<MoneyBox[], [participant: string]>()
-        .task(async (participant) => {
-            const orderData = await this.repo.getMoneyBoxesByParticipantAddress(participant);
-            orderData.forEach(el => this.orders.add(el));
-            return orderData;
-        })
-        .result((resultMoneyboxArr) => resultMoneyboxArr || [])
-        .id((participant) => participant)
-        .revaildate;
-    
+    async getAmountToFill(orderId: string): Promise<number> {
+        return await this.repo.getAmountToFill(orderId);
+    }
 }

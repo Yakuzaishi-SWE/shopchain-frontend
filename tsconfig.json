@@ -34,10 +34,7 @@
 		"resolveJsonModule": true,
 		// "isolatedModules": true
 	},
-	"exclude": [
-		"**/*.test.ts",
-	],
 	"include": [
-		"src"	
-	],
+		"src"
+	]
 }

@@ -5,8 +5,7 @@ import { makeObservable, observable } from "mobx";
 import ORDER_MANAGER_ABI from "./OrderManagerContractABI.json";
 import { AbiItem } from "web3-utils";
 
-//const ORDER_MANAGER_ADDRESS = "0xD9e1D649434573947d9ca606d7EFf3C6b4CFa377";
-const ORDER_MANAGER_ADDRESS = "0x1fe85508d1919067F2eBEAb6B75D0B944e5391ef";
+const ORDER_MANAGER_ADDRESS = "0xD9e1D649434573947d9ca606d7EFf3C6b4CFa377";
 
 export default class OrderManagerContractRepo implements IContractRepo {
     private readonly w3store: W3Store;
@@ -17,14 +16,14 @@ export default class OrderManagerContractRepo implements IContractRepo {
         this.w3store = w3store;
         this.address = address;
         this.abis = abis;
-        makeObservable<this, "w3store" | "address">(this, {
-            w3store: observable,
+        makeObservable<this, "store" | "address">(this, {
+            store: observable,
             address: observable,
-        });
+        })
     }
 
     init(): Contract {
         if (!this.w3store.web3) throw new Error("Web3 is not initialized");
-        return new this.w3store.web3.eth.Contract(this.abis, this.address);
+        return new this.w3store.web3.eth.Contract(this.abis, this.address)
     }
 }

@@ -1,6 +1,7 @@
 import { render } from "react-dom";
 import App from "./App";
 import React from "react";
+import { AppProvider } from "./providers";
 
 
-render(<App />, document.getElementById("root"));
+render(<AppProvider><App /></AppProvider>, document.getElementById("root"));

@@ -13,18 +13,12 @@ declare interface IOrder {
     ownerAddress: string,
     amount: number,
     unlockCode: number,
-    state: OrderState,
-    timestamp: number,
+    state: OrderState
 }
 
 declare interface IOrderTuple {
     id: string,
     order: IOrder,
-}
-
-declare interface IPaymentTuple {
-    moneyboxId: string,
-    payment: Payment,
 }
 
 declare interface ITransaction {

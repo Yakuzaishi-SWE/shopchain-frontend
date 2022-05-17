@@ -1,3 +1,4 @@
+import Address from "core/provider/domain/Address";
 import { makeAutoObservable } from "mobx";
 import PaymentDTO from "../dtos/PaymentDTO";
 import Amount from "./Amount";
@@ -20,10 +21,6 @@ export default class Payment {
         return this.props.from;
     }
 
-    isFrom(address: string) {
-        return this.from.toLowerCase() === address;
-    }
-
     get amount() {
         return this.props.amount;
     }
@@ -34,9 +31,9 @@ export default class Payment {
 
     static create(props: PaymentDTO) {
         return new Payment({
-            timestamp: props.timestamp,
+            timestamp: props.datetime,
             from: props.from,
-            amount: Amount.create(props.amount),
+            amount: Amount.create(props.feeAmount),
         });
     }
 }

@@ -1,8 +1,8 @@
 
 interface PaymentDTO {
     from: string;
-    amount: number;
-    timestamp: number;
+    feeAmount: number;
+    datetime: number;
 }
 
 export default PaymentDTO;

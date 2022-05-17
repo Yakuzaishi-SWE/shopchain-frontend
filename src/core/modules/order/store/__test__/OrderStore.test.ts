@@ -1,5 +1,5 @@
-import { OrderStateEnum } from "../../../../../types/enums";
-import RootStore from "../../../../shared/RootStore";
+import RootStore from "core/shared/RootStore";
+import { OrderStateEnum } from "types/enums";
 import OrderDTO from "../../dtos/OrderDTO";
 import IOrderRepo from "../../repo/IOrderRepo";
 import OrderStore from "../OrderStore";
@@ -13,14 +13,11 @@ const order:  OrderDTO = {
     amount: 0,
     unlockCode: 0,
     state: OrderStateEnum.CREATED,
-    timestamp: 123,
 }
 
 const repo: IOrderRepo = {
-    createOrder: jest.fn(),
-    getOrderById: jest.fn(),
-    getOrdersBySeller: jest.fn(),
-    getOrdersByBuyer: jest.fn(),
+    createOrder: jest.fn(async (data: any) => { return; }),
+    getOrderById: jest.fn(async (id: string) => { return order; }),
     refund: jest.fn(async (id: string) => { return; }),
     unlock: jest.fn(async (id: string, code: number) => { return; }),
 };
@@ -41,8 +38,8 @@ describe("OrderStore", () => {
             amount:  "0",
             id:  "0x0",
         };
-        await orderStore.createOrder(data, "0");
-        expect(repo.createOrder).toHaveBeenCalledWith(data, "0");
+        await orderStore.createOrder(data);
+        expect(repo.createOrder).toHaveBeenCalledWith(data);
         expect(repo.createOrder).toHaveBeenCalledTimes(1);
     });
 })

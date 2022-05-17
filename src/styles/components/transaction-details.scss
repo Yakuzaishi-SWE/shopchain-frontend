@@ -5,7 +5,7 @@
     margin: 1em auto 5em auto;
     border-radius: 32px;
     color: white;
-    width: 80%;
+    width: 50%;
 
     header {
         color: white;
@@ -30,13 +30,5 @@
         font-weight: bold;
         width: 25%;
         float: left;
-        display: flex;
-        justify-content: flex-end;
-        margin-right: 2em;
-    }
-
-    & span.moneybox-percentage {
-        font-weight: bolder;
-        font-size: 3em;
     }
 }

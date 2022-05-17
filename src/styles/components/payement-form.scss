@@ -1,118 +1,99 @@
-.payment-form {
-    border-radius: 30px;
-    padding: 2em;
+.payment-form{
+    margin: 10em 25%;
+        border-radius: 30px;
+        background-color: $background80;
+        padding: 2em;
 
-    &h1 {
-        color: green;
-    }
-
-    &>div.form-wrapper {
-
-        & label {
-            color: white;
-            font-size: 1.2em;
-            font-weight: 100;
-            display: block;
-            text-align: center;
+        &h1{
+            color:green;
         }
-
-        & label.toTheLeft{
-            text-align: left;
+        
+        & > div.form-wrapper{
             
-        }
-
-        & input[type=text],
-        input[type=number] {
-            width: 100%;
-            padding: 1em 1em;
-            margin: 1em 0 1.5em 0;
-            display: inline-block;
-            border-radius: 32px;
-            box-sizing: border-box;
-            font-size: 1em;
-            color: white;
-            background-color: $background60;
-            border: none;
-
-            &:focus {
-                outline: none;
-            }
-        }
-
-        & ::placeholder {
-            color: white;
-        }
-
-        & div.ftm-input {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: $background60;
-            padding: 0.3em 0.5em;
-            margin: 1em 0;
-            border-radius: 32px;
-
-            &>input {
-                width: 100%;
-                margin: 0;
-                padding: 0 0.8em;
-            }
-
-            & span.ftm-icon {
-                display: flex;
-                align-items: center;
-                padding: 0.5em 0.6em;
-                background-color: $background;
-                border-radius: 60px;
+            &  label {
                 color: white;
+                font-size: 1.2em;
+                font-weight: 200;
+                display: block;
+                text-transform: uppercase;
 
-                &>svg {
-                    margin-right: 5px;
+            }
+            
+            & input[type=text], input[type=number] {
+                width: 100%;
+                padding: 1em 1em;
+                margin: 1em  0 1.5em 0;
+                display: inline-block;
+                border-radius: 32px;
+                box-sizing: border-box;
+                font-size: 1em;
+                color: white;
+                background-color: $background60;
+                border: none;
+
+                &:focus {
+                    outline: none;
                 }
             }
+
+            & ::placeholder {
+                color: white;
+            }
+
+            & div.ftm-input {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: $background60;
+                padding: 0.3em 0.5em;
+                margin: 1em 0;
+                border-radius: 32px;
+
+                & > input {
+                    width: 100%;
+                    margin: 0;
+                    padding: 0 0.8em;
+                }
+                
+                & span.ftm-icon {
+                    display: flex;
+                    align-items: center;
+                    padding: 0.5em 0.6em;
+                    background-color: $background;
+                    border-radius: 60px;
+                    color: white;
+    
+                    & > svg {
+                        margin-right: 5px;
+                    }
+                }
+            }
+
+            & > .ftm-wei{
+                text-align: end;
+                margin: 1.5em;
+                color: #b9b9b9;
+            }
         }
 
-        &>.ftm-wei {
-            text-align: end;
-            margin: 1.5em;
-            color: #b9b9b9;
+        & >div.btn-block {
+            text-align: center;
+            & > input[type=submit] {
+                background-color: $success;
+                color: black;
+                height: 50px;
+                border: none;
+                margin: none;
+                padding: 16px;
+                font-weight: bold;
+                border-radius: 16px;
+                cursor: pointer;
+            }
         }
-    }
-
-    & .btn-block {
-        text-align: center;
-
-        &>input[type=submit] {
-            background-color: $success;
-            color: black;
-            height: 50px;
-            border: none;
-            margin: none;
-            padding: 16px;
-            font-weight: bold;
-            border-radius: 16px;
-            cursor: pointer;
-        }
-    }
 }
-
-.checkout-form {
-    background-color: $background80;
-    margin: 3em auto;
-    width: 50%;
-
-    & label {
-        color: white;
-        font-size: 1.2em;
-        font-weight: 200;
-        display: block;
-        text-transform: uppercase;
-    }
-}
-
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -1,17 +1,11 @@
-import Amount from "../domain/Amount";
-import MoneyBox from "../domain/MoneyBox";
-import Payment from "../domain/Payment";
+import PaymentDTO from "../dtos/PaymentDTO";
 import IOrderRepo from "./IOrderRepo";
 
 
 interface IMoneyBoxOrderRepo extends IOrderRepo {
-    newPayment(orderId: string, amount: string): Promise<void>;
-    getPayments(orderId: string): Promise<Payment[]>;
-    getAmountToFill(orderId: string): Promise<Amount>;
-    getOrderById(id: string): Promise<MoneyBox>;
-    getOrdersBySeller(seller: string): Promise<MoneyBox[]>;
-    getOrdersByBuyer(seller: string): Promise<MoneyBox[]>;
-    getMoneyBoxesByParticipantAddress(participant: string): Promise<MoneyBox[]>;
+    newPayment(orderId: string, amount: number): Promise<void>;
+    getPayments(orderId: string): Promise<PaymentDTO[]>;
+    getAmountToFill(orderId: string): Promise<number>;
 }
 
 export default IMoneyBoxOrderRepo;

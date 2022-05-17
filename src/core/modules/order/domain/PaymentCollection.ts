@@ -11,7 +11,15 @@ export default class PaymentCollection {
         makeAutoObservable(this);
     }
 
-    add(orderid: string, ...payments: Payment[]) {
+    add(orderid: string, payment: Payment) {
+        if (!this.payments.has(orderid)) {
+            this.payments.set(orderid, []);
+        }
+        const paymentarr = this.payments.get(orderid);
+        if (paymentarr) paymentarr.push(payment);
+    }
+
+    set(orderid: string, payments: Payment[]) {
         this.payments.set(orderid, payments);
     }
 

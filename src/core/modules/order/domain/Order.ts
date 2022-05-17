@@ -9,8 +9,7 @@ export type OrderProps = {
     ownerAddress: string,
     amount: Amount,
     unlockCode: number,
-    state: OrderState,
-    timestamp: number,
+    state: OrderState
 };
 
 export default class Order {
@@ -28,12 +27,15 @@ export default class Order {
             id: observable,
             props: observable,
             sellerAddress: computed,
-            ownerAddress: computed,
-            amount: computed,
-            unlockCode: computed,
-            state: computed,
-            type: computed,
         });
+    }
+
+    get sellerAddress(): string {
+        return this.props.sellerAddress;
+    }
+
+    set sellerAddress(address: string) {
+        this.props.sellerAddress = address;
     }
 
     static create(store: OrderStore, id: string, props: OrderDTO) {
@@ -43,57 +45,18 @@ export default class Order {
         return new Order(
             store,
             id, {
-                ...props,
-                amount: amount,
-                state: state,
-            });
+            ...props,
+            amount: amount,
+            state: state,
+        }
+        );
     }
 
-    unlock(code: number) {
-        return this.store.unlock(this.id, code);
+    async unlock(code: number): Promise<void> {
+        await this.store.unlock(this.id, code);
     }
 
-    refund() {
-        return this.store.refund(this.id);
-    }
-
-    /***********************
-     *       GET/SET
-     **********************/
-
-    get type(): string {
-        return "ORDER";
-    }
-
-    get sellerAddress(): string {
-        return this.props.sellerAddress;
-    }
-
-    get ownerAddress(): string {
-        return this.props.ownerAddress;
-    }
-
-    get amount(): Amount {
-        return this.props.amount;
-    }
-
-    get unlockCode(): number {
-        return this.props.unlockCode;
-    }
-
-    get state(): OrderState {
-        return this.props.state;
-    }
-
-    set state(state: OrderState) {
-        this.props.state = state;
-    }
-
-    get timestamp(): number {
-        return this.props.timestamp;
-    }
-    
-    patch(other: Order) {
-        this.state = other.state;
+    async refund(): Promise<void> {
+        await this.store.refund(this.id);
     }
 }
