@@ -21,6 +21,10 @@ export default class Amount {
         this.amount = amount;
     }
 
+    setAmountFTM(amount: number): void {
+        this.amount = amount * 10 ** 18;
+    }
+
     static create(amount: number): Amount {
         return new Amount(amount);
     }

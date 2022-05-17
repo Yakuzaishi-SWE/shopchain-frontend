@@ -6,7 +6,7 @@ export default class OrderManagerRepo implements IOrderManagerRepo {
 
     async getContractBalance(): Promise<number | undefined> {
         if (!this.contract.instance) return undefined;
-        return await this.contract.instance.methods.getBalance().call();
+        return await this.contract.instance.methods.contractBalance().call();
     }
 
     async getOrderCount(): Promise<number | undefined> {

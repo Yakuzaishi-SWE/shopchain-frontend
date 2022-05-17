@@ -5,7 +5,8 @@ interface OrderDTO {
     ownerAddress: string,
     amount: number,
     unlockCode: number,
-    state: OrderStateEnum
+    state: OrderStateEnum,
+    timestamp: number,
 }
 
 export default OrderDTO;

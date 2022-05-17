@@ -25,6 +25,7 @@ module.exports = {
         },
         alias: {
             types: path.resolve(process.cwd(), "src/types"),
+            application: path.resolve(process.cwd(), "src/application"),
             core: path.resolve(process.cwd(), "src/core"),
             pages: path.resolve(process.cwd(), "src/pages"),
             views: path.resolve(process.cwd(), "src/views"),

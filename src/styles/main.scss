@@ -23,6 +23,10 @@ body {
     color: white;
 }
 
+.hide {
+    display: none !important;
+}
+
 @import './layout/';
 
 @import './components/';
