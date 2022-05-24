@@ -53,6 +53,7 @@ export default class ProviderStore {
     async getProvider() {
         console.log("getProvider");
         const provider = await this.repo.getProvider();
+        console.log(provider);
         runInAction(() => {
             this.provider = provider;
             this.subscribeAddressChanged(this.address.setAddress);
