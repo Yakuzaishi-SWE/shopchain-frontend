@@ -1,6 +1,6 @@
 import ProviderStore from "core/provider/store/ProviderStore";
 import { makeAutoObservable } from "mobx";
-import ILockOverlayViewModel from "./ILockOverlayModel";
+import ILockOverlayViewModel from "./ILockOverlayViewModel";
 
 
 export default class LockOverlayViewModel implements ILockOverlayViewModel {    
