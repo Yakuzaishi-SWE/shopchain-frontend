@@ -1,7 +1,7 @@
 import Amount from "core/modules/order/domain/Amount";
 import MoneyBox from "core/modules/order/domain/MoneyBox";
 import Payment from "core/modules/order/domain/Payment";
-import ProviderStore, { providerStore } from "core/provider/store/ProviderStore";
+import ProviderStore from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import ComputedTask from "core/utils/ComputedTask";
 import { makeAutoObservable } from "mobx";
@@ -11,10 +11,8 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     _id = "";
     _feeAmount = new Amount(0);
     _code = 0;
-    providerStore: ProviderStore;
 
-    constructor(private readonly rootStore: RootStore, providerStore: ProviderStore = ProviderStore.getInstance()) {
-        this.providerStore = providerStore;
+    constructor(private readonly rootStore: RootStore, private readonly providerStore: ProviderStore = ProviderStore.getInstance()) {
         makeAutoObservable(this, {}, { autoBind: true, });
     }
 
@@ -23,7 +21,7 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     }
 
     private get moneyboxTask() {
-        if (!providerStore.provider) return null;
+        if (!this.providerStore.provider) return null;
         return this.rootStore.moneyBoxStore.getOrderById(this._id) as ComputedTask<MoneyBox | null, [id: string], MoneyBox | null>;
     }
 
