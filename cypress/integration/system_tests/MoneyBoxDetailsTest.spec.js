@@ -3,7 +3,7 @@ import Web3 from "web3";
 
 /// <reference types="cypress" />
 
-describe("TS1F8", () => {
+describe("MoneyBox Details Page Tests", () => {
     beforeEach(() => {
         // Cypress starts out with a blank slate for each test
         // so we must tell it to visit our website with the `cy.visit()` command.
@@ -14,7 +14,7 @@ describe("TS1F8", () => {
             //     "d5d4d2323ead64f264bdf8216f5112a22a72294291da220f78b34d49329d0c96",
             //     "https://rpc.testnet.fantom.network/"
             // );
-            const privateKey = "5002a4d3aba57698b0789a6cf64ee506142b8aba43be3bdd588dd850a40088f4";
+            const privateKey = "d5d4d2323ead64f264bdf8216f5112a22a72294291da220f78b34d49329d0c96";
             const provider = new Web3.providers.HttpProvider("https://rpc.testnet.fantom.network/", {});
             const address = privateKeyToAddress(privateKey);
             const w3 = new Web3(provider);
@@ -30,14 +30,33 @@ describe("TS1F8", () => {
             };
             win.ethereum = w3;
         });
-        cy.visit("http://localhost:8085/");
-        cy.contains("Transactions");
+
     });
 
-    it("TS2F8.1: Verificare che il venditore possa visualizzare le transazioni in entrata pagate ma non sbloccate", () => {
-        cy.get(':nth-child(4) > .home-button').click();
-        cy.get('#state-dropdown').select("Paid");
 
-        cy.get('#state-dropdown').should('have.value', 'Paid');
+
+    it("TS1F2.2.1: Verificare che l’utente possa visualizzare lo stato di completamento della MoneyBox Correttamente.", () => {
+        cy.visit("http://localhost:8085/#/");
+        cy.visit("http://localhost:8085/#/out/moneybox/3499e238-4200-4803-aebe-7bbd5d4339a0/");
+        cy.get('.moneybox-percentage').should('be.visible');
+
+    });
+
+    it("TS1F2.2.2: Verificare che l’utente possa copiare l'invito di partecipazione della MoneyBox Correttamente.", () => {
+        cy.get('#copy-invite-link').should('be.visible');
+        cy.get('#copy-invite-link').should('have.text', 'Copy invite link');
+        cy.get('#copy-invite-link').should('not.have.attr', 'disabled');
+    });
+
+    
+    it("TSF2.2.3 Verificare che l’utente possa visualizzare una traduzione visiva della MoneyBox correttamente.", () => {
+        cy.get('.bigPiggy').should('be.visible');
+    });
+
+    // TO DO
+    // it("TSF2.2.4 ", () => {});
+
+    it("TSF2.2.5 Verificare che l’utente possa visualizzare l’elenco delle transazione dei partecipanti alla MoneyBox correttamente.", () => {
+        cy.get('#table-payments').should('be.visible');
     });
 });

@@ -3,7 +3,7 @@ import Web3 from "web3";
 
 /// <reference types="cypress" />
 
-describe("TS1F8", () => {
+describe("Inbound Transactionsn Page Tests", () => {
     beforeEach(() => {
         // Cypress starts out with a blank slate for each test
         // so we must tell it to visit our website with the `cy.visit()` command.
@@ -34,10 +34,29 @@ describe("TS1F8", () => {
         cy.contains("Transactions");
     });
 
-    it("TS2F8.1: Verificare che il venditore possa visualizzare le transazioni in entrata pagate ma non sbloccate", () => {
+    it("TS2F8.1: Verificare che il venditore possa visualizzare le transazioni in entrata pagate.", () => {
+        cy.visit("http://localhost:8085/Transaction/out#/transaction/in/");
+        cy.get('.transaction-list').should('be.visible');
+    });
+
+    it("TS2F8.1.1: Verificare che il venditore possa visualizzare le transazioni in entrata pagate ma non sbloccate", () => {
         cy.get(':nth-child(4) > .home-button').click();
         cy.get('#state-dropdown').select("Paid");
 
         cy.get('#state-dropdown').should('have.value', 'Paid');
+    });
+
+    it("TS2F8.1.2: Verificare che il venditore possa visualizzare le transazioni in entrata pagate e sbloccate.", () => {
+        cy.get(':nth-child(4) > .home-button').click();
+        cy.get('#state-dropdown').select("Unlocked");
+
+        cy.get('#state-dropdown').should('have.value', 'Unlocked');
+    });
+
+    it("TS2F8.1.3: Verificare che il venditore possa visualizzare le transazioni in entrata pagate e cancellate.", () => {
+        cy.get(':nth-child(4) > .home-button').click();
+        cy.get('#state-dropdown').select("Refunded");
+
+        cy.get('#state-dropdown').should('have.value', 'Refunded');
     });
 });

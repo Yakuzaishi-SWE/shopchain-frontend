@@ -3,7 +3,7 @@ import Web3 from "web3";
 
 /// <reference types="cypress" />
 
-describe("TS1F8", () => {
+describe("Connection State Tests", () => {
     beforeEach(() => {
         // Cypress starts out with a blank slate for each test
         // so we must tell it to visit our website with the `cy.visit()` command.
@@ -14,12 +14,12 @@ describe("TS1F8", () => {
             //     "d5d4d2323ead64f264bdf8216f5112a22a72294291da220f78b34d49329d0c96",
             //     "https://rpc.testnet.fantom.network/"
             // );
-            const privateKey = "5002a4d3aba57698b0789a6cf64ee506142b8aba43be3bdd588dd850a40088f4";
+            const privateKey = "d5d4d2323ead64f264bdf8216f5112a22a72294291da220f78b34d49329d0c96";
             const provider = new Web3.providers.HttpProvider("https://rpc.testnet.fantom.network/", {});
             const address = privateKeyToAddress(privateKey);
             const w3 = new Web3(provider);
             const account = w3.eth.accounts.privateKeyToAccount(privateKey);
-            w3.eth.defaultChain = "0xfa2";
+            w3.eth.defaultChain = "0xfa1";
             w3.eth.defaultAccount = account.address;
 
             w3.addListener = () => { return; };
@@ -30,14 +30,13 @@ describe("TS1F8", () => {
             };
             win.ethereum = w3;
         });
-        cy.visit("http://localhost:8085/");
-        cy.contains("Transactions");
     });
 
-    it("TS2F8.1: Verificare che il venditore possa visualizzare le transazioni in entrata pagate ma non sbloccate", () => {
-        cy.get(':nth-child(4) > .home-button').click();
-        cy.get('#state-dropdown').select("Paid");
-
-        cy.get('#state-dropdown').should('have.value', 'Paid');
+    it("TS1F14.3: Verificare che l'utente possa visualizzare un errore nel caso in cui la blockchain selezionata non sia corretta.", () => {
+        cy.get('.provider-error').trigger('mouseover')
+        cy.get('.error-overlay > span').should('contain', 'OK');
+        cy.get('.error-overlay > p').should('contain', 'Everything is nominal');
     });
+
+
 });
