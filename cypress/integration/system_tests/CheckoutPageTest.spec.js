@@ -52,16 +52,17 @@ describe("Checkout Page Tests", () => {
             cy.get('.btn-payalone').should('not.have.attr', 'disabled');
             cy.get('.btn-payalone').click();
         });
+        
+        it("TS1F2.2: Verificare che l’utente possa scegliere la tipologia di pagamento Money Box correttamente.", () => {
+            cy.get('.btn-moneybox').should('be.visible');
+            cy.get('.btn-moneybox').should('have.text', 'Create Money Box');
+            cy.get('.btn-moneybox').should('not.have.attr', 'disabled');
+        });
 
         it("Transaction Success", () => {
             cy.visit("http://localhost:8085/#/checkout/success/order/e80601f3-27a5-4b9e-8ea3-f409667f9e80");
         });
 
-    //     it("TS1F2.2: Verificare che l’utente possa scegliere la tipologia di pagamento Money Box correttamente.", () => {
-    //         cy.get('.btn-moneybox').should('be.visible');
-    //         cy.get('.btn-moneybox').should('have.text', 'Create Money Box');
-    //         cy.get('.btn-moneybox').should('not.have.attr', 'disabled');
-    //     });
 
 
 

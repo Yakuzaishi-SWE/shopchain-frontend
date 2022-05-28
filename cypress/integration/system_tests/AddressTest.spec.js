@@ -32,12 +32,12 @@ describe("Address Tests", () => {
         });
     });
 
-    it("TSF11: Verificare che l’utente possa visualizzare correttamente l’indirizzo del suo wallet", () => {
+    it("TS1F11: Verificare che l’utente possa visualizzare correttamente l’indirizzo del suo wallet", () => {
         cy.visit("localhost:8085/#/");
         cy.get('.addr').should('be.visible');
     });
 
-    it("TSF11.1: Verificare che l’utente possa visualizzare correttamente l’indirizzo del suo wallet in forma testuale.", () => {
+    it("TS1F11.1: Verificare che l’utente possa visualizzare correttamente l’indirizzo del suo wallet in forma testuale.", () => {
         cy.get('.addr').should('contain', '0x91350E18AE7133052E06436433040E80f2E6988E');
     });
 });

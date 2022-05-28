@@ -26,16 +26,18 @@ describe("Connection State Tests", () => {
             w3.request = async ({ method }) => {
                 if (method === "eth_accounts") return [address];
                 if (method === "eth_requestAccounts") return [address];
-                if (method === "eth_chainId") return "0xfa2";
+                if (method === "eth_chainId") return "0xfa1";
             };
             win.ethereum = w3;
         });
     });
 
     it("TS1F14.3: Verificare che l'utente possa visualizzare un errore nel caso in cui la blockchain selezionata non sia corretta.", () => {
-        cy.get('.provider-error').trigger('mouseover')
-        cy.get('.error-overlay > span').should('contain', 'OK');
-        cy.get('.error-overlay > p').should('contain', 'Everything is nominal');
+        cy.visit('http://localhost:8085/#/');
+        cy.get('.btn-connect').should('be.visible');
+        //cy.get('.provider-error').trigger('mouseover')
+        cy.get('.error-overlay > span').should('contain', 'WRONG_CHAIN');
+        cy.get('.error-overlay > p').should('contain', 'Connect to Fantom Test Net (0xfa2)');
     });
 
 

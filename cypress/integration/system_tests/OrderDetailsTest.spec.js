@@ -34,12 +34,12 @@ describe("Order Details Tests", () => {
     });
 
 
-    it("TSF1F3 Verificare che l’utente possa visualizzare il totale dell’ordine correttamente.", () => {
+    it("TS1F3: Verificare che l’utente possa visualizzare il totale dell’ordine correttamente.", () => {
         cy.visit('http://localhost:8085/#/out/order/89c33051-f88b-490b-bbb4-f02e0f7ca6a0/');
         cy.get('.transaction-details > ul > :nth-child(4)').should('be.visible');
     });
 
-    it("TS1F7 Verificare che il proprietario dell’ordine possa sbloccare correttamente i fondi dallo Smart Contract dopo avvenuta ricezione", () => {
+    it("TS1F7: Verificare che il proprietario dell’ordine possa sbloccare correttamente i fondi dallo Smart Contract dopo avvenuta ricezione", () => {
         cy.get('#unlock').should('be.visible');
         cy.get('#unlock').should('be.enabled');
         cy.get('#unlock').click();
@@ -50,13 +50,38 @@ describe("Order Details Tests", () => {
         cy.get('.popup-inner > :nth-child(3)').should('be.enabled');
     });
 
-    it("TS1F7.1 Verificare che il proprietario dell’ordine possa visualizzare correttamente il codice di sblocco.", () => {
+    it("TS1F7.1: Verificare che il proprietario dell’ordine possa visualizzare correttamente il codice di sblocco.", () => {
         cy.get('.popup-inner').should('be.visible');
     });
 
-    it("TS1F7.2 ", () => {
-        
+    it("TS1F16.1: Verificare che l'utente possa visualizzare i dettagli dell'ordine pagato", () => {
+        cy.get('.close-btn').click();
+        cy.get('.transaction-details').should('be.visible');
     });
 
+    it("TS1F16.1.1: Verificare che l'utente possa visualizzare l'id dell'ordine pagato", () => {
+        cy.get('.transaction-details > ul > :nth-child(1)').should('be.visible');
+        cy.get('.transaction-details > ul > :nth-child(1)').should('contain', '89c33051-f88b-490b-bbb4-f02e0f7ca6a0');
+    });
+
+    it("TS1F16.1.2: Verificare che l'utente possa visualizzare l'indirizzo del venditore dell'ordine pagato", () => {
+        cy.get('.transaction-details > ul > :nth-child(3)').should('be.visible');
+        cy.get('.transaction-details > ul > :nth-child(3)').should('contain', '0x7B44Fba1DB530C59DB6bbBF1FF886d4e49C07aE7');
+    });
+
+    it("TS1F16.1.3: Verificare che l'utente possa visualizzare l'ammontare dell'ordine pagato", () => {
+        cy.get('.transaction-details > ul > :nth-child(4)').should('be.visible');
+        cy.get('.transaction-details > ul > :nth-child(4)').should('contain', '1 FTM (1000000000000000000 wei)');
+    });
+
+    it("TS1F16.1.4: Verificare che l'utente possa visualizzare lo stato dell'ordine pagato", () => {
+        cy.get('.transaction-details > ul > :nth-child(5)').should('be.visible');
+        cy.get('.transaction-details > ul > :nth-child(5)').should('contain', 'Paid');
+    });
+
+    it("TS1F16.1.5: Verificare che l'utente possa visualizzare la data dell'ordine pagato", () => {
+        cy.get('.transaction-details > ul > :nth-child(6)').should('be.visible');
+        cy.get('.transaction-details > ul > :nth-child(6)').should('contain', '9/5/2022 19:22:55');
+    });
 
 });

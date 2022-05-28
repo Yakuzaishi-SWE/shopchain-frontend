@@ -48,15 +48,36 @@ describe("MoneyBox Details Page Tests", () => {
         cy.get('#copy-invite-link').should('not.have.attr', 'disabled');
     });
 
-    
-    it("TSF2.2.3 Verificare che l’utente possa visualizzare una traduzione visiva della MoneyBox correttamente.", () => {
-        cy.get('.bigPiggy').should('be.visible');
-    });
-
-    // TO DO
-    // it("TSF2.2.4 ", () => {});
-
     it("TSF2.2.5 Verificare che l’utente possa visualizzare l’elenco delle transazione dei partecipanti alla MoneyBox correttamente.", () => {
         cy.get('#table-payments').should('be.visible');
+    });
+
+    it("TS1F16.1: Verificare che l'utente possa visualizzare i dettagli dell'ordine pagato", () => {
+        cy.get('.transaction-details').should('be.visible');
+    });
+
+    it("TS1F16.1.1: Verificare che l'utente possa visualizzare l'id dell'ordine pagato", () => {
+        cy.get('.details > ul > :nth-child(1)').should('be.visible');
+        cy.get('.details > ul > :nth-child(1)').should('contain', '3499e238-4200-4803-aebe-7bbd5d4339a0');
+    });
+
+    it("TS1F16.1.2: Verificare che l'utente possa visualizzare l'indirizzo del venditore dell'ordine pagato", () => {
+        cy.get('.details > ul > :nth-child(3)').should('be.visible');
+        cy.get('.details > ul > :nth-child(3)').should('contain', '0x7B44Fba1DB530C59DB6bbBF1FF886d4e49C07aE7');
+    });
+
+    it("TS1F16.1.3: Verificare che l'utente possa visualizzare l'ammontare dell'ordine pagato", () => {
+        cy.get('.details > ul > :nth-child(4)').should('be.visible');
+        cy.get('.details > ul > :nth-child(4)').should('contain', '0.5 FTM (500000000000000000 wei)');
+    });
+
+    it("TS1F16.1.4: Verificare che l'utente possa visualizzare lo stato dell'ordine pagato", () => {
+        cy.get('.details > ul > :nth-child(7)').should('be.visible');
+        cy.get('.details > ul > :nth-child(7)').should('contain', 'Created');
+    });
+
+    it("TS1F16.1.5: Verificare che l'utente possa visualizzare la data dell'ordine pagato", () => {
+        cy.get('.details > ul > :nth-child(8)').should('be.visible');
+        cy.get('.details > ul > :nth-child(8)').should('contain', '15/5/2022 11:57:43');
     });
 });

@@ -39,7 +39,7 @@ describe("Connection State Tests", () => {
     });
 
     it("TS1F14.1: Verificare che l'utente possa visualizzare un suggerimento se connesso correttamente.", () => {
-        cy.get('.provider-error').trigger('mouseover')
+        cy.get('.provider-error').trigger('mouseover');
         cy.get('.error-overlay > span').should('contain', 'OK');
         cy.get('.error-overlay > p').should('contain', 'Everything is nominal');
     });
