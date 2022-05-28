@@ -48,7 +48,7 @@ describe("MoneyBox Details Page Tests", () => {
         cy.get('#copy-invite-link').should('not.have.attr', 'disabled');
     });
 
-    it("TSF2.2.5 Verificare che l’utente possa visualizzare l’elenco delle transazione dei partecipanti alla MoneyBox correttamente.", () => {
+    it("TS2F2.2.5: Verificare che l’utente possa visualizzare l’elenco delle transazione dei partecipanti alla MoneyBox correttamente.", () => {
         cy.get('#table-payments').should('be.visible');
     });
 

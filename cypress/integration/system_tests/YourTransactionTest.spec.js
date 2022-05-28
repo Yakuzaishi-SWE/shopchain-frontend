@@ -43,7 +43,7 @@ describe("Your Transaction Page Tests", () => {
         cy.get(':nth-child(2) > #type-dropdown').should('have.value', 'Created');
     });
 
-    it("TS2F8.2.2: Verificare che il proprietario dell’ordine possa vi- sualizzare le transazioni in uscita pagate ma non sbloccate.", () => {
+    it("TS2F8.2.2: Verificare che il proprietario dell’ordine possa visualizzare le transazioni in uscita pagate ma non sbloccate.", () => {
         cy.get(':nth-child(2) > #type-dropdown').select("Paid");
 
         cy.get(':nth-child(2) > #type-dropdown').should('have.value', 'Paid');

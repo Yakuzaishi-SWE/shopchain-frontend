@@ -36,7 +36,8 @@ describe("Checkout Page Tests", () => {
         cy.visit("http://localhost:8085/#/checkout");
         cy.get('.clickable-input').type("0.5");
         cy.get('.btn-block > input').click();
-        //cy.url().should('match', '');
+        cy.url().should('contain', 'http://localhost:8085/#/checkout/');
+        cy.url().should('contain', '/?amount=500000000000000000');
     });
 
         it("TS1F2: Verificare che l’utente visualizzi correttamente le diverse tipologie di pagamento.", () => {
@@ -59,9 +60,9 @@ describe("Checkout Page Tests", () => {
             cy.get('.btn-moneybox').should('not.have.attr', 'disabled');
         });
 
-        it("Transaction Success", () => {
-            cy.visit("http://localhost:8085/#/checkout/success/order/e80601f3-27a5-4b9e-8ea3-f409667f9e80");
-        });
+        // it("Transaction Success", () => {
+        //     cy.visit("http://localhost:8085/#/checkout/success/order/e80601f3-27a5-4b9e-8ea3-f409667f9e80");
+        // });
 
 
 
