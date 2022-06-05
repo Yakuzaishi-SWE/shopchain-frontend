@@ -13,7 +13,7 @@ jest.mock("mobx", () => {
 
 jest.mock("uuid", () => {
     return {
-        v4: jest.fn(),
+        v4: () => "mock",
     }
 });
 
@@ -41,14 +41,13 @@ describe("ECommerceViewModel", () => {
     });
 
     it("should create an instance", () => {
-        (v4 as jest.MockedFunction<typeof v4>).mockReturnValue("mock");
         const vm = new ECommerceViewModel(providerStore);
         expect(makeAutoObservable).toBeCalledTimes(2);
         expect(makeAutoObservable).toBeCalledWith(vm, {}, { autoBind: true });
         expect(vm.redirectLink).toBe(NULLredirectLink);
     });
 
-   it("should return amount", () => {
+    it("should return amount", () => {
         const vm = new ECommerceViewModel(providerStore);
         expect(vm.amount).toBe(0);
     });

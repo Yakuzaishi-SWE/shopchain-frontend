@@ -19,7 +19,7 @@ const providerStore = {} as unknown as ProviderStore;
 
 describe("ChoiceViewModel", () => {
     beforeEach(() => {
-        jest.resetAllMocks();
+        jest.clearAllMocks();
     });
 
     it("should create an instance", () => {
