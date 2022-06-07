@@ -91,12 +91,13 @@ div.box-button {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin: 1em;
+
 
     & button {
         padding: 1.5em;
         font-size: 1.2em;
         box-shadow: 0.3em 0.3em rgb(29, 29, 29);
-        //margin: 1em;
         cursor: pointer;
         width: 20%;
 
