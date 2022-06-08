@@ -21,7 +21,7 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
     }
 
     private get orderTask() {
-        if (!this.providerStore.w3.om.instance) return null;
+        if (!this.providerStore.provider) return null;
         return this.rootStore.orderStore.getOrderById(this.id);
     }
 
@@ -81,7 +81,7 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
     refundTask: ComputedTask<void, [string], void> | null = null;
     refund() {
         if (this.order) {
-            this. refundTask = this.order.refund();
+            this.refundTask = this.order.refund();
             return false;
         }
         return true;

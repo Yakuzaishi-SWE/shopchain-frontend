@@ -11,7 +11,13 @@ jest.mock("mobx", () => {
 
 const rootStore = {
     orderStore: {
-        createOrder: jest.fn(),
+        createOrder: jest.fn(() => ({
+            result : {
+
+            },
+            isBusy: false,
+            isFailed: false,
+        })),
     },
 } as unknown as RootStore;
 
@@ -32,5 +38,33 @@ describe("ChoiceViewModel", () => {
         const vm = new ChoiceViewModel(providerStore, rootStore);
         vm.createOrder();
         expect(rootStore.orderStore.createOrder).toBeCalledTimes(1); //? non so se ha senso sta roba
+    });
+
+    it("should return canRedirect", () => {
+        const vm = new ChoiceViewModel(providerStore, rootStore);
+        vm.createOrder();
+        expect(vm.canRedirect).toBe(false);
+    });
+
+    it("should return isBusy", () => {
+        const vm = new ChoiceViewModel(providerStore, rootStore);
+        vm.createOrder();
+        expect(vm.isBusy).toBe(false);
+    });
+
+    it("should return isFailed", () => {
+        const vm = new ChoiceViewModel(providerStore, rootStore);
+        vm.createOrder();
+        expect(vm.isFailed).toBe(false);
+    });
+
+    it("setAmount",() => {
+        const vm = new ChoiceViewModel(providerStore, rootStore);
+        vm.setAmount("1");
+    })
+
+    it("setId",() => {
+        const vm = new ChoiceViewModel(providerStore, rootStore);
+        vm.setId("1");
     });
 });

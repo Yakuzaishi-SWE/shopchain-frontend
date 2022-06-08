@@ -1,7 +1,7 @@
 import ProviderStore from "../../../core/provider/store/ProviderStore";
 import RootStore from "../../../core/shared/RootStore";
 import { makeAutoObservable } from "mobx";
-import MoneyBoxDetailsViewModel from "./MoneyBoxDetailsViewModel";
+import MoneyBoxDetailsViewModel from "./OrderDetailsViewModel";
 import Amount from "core/modules/order/domain/Amount";
 import OrderState from "core/modules/order/domain/OrderState";
 import { OrderStateEnum } from "types/enums";
@@ -22,17 +22,6 @@ jest.mock("mobx", () => {
 
 const moneyBoxTask = {
     result: {
-        amountToFill: {
-            result: new Amount(50000),
-        },
-        payments: {
-            result: [
-                {
-                    from: "0x0",
-                    amount: new Amount(123)
-                }
-            ],
-        },
         timestamp: 12345,
         amount: new Amount(100000),
         ownerAddress: "0x0",
@@ -44,7 +33,7 @@ const moneyBoxTask = {
 }
 
 const rootStore = {
-    moneyBoxStore: {
+    orderStore: {
         newPayment: jest.fn(),
         getOrderById: jest.fn(() => moneyBoxTask),
     },
@@ -68,7 +57,7 @@ describe("MoneyBoxDetailsViewModel", () => {
 
     it("should create an instance", () => {
         const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(makeAutoObservable).toBeCalledTimes(2);
+        expect(makeAutoObservable).toBeCalledTimes(1);
         expect(makeAutoObservable).toBeCalledWith(vm, {}, { autoBind: true });
     });
 
@@ -99,26 +88,6 @@ describe("MoneyBoxDetailsViewModel", () => {
         expect(vm.wei).toBe(100000);
     });
 
-    it("should get filledFtm", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.filledFtm).toBe(5 * 10 ** -14);
-    });
-
-    it("should get filledWei", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.filledWei).toBe(50000);
-    });
-
-    it("should get ftmToFill", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.ftmToFill).toBe(5 * 10 ** -14);
-    });
-
-    it("should get weiToFill", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.weiToFill).toBe(50000);
-    });
-
     it("should get state", () => {
         const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
         expect(vm.state).toBe("Created");
@@ -128,30 +97,6 @@ describe("MoneyBoxDetailsViewModel", () => {
         const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
         expect(vm.isPaid).toBe(false);
     })
-
-    it("should get isRefunded", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.isRefunded).toBe(false);
-    });
-
-    it("should get isUnlocked", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.isUnlocked).toBe(false);
-    });
-
-    it("should get feeAmountFtm", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.feeAmountFtm).toBe(0);
-        vm.setFeeAmount(123);
-        expect(vm.feeAmountFtm).toBe(123);
-    });
-
-    it("should get feeAmountWei", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.feeAmountWei).toBe(0);
-        vm.setFeeAmount(123);
-        expect(vm.feeAmountWei).toBe(123 * 10 ** 18);
-    });
 
     it("should get unlockCode", () => {
         const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
@@ -163,19 +108,6 @@ describe("MoneyBoxDetailsViewModel", () => {
         expect(vm.code).toBe(0);
         vm.setCode(1234);
         expect(vm.code).toBe(1234);
-    });
-
-    it("should get partecipants", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.partecipants).toEqual([
-            {
-                amount: new Amount(123),
-                from: "0x0",
-            }
-        ]);
-
-        const vm2 = new MoneyBoxDetailsViewModel(rootStore, FAILproviderStore);
-        expect(vm2.partecipants).toEqual([]);
     });
 
     it("should get isOwner", () => {
@@ -217,20 +149,6 @@ describe("MoneyBoxDetailsViewModel", () => {
 
         const v2 = new MoneyBoxDetailsViewModel(rootStore, FAILproviderStore);
         expect(v2.refund()).toBe(true);
-    })
-
-    it("dateNtime", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.dateNtime({  timestamp: 1000 } as Payment)).toBe("1/1/1970 0:16:40");
-    })
-
-    it("newPayment",() => {
-        const vm1 = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        vm1.setFeeAmount(100 * 10 ** -18);
-        expect(vm1.newPayment()).toBe(false);
-
-        const vm2 = new MoneyBoxDetailsViewModel(rootStore, FAILproviderStore);
-        expect(vm2.newPayment()).toBe(true);
     })
 
     it("back",() => {

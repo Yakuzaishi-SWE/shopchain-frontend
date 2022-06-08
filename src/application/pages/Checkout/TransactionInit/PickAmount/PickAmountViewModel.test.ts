@@ -29,6 +29,21 @@ describe("PickAmountViewModel", () => {
         const vm = new PickAmountViewModel(rootStore);
         vm.createMoneyBox();
         expect(rootStore.moneyBoxStore.createOrder).toBeCalledTimes(1); //? non so se ha senso sta roba
+
+        const vm2 = new PickAmountViewModel(rootStore);
+        vm2.setAmount(String(10 * 10 ** 18));
+        expect(vm2.createMoneyBox()).toBeFalsy();
+    });
+
+    it("should return canRedirect", () => {
+        const vm = new PickAmountViewModel(rootStore);
+        vm.setAmount(String(10 * 10 ** 18));
+        expect(vm.canRedirect).toBeFalsy();
+    });
+
+    it("should return isBusy",  () => {
+        const vm = new PickAmountViewModel(rootStore);
+        expect(vm.isBusy).toBeFalsy();
     });
 
     it("should call setAmount", () => {
