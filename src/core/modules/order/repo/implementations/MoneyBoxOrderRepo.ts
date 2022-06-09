@@ -38,11 +38,17 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         return ordertuples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
     }
 
-    async newPayment(orderId: string, amount: string): Promise<void> {
+    async newPayment(orderId: string, amountIn: string, amountOut?: string): Promise<void> {
         if (!this.contract.instance) throw Error("Contract not loaded");
+
+        if  (!amountOut){
+            if (!this.uniswap.instance) throw Error("Uniswap not loaded");
+            amountOut = await this.uniswap.instance.methods.getAmountsOut(amountIn, this.uniswap.path).call()[1];
+        }
+
         await this.contract.instance.methods
-            .newPayment(orderId, amount)
-            .send({ from: this.address.address, value: amount });
+            .newPayment(orderId, amountIn, amountOut)
+            .send({ from: this.address.address, value: amountIn });
     }
 
     async getPayments(orderId: string): Promise<Payment[]> {

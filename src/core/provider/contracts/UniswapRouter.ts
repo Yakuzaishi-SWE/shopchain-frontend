@@ -20,7 +20,7 @@ export default class UniswapRouter {
         });
     }
 
-    public getAmountsIn = TaskCacheBuilder.build<number | null, [usdt: number]>()
+    public getAmountsIn = TaskCacheBuilder.build<string | null, [usdt: string]>()
         .task(async (usdt) => {
             const res = await this.instance?.methods.getAmountsIn(usdt, this.path).call();
             return res[0];
@@ -28,7 +28,7 @@ export default class UniswapRouter {
         .result((res) => res)
         .revaildate;
 
-    public getAmountsOut = TaskCacheBuilder.build<number | null, [ftm: number]>()
+    public getAmountsOut = TaskCacheBuilder.build<string | null, [ftm: string]>()
         .task(async (ftm) => {
             const res = await this.instance?.methods.getAmountsOut(ftm, this.path).call();
             return res[1];

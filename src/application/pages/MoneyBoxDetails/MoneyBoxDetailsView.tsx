@@ -1,4 +1,6 @@
+import FTMtoUSDT from "application/utils/FTMtoUSDT";
 import Popup from "application/utils/Popup";
+import USDTtoFTM from "application/utils/USDTtoFTM";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -8,12 +10,9 @@ import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 export default observer(function MoneyBoxDetailsView({
     id,
     sellerAddress,
-    ftm,
-    wei,
-    filledFtm,
-    filledWei,
-    ftmToFill,
-    weiToFill,
+    usdt,
+    filledUsdt,
+    usdtToFill,
     state,
     isPaid,
     isUnlocked,
@@ -21,7 +20,6 @@ export default observer(function MoneyBoxDetailsView({
     unlock,
     refund,
     feeAmountFtm,
-    feeAmountWei,
     setFeeAmount,
     newPayment,
     partecipants,
@@ -30,7 +28,7 @@ export default observer(function MoneyBoxDetailsView({
     isSeller,
     ownerAddress,
     date,
-    back,
+    // back,
     isBusy,
     unlockCode,
     code,
@@ -52,16 +50,16 @@ export default observer(function MoneyBoxDetailsView({
                 <div className="two-cols">
                     <div className="img-box">
                         <PiggyBank className="bigPiggy" />
-                        <span className="moneybox-percentage">{((filledFtm / ftm) * 100).toFixed(0)}% filled</span>
+                        <span className="moneybox-percentage">{((filledUsdt / usdt) * 100).toFixed(0)}% filled</span>
                     </div>
                     <div className="details">
                         <ul>
                             <li><div className="section-head">Transaction ID:</div>{id}</li>
                             <li><div className="section-head">Owner:</div>{ownerAddress}</li>
                             <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
-                            <li><div className="section-head">Total Amount:</div>{ftm} FTM ({wei} wei)</li>
-                            <li><div className="section-head">Filled:</div>{filledFtm} FTM ({filledWei} wei)</li>
-                            <li><div className="section-head">To be Filled:</div>{ftmToFill} FTM ({weiToFill} wei)</li>
+                            <li><div className="section-head">Total Amount:</div>{usdt} USDT (<USDTtoFTM usdt={usdt}/> FTM)</li>
+                            <li><div className="section-head">Filled:</div>{filledUsdt} USDT (<USDTtoFTM usdt={filledUsdt}/> FTM)</li>
+                            <li><div className="section-head">To be Filled:</div>{usdtToFill} USDT (<USDTtoFTM usdt={usdtToFill}/> FTM)</li>
                             <li><div className="section-head">State:</div>{state}</li>
                             <li><div className="section-head">Date:</div>{date}</li>
                         </ul>
@@ -69,17 +67,12 @@ export default observer(function MoneyBoxDetailsView({
                         <form className="payment-form">
                             <div className={!(isPaid || isUnlocked || isRefunded) ? "form-wrapper" : "hide"}>
                                 <label>Select the amount that you want to send</label>
-                                <p className={error ? "err_p" : "hide"}>Amount must be between 1 wei and {ftmToFill} FTM</p>
+                                <p className={error ? "err_p" : "hide"}>Amount must be between 1 wei and <USDTtoFTM usdt={usdtToFill}/> FTM</p>
                                 <div className={error ? "ftm-input err_input" : "ftm-input"}>
                                     <input type="number" step="any" className="clickable-input" value={feeAmountFtm || undefined} onChange={el => setFeeAmount(el.target.valueAsNumber)} placeholder="0.00" />
                                     <span className="ftm-icon">
                                         <FTMIcon />
                                         FTM
-                                    </span>
-                                </div>
-                                <div className="ftm-wei">
-                                    <span>
-                                        ({feeAmountWei}) wei
                                     </span>
                                 </div>
                                 <button id="contribute" onClick={() => setError(newPayment)} disabled={isPaid}>Contribute</button>
@@ -100,7 +93,7 @@ export default observer(function MoneyBoxDetailsView({
                         {partecipants && partecipants.map(partecipant =>
                             <tr key={partecipant.timestamp}>
                                 <td>{partecipant.from}</td>
-                                <td>{partecipant.amount.FTM}</td>
+                                <td>{partecipant.amount.USDT} USDT | (<USDTtoFTM usdt={partecipant.amount.USDT}/> FTM)</td>
                                 <td>{dateNtime(partecipant)}</td>
                             </tr>
                         )}

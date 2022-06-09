@@ -16,7 +16,7 @@ export default class ECommerceViewModel implements IECommerceViewModel {
     }
 
     get amount(): number {
-        return this._amount.FTM;
+        return this._amount.USDT;
     }
 
     get wei(): number {

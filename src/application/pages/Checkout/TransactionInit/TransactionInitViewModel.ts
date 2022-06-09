@@ -25,7 +25,7 @@ export default class TransactionInitViewModel implements ITransactionInitViewMod
     // ------------------- VIEW SIDE -------------------------------
 
     get ftm(): number {
-        return this._amount.FTM;
+        return this._amount.USDT;
     }
 
     get wei(): number {

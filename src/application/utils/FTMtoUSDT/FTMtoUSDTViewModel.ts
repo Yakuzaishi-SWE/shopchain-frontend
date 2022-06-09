@@ -3,21 +3,26 @@ import { makeAutoObservable } from "mobx";
 
 
 
-export default class USDTtoFTMViewModel {
+export default class FTMtoUSDTViewModel {
 
-    private usdt: number|null = null;
+    private ftm: number|null = null;
 
     constructor(private readonly providerStore: ProviderStore = ProviderStore.getInstance()) {
         makeAutoObservable(this, {}, { autoBind: true });
     }
 
-    setUSDT(usdt: number) {
-        this.usdt = usdt;
+    setFTM(ftm: number) {
+        this.ftm = ftm;
+    }
+
+    private get wei() {
+        if (!this.ftm) return 0;
+        return this.ftm * 10 ** 18;
     }
 
     private get Task() {
-        if (!this.usdt) return null;
-        return this.providerStore.w3.
+        if (!this.ftm) return null;
+        return this.providerStore.w3.uni.getAmountsOut(this.wei.toString());
     }
 
     get isBusy() {
@@ -37,6 +42,7 @@ export default class USDTtoFTMViewModel {
 
     get value() {
         if (!this.Task) return null;
-        return this.Task.result;
+        if(!this.Task.result) return null;
+        return parseInt(this.Task.result)/10 ** 18;
     }
 }

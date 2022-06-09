@@ -16,13 +16,13 @@ describe("Amount", () =>  {
 
     it("should get the FTM value correctly",() => {
         const amount = new Amount(1);
-        expect(amount.FTM).toBe(0.000000000000000001);
+        expect(amount.USDT).toBe(0.000000000000000001);
     });
 
     it("should set the FTM value correctly",() => {
         const amount = new Amount(1);
         amount.setAmountFTM(0.5);
-        expect(amount.FTM).toBe(0.5);
+        expect(amount.USDT).toBe(0.5);
     });
 
     it("should create the amount properly", () => {

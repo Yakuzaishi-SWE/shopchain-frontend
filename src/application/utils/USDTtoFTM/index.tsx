@@ -6,13 +6,13 @@ import USDTtoFTMViewModel from "./USDTtoFTMViewModel";
 
 
 
-export default observer(function USDtoFTM({usdt}: { usdt: number }) {
+export default observer(function USDTtoFTM({usdt}: { usdt: number }) : any {
     const vm = useViewModel(USDTtoFTMViewModel);
 
     useEffect(() => {
         vm.setUSDT(usdt);
     }, [usdt]);
 
-    if (vm.isLoaded) return vm.value;
+    if (vm.isLoaded) return <p>vm.value</p>;
     else return <Loading/>;
 }); 

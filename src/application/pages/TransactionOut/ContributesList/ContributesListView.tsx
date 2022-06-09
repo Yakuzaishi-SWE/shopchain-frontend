@@ -34,7 +34,7 @@ export default observer(function ContributesListView({
                                 {getContributesFromMoneyBox(moneybox).map(contribute =>
                                     <>
                                         <tr key={contribute.timestamp}>
-                                            <td>{contribute.amount.FTM} FTM</td>
+                                            <td>{contribute.amount.USDT} FTM</td>
                                             <td>{dateNtime(contribute)}</td>
                                         </tr>
                                     </>

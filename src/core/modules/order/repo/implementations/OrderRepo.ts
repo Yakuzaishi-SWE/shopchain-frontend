@@ -16,18 +16,15 @@ export default class OrderRepo implements IOrderRepo {
         });
     }
 
-    // private FTMtoUSDT(ftm: string) {
-    //     return (parseInt(ftm)*3).toString();
-    // }
-
     async createOrder(data: { seller: string, amount: string,  id: string }, initAmount: string = data.amount): Promise<void> {
         if (!this.contract.instance) throw new Error("Contract not init");
         if (!this.uniswap.instance) throw new Error("Uniswap not init");
-        let amounts = await this.uniswap.instance.methods.getAmountsOut(initAmount, this.uniswap.path).call();
-        amounts = amounts[1];
-        // console.log("uni: " + initAmount + " - " + amounts);
+        const totAmount = await this.uniswap.instance.methods.getAmountsOut(data.amount, this.uniswap.path).call();
+        const partialAmout = await this.uniswap.instance.methods.getAmountsOut(initAmount, this.uniswap.path).call();
+        const amounts = [totAmount[1], partialAmout[1]];
+        console.log("amounts: " + amounts);
         await this.contract.instance.methods
-            .newOrder(data.seller, initAmount, amounts, data.id)
+            .newOrder(data.seller, data.amount, amounts, data.id)
             .send({ from: this.address.address, value: initAmount });
     }
 

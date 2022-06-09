@@ -21,7 +21,7 @@ export default class BalanceViewModel  implements IBalanceViewModel  {
         if (!providerStore.provider) return 0;
         if (!this.balance) return 0;
         if (!this.balance.result) return 0;
-        return this.balance.result.FTM;
+        return this.balance.result.USDT;
     }
 
     get balanceWEI(): number {
