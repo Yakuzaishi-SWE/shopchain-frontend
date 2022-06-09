@@ -17,7 +17,7 @@ export default class USDTtoFTMViewModel {
 
     private get Task() {
         if (!this.usdt) return null;
-        return this.providerStore.w3.
+        return this.providerStore.w3.uni.getAmountsIn(this.usdt);
     }
 
     get isBusy() {

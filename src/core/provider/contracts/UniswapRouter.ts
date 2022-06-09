@@ -1,3 +1,4 @@
+import TaskCacheBuilder from "core/utils/TaskCacheBuilder";
 import { computed, makeObservable, observable } from "mobx";
 import W3Store from "../domain/W3Store";
 import UniswapRouterRepo from "../repo/implementations/UniswapRouterRepo";
@@ -18,6 +19,22 @@ export default class UniswapRouter {
             path: computed,
         });
     }
+
+    public getAmountsIn = TaskCacheBuilder.build<number | null, [usdt: number]>()
+        .task(async (usdt) => {
+            const res = await this.instance?.methods.getAmountsIn(usdt, this.path).call();
+            return res[0];
+        })
+        .result((res) => res)
+        .revaildate;
+
+    public getAmountsOut = TaskCacheBuilder.build<number | null, [ftm: number]>()
+        .task(async (ftm) => {
+            const res = await this.instance?.methods.getAmountsOut(ftm, this.path).call();
+            return res[1];
+        })
+        .result((res) => res)
+        .revaildate;
 
     get instance() {
         if (!this.w3store.web3) return null;
