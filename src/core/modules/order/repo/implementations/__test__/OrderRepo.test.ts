@@ -92,7 +92,7 @@ describe("OrderRepo", () => {
             expect(send).toHaveBeenCalledWith({ from: address.address, value: data.amount });
             expect(uniswap.instance?.methods.getAmountsOut).toHaveBeenCalled();
             expect(contract.instance?.methods.newOrder).toHaveBeenCalled();
-            expect(contract.instance?.methods.newOrder).toHaveBeenCalledWith(data.seller, data.amount, 1, data.id);
+            expect(contract.instance?.methods.newOrder).toHaveBeenCalledWith(data.seller, data.amount, [1, 1], data.id);
         });
 
         it("undefined uniswap instance", async () => {

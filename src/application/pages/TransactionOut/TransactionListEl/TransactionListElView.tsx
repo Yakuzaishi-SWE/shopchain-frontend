@@ -1,3 +1,4 @@
+import USDTtoFTM from "application/utils/USDTtoFTM";
 import { observer } from "mobx-react";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -35,16 +36,21 @@ const TransactionListElView = observer(({
                     <span className="addr">{transaction.ownerAddress}</span>
                 </div>
                 <div className="info-box">
-                    {
-                        isRefunded ?
-                            <span>REFUNDED</span>
+                {
+                    isRefunded ?
+                        <span>REFUNDED</span>
+                        :
+                        isUnlocked ?
+                            <span>UNLOCKED</span>
                             :
                             <div className="amount-box">
                                 <span className="transaction-label">Amount</span>
                                 <br />
-                                <span className="transaction-amount">{transaction.amount.USDT} FTM</span>
+                                <span className="transaction-amount">{transaction.amount.USDT} USDT</span>
+                                <br />
+                                <span className="transaction-amount">(<USDTtoFTM usdt={transaction.amount.USDT}/> FTM)</span>
                             </div>
-                    }
+                }
                 </div>
             </div>
         </article>

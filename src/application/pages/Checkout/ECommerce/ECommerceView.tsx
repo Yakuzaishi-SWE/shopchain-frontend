@@ -34,11 +34,6 @@ export default observer(function ECommerceView({
                         FTM
                     </span>
                 </div>
-                <div className="ftm-wei">
-                    <span>
-                        ({wei}) wei
-                    </span>
-                </div>
             </div>
             <div className="btn-block">
                 <input type="submit" value="Send" onClick={() => {if(amount <= 0) setError(true); else setError(false);}}></input>

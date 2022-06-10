@@ -1,10 +1,10 @@
-import FTMtoUSDT from "application/utils/FTMtoUSDT";
+/* eslint-disable prefer-arrow-callback */
+
 import Popup from "application/utils/Popup";
 import USDTtoFTM from "application/utils/USDTtoFTM";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { BackArrowIcon, FTMIcon, Loading, PiggyBank } from "resources/svg";
+import { FTMIcon, Loading, PiggyBank } from "resources/svg";
 import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
 export default observer(function MoneyBoxDetailsView({
@@ -96,7 +96,7 @@ export default observer(function MoneyBoxDetailsView({
                         {partecipants && partecipants.map(partecipant =>
                             <tr key={partecipant.timestamp}>
                                 <td>{partecipant.from}</td>
-                                <td>{partecipant.amount.USDT} USDT | (<USDTtoFTM usdt={partecipant.amount.USDT}/> FTM)</td>
+                                <td>{partecipant.amount.USDT} USDT &nbsp; ( <USDTtoFTM usdt={partecipant.amount.USDT}/> FTM )</td>
                                 <td>{dateNtime(partecipant)}</td>
                             </tr>
                         )}

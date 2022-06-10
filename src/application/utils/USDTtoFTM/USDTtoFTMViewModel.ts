@@ -5,23 +5,27 @@ import { makeAutoObservable } from "mobx";
 
 export default class USDTtoFTMViewModel {
 
-    private usdt: number|null = null;
+    private _usdt: number|null = null;
 
     constructor(private readonly providerStore: ProviderStore = ProviderStore.getInstance()) {
         makeAutoObservable(this, {}, { autoBind: true });
     }
 
     setUSDT(usdt: number) {
-        this.usdt = usdt;
+        this._usdt = usdt;
+    }
+
+    get usdt() {
+        return this._usdt;
     }
 
     private get wei() {
-        if (!this.usdt) return 0;
-        return this.usdt * 10 ** 18;
+        if (!this._usdt) return 0;
+        return this._usdt * 10 ** 18;
     }
 
     private get Task() {
-        if (!this.usdt) return null;
+        if (!this._usdt) return null;
         return this.providerStore.w3.uni.getAmountsIn(this.wei.toString());
     }
 

@@ -167,11 +167,11 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 
-    back(route: string) {
-        if(route.includes("out")) return "/transaction/out";
-        if(route.includes("in")) return "/transaction/in";
-        return "";
-    }
+    // back(route: string) {
+    //     if(route.includes("out")) return "/transaction/out";
+    //     if(route.includes("in")) return "/transaction/in";
+    //     return "";
+    // }
 
     get isOwner() {
         if(!this.providerStore.address.address) return false;

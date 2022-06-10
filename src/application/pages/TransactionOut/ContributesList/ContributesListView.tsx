@@ -1,3 +1,4 @@
+import USDTtoFTM from "application/utils/USDTtoFTM";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -34,7 +35,11 @@ export default observer(function ContributesListView({
                                 {getContributesFromMoneyBox(moneybox).map(contribute =>
                                     <>
                                         <tr key={contribute.timestamp}>
-                                            <td>{contribute.amount.USDT} FTM</td>
+                                            <td>
+                                            {contribute.amount.USDT} USDT
+                                            &nbsp;
+                                            (<USDTtoFTM usdt={contribute.amount.USDT}/> FTM)
+                                            </td>
                                             <td>{dateNtime(contribute)}</td>
                                         </tr>
                                     </>

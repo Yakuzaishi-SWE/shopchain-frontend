@@ -13,11 +13,12 @@ export default class MoneyBoxBalanceViewModel  implements IMoneyBoxBalanceViewMo
         return this.rootStore.contractStore.moneyBoxManager.getContractBalance();
     }
 
-    get isBusy(): boolean {
-        return this.balance?.isBusy || false;
+    get isLoaded(): boolean {
+        if(!this.balance) return false;
+        return this.balance.isLoaded;
     }
 
-    get balanceFTM(): number {
+    get balanceUSDT(): number {
         if (!providerStore.provider) return 0;
         if (!this.balance) return 0;
         if (!this.balance.result) return 0;

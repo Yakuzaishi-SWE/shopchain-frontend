@@ -6,7 +6,7 @@ import ITransactionInitViewModel from "./ITransactionInitViewModel";
 export default observer(function TransactionInitView({
     id,
     ftm,
-    wei,
+    // wei,
     sellerAddress,
 }: ITransactionInitViewModel) {
     return <>
@@ -28,7 +28,7 @@ export default observer(function TransactionInitView({
                 </li>
                 <li>
                     <div className="section-head">Amount to pay:</div>
-                    {ftm} FTM ({wei} wei)
+                    {ftm} FTM
                 </li>
             </ul>
         </section>
