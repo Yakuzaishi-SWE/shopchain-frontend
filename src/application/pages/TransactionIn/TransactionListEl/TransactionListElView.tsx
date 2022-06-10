@@ -45,9 +45,9 @@ const TransactionListElView = observer(({
                             <div className="amount-box">
                                 <span className="transaction-label">Amount</span>
                                 <br />
-                                <span className="transaction-amount">{transaction.amount.USDT} USDT</span>
+                                <span className="transaction-amount">{transaction.amount.USDT.toFixed(8)} USDT</span>
                                 <br />
-                                <span className="transaction-amount">(<USDTtoFTM usdt={transaction.amount.USDT}/> FTM)</span>
+                                <span className="transaction-amount">(<USDTtoFTM usdt={transaction.amount.USDT} fixed={8}/> FTM)</span>
                             </div>
                 }
                 </div>

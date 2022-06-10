@@ -40,7 +40,7 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
 
     async newPayment(orderId: string, amountIn: string, amountOut?: string): Promise<void> {
         if (!this.contract.instance) throw Error("Contract not loaded");
-
+        
         if  (!amountOut){
             if (!this.uniswap.instance) throw Error("Uniswap not loaded");
             const amounts = await this.uniswap.instance.methods.getAmountsOut(amountIn, this.uniswap.path).call();

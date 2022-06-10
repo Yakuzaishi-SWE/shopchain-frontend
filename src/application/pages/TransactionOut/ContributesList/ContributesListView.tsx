@@ -36,9 +36,9 @@ export default observer(function ContributesListView({
                                     <>
                                         <tr key={contribute.timestamp}>
                                             <td>
-                                            {contribute.amount.USDT} USDT
+                                            {contribute.amount.USDT.toFixed(8)} USDT
                                             &nbsp;
-                                            (<USDTtoFTM usdt={contribute.amount.USDT}/> FTM)
+                                            (<USDTtoFTM usdt={contribute.amount.USDT} fixed={8}/> FTM)
                                             </td>
                                             <td>{dateNtime(contribute)}</td>
                                         </tr>

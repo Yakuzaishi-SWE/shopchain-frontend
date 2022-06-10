@@ -37,6 +37,7 @@ export default observer(function MoneyBoxDetailsView({
     const [error, setError] = useState(false);
     const [popUnlock, setPopUnlock] = useState(false);
     const [popRefund, setPopRefund] = useState(false);
+    const [copy, setCopy] = useState(false);
     // const location = useLocation();
 
     return <>
@@ -57,12 +58,12 @@ export default observer(function MoneyBoxDetailsView({
                             <li><div className="section-head">Transaction ID:</div>{id}</li>
                             <li><div className="section-head">Owner:</div>{ownerAddress}</li>
                             <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
-                            <li><div className="section-head">Total Amount:</div>{usdt} USDT</li>
-                            <li className="conversion">(<USDTtoFTM usdt={usdt}/> FTM)</li>
-                            <li><div className="section-head">Filled:</div>{filledUsdt} USDT </li>
-                            <li className="conversion">(<USDTtoFTM usdt={filledUsdt}/> FTM)</li>
-                            <li><div className="section-head">To be Filled:</div>{usdtToFill} USDT</li>
-                            <li className="conversion"><span>(<USDTtoFTM usdt={usdtToFill}/> FTM)</span></li>
+                            <li><div className="section-head">Total Amount:</div>{usdt.toFixed(8)} USDT</li>
+                            <li className="conversion">(<USDTtoFTM usdt={usdt} fixed={8}/> FTM)</li>
+                            <li><div className="section-head">Filled:</div>{filledUsdt.toFixed(8)} USDT </li>
+                            <li className="conversion">(<USDTtoFTM usdt={filledUsdt} fixed={8}/> FTM)</li>
+                            <li><div className="section-head">To be Filled:</div>{usdtToFill.toFixed(8)} USDT</li>
+                            <li className="conversion">(<USDTtoFTM usdt={usdtToFill} fixed={8}/> FTM)</li>
                             <li><div className="section-head">State:</div>{state}</li>
                             <li><div className="section-head">Date:</div>{date}</li>
                         </ul>
@@ -96,7 +97,7 @@ export default observer(function MoneyBoxDetailsView({
                         {partecipants && partecipants.map(partecipant =>
                             <tr key={partecipant.timestamp}>
                                 <td>{partecipant.from}</td>
-                                <td>{partecipant.amount.USDT} USDT &nbsp; ( <USDTtoFTM usdt={partecipant.amount.USDT}/> FTM )</td>
+                                <td>{partecipant.amount.USDT.toFixed(8)} USDT &nbsp; (<USDTtoFTM usdt={partecipant.amount.USDT} fixed={8}/> FTM)</td>
                                 <td>{dateNtime(partecipant)}</td>
                             </tr>
                         )}
@@ -105,7 +106,7 @@ export default observer(function MoneyBoxDetailsView({
                 <div className="box-button">
                     <button className={(isPaid && isOwner) ? "" : "hide"} id="unlock" onClick={() => setPopUnlock(true)} disabled={!isPaid}>Unlock</button>
                     <button className={(isUnlocked || isRefunded || !(isOwner || isSeller)) ? "hide" : ""} id="refund" onClick={() => setPopRefund(true)} disabled={isUnlocked}>Refund</button>
-                    <button className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"} id="copy-invite-link" onClick={() => { navigator.clipboard.writeText("Help me fill my MoneyBox\n\n" + window.location.href).then(function () { alert("Invite Link Successfully Copied!"); }); }} disabled={isPaid}>Copy invite link</button>
+                    <button className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"} id="copy-invite-link" onClick={() => { navigator.clipboard.writeText("Help me fill my MoneyBox\n\n" + window.location.href).then(() => setCopy(true)); }} disabled={isPaid}>{copy ? <span id="text_success">Link successfully copied</span> : "Copy invite link"}</button>
                 </div>
 
             </section>

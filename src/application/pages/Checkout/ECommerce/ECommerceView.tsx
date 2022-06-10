@@ -28,7 +28,7 @@ export default observer(function ECommerceView({
                 <label className="toTheLeft">Amount</label>
                 <p className={error ? "err_p": "hide"}>The amount must be higher than 0</p>
                 <div className={error ? "ftm-input err_input" : "ftm-input"}>
-                    <input type="number" step="any" className="clickable-input" value={amount || undefined} onChange={el => setAmount(el.target.valueAsNumber)} placeholder="0.00" />
+                    <input type="number" step="any" className="clickable-input" value={amount || undefined} onChange={el => setAmount(el.target.valueAsNumber)} placeholder="0.0" />
                     <span className="ftm-icon">
                         <FTMIcon />
                         FTM

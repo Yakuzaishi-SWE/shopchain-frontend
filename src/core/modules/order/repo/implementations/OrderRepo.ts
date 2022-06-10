@@ -20,9 +20,13 @@ export default class OrderRepo implements IOrderRepo {
         if (!this.contract.instance) throw new Error("Contract not init");
         if (!this.uniswap.instance) throw new Error("Uniswap not init");
         const totAmount = await this.uniswap.instance.methods.getAmountsOut(data.amount, this.uniswap.path).call();
+        let amounts;
+        if (parseInt(initAmount) > 0) {
         const partialAmout = await this.uniswap.instance.methods.getAmountsOut(initAmount, this.uniswap.path).call();
-        const amounts = [totAmount[1], partialAmout[1]];
-        console.log("amounts: " + amounts);
+        amounts = [totAmount[1], partialAmout[1]];
+        } else {
+            amounts = [totAmount[1]];
+        }
         await this.contract.instance.methods
             .newOrder(data.seller, data.amount, amounts, data.id)
             .send({ from: this.address.address, value: initAmount });

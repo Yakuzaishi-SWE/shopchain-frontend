@@ -144,7 +144,7 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     
     newPaymentTask: ComputedTask<void, [orderId: string, amount: string], void> | null = null;
     newPayment(): boolean {
-        if(this._feeAmount.USDT <= this.usdtToFill && this._feeAmount.USDT > 0) {
+        if(this._feeAmount.USDT > 0) {
             if (this.moneybox) {
                 this.newPaymentTask = this.rootStore.moneyBoxStore.newPayment(
                     this.id, 

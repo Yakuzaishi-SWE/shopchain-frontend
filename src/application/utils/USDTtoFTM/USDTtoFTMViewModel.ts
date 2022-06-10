@@ -26,6 +26,7 @@ export default class USDTtoFTMViewModel {
 
     private get Task() {
         if (!this._usdt) return null;
+        if (this.wei === 0) return 0;
         return this.providerStore.w3.uni.getAmountsIn(this.wei.toString());
     }
 
