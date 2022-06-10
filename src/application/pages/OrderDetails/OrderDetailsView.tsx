@@ -38,7 +38,7 @@ export default observer(function OrderDetailsView({
                     <li><div className="section-head">Order Owner:</div>{ownerAddress}</li>
                     <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
                     <li><div className="section-head">Amount:</div>{usdt} USDT </li>
-                    <li className="conversion">(<USDTtoFTM usdt={usdt}/> FTM)</li>
+                    <li className="conversionSingle">(<USDTtoFTM usdt={usdt}/> FTM)</li>
                     <li><div className="section-head">State:</div>{state}</li>
                     <li><div className="section-head">Date:</div>{date}</li>
                 </ul>
