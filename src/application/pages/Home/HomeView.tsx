@@ -30,7 +30,7 @@ const HomeView = () => {
                     <h3>
                         <span className="ourServices">Refund Garanteed</span>
                     </h3>
-                    <p>You didn't receive your order? Ask for a refund</p> 
+                    <p>You didn't receive your order?<br/>Ask for a refund</p> 
                 </div>
             </div>
 

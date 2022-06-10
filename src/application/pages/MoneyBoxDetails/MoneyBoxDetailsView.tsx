@@ -58,12 +58,36 @@ export default observer(function MoneyBoxDetailsView({
                             <li><div className="section-head">Transaction ID:</div>{id}</li>
                             <li><div className="section-head">Owner:</div>{ownerAddress}</li>
                             <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
-                            <li><div className="section-head">Total Amount:</div>{usdt.toFixed(8)} USDT</li>
-                            <li className="conversion">(<USDTtoFTM usdt={usdt} fixed={8}/> FTM)</li>
-                            <li><div className="section-head">Filled:</div>{filledUsdt.toFixed(8)} USDT </li>
-                            <li className="conversion">(<USDTtoFTM usdt={filledUsdt} fixed={8}/> FTM)</li>
-                            <li><div className="section-head">To be Filled:</div>{usdtToFill.toFixed(8)} USDT</li>
-                            <li className="conversion">(<USDTtoFTM usdt={usdtToFill} fixed={8}/> FTM)</li>
+                            <li><div className="section-head">Total Amount:</div>
+                                <div className="usdt_ftm">
+                                    <span>
+                                        {usdt.toFixed(8)} USDT
+                                    </span>
+                                    <span>
+                                    (<USDTtoFTM usdt={usdt} fixed={8}/> FTM)
+                                    </span>
+                                </div>
+                            </li>
+                            <li><div className="section-head">Filled:</div>
+                                <div className="usdt_ftm">
+                                    <span>
+                                        {filledUsdt.toFixed(8)} USDT
+                                    </span>
+                                    <span>
+                                        (<USDTtoFTM usdt={filledUsdt} fixed={8}/> FTM)
+                                    </span>
+                                </div>
+                            </li>
+                            <li><div className="section-head">To be Filled:</div>
+                                <div className="usdt_ftm">
+                                    <span>
+                                        {usdtToFill > 0 ? usdtToFill.toFixed(8) : "0"} USDT
+                                    </span>
+                                    <span>
+                                        ({usdtToFill > 0 ? <USDTtoFTM usdt={usdtToFill+0.0000005} fixed={8}/> : "0"} FTM)
+                                    </span>
+                                </div>
+                            </li>
                             <li><div className="section-head">State:</div>{state}</li>
                             <li><div className="section-head">Date:</div>{date}</li>
                         </ul>
