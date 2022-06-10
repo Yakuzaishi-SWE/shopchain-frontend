@@ -57,9 +57,12 @@ export default observer(function MoneyBoxDetailsView({
                             <li><div className="section-head">Transaction ID:</div>{id}</li>
                             <li><div className="section-head">Owner:</div>{ownerAddress}</li>
                             <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
-                            <li><div className="section-head">Total Amount:</div>{usdt} USDT (<USDTtoFTM usdt={usdt}/> FTM)</li>
-                            <li><div className="section-head">Filled:</div>{filledUsdt} USDT (<USDTtoFTM usdt={filledUsdt}/> FTM)</li>
-                            <li><div className="section-head">To be Filled:</div>{usdtToFill} USDT (<USDTtoFTM usdt={usdtToFill}/> FTM)</li>
+                            <li><div className="section-head">Total Amount:</div>{usdt} USDT</li>
+                            <li className="conversion">(<USDTtoFTM usdt={usdt}/> FTM)</li>
+                            <li><div className="section-head">Filled:</div>{filledUsdt} USDT </li>
+                            <li className="conversion">(<USDTtoFTM usdt={filledUsdt}/> FTM)</li>
+                            <li><div className="section-head">To be Filled:</div>{usdtToFill} USDT</li>
+                            <li className="conversion"><span>(<USDTtoFTM usdt={usdtToFill}/> FTM)</span></li>
                             <li><div className="section-head">State:</div>{state}</li>
                             <li><div className="section-head">Date:</div>{date}</li>
                         </ul>
@@ -102,7 +105,7 @@ export default observer(function MoneyBoxDetailsView({
                 <div className="box-button">
                     <button className={(isPaid && isOwner) ? "" : "hide"} id="unlock" onClick={() => setPopUnlock(true)} disabled={!isPaid}>Unlock</button>
                     <button className={(isUnlocked || isRefunded || !(isOwner || isSeller)) ? "hide" : ""} id="refund" onClick={() => setPopRefund(true)} disabled={isUnlocked}>Refund</button>
-                    <button className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"} id="copy-invite-link" onClick={() => { navigator.clipboard.writeText("Help me fill my MoneyBox, I'm poor...\n\n" + window.location.href).then(function () { alert("Invite Link Successfully Copied!"); }); }} disabled={isPaid}>Copy invite link</button>
+                    <button className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"} id="copy-invite-link" onClick={() => { navigator.clipboard.writeText("Help me fill my MoneyBox\n\n" + window.location.href).then(function () { alert("Invite Link Successfully Copied!"); }); }} disabled={isPaid}>Copy invite link</button>
                 </div>
 
             </section>

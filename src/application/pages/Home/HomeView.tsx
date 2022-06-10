@@ -7,7 +7,7 @@ import MoneyBoxCountController from "./MoneyBoxCount/MoneyBoxCountController";
 const HomeView = () => {
     return <div className="page-container">
         <div className="home-card">
-            <h1>Hey FraBro, welcome in Shopchain Verse!</h1>
+            <h1>Hey, welcome in Shopchain Verse!</h1>
 
             <h2>What is Shopchain?</h2>
             <p>Shopchain is a Decentralized App deployed on Fantom (test) Network. It manages orders for future crypto e-commerce.</p>

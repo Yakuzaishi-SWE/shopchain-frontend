@@ -13,6 +13,6 @@ export default observer(function USDTtoFTM({usdt}: { usdt: number }) : any {
         vm.setUSDT(usdt);
     }, [usdt]);
 
-    if (vm.isLoaded) return <p>vm.value</p>;
+    if (vm.isLoaded) return <span>vm.value</span>;
     else return <Loading/>;
 }); 
