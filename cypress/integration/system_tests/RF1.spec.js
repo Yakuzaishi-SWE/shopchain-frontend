@@ -90,10 +90,4 @@ describe("RF1", () => {
         cy.visit("http://localhost:8085/");
         cy.contains("Checkout Page").click();
     });
-
-    it("tests things", () => {
-        cy.get(".ftm-input").type("0.0001");
-        cy.get(".btn-block > input").click();
-        cy.get(".btn-payalone").click();
-    });
 });

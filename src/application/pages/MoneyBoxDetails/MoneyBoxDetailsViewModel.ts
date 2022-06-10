@@ -1,7 +1,7 @@
 import Amount from "core/modules/order/domain/Amount";
 import MoneyBox from "core/modules/order/domain/MoneyBox";
 import Payment from "core/modules/order/domain/Payment";
-import ProviderStore, { providerStore } from "core/provider/store/ProviderStore";
+import ProviderStore from "core/provider/store/ProviderStore";
 import RootStore from "core/shared/RootStore";
 import ComputedTask from "core/utils/ComputedTask";
 import { makeAutoObservable } from "mobx";
@@ -11,10 +11,8 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     _id = "";
     _feeAmount = new Amount(0);
     _code = 0;
-    providerStore: ProviderStore;
 
-    constructor(private readonly rootStore: RootStore, providerStore: ProviderStore = ProviderStore.getInstance()) {
-        this.providerStore = providerStore;
+    constructor(private readonly rootStore: RootStore, private readonly providerStore: ProviderStore = ProviderStore.getInstance()) {
         makeAutoObservable(this, {}, { autoBind: true, });
     }
 
@@ -23,12 +21,12 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     }
 
     private get moneyboxTask() {
-        if (!providerStore.provider) return null;
+        if (!this.providerStore.provider) return null;
         return this.rootStore.moneyBoxStore.getOrderById(this._id) as ComputedTask<MoneyBox | null, [id: string], MoneyBox | null>;
     }
 
     private get moneybox() {
-        if(!this.moneyboxTask) return null;
+        if (!this.moneyboxTask) return null;
         return this.moneyboxTask.result;
     }
 
@@ -80,7 +78,7 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.moneybox?.amount?.wei || 0;
     }
 
-    get filledFtm()  {
+    get filledFtm() {
         return this.AmountFilled.FTM;
     }
 
@@ -138,8 +136,6 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
 
     unlockTask: ComputedTask<void, [string, number], void> | null = null;
     unlock() {
-        console.log("unlockCode", this.unlockCode);
-        console.log("code", this.code);
         if (this.moneybox && this.code == this.unlockCode) {
             this.unlockTask = this.moneybox.unlock(this.moneybox.unlockCode);
             return false;
@@ -155,45 +151,41 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         }
         return true;
     }
-    
+
     newPaymentTask: ComputedTask<void, [orderId: string, amount: string], void> | null = null;
     newPayment(): boolean {
-        if(this._feeAmount.FTM <= this.ftmToFill && this._feeAmount.FTM > 0) {
-            if (this.moneybox) {
-                this.newPaymentTask = this.rootStore.moneyBoxStore.newPayment(
-                    this.id, 
-                    String(this.feeAmountWei)
-                );
-                return false;
-            }
-            return true;
-        } else {
-            return true;
+        if (this._feeAmount.wei <= this.weiToFill && this._feeAmount.wei > 0) {
+            this.newPaymentTask = this.rootStore.moneyBoxStore.newPayment(
+                this.id,
+                String(this.feeAmountWei)
+            );
+            return false;
         }
+        return true;
     }
 
-    get partecipants(){
+    get partecipants() {
         return this.partecipantsPayments;
     }
 
     dateNtime(partecipant: Payment): string {
-        const date = new Date(partecipant.timestamp*1000);
-        return date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        const date = new Date(partecipant.timestamp * 1000);
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 
     back(route: string) {
-        if(route.includes("out")) return "/transaction/out";
-        if(route.includes("in")) return "/transaction/in";
+        if (route.includes("out")) return "/transaction/out";
+        if (route.includes("in")) return "/transaction/in";
         return "";
     }
 
     get isOwner() {
-        if(!this.providerStore.address.address) return false;
+        if (!this.providerStore.address.address) return false;
         return this.ownerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
     }
 
     get isSeller() {
-        if(!this.providerStore.address.address) return false;
+        if (!this.providerStore.address.address) return false;
         return this.sellerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
     }
 

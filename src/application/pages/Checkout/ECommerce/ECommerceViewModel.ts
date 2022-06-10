@@ -5,6 +5,7 @@ import { v4 } from "uuid";
 import IECommerceViewModel from "./IECommerceViewModel";
 
 
+
 export default class ECommerceViewModel implements IECommerceViewModel {
     private _amount: Amount = new Amount(0);
     private _id = v4();

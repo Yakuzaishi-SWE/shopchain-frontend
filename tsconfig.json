@@ -32,11 +32,15 @@
 		"noFallthroughCasesInSwitch": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
-		// "isolatedModules": true,
-		"types": ["cypress"]
+		"isolatedModules": true,
+		"types": [
+			// "cypress",
+			"jest",
+		]
 	},
 	"exclude": [
-		"**/*.test.ts",
+		"cypress/**/*"
+		// "**/*.test.ts",
 	],
 	"include": [
 		"src"	
