@@ -6,13 +6,13 @@ import FTMtoUSDTViewModel from "./FTMtoUSDTViewModel";
 
 
 
-export default observer(function FTMtoUSDT({ftm}: { ftm: number }) : any {
+export default observer(function FTMtoUSDT({ftm}: { ftm: number }) {
     const vm = useViewModel(FTMtoUSDTViewModel);
 
     useEffect(() => {
         vm.setFTM(ftm);
-    }, [ftm]);
+    }, [vm.setFTM, ftm]);
 
-    if (vm.isLoaded) return vm.value?.toString();
+    if (vm.isLoaded) return <>{vm.value?.toString()}</>;
     else return <Loading/>;
 }); 

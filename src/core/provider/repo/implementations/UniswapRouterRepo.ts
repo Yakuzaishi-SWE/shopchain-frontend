@@ -1,7 +1,7 @@
 import W3Store from "../../domain/W3Store";
 import { Contract } from "web3-eth-contract";
 import { makeObservable, observable } from "mobx";
-import UNISWAP_ROUTER_ABI from "./UniswapRouterABI.json";
+import UNISWAP_ROUTER_ABI from "./UniSwapRouterABI.json";
 import { AbiItem } from "web3-utils";
 import IContractRepo from "../IContractRepo";
 

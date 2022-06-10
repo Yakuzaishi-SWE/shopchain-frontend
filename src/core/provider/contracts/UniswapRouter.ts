@@ -25,6 +25,8 @@ export default class UniswapRouter {
             const res = await this.instance?.methods.getAmountsIn(usdt, this.path).call();
             return res[0];
         })
+        .id((usdt) => usdt)
+        .expireIn(1000 * 5)
         .result((res) => res)
         .revaildate;
 
@@ -33,6 +35,8 @@ export default class UniswapRouter {
             const res = await this.instance?.methods.getAmountsOut(ftm, this.path).call();
             return res[1];
         })
+        .id((usdt) => usdt)
+        .expireIn(1000 * 5)
         .result((res) => res)
         .revaildate;
 

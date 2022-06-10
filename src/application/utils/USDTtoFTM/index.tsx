@@ -11,8 +11,8 @@ export default observer(function USDTtoFTM({usdt}: { usdt: number }) : any {
 
     useEffect(() => {
         vm.setUSDT(usdt);
-    }, [usdt]);
+    }, [vm.setUSDT, usdt]);
 
-    if (vm.isLoaded) return <span>vm.value</span>;
+    if (vm.isLoaded) return <>{vm.value?.toString()}</>;
     else return <Loading/>;
 }); 
