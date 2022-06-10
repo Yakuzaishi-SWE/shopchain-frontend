@@ -34,10 +34,14 @@ describe("Address Tests", () => {
 
     it("TS1F11: Verificare che l’utente possa visualizzare correttamente l’indirizzo del suo wallet", () => {
         cy.visit("localhost:8085/#/");
-        cy.get('.addr').should('be.visible');
+        cy.get('.addr').trigger('mouseover').should('be.visible');
     });
 
     it("TS1F11.1: Verificare che l’utente possa visualizzare correttamente l’indirizzo del suo wallet in forma testuale.", () => {
         cy.get('.addr').should('contain', '0x91350E18AE7133052E06436433040E80f2E6988E');
+    });
+
+    it("TS3F11.3 Verificare che l'utente possa visualizzare correttamente l'indirizzo del suo wallet sotto forma di sequenza emoji", () => {
+        cy.get('.addr').should('be.visible');
     });
 });
