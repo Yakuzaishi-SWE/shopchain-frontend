@@ -43,7 +43,8 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
 
         if  (!amountOut){
             if (!this.uniswap.instance) throw Error("Uniswap not loaded");
-            amountOut = await this.uniswap.instance.methods.getAmountsOut(amountIn, this.uniswap.path).call()[1];
+            const amounts = await this.uniswap.instance.methods.getAmountsOut(amountIn, this.uniswap.path).call();
+            amountOut = amounts[1];
         }
 
         await this.contract.instance.methods
