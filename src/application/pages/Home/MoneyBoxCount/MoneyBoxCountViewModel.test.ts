@@ -60,7 +60,7 @@ const FAILproviderStore = {
     provider: null,
 } as unknown as ProviderStore;
 
-describe("MoneyBoxDetailsViewModel", () => {
+describe("MoneyBoxCountViewModel", () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
