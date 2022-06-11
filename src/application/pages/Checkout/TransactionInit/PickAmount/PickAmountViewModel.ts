@@ -54,9 +54,8 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
                 id: this._id
             }, String(this._initAmount.wei));
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     get canRedirect(): boolean {

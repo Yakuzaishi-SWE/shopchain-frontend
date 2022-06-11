@@ -3,8 +3,6 @@ import RootStore from "core/shared/RootStore";
 import { makeAutoObservable } from "mobx";
 import IMoneyBoxCountViewModel from "./IMoneyBoxCountViewModel";
 
-
-
 export default class MoneyBoxCountViewModel  implements IMoneyBoxCountViewModel  {
     constructor(private readonly rootStore: RootStore)  {
         makeAutoObservable(this, {}, { autoBind: true });

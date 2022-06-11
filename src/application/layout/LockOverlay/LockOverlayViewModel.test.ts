@@ -35,19 +35,13 @@ describe("LockOverlayViewModel", () => {
     })
 
     describe("isConnected", () => {
-        it("isConnected successful", () =>{
+        it("successful", () =>{
             const vm = new LockOverlayViewModel(OKProviderStore);
 
             expect(vm.isConnected).toBe(true);
         })
 
-        it("isConnected successful", () =>{
-            const vm = new LockOverlayViewModel(FAILProviderStore);
-
-            expect(vm.isConnected).toBe(false);
-        })
-
-        it("isConnected successful", () =>{
+        it("not successful", () =>{
             const vm = new LockOverlayViewModel(FAILProviderStore);
 
             expect(vm.isConnected).toBe(false);

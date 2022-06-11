@@ -26,7 +26,7 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     }
 
     private get moneybox() {
-        if(!this.moneyboxTask) return null;
+        if (!this.moneyboxTask) return null;
         return this.moneyboxTask.result;
     }
 
@@ -124,8 +124,6 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
 
     unlockTask: ComputedTask<void, [string, number], void> | null = null;
     unlock() {
-        console.log("unlockCode", this.unlockCode);
-        console.log("code", this.code);
         if (this.moneybox && this.code == this.unlockCode) {
             this.unlockTask = this.moneybox.unlock(this.moneybox.unlockCode);
             return false;
@@ -141,7 +139,7 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         }
         return true;
     }
-    
+
     newPaymentTask: ComputedTask<void, [orderId: string, amount: string], void> | null = null;
     newPayment(): boolean {
         if(this._feeAmount.USDT > 0) {
@@ -158,13 +156,13 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         }
     }
 
-    get partecipants(){
+    get partecipants() {
         return this.partecipantsPayments;
     }
 
     dateNtime(partecipant: Payment): string {
-        const date = new Date(partecipant.timestamp*1000);
-        return date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        const date = new Date(partecipant.timestamp * 1000);
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 
     // back(route: string) {
@@ -174,12 +172,12 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     // }
 
     get isOwner() {
-        if(!this.providerStore.address.address) return false;
+        if (!this.providerStore.address.address) return false;
         return this.ownerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
     }
 
     get isSeller() {
-        if(!this.providerStore.address.address) return false;
+        if (!this.providerStore.address.address) return false;
         return this.sellerAddress.toLowerCase() === this.providerStore.address.address.toLowerCase();
     }
 
