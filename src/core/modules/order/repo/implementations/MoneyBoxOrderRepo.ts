@@ -1,6 +1,7 @@
 /* eslint-disable sonarjs/no-empty-collection */
 /* eslint-disable sonarjs/no-duplicate-string */
 import MoneyBoxManagerContract from "core/provider/contracts/MoneyBoxManagerContract";
+import UniswapRouter from "core/provider/contracts/UniswapRouter";
 import Address from "core/provider/domain/Address";
 import Amount from "../../domain/Amount";
 import MoneyBox from "../../domain/MoneyBox";
@@ -15,8 +16,8 @@ import OrderRepo from "./OrderRepo";
 export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrderRepo {
     declare protected readonly store: MoneyBoxOrderStore;
 
-    public constructor(store: MoneyBoxOrderStore, contract: MoneyBoxManagerContract, address: Address ) {
-        super(store, contract, address);
+    public constructor(store: MoneyBoxOrderStore, contract: MoneyBoxManagerContract, uniswap: UniswapRouter, address: Address ) {
+        super(store, contract, uniswap, address);
     }
 
     async getOrderById(id: string): Promise<MoneyBox> {
@@ -37,11 +38,18 @@ export default class MoneyBoxOrderRepo extends OrderRepo implements IMoneyBoxOrd
         return ordertuples.map(tuple => MoneyBox.create(this.store, tuple.id, tuple.order));
     }
 
-    async newPayment(orderId: string, amount: string): Promise<void> {
+    async newPayment(orderId: string, amountIn: string, amountOut?: string): Promise<void> {
         if (!this.contract.instance) throw Error("Contract not loaded");
+        
+        if  (!amountOut){
+            if (!this.uniswap.instance) throw Error("Uniswap not loaded");
+            const amounts = await this.uniswap.instance.methods.getAmountsOut(amountIn, this.uniswap.path).call();
+            amountOut = amounts[1];
+        }
+
         await this.contract.instance.methods
-            .newPayment(orderId, amount)
-            .send({ from: this.address.address, value: amount });
+            .newPayment(orderId, amountIn, amountOut)
+            .send({ from: this.address.address, value: amountIn });
     }
 
     async getPayments(orderId: string): Promise<Payment[]> {

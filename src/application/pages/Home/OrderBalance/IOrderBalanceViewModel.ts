@@ -1,7 +1,7 @@
 
 interface IOrderBalanceViewModel {
-    isBusy: boolean;
-    balanceFTM: number;
+    isLoaded: boolean;
+    balanceUSDT: number;
     balanceWEI: number;
 }
 

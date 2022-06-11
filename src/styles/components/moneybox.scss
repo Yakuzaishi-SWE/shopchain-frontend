@@ -9,6 +9,10 @@ div.two-cols {
     }
 }
 
+.usdt_ftm {
+    display: inline-grid;
+}
+
 .addOnCreate-moneybox {
     padding: 1em 1em;
     border-radius: 32px;
@@ -32,3 +36,6 @@ div.two-cols {
     border: 2px solid $error;
 }
 
+.conversion{
+    padding-left: 13em;
+}

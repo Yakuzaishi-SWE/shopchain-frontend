@@ -1,11 +1,10 @@
-import OrderRepo from "../OrderRepo"
+import UniswapRouter from "core/provider/contracts/UniswapRouter";
+import { OrderStateEnum } from "../../../../../../types/enums";
 import OrderManagerContract from "../../../../../provider/contracts/OrderManagerContract";
 import Address from "../../../../../provider/domain/Address";
-import OrderStore from "../../../store/OrderStore";
-import Amount from "../../../domain/Amount";
 import OrderDTO from "../../../dtos/OrderDTO";
-import OrderState from "../../../domain/OrderState";
-import { OrderStateEnum } from "../../../../../../types/enums";
+import OrderStore from "../../../store/OrderStore";
+import OrderRepo from "../OrderRepo";
 
 
 const send = jest.fn(async (data: { from: string, value: number }) => { });
@@ -53,6 +52,24 @@ const undefinedContract: OrderManagerContract = {
     instance: null,
 } as any;
 
+const uniswap: UniswapRouter = {
+    instance: {
+        methods: {
+            getAmountsOut: jest.fn((amount: number, path: string) => {
+                return { 
+                    call: jest.fn(() => {
+                        return [0, 1];
+                    })
+                }
+            })
+        }
+    },
+} as any;
+
+const undefinedUniswap: UniswapRouter = {
+    instance: null,
+} as any;
+
 const address: Address = {
     address: "0x0",
 } as any;
@@ -60,7 +77,7 @@ const address: Address = {
 describe("OrderRepo", () => {
 
     it("should create an instance of OrderRepo", () => {
-        const _orderRepo = new OrderRepo(rootStore, contract, address);
+        const _orderRepo = new OrderRepo(rootStore, contract, uniswap, address);
         expect(_orderRepo).toBeTruthy();
         expect(_orderRepo).not.toBeFalsy();
     })
@@ -68,17 +85,29 @@ describe("OrderRepo", () => {
     describe("createOrder", () => {
 
         it("defined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, contract, address);
+            const _orderRepo = new OrderRepo(rootStore, contract, uniswap, address);
             const data = { seller: "0x0", amount: "0x0", id: "0x0" };
             await _orderRepo.createOrder(data);
             expect(send).toHaveBeenCalled();
             expect(send).toHaveBeenCalledWith({ from: address.address, value: data.amount });
+            expect(uniswap.instance?.methods.getAmountsOut).toHaveBeenCalled();
             expect(contract.instance?.methods.newOrder).toHaveBeenCalled();
-            expect(contract.instance?.methods.newOrder).toHaveBeenCalledWith(data.seller, data.amount, data.id);
+            expect(contract.instance?.methods.newOrder).toHaveBeenCalledWith(data.seller, data.amount, [1, 1], data.id);
+        });
+
+        it("undefined uniswap instance", async () => {
+            const _orderRepo = new OrderRepo(rootStore, contract, undefinedUniswap, address);
+            const data = { seller: "0x0", amount: "0x0", id: "0x0" };
+            try {
+                await _orderRepo.createOrder(data);
+            } catch (err) {
+                expect(call).not.toHaveBeenCalled();
+                expect(uniswap.instance?.methods.getAmountsOut).not.toHaveBeenCalled();
+            }
         });
 
         it("undefined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, undefinedContract, address);
+            const _orderRepo = new OrderRepo(rootStore, undefinedContract, uniswap, address);
             const data = { seller: "0x0", amount: "0x0", id: "0x0" };
             try {
                 await _orderRepo.createOrder(data);
@@ -92,7 +121,7 @@ describe("OrderRepo", () => {
     describe("unlock", () => {
 
         it("defined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, contract, address);
+            const _orderRepo = new OrderRepo(rootStore, contract, uniswap, address);
             const id = "0x0";
             const code = 0;
             await _orderRepo.unlock(id, code);
@@ -103,7 +132,7 @@ describe("OrderRepo", () => {
         });
 
         it("undefined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, undefinedContract, address);
+            const _orderRepo = new OrderRepo(rootStore, undefinedContract, uniswap, address);
             const id = "0x0";
             const code = 0;
             try {
@@ -118,7 +147,7 @@ describe("OrderRepo", () => {
     describe("refund", () => {
 
         it("defined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, contract, address);
+            const _orderRepo = new OrderRepo(rootStore, contract, uniswap, address);
             const id = "0x0";
             await _orderRepo.refund(id);
             expect(send).toHaveBeenCalled();
@@ -128,7 +157,7 @@ describe("OrderRepo", () => {
         });
 
         it("undefined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, undefinedContract, address);
+            const _orderRepo = new OrderRepo(rootStore, undefinedContract, uniswap, address);
             const id = "0x0";
             try {
                 await _orderRepo.refund(id);
@@ -142,7 +171,7 @@ describe("OrderRepo", () => {
     describe("getOrderById", () => {
 
         it("defined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, contract, address);
+            const _orderRepo = new OrderRepo(rootStore, contract, uniswap, address);
             const id = "0x0";
             const order = await _orderRepo.getOrderById(id);
             expect(callData).toHaveBeenCalled();
@@ -151,7 +180,7 @@ describe("OrderRepo", () => {
         });
 
         it("undefined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, undefinedContract, address);
+            const _orderRepo = new OrderRepo(rootStore, undefinedContract, uniswap, address);
             const id = "0x0"; try {
                 const order = await _orderRepo.getOrderById(id);
             } catch (err) {
@@ -163,7 +192,7 @@ describe("OrderRepo", () => {
 
     describe("getOrdersBySeller", () => {
         it("defined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, contract, address);
+            const _orderRepo = new OrderRepo(rootStore, contract, uniswap, address);
             const seller = "0x0";
             const orders = await _orderRepo.getOrdersBySeller(seller);
             expect(callArr).toHaveBeenCalled();
@@ -172,7 +201,7 @@ describe("OrderRepo", () => {
         });
 
         it("undefined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, undefinedContract, address);
+            const _orderRepo = new OrderRepo(rootStore, undefinedContract, uniswap, address);
             const seller = "0x0";
             try {
                 const orders = await _orderRepo.getOrdersBySeller(seller);
@@ -186,7 +215,7 @@ describe("OrderRepo", () => {
 
     describe("getOrdersByBuyer", () => {
         it("defined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, contract, address);
+            const _orderRepo = new OrderRepo(rootStore, contract, uniswap, address);
             const buyer = "0x0";
             const orders = await _orderRepo.getOrdersByBuyer(buyer);
             expect(callArr).toHaveBeenCalled();
@@ -195,7 +224,7 @@ describe("OrderRepo", () => {
         });
 
         it("undefined contract instance", async () => {
-            const _orderRepo = new OrderRepo(rootStore, undefinedContract, address);
+            const _orderRepo = new OrderRepo(rootStore, undefinedContract, uniswap, address);
             const buyer = "0x0";
             try {
                 const orders = await _orderRepo.getOrdersByBuyer(buyer);

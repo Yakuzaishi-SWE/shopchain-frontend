@@ -1,19 +1,18 @@
+/* eslint-disable prefer-arrow-callback */
+
 import Popup from "application/utils/Popup";
+import USDTtoFTM from "application/utils/USDTtoFTM";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { BackArrowIcon, FTMIcon, Loading, PiggyBank } from "resources/svg";
+import { FTMIcon, Loading, PiggyBank } from "resources/svg";
 import IMoneyBoxDetailsViewModel from "./IMoneyBoxDetailsViewModel";
 
 export default observer(function MoneyBoxDetailsView({
     id,
     sellerAddress,
-    ftm,
-    wei,
-    filledFtm,
-    filledWei,
-    ftmToFill,
-    weiToFill,
+    usdt,
+    filledUsdt,
+    usdtToFill,
     state,
     isPaid,
     isUnlocked,
@@ -21,7 +20,6 @@ export default observer(function MoneyBoxDetailsView({
     unlock,
     refund,
     feeAmountFtm,
-    feeAmountWei,
     setFeeAmount,
     newPayment,
     partecipants,
@@ -30,7 +28,7 @@ export default observer(function MoneyBoxDetailsView({
     isSeller,
     ownerAddress,
     date,
-    back,
+    // back,
     isBusy,
     unlockCode,
     code,
@@ -39,6 +37,7 @@ export default observer(function MoneyBoxDetailsView({
     const [error, setError] = useState(false);
     const [popUnlock, setPopUnlock] = useState(false);
     const [popRefund, setPopRefund] = useState(false);
+    const [copy, setCopy] = useState(false);
     // const location = useLocation();
 
     return <>
@@ -52,16 +51,43 @@ export default observer(function MoneyBoxDetailsView({
                 <div className="two-cols">
                     <div className="img-box">
                         <PiggyBank className="bigPiggy" />
-                        <span className="moneybox-percentage">{((filledFtm / ftm) * 100).toFixed(0)}% filled</span>
+                        <span className="moneybox-percentage">{((filledUsdt / usdt) * 100).toFixed(0)}% filled</span>
                     </div>
                     <div className="details">
                         <ul>
                             <li><div className="section-head">Transaction ID:</div>{id}</li>
                             <li><div className="section-head">Owner:</div>{ownerAddress}</li>
                             <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
-                            <li><div className="section-head">Total Amount:</div>{ftm} FTM ({wei} wei)</li>
-                            <li><div className="section-head">Filled:</div>{filledFtm} FTM ({filledWei} wei)</li>
-                            <li><div className="section-head">To be Filled:</div>{ftmToFill} FTM ({weiToFill} wei)</li>
+                            <li><div className="section-head">Total Amount:</div>
+                                <div className="usdt_ftm">
+                                    <span>
+                                        {usdt.toFixed(8)} USDT
+                                    </span>
+                                    <span>
+                                    (<USDTtoFTM usdt={usdt} fixed={8}/> FTM)
+                                    </span>
+                                </div>
+                            </li>
+                            <li><div className="section-head">Filled:</div>
+                                <div className="usdt_ftm">
+                                    <span>
+                                        {filledUsdt.toFixed(8)} USDT
+                                    </span>
+                                    <span>
+                                        (<USDTtoFTM usdt={filledUsdt} fixed={8}/> FTM)
+                                    </span>
+                                </div>
+                            </li>
+                            <li><div className="section-head">To be Filled:</div>
+                                <div className="usdt_ftm">
+                                    <span>
+                                        {usdtToFill > 0 ? usdtToFill.toFixed(8) : "0"} USDT
+                                    </span>
+                                    <span>
+                                        ({usdtToFill > 0 ? <USDTtoFTM usdt={usdtToFill+0.0000005} fixed={8}/> : "0"} FTM)
+                                    </span>
+                                </div>
+                            </li>
                             <li><div className="section-head">State:</div>{state}</li>
                             <li><div className="section-head">Date:</div>{date}</li>
                         </ul>
@@ -69,17 +95,12 @@ export default observer(function MoneyBoxDetailsView({
                         <form className="payment-form">
                             <div className={!(isPaid || isUnlocked || isRefunded) ? "form-wrapper" : "hide"}>
                                 <label>Select the amount that you want to send</label>
-                                <p className={error ? "err_p" : "hide"}>Amount must be between 1 wei and {ftmToFill} FTM</p>
+                                <p className={error ? "err_p" : "hide"}>Amount must be between 1 wei and <USDTtoFTM usdt={usdtToFill}/> FTM</p>
                                 <div className={error ? "ftm-input err_input" : "ftm-input"}>
                                     <input type="number" step="any" className="clickable-input" value={feeAmountFtm || undefined} onChange={el => setFeeAmount(el.target.valueAsNumber)} placeholder="0.00" />
                                     <span className="ftm-icon">
                                         <FTMIcon />
                                         FTM
-                                    </span>
-                                </div>
-                                <div className="ftm-wei">
-                                    <span>
-                                        ({feeAmountWei}) wei
                                     </span>
                                 </div>
                                 <button id="contribute" onClick={() => setError(newPayment)} disabled={isPaid}>Contribute</button>
@@ -100,7 +121,7 @@ export default observer(function MoneyBoxDetailsView({
                         {partecipants && partecipants.map(partecipant =>
                             <tr key={partecipant.timestamp}>
                                 <td>{partecipant.from}</td>
-                                <td>{partecipant.amount.FTM}</td>
+                                <td>{partecipant.amount.USDT.toFixed(8)} USDT &nbsp; (<USDTtoFTM usdt={partecipant.amount.USDT} fixed={8}/> FTM)</td>
                                 <td>{dateNtime(partecipant)}</td>
                             </tr>
                         )}
@@ -109,7 +130,7 @@ export default observer(function MoneyBoxDetailsView({
                 <div className="box-button">
                     <button className={(isPaid && isOwner) ? "" : "hide"} id="unlock" onClick={() => setPopUnlock(true)} disabled={!isPaid}>Unlock</button>
                     <button className={(isUnlocked || isRefunded || !(isOwner || isSeller)) ? "hide" : ""} id="refund" onClick={() => setPopRefund(true)} disabled={isUnlocked}>Refund</button>
-                    <button className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"} id="copy-invite-link" onClick={() => { navigator.clipboard.writeText("Help me fill my MoneyBox, I'm poor...\n\n" + window.location.href).then(function () { alert("Invite Link Successfully Copied!"); }); }} disabled={isPaid}>Copy invite link</button>
+                    <button className={!(isPaid || isUnlocked || isRefunded) ? "" : "hide"} id="copy-invite-link" onClick={() => { navigator.clipboard.writeText("Help me fill my MoneyBox\n\n" + window.location.href).then(() => setCopy(true)); }} disabled={isPaid}>{copy ? <span id="text_success">Link successfully copied</span> : "Copy invite link"}</button>
                 </div>
 
             </section>

@@ -43,12 +43,8 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
         return this.order?.sellerAddress || "";
     }
 
-    get ftm() {
-        return this.order?.amount?.FTM || 0;
-    }
-
-    get wei() {
-        return this.order?.amount?.wei || 0;
+    get usdt() {
+        return this.order?.amount?.USDT || 0;
     }
 
     get state() {
@@ -87,11 +83,11 @@ export default class OrderDetailsViewModel implements IOrderDetailsViewModel {
         return true;
     }
 
-    back(route: string) {
-        if (route.includes("out")) return "/transaction/out";
-        if (route.includes("in")) return "/transaction/in";
-        return "";
-    }
+    // back(route: string) {
+    //     if (route.includes("out")) return "/transaction/out";
+    //     if (route.includes("in")) return "/transaction/in";
+    //     return "";
+    // }
 
     get isOwner() {
         if (!this.providerStore.address.address) return false;

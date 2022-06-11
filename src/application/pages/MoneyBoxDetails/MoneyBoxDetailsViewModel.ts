@@ -70,28 +70,16 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return this.moneybox?.sellerAddress || "";
     }
 
-    get ftm() {
-        return this.moneybox?.amount?.FTM || 0;
+    get usdt() {
+        return this.moneybox?.amount?.USDT || 0;
     }
 
-    get wei() {
-        return this.moneybox?.amount?.wei || 0;
+    get filledUsdt()  {
+        return this.AmountFilled.USDT;
     }
 
-    get filledFtm() {
-        return this.AmountFilled.FTM;
-    }
-
-    get filledWei() {
-        return this.AmountFilled.wei;
-    }
-
-    get ftmToFill() {
-        return this.amountToFillTask?.result?.FTM || 0;
-    }
-
-    get weiToFill() {
-        return this.amountToFillTask?.result?.wei || 0;
+    get usdtToFill() {
+        return this.amountToFillTask?.result?.USDT || 0;
     }
 
     get state() {
@@ -111,10 +99,10 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
     }
 
     get feeAmountFtm() {
-        return this._feeAmount.FTM;
+        return this._feeAmount.USDT;
     }
 
-    get feeAmountWei() {
+    private get feeAmountWei() {
         return this._feeAmount.wei;
     }
 
@@ -154,14 +142,18 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
 
     newPaymentTask: ComputedTask<void, [orderId: string, amount: string], void> | null = null;
     newPayment(): boolean {
-        if (this._feeAmount.wei <= this.weiToFill && this._feeAmount.wei > 0) {
-            this.newPaymentTask = this.rootStore.moneyBoxStore.newPayment(
-                this.id,
-                String(this.feeAmountWei)
-            );
-            return false;
+        if(this._feeAmount.USDT > 0) {
+            if (this.moneybox) {
+                this.newPaymentTask = this.rootStore.moneyBoxStore.newPayment(
+                    this.id, 
+                    String(this.feeAmountWei)
+                );
+                return false;
+            }
+            return true;
+        } else {
+            return true;
         }
-        return true;
     }
 
     get partecipants() {
@@ -173,11 +165,11 @@ export default class MoneyBoxDetailsViewModel implements IMoneyBoxDetailsViewMod
         return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 
-    back(route: string) {
-        if (route.includes("out")) return "/transaction/out";
-        if (route.includes("in")) return "/transaction/in";
-        return "";
-    }
+    // back(route: string) {
+    //     if(route.includes("out")) return "/transaction/out";
+    //     if(route.includes("in")) return "/transaction/in";
+    //     return "";
+    // }
 
     get isOwner() {
         if (!this.providerStore.address.address) return false;

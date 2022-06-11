@@ -7,7 +7,7 @@ import TransactionListController from "./TransactionList/TransactionListControll
 export default observer(function TransactionInView() {
     return <>
         <div className="content-card">
-            <h1 className="center">Inbound transactions</h1>
+            <h1 className="center">Inbound Transactions</h1>
             <TransactionListController />
         </div>
     </>;

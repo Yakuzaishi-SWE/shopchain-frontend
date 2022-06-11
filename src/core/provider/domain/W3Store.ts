@@ -1,9 +1,9 @@
-import TaskCache from "core/utils/TaskCache";
 import { action, autorun, computed, makeObservable, observable } from "mobx";
 import Web3 from "web3";
 import { provider } from "web3-core";
 import MoneyBoxManagerContract from "../contracts/MoneyBoxManagerContract";
 import OrderManagerContract from "../contracts/OrderManagerContract";
+import UniswapRouter from "../contracts/UniswapRouter";
 import ProviderStore from "../store/ProviderStore";
 
 
@@ -14,11 +14,13 @@ export default class W3Store {
     private _web3: Web3 | null = null;
     public om: OrderManagerContract;
     public mm: MoneyBoxManagerContract;
+    public uni: UniswapRouter;
 
     constructor(providerStore: ProviderStore) {
         this.providerStore = providerStore;
         this.om = new OrderManagerContract(this);
         this.mm = new MoneyBoxManagerContract(this);
+        this.uni = new UniswapRouter(this);
         makeObservable<this, "providerStore" | "_web3" | "setWeb3">(this, {
             providerStore: observable,
             _web3: observable.ref,
@@ -26,6 +28,7 @@ export default class W3Store {
             setWeb3: action,
             om: observable,
             mm: observable,
+            uni: observable,
         }, {autoBind: true});
 
         autorun(() => {

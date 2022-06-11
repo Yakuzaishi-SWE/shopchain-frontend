@@ -30,7 +30,7 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
     }
 
     get initFTM(): number {
-        return this._initAmount.FTM;
+        return this._initAmount.USDT;
     }
 
     setInitFTM(value: number): void {
@@ -38,7 +38,7 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
     }
 
     get amountFtm(): number {
-        return this._amount.FTM;
+        return this._amount.USDT;
     }
 
     get initWei(): number {
@@ -47,7 +47,7 @@ export default class PickAmountViewModel implements IPickAmountViewModel {
 
     createMoneyBoxTask: ComputedTask<void, [data: { seller: string; amount: string; id: string; }, initAmount?: string | undefined], void> | null = null;
     createMoneyBox(): boolean {
-        if(this._initAmount.FTM <= this._amount.FTM && this._initAmount.FTM >= 0) {
+        if(this._initAmount.USDT <= this._amount.USDT && this._initAmount.USDT >= 0) {
             this.createMoneyBoxTask = this.rootStore.moneyBoxStore.createOrder({
                 seller: this._sellerAddress,
                 amount: String(this._amount.wei),
