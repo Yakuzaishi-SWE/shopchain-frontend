@@ -91,32 +91,17 @@ describe("MoneyBoxDetailsViewModel", () => {
 
     it("should get ftm", () => {
         const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.ftm).toBe(10 ** -13);
-    });
-
-    it("should get wei", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.wei).toBe(100000);
+        expect(vm.usdt).toBe(10 ** -13);
     });
 
     it("should get filledFtm", () => {
         const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.filledFtm).toBe(5 * 10 ** -14);
-    });
-
-    it("should get filledWei", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.filledWei).toBe(50000);
+        expect(vm.filledUsdt).toBe(5 * 10 ** -14);
     });
 
     it("should get ftmToFill", () => {
         const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.ftmToFill).toBe(5 * 10 ** -14);
-    });
-
-    it("should get weiToFill", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.weiToFill).toBe(50000);
+        expect(vm.usdtToFill).toBe(5 * 10 ** -14);
     });
 
     it("should get state", () => {
@@ -144,13 +129,6 @@ describe("MoneyBoxDetailsViewModel", () => {
         expect(vm.feeAmountFtm).toBe(0);
         vm.setFeeAmount(123);
         expect(vm.feeAmountFtm).toBe(123);
-    });
-
-    it("should get feeAmountWei", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.feeAmountWei).toBe(0);
-        vm.setFeeAmount(123);
-        expect(vm.feeAmountWei).toBe(123 * 10 ** 18);
     });
 
     it("should get unlockCode", () => {
@@ -233,10 +211,4 @@ describe("MoneyBoxDetailsViewModel", () => {
         expect(vm2.newPayment()).toBe(true);
     })
 
-    it("back",() => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.back("out")).toBe("/transaction/out");
-        expect(vm.back("in")).toBe("/transaction/in");
-        expect(vm.back("")).toBe("");
-    })
 });

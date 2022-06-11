@@ -80,12 +80,7 @@ describe("MoneyBoxDetailsViewModel", () => {
 
     it("should get ftm", () => {
         const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.ftm).toBe(10 ** -13);
-    });
-
-    it("should get wei", () => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.wei).toBe(100000);
+        expect(vm.usdt).toBe(10 ** -13);
     });
 
     it("should get state", () => {
@@ -151,10 +146,4 @@ describe("MoneyBoxDetailsViewModel", () => {
         expect(v2.refund()).toBe(true);
     })
 
-    it("back",() => {
-        const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(vm.back("out")).toBe("/transaction/out");
-        expect(vm.back("in")).toBe("/transaction/in");
-        expect(vm.back("")).toBe("");
-    })
 });

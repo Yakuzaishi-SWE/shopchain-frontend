@@ -86,12 +86,12 @@ describe("MoneyBoxBalanceViewModel", () => {
 
     it("isBusy", () => {
         const vm = new MoneyBoxBalanceViewModel(rootStore);
-        expect(vm.isBusy).toBe(false);
+        expect(vm.isLoaded).toBe(false);
     })
 
     it("balanceFTM", () => {
         const vm = new MoneyBoxBalanceViewModel(rootStore);
-        expect(vm.balanceFTM).toBe(123  * 10 ** -18);
+        expect(vm.balanceUSDT).toBe(123  * 10 ** -18);
     });
 
     it("balanceWEI", () => {
