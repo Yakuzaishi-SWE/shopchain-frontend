@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import ILockOverlayViewModel from "./ILockOverlayModel";
+import ILockOverlayViewModel from "./ILockOverlayViewModel";
 import Popup from "application/utils/Popup";
 import { useLocation } from "react-router-dom";
 import ProviderStore from "core/provider/store/ProviderStore";

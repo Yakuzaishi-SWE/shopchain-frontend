@@ -5,6 +5,7 @@ import { v4 } from "uuid";
 import IECommerceViewModel from "./IECommerceViewModel";
 
 
+
 export default class ECommerceViewModel implements IECommerceViewModel {
     private _amount: Amount = new Amount(0);
     private _id = v4();
@@ -15,7 +16,7 @@ export default class ECommerceViewModel implements IECommerceViewModel {
     }
 
     get amount(): number {
-        return this._amount.FTM;
+        return this._amount.USDT;
     }
 
     get wei(): number {

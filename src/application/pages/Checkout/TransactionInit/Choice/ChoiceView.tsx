@@ -8,10 +8,10 @@ import IChoiceViewModel from "./IChoiceViewModel";
 export default observer(function ChoiceView({
     createOrder,
     isBusy,
-    isFailed,
+    // isFailed,
 }: IChoiceViewModel) {
     const location = useLocation();
-    const [failedPopup, setFailedPopup] = useState(false);
+    // const [failedPopup, setFailedPopup] = useState(false);
 
     return <>
         <div className="box-button center">

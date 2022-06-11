@@ -17,7 +17,7 @@ export default class OrderStore {
     constructor(store: RootStore, repo?: IOrderRepo) {
         this.store = store;
         this.orders = new OrderCollection();
-        this.repo = repo || new OrderRepo(this, providerStore.w3.om, providerStore.address);
+        this.repo = repo || new OrderRepo(this, providerStore.w3.om, providerStore.w3.uni, providerStore.address);
         makeObservable<this, "store" | "orders">(this, {
             store: observable,
             orders: observable,

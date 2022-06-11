@@ -21,7 +21,7 @@ export default class TransactionListElViewModel implements ITransactionListElVie
     }
 
     get id(): string {
-        return this.id;
+        return this.order.id;
     }
 
     get transaction(): Order {

@@ -20,7 +20,7 @@ export default class MoneyBoxOrderStore extends OrderStore {
 
     constructor(store: RootStore, repo?: IMoneyBoxOrderRepo) {
         super(store);
-        this.repo = repo || new MoneyBoxOrderRepo(this, providerStore.w3.mm, providerStore.address);
+        this.repo = repo || new MoneyBoxOrderRepo(this, providerStore.w3.mm, providerStore.w3.uni, providerStore.address);
         this.payments = new PaymentCollection();
         makeObservable<this, "payments">(this, {
             payments: observable,

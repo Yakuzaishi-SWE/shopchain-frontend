@@ -11,7 +11,6 @@ import IPickAmountViewModel from "./IPickAmountViewModel";
 export default observer(function PickAmountView({
     id,
     initFTM,
-    initWei,
     createMoneyBox,
     setInitFTM,
     amountFtm,
@@ -30,9 +29,6 @@ export default observer(function PickAmountView({
                         <input className="clickable-input addOnCreate-moneybox" type="number" step="any" value={initFTM} onChange={e => setInitFTM(e.target.valueAsNumber)}/>
                         <span className="ftm-icon"><FTMIcon />FTM</span>
                         
-                    </div>
-                    <div className="ftm-wei center">
-                        <span>({initWei}) wei</span>
                     </div>
                 </div>
             </div>

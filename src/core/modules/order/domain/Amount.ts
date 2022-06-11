@@ -13,7 +13,7 @@ export default class Amount {
         return this.amount;
     }
 
-    get FTM(): number {
+    get USDT(): number {
         return this.amount / 10 ** 18;
     }
 

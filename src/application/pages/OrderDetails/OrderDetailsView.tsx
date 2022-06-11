@@ -1,22 +1,19 @@
 import Popup from "application/utils/Popup";
+import USDTtoFTM from "application/utils/USDTtoFTM";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
-import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
-import { BackArrowIcon, Loading } from "resources/svg";
+import { Loading } from "resources/svg";
 import IOrderDetailsViewModel from "./IOrderDetailsViewModel";
 
 export default observer(function OrderDetailsView({
     id,
     ownerAddress,
     sellerAddress,
-    ftm,
-    wei,
+    usdt,
     state,
     isPaid,
     unlock,
     refund,
-    back,
     isOwner,
     isSeller,
     date,
@@ -40,7 +37,16 @@ export default observer(function OrderDetailsView({
                     <li><div className="section-head">Transaction ID:</div>{id}</li>
                     <li><div className="section-head">Order Owner:</div>{ownerAddress}</li>
                     <li><div className="section-head">Payed To:</div>{sellerAddress}</li>
-                    <li><div className="section-head">Amount:</div>{ftm} FTM ({wei} wei)</li>
+                    <li><div className="section-head">Amount:</div>
+                        <div className="usdt_ftm">
+                            <span>
+                                {usdt.toFixed(8)} USDT
+                            </span>
+                            <span>
+                                (<USDTtoFTM usdt={usdt} fixed={8}/> FTM)
+                            </span>
+                        </div>
+                    </li>
                     <li><div className="section-head">State:</div>{state}</li>
                     <li><div className="section-head">Date:</div>{date}</li>
                 </ul>

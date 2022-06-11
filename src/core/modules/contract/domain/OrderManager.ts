@@ -37,6 +37,7 @@ export default class OrderManager {
             const balanceOrUndefined = await this.repo.getContractBalance();
             if (balanceOrUndefined !== undefined){
                 const amount = new Amount(balanceOrUndefined);
+                // console.log("amount "+amount.amount+" ! balance "+balanceOrUndefined);
                 runInAction(() => this.balance = amount);
                 return amount;
             } else return null;

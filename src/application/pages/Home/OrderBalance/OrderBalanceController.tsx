@@ -11,7 +11,7 @@ export default observer(function OrderBalanceController() {
 
     return <OrderBalanceView
         balanceWEI={vm.balanceWEI}
-        isBusy={vm.isBusy}
-        balanceFTM={vm.balanceFTM}
+        isLoaded={vm.isLoaded}
+        balanceUSDT={vm.balanceUSDT}
     />;
 });

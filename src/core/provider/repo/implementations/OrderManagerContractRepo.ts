@@ -5,8 +5,8 @@ import { makeObservable, observable } from "mobx";
 import ORDER_MANAGER_ABI from "./OrderManagerContractABI.json";
 import { AbiItem } from "web3-utils";
 
-//const ORDER_MANAGER_ADDRESS = "0xD9e1D649434573947d9ca606d7EFf3C6b4CFa377";
-const ORDER_MANAGER_ADDRESS = "0x1fe85508d1919067F2eBEAb6B75D0B944e5391ef";
+const ORDER_MANAGER_ADDRESS = "0xdd21569051115e8717a0DDF756614F3948b7F3DE";
+// const ORDER_MANAGER_ADDRESS = "0xE162aFf01B9a07D61d6062c9E2403936a153411b";
 
 export default class OrderManagerContractRepo implements IContractRepo {
     private readonly w3store: W3Store;

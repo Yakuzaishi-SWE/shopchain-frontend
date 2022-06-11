@@ -25,13 +25,12 @@ export default observer(function OrderDetails() {
         id={vm.id}
         ownerAddress={vm.ownerAddress}
         sellerAddress={vm.sellerAddress}
-        ftm={vm.ftm}
-        wei={vm.wei}
+        usdt={vm.usdt}
         state={vm.state}
         isPaid={vm.isPaid}
         unlock={vm.unlock}
         refund={vm.refund}
-        back={vm.back}
+        // back={vm.back}
         isOwner={vm.isOwner}
         isSeller={vm.isSeller}
         date={vm.date}
