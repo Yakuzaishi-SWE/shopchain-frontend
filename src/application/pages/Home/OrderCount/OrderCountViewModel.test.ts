@@ -3,21 +3,9 @@ import Amount from "core/modules/order/domain/Amount";
 import OrderState from "core/modules/order/domain/OrderState";
 import { OrderStateEnum } from "types/enums";
 
-import MoneyBoxCountViewModel from "./OrderCountViewModel";
+import OrderCountViewModel from "./OrderCountViewModel";
 import RootStore from "core/shared/RootStore";
 import ProviderStore from "core/provider/store/ProviderStore";
-
-jest.mock("mobx", () => {
-    return {
-        makeAutoObservable: jest.fn(),
-        makeObservable: jest.fn(),
-        observable: { ref: 1 },
-        computed: 1,
-        action: 1,
-        autorun: jest.fn(),
-        reaction: jest.fn(),
-    };
-});
 
 const moneyBoxTask = {
     result: {
@@ -47,6 +35,11 @@ const rootStore = {
         newPayment: jest.fn(),
         getOrderById: jest.fn(() => moneyBoxTask),
     },
+    contractStore: {
+        orderManager: {
+            getOrderCount: () => ({ result: new Amount(123) }),
+        }
+    }
 } as unknown as RootStore;
 
 const OKproviderStore = {
@@ -60,23 +53,23 @@ const FAILproviderStore = {
     provider: null,
 } as unknown as ProviderStore;
 
-describe("MoneyBoxDetailsViewModel", () => {
+describe("OrderCountViewModel", () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
 
     it("creates vm", () =>  {
-        const vm = new MoneyBoxCountViewModel(rootStore);
+        const vm = new OrderCountViewModel(rootStore);
         expect(vm).toBeDefined();
     })
 
     it("isBusy", () => {
-        const vm = new MoneyBoxCountViewModel(rootStore);
+        const vm = new OrderCountViewModel(rootStore);
         expect(vm.isBusy).toBe(false);
     })
 
     it("count", () => {
-        const vm = new MoneyBoxCountViewModel(rootStore);
+        const vm = new OrderCountViewModel(rootStore);
         expect(vm.count).toBe(0);
     });
 });

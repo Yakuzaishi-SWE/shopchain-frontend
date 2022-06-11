@@ -6,19 +6,24 @@ import Amount from "core/modules/order/domain/Amount";
 import OrderState from "core/modules/order/domain/OrderState";
 import { OrderStateEnum } from "types/enums";
 import Payment from "core/modules/order/domain/Payment";
-import moment from "moment";
 
-jest.mock("mobx", () => {
-    return {
-        makeAutoObservable: jest.fn(),
-        makeObservable: jest.fn(),
-        observable: { ref: 1 },
-        computed: 1,
-        action: 1,
-        autorun: jest.fn(),
-        reaction: jest.fn(),
-    };
-});
+// jest.mock("mobx-utils", () => {
+//     return {
+//         computedFn: jest.fn((fn) => fn),
+//     };
+// });
+
+// jest.mock("mobx", () => {
+//     return {
+//         makeAutoObservable: jest.fn(),
+//         makeObservable: jest.fn(),
+//         observable: { ref: 1 },
+//         computed: 1,
+//         action: 1,
+//         autorun: jest.fn(),
+//         reaction: jest.fn(),
+//     };
+// });
 
 const moneyBoxTask = {
     result: {
@@ -68,8 +73,8 @@ describe("MoneyBoxDetailsViewModel", () => {
 
     it("should create an instance", () => {
         const vm = new MoneyBoxDetailsViewModel(rootStore, OKproviderStore);
-        expect(makeAutoObservable).toBeCalledTimes(2);
-        expect(makeAutoObservable).toBeCalledWith(vm, {}, { autoBind: true });
+        // expect(makeAutoObservable).toBeCalledTimes(2);
+        // expect(makeAutoObservable).toBeCalledWith(vm, {}, { autoBind: true });
     });
 
     it("should set the id", () => {

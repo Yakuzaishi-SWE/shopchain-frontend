@@ -86,7 +86,7 @@ describe("MoneyBoxDetailsViewModel", () => {
 
     it("isBusy", () => {
         const vm = new MoneyBoxBalanceViewModel(rootStore);
-        expect(vm.isLoaded).toBe(false);
+        expect(vm.isLoaded).toBe(undefined);
     })
 
     it("balanceFTM", () => {

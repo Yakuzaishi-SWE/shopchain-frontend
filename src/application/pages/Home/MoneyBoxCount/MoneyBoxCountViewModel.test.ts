@@ -7,18 +7,6 @@ import MoneyBoxCountViewModel from "./MoneyBoxCountViewModel";
 import RootStore from "core/shared/RootStore";
 import ProviderStore from "core/provider/store/ProviderStore";
 
-jest.mock("mobx", () => {
-    return {
-        makeAutoObservable: jest.fn(),
-        makeObservable: jest.fn(),
-        observable: { ref: 1 },
-        computed: 1,
-        action: 1,
-        autorun: jest.fn(),
-        reaction: jest.fn(),
-    };
-});
-
 const moneyBoxTask = {
     result: {
         amountToFill: {
