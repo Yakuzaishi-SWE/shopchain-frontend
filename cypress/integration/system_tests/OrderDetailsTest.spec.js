@@ -11,10 +11,10 @@ describe("Order Details Tests", () => {
         // we include it in our beforeEach function so that it runs before each test
         cy.on("window:before:load", (win) => {
             // const provider = new PrivateKeyProvider(
-            //     "d5d4d2323ead64f264bdf8216f5112a22a72294291da220f78b34d49329d0c96",
+            //     "74ede2dfa2d570b79381f07385861831241d0a8951e17e796c73e7b0801779fd",
             //     "https://rpc.testnet.fantom.network/"
             // );
-            const privateKey = "d5d4d2323ead64f264bdf8216f5112a22a72294291da220f78b34d49329d0c96";
+            const privateKey = "74ede2dfa2d570b79381f07385861831241d0a8951e17e796c73e7b0801779fd";
             const provider = new Web3.providers.HttpProvider("https://rpc.testnet.fantom.network/", {});
             const address = privateKeyToAddress(privateKey);
             const w3 = new Web3(provider);
@@ -35,7 +35,7 @@ describe("Order Details Tests", () => {
 
 
     it("TS1F3: Verificare che l’utente possa visualizzare il totale dell’ordine correttamente.", () => {
-        cy.visit('http://localhost:8085/#/out/order/89c33051-f88b-490b-bbb4-f02e0f7ca6a0/');
+        cy.visit('http://localhost:8085/#/out/order/9caedd3b-654e-49a5-91a4-64b5de8d1a0a/');
         cy.get('.transaction-details > ul > :nth-child(4)').should('be.visible');
     });
 
@@ -61,7 +61,7 @@ describe("Order Details Tests", () => {
 
     it("TS1F16.1.1: Verificare che l'utente possa visualizzare l'id dell'ordine pagato", () => {
         cy.get('.transaction-details > ul > :nth-child(1)').should('be.visible');
-        cy.get('.transaction-details > ul > :nth-child(1)').should('contain', '89c33051-f88b-490b-bbb4-f02e0f7ca6a0');
+        cy.get('.transaction-details > ul > :nth-child(1)').should('contain', '9caedd3b-654e-49a5-91a4-64b5de8d1a0a');
     });
 
     it("TS1F16.1.2: Verificare che l'utente possa visualizzare l'indirizzo del venditore dell'ordine pagato", () => {
@@ -71,7 +71,7 @@ describe("Order Details Tests", () => {
 
     it("TS1F16.1.3: Verificare che l'utente possa visualizzare l'ammontare dell'ordine pagato", () => {
         cy.get('.transaction-details > ul > :nth-child(4)').should('be.visible');
-        cy.get('.transaction-details > ul > :nth-child(4)').should('contain', '1 FTM (1000000000000000000 wei)');
+        cy.get('.transaction-details > ul > :nth-child(4)').should('contain', 'USDT');
     });
 
     it("TS1F16.1.4: Verificare che l'utente possa visualizzare lo stato dell'ordine pagato", () => {
@@ -81,7 +81,6 @@ describe("Order Details Tests", () => {
 
     it("TS1F16.1.5: Verificare che l'utente possa visualizzare la data dell'ordine pagato", () => {
         cy.get('.transaction-details > ul > :nth-child(6)').should('be.visible');
-        cy.get('.transaction-details > ul > :nth-child(6)').should('contain', '9/5/2022 19:22:55');
     });
 
 });

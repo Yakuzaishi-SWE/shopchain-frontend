@@ -11,10 +11,10 @@ describe("Checkout Page Tests", () => {
         // we include it in our beforeEach function so that it runs before each test
         cy.on("window:before:load", (win) => {
             // const provider = new PrivateKeyProvider(
-            //     "d5d4d2323ead64f264bdf8216f5112a22a72294291da220f78b34d49329d0c96",
+            //     "74ede2dfa2d570b79381f07385861831241d0a8951e17e796c73e7b0801779fd",
             //     "https://rpc.testnet.fantom.network/"
             // );
-            const privateKey = "d5d4d2323ead64f264bdf8216f5112a22a72294291da220f78b34d49329d0c96";
+            const privateKey = "74ede2dfa2d570b79381f07385861831241d0a8951e17e796c73e7b0801779fd";
             const provider = new Web3.providers.HttpProvider("https://rpc.testnet.fantom.network/", {});
             const address = privateKeyToAddress(privateKey);
             const w3 = new Web3(provider);
